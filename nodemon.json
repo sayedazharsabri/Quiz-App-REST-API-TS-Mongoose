@@ -1,0 +1,9 @@
+{
+    "env":{
+        "CONNECTION_STRING":"",
+        "PORT":3000
+    },
+    "watch":["src"],
+    "ext": "ts,json",
+    "exec": "ts-node ./src/app.ts"
+}
