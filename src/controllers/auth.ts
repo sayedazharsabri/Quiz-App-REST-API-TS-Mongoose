@@ -5,17 +5,18 @@ import jwt from 'jsonwebtoken';
 
 
 import User from '../models/user';
+import ProjectError from '../helper/error';
 
 interface ReturnResponse {
     status: "success" | "error",
     message: String,
-    data: {}
+    data: {} | []
 }
 
 
 
 
-const registerUser = async (req: Request, res: Response, next:NextFunction) => {
+const registerUser = async (req: Request, res: Response, next: NextFunction) => {
 
     let resp: ReturnResponse;
     try {
@@ -40,7 +41,7 @@ const registerUser = async (req: Request, res: Response, next:NextFunction) => {
 
 }
 
-const loginUser = async (req: Request, res: Response, next:NextFunction) => {
+const loginUser = async (req: Request, res: Response, next: NextFunction) => {
     let resp: ReturnResponse;
     try {
         const email = req.body.email;
@@ -50,8 +51,9 @@ const loginUser = async (req: Request, res: Response, next:NextFunction) => {
         const user = await User.findOne({ email });
 
         if (!user) {
-            resp = { status: "error", message: "No user exist", data: {} };
-            res.status(401).send(resp);
+            const err = new ProjectError("No user exist");
+            err.statusCode = 401;
+            throw err;
         }
         //verify password using bcrypt
         const status = await bcrypt.compare(password, user.password);
@@ -63,9 +65,9 @@ const loginUser = async (req: Request, res: Response, next:NextFunction) => {
             resp = { status: "success", message: "Logged in", data: { token } };
             res.status(200).send(resp);
         } else {
-
-            resp = { status: "error", message: "Credentials mismatch", data: {} };
-            res.status(401).send(resp);
+            const err = new ProjectError("Credential mismatch");
+            err.statusCode = 401;
+            throw err;
         }
 
     } catch (error) {
