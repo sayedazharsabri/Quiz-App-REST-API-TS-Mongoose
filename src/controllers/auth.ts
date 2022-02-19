@@ -2,6 +2,7 @@
 import { Request, Response, NextFunction } from 'express';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
+import { validationResult } from 'express-validator';
 
 
 import User from '../models/user';
@@ -20,7 +21,15 @@ const registerUser = async (req: Request, res: Response, next: NextFunction) => 
 
     let resp: ReturnResponse;
     try {
-        //
+        //validation
+        const validationError = validationResult(req);
+        if(!validationError.isEmpty()){
+            const err = new ProjectError("Validation failed!");
+            err.statusCode = 422;
+            err.data = validationError.array();
+            throw err;
+        }
+        //validation end
         const email = req.body.email;
         const name = req.body.name;
         let password = await bcrypt.hash(req.body.password, 12);
@@ -75,5 +84,11 @@ const loginUser = async (req: Request, res: Response, next: NextFunction) => {
     }
 }
 
-
-export { registerUser, loginUser }
+const isUserExist = async (email:String) => {
+        const user = await User.findOne({ email });
+        if (!user) {
+            return false;
+        }
+        return true;
+}
+export { registerUser, loginUser, isUserExist }
