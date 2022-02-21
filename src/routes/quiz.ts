@@ -25,7 +25,7 @@ router.put("/", isAuthenticated, updateQuiz);
 router.delete("/:quizId", isAuthenticated, deleteQuiz);
 
 //Publish
-// PATCH quiz/:quizId
+// PATCH quiz/publish
 router.patch("/publish", isAuthenticated, publishQuiz);
 
 
