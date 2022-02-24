@@ -1,12 +1,7 @@
 import Report from "../models/report";
 import { RequestHandler } from 'express';
 import ProjectError from "../helper/error";
-
-interface ReturnResponse {
-    status: "success" | "error",
-    message: String,
-    data: {} | []
-}
+import {ReturnResponse} from '../utils/interfaces';
 
 
 const getReport:RequestHandler = async (req, res, next) => {

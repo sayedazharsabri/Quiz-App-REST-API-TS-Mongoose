@@ -5,12 +5,7 @@ import Report from "../models/report";
 
 import ProjectError from "../helper/error";
 import { isNamedExportBindings } from "typescript";
-
-interface ReturnResponse {
-    status: "success" | "error",
-    message: String,
-    data: {} | []
-}
+import {ReturnResponse} from '../utils/interfaces';
 
 const startExam:RequestHandler = async (req, res, next) => {
     try {
