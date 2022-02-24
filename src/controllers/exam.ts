@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from "express";
 
 import Quiz from "../models/quiz";
-import Result from "../models/result";
+import Report from "../models/report";
 
 import ProjectError from "../helper/error";
 import { isNamedExportBindings } from "typescript";
@@ -57,9 +57,9 @@ const submitExam = async (req: Request, res: Response, next:NextFunction) => {
         }
 
 
-        const result = new Result({userId, quizId, score, total});
-        const data = await result.save();
-        const resp: ReturnResponse = { status: "success", message: "Quiz submitted", data: {total, score, resultId:data._id} };
+        const report = new Report({userId, quizId, score, total});
+        const data = await report.save();
+        const resp: ReturnResponse = { status: "success", message: "Quiz submitted", data: {total, score, ReportId:data._id} };
         res.status(200).send(resp);
     } catch (error) {
         next(error);

@@ -6,6 +6,7 @@ import UserRoute from './routes/user';
 import authRoute from './routes/auth';
 import quizRoute from './routes/quiz';
 import examRoute from './routes/exam';
+import reportRoute from './routes/report';
 
 import ProjectError from "./helper/error";
 
@@ -42,7 +43,10 @@ app.use('/auth', authRoute);
 app.use('/quiz', quizRoute);
 
 //Redirect /exam
-app.use('/exam',examRoute)
+app.use('/exam',examRoute);
+
+//Redirect /report
+app.use('/report',reportRoute);
 
 app.use((err: ProjectError, req: Request, res: Response, next: NextFunction) => {
 
