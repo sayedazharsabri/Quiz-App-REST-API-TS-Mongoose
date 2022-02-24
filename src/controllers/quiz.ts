@@ -1,5 +1,5 @@
 //model
-import { Request, Response, NextFunction } from 'express';
+import { RequestHandler } from 'express';
 import { validationResult } from 'express-validator';
 
 import Quiz from '../models/quiz';
@@ -12,7 +12,7 @@ interface ReturnResponse {
 }
 
 
-const createQuiz = async (req: Request, res: Response, next: NextFunction) => {
+const createQuiz:RequestHandler = async (req, res, next) => {
 
     try {
         const validationError = validationResult(req);
@@ -38,7 +38,7 @@ const createQuiz = async (req: Request, res: Response, next: NextFunction) => {
     }
 }
 
-const getQuiz = async (req: Request, res: Response, next: NextFunction) => {
+const getQuiz:RequestHandler = async (req, res, next) => {
 
     try {
         const quizId = req.params.quizId;
@@ -63,7 +63,7 @@ const getQuiz = async (req: Request, res: Response, next: NextFunction) => {
     }
 }
 
-const updateQuiz = async (req: Request, res: Response, next: NextFunction) => {
+const updateQuiz:RequestHandler = async (req, res, next) => {
     try {
 
         const validationError = validationResult(req);
@@ -113,7 +113,7 @@ const updateQuiz = async (req: Request, res: Response, next: NextFunction) => {
 
 }
 
-const deleteQuiz = async (req: Request, res: Response, next: NextFunction) => {
+const deleteQuiz:RequestHandler = async (req, res, next) => {
     try {
         const quizId = req.params.quizId;
         const quiz = await Quiz.findById(quizId);
@@ -139,7 +139,7 @@ const deleteQuiz = async (req: Request, res: Response, next: NextFunction) => {
     }
 }
 
-const publishQuiz = async (req: Request, res: Response, next: NextFunction) => {
+const publishQuiz:RequestHandler = async (req, res, next) => {
     try {
         const quizId = req.body.quizId;
         const quiz = await Quiz.findById(quizId);

@@ -1,4 +1,4 @@
-import { NextFunction, Request, Response } from "express";
+import { RequestHandler } from 'express';
 
 import Quiz from "../models/quiz";
 import Report from "../models/report";
@@ -12,7 +12,7 @@ interface ReturnResponse {
     data: {} | []
 }
 
-const startExam = async (req: Request, res: Response, next: NextFunction) => {
+const startExam:RequestHandler = async (req, res, next) => {
     try {
         const quizId = req.params.quizId;
         const quiz = await Quiz.findById(quizId, { name: 1, questions_list: 1, is_published: 1 });
@@ -35,7 +35,7 @@ const startExam = async (req: Request, res: Response, next: NextFunction) => {
     }
 }
 
-const submitExam = async (req: Request, res: Response, next:NextFunction) => {
+const submitExam:RequestHandler = async (req, res, next) => {
     try {
         const quizId = req.body.quizId;
         const attempted_question = req.body.attempted_question;

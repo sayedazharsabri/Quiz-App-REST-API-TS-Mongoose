@@ -1,5 +1,5 @@
-
-import { Request, Response, NextFunction } from 'express';
+// import { Request, Response, NextFunction} from 'express';
+import { RequestHandler } from 'express';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import { validationResult } from 'express-validator';
@@ -16,14 +16,14 @@ interface ReturnResponse {
 
 
 
-
-const registerUser = async (req: Request, res: Response, next: NextFunction) => {
+//const registerUser:RequestHandler = async (req: Request, res: Response, next: NextFunction) => {
+const registerUser: RequestHandler = async (req, res, next) => {
 
     let resp: ReturnResponse;
     try {
         //validation
         const validationError = validationResult(req);
-        if(!validationError.isEmpty()){
+        if (!validationError.isEmpty()) {
             const err = new ProjectError("Validation failed!");
             err.statusCode = 422;
             err.data = validationError.array();
@@ -50,7 +50,7 @@ const registerUser = async (req: Request, res: Response, next: NextFunction) => 
 
 }
 
-const loginUser = async (req: Request, res: Response, next: NextFunction) => {
+const loginUser: RequestHandler = async (req, res, next) => {
     let resp: ReturnResponse;
     try {
         const email = req.body.email;
@@ -84,11 +84,11 @@ const loginUser = async (req: Request, res: Response, next: NextFunction) => {
     }
 }
 
-const isUserExist = async (email:String) => {
-        const user = await User.findOne({ email });
-        if (!user) {
-            return false;
-        }
-        return true;
+const isUserExist = async (email: String) => {
+    const user = await User.findOne({ email });
+    if (!user) {
+        return false;
+    }
+    return true;
 }
 export { registerUser, loginUser, isUserExist }

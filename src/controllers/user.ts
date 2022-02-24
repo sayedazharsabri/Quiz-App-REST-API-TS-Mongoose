@@ -1,4 +1,4 @@
-import { Request, Response, NextFunction } from 'express';
+import { RequestHandler } from 'express';
 
 import User from '../models/user';
 import ProjectError from '../helper/error';
@@ -9,7 +9,7 @@ interface ReturnResponse {
     data: {} | []
 }
 
-const getUser = async (req: Request, res: Response, next: NextFunction) => {
+const getUser:RequestHandler = async (req, res, next) => {
     let resp: ReturnResponse;
 
     try {
@@ -37,7 +37,7 @@ const getUser = async (req: Request, res: Response, next: NextFunction) => {
 
 }
 
-const updateUser = async (req: Request, res: Response, next: NextFunction) => {
+const updateUser:RequestHandler = async (req, res, next) => {
 
     let resp: ReturnResponse;
     try {

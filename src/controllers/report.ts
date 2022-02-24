@@ -1,5 +1,5 @@
 import Report from "../models/report";
-import { Request, Response, NextFunction } from 'express';
+import { RequestHandler } from 'express';
 import ProjectError from "../helper/error";
 
 interface ReturnResponse {
@@ -9,7 +9,7 @@ interface ReturnResponse {
 }
 
 
-const getReport = async (req: Request, res: Response, next: NextFunction) => {
+const getReport:RequestHandler = async (req, res, next) => {
     try {
         let report;
         if(!!req.params.reportId){
