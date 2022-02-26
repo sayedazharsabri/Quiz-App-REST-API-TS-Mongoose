@@ -3,6 +3,9 @@ logs
 build
 node_modules/
 
+#Nodemon env file
+nodemon.json
+
 # TypeScript v1 declaration files
 typings/
 

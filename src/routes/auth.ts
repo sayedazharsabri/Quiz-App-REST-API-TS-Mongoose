@@ -1,7 +1,7 @@
 // Redirect request to Particular method on Controller
 import express from 'express';
-import {registerUser, loginUser, isUserExist} from '../controllers/auth';
-import {body} from 'express-validator';
+import { registerUser, loginUser, isUserExist, isPasswordValid } from '../controllers/auth';
+import { body } from 'express-validator';
 
 const router = express.Router();
 
@@ -11,38 +11,47 @@ router.post('/', [
         .trim()
         .not()
         .isEmpty()
-        .isLength({min:4})
+        .isLength({ min: 4 })
         .withMessage("Please enter a valid name, minimum 4 character long"),
     body('email')
         .trim()
         .isEmail()
-        .custom((emailId:String) => {
+        .custom((emailId: String) => {
             return isUserExist(emailId)
-                .then((status:Boolean) =>{
-                    if(status){
-                           return Promise.reject("User already exist!");
+                .then((status: Boolean) => {
+                    if (status) {
+                        return Promise.reject("User already exist!");
                     }
-                } )
+                })
                 .catch((err) => {
                     return Promise.reject(err);
                 })
-                
+
         })
         .normalizeEmail(),
     body('password')
         .trim()
-        .isLength({min:8})
-        .withMessage("Enter at least 8 character long password"),
+        .isLength({ min: 8 })
+        .custom((password: String) => {
+            return isPasswordValid(password)
+                .then((status: Boolean) => {
+                    if (!status)
+                        return Promise.reject('Enter a valid password, having atleast 8 characters including 1 smallCase alphabet, 1 capitalCase albhabet, 1 digit and 1 special character($,@,!,#,*).');
+                })
+                .catch((err) => {
+                    return Promise.reject(err);
+                })
+        }),
     body('confirm_password')
         .trim()
-        .custom((value:String, {req})=>{
-            if(value != req.body.password){
-                return Promise.reject("Password mismatch!");
+        .custom((value: String, { req }) => {
+            if (value != req.body.password) {
+                return Promise.reject('Password mismatched!');
             }
             return true;
         })
 
-],registerUser);
+], registerUser);
 
 
 // POST /auth/login
