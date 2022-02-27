@@ -43,7 +43,7 @@ router.post(
           .then((status: Boolean) => {
             if (!status)
               return Promise.reject(
-                "Enter a valid password, having atleast 8 characters including 1 smallCase alphabet, 1 capitalCase albhabet, 1 digit and 1 special character($,@,!,#,*)."
+                "Enter a valid password, having atleast 8 characters including 1 small alphabet, 1 capital albhabet, 1 digit and 1 special character($,@,!,#,*)."
               );
           })
           .catch((err) => {
