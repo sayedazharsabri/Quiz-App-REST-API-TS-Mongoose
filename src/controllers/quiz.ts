@@ -162,4 +162,13 @@ const publishQuiz:RequestHandler = async (req, res, next) => {
 }
 
 
-export { createQuiz, getQuiz, updateQuiz, deleteQuiz, publishQuiz };
+const isValidQuiz = async (questions_list:[],answers:{})=>{
+        if(questions_list.length==0)
+                return false;
+        if(questions_list.length!=Object.keys(answers).length){
+            return false;
+        }
+        return true;
+}
+
+export { createQuiz, getQuiz, updateQuiz, deleteQuiz, publishQuiz, isValidQuiz };
