@@ -182,6 +182,15 @@ const isValidQuiz = async (questions_list: [], answers: {}) => {
   return true;
 };
 
+const isValidQuizName= async (name:String)=>{
+  const quiz = await Quiz.findOne({name});
+  if(!quiz){
+    return true;
+  }
+  return false;
+
+};
+
 export {
   createQuiz,
   getQuiz,
@@ -189,4 +198,5 @@ export {
   deleteQuiz,
   publishQuiz,
   isValidQuiz,
+  isValidQuizName
 };
