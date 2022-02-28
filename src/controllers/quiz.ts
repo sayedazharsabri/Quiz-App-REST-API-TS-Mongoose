@@ -174,21 +174,42 @@ const publishQuiz: RequestHandler = async (req, res, next) => {
   }
 };
 
-const isValidQuiz = async (questions_list: [], answers: {}) => {
-  if (questions_list.length == 0) return false;
+const isValidQuiz = async (
+  questions_list: [{ question_number: Number; question: String; options: {} }],
+  answers: {}
+) => {
+  if (!questions_list.length) {
+    return false;
+  }
   if (questions_list.length != Object.keys(answers).length) {
     return false;
   }
-  return true;
+  let flag = true;
+  questions_list.forEach(
+    (question: { question_number: Number; question: String; options: {} }) => {
+      let opt = Object.keys(question["options"]);
+      if (
+        opt.indexOf(
+          `${
+            Object.values(answers)[
+              Object.keys(answers).indexOf(question.question_number.toString())
+            ]
+          }`
+        ) == -1
+      ) {
+        flag = false;
+      }
+    }
+  );
+  return flag;
 };
 
-const isValidQuizName= async (name:String)=>{
-  const quiz = await Quiz.findOne({name});
-  if(!quiz){
+const isValidQuizName = async (name: String) => {
+  const quiz = await Quiz.findOne({ name });
+  if (!quiz) {
     return true;
   }
   return false;
-
 };
 
 export {
@@ -198,5 +219,5 @@ export {
   deleteQuiz,
   publishQuiz,
   isValidQuiz,
-  isValidQuizName
+  isValidQuizName,
 };
