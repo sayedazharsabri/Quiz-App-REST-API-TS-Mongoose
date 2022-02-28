@@ -56,7 +56,7 @@ app.use((err: ProjectError, req: Request, res: Response, next: NextFunction) => 
         message = err.message;
         statusCode = err.statusCode;
     }else{
-        message = "Something went wrong please try after sometimes!";
+        message = "Something went wrong please try after sometime!";
         statusCode = 500;
     }
 
