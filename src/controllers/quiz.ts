@@ -45,13 +45,13 @@ const getQuiz: RequestHandler = async (req, res, next) => {
     });
 
     if (!quiz) {
-      const err = new ProjectError("Quiz not found");
+      const err = new ProjectError("Quiz not found!");
       err.statusCode = 404;
       throw err;
     }
 
     if (req.userId !== quiz.created_by.toString()) {
-      const err = new ProjectError("You are not authorized");
+      const err = new ProjectError("You are not authorized!");
       err.statusCode = 403;
       throw err;
     }
@@ -81,13 +81,13 @@ const updateQuiz: RequestHandler = async (req, res, next) => {
     const quiz = await Quiz.findById(quizId);
 
     if (!quiz) {
-      const err = new ProjectError("Quiz not found");
+      const err = new ProjectError("Quiz not found!");
       err.statusCode = 404;
       throw err;
     }
 
     if (req.userId !== quiz.created_by.toString()) {
-      const err = new ProjectError("You are not authorized");
+      const err = new ProjectError("You are not authorized!");
       err.statusCode = 403;
       throw err;
     }
@@ -120,8 +120,14 @@ const deleteQuiz: RequestHandler = async (req, res, next) => {
     const quizId = req.params.quizId;
     const quiz = await Quiz.findById(quizId);
 
+    if (!quiz) {
+      const err = new ProjectError("Quiz not found!");
+      err.statusCode = 404;
+      throw err;
+    }
+
     if (req.userId !== quiz.created_by.toString()) {
-      const err = new ProjectError("You are not authorized");
+      const err = new ProjectError("You are not authorized!");
       err.statusCode = 403;
       throw err;
     }
@@ -150,14 +156,20 @@ const publishQuiz: RequestHandler = async (req, res, next) => {
     const quiz = await Quiz.findById(quizId);
 
     if (!quiz) {
-      const err = new ProjectError("Quiz not found");
+      const err = new ProjectError("Quiz not found!");
       err.statusCode = 404;
       throw err;
     }
 
     if (req.userId !== quiz.created_by.toString()) {
-      const err = new ProjectError("You are not authorized");
+      const err = new ProjectError("You are not authorized!");
       err.statusCode = 403;
+      throw err;
+    }
+
+    if (!!quiz.is_published) {
+      const err = new ProjectError("Quiz is already published!");
+      err.statusCode = 405;
       throw err;
     }
 
@@ -165,7 +177,7 @@ const publishQuiz: RequestHandler = async (req, res, next) => {
     await quiz.save();
     const resp: ReturnResponse = {
       status: "success",
-      message: "Quiz published",
+      message: "Quiz published!",
       data: {},
     };
     res.status(200).send(resp);
