@@ -97,8 +97,15 @@ const updateQuiz: RequestHandler = async (req, res, next) => {
       err.statusCode = 405;
       throw err;
     }
-
-    quiz.name = req.body.name;
+    if (quiz.name != req.body.name) {
+      let status = await isValidQuizName(req.body.name);
+      if (!status) {
+        const err = new ProjectError("Please enter an unique quiz name.");
+        err.statusCode = 422;
+        throw err;
+      }
+      quiz.name = req.body.name;
+    }
     quiz.questions_list = req.body.questions_list;
     quiz.answers = req.body.answers;
 
