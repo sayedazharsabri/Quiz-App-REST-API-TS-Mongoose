@@ -1,7 +1,7 @@
 import express from "express";
-import { isAuthenticated } from '../middlewares/isAuth';
+import { isAuthenticated } from "../middlewares/isAuth";
 
-import { getReport } from '../controllers/report';
+import { getReport } from "../controllers/report";
 
 const router = express.Router();
 
