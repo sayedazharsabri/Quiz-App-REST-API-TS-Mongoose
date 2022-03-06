@@ -2,7 +2,6 @@
 import { RequestHandler } from "express";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
-import { validationResult } from "express-validator";
 
 import User from "../models/user";
 import ProjectError from "../helper/error";
@@ -13,15 +12,7 @@ import { ReturnResponse } from "../utils/interfaces";
 const registerUser: RequestHandler = async (req, res, next) => {
   let resp: ReturnResponse;
   try {
-    //validation
-    const validationError = validationResult(req);
-    if (!validationError.isEmpty()) {
-      const err = new ProjectError("Validation failed!");
-      err.statusCode = 422;
-      err.data = validationError.array();
-      throw err;
-    }
-    //validation end
+    
     const email = req.body.email;
     const name = req.body.name;
     let password = await bcrypt.hash(req.body.password, 12);
@@ -47,14 +38,6 @@ const registerUser: RequestHandler = async (req, res, next) => {
 const loginUser: RequestHandler = async (req, res, next) => {
   let resp: ReturnResponse;
   try {
-    const validationError = validationResult(req);
-    if (!validationError.isEmpty()) {
-      const err = new ProjectError("Validation failed!");
-      err.statusCode = 422;
-      err.data = validationError.array();
-      throw err;
-    }
-
     const email = req.body.email;
     const password = req.body.password;
 

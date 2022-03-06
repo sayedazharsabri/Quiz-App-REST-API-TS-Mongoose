@@ -1,4 +1,8 @@
 import express from "express";
+import { body } from "express-validator";
+
+import { isAuthenticated } from "../middlewares/isAuth";
+import {validateRequest} from "../helper/validateRequest";
 import {
   createQuiz,
   getQuiz,
@@ -8,9 +12,7 @@ import {
   isValidQuiz,
   isValidQuizName,
 } from "../controllers/quiz";
-import { isAuthenticated } from "../middlewares/isAuth";
 
-import { body } from "express-validator";
 
 const router = express.Router();
 
@@ -51,6 +53,7 @@ router.post(
         });
     }),
   ],
+  validateRequest,
   createQuiz
 );
 
@@ -86,6 +89,7 @@ router.put(
         });
     }),
   ],
+  validateRequest,
   updateQuiz
 );
 
