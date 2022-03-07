@@ -4,6 +4,7 @@ const router = express.Router();
 import { isAuthenticated } from "../middlewares/isAuth";
 import { doesQuizExist, startExam, submitExam } from "../controllers/exam";
 import { body } from "express-validator";
+import { validateRequest } from "../helper/validateRequest";
 
 // GET /exam/quizId
 router.get("/:quizId", isAuthenticated, startExam);
@@ -29,6 +30,6 @@ router.post("/", isAuthenticated,[
     .not()
     .isEmpty()
     .withMessage("Invalid attempt!")
-], submitExam);
+],validateRequest , submitExam);
 
 export default router;

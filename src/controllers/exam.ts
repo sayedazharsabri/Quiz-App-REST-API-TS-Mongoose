@@ -41,13 +41,6 @@ const startExam: RequestHandler = async (req, res, next) => {
 
 const submitExam: RequestHandler = async (req, res, next) => {
   try {
-    const validationError = validationResult(req);
-    if (!validationError.isEmpty()) {
-      const err = new ProjectError("Validation failed!");
-      err.statusCode = 422;
-      err.data = validationError.array();
-      throw err;
-    }
     const quizId = req.body.quizId;
     const attempted_question = req.body.attempted_question;
 
