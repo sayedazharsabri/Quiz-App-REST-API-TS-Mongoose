@@ -9,8 +9,7 @@ import { body } from "express-validator";
 router.get("/:quizId", isAuthenticated, startExam);
 
 // POST /exam
-router.post("/",
-[
+router.post("/", isAuthenticated,[
     body("quizId")
     .trim()
     .not()
@@ -27,10 +26,9 @@ router.post("/",
         })
     }),
     body("attempted_question")
-    .trim()
     .not()
     .isEmpty()
     .withMessage("Invalid attempt!")
-], isAuthenticated, submitExam);
+], submitExam);
 
 export default router;
