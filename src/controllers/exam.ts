@@ -4,8 +4,9 @@ import Quiz from "../models/quiz";
 import Report from "../models/report";
 
 import ProjectError from "../helper/error";
-import { isNamedExportBindings } from "typescript";
 import { ReturnResponse } from "../utils/interfaces";
+import { Mongoose } from "mongoose";
+import { validationResult } from "express-validator";
 
 const startExam: RequestHandler = async (req, res, next) => {
   try {
@@ -75,4 +76,31 @@ const submitExam: RequestHandler = async (req, res, next) => {
   }
 };
 
-export { startExam, submitExam };
+const doesQuizExist = async (quizId:Mongoose["Types"]["ObjectId"])=>{
+  const quiz= await Quiz.findById(quizId);
+  if(!quiz)
+    return false;
+  return true;
+}
+
+const isValidAttempt = async (attempted_question:{},quizId:Mongoose["Types"]["ObjectId"])=>{
+  const quiz= await Quiz.findById(quizId);
+  const answers=quiz.answers;
+  const questions=Object.keys(answers);
+  const attemptQ=Object.keys(attempted_question);
+  if(attemptQ.length!=questions.length)
+    return false;
+
+  let flag=0;
+  attemptQ.forEach((e)=>{
+    if(questions.indexOf(e)<0){
+      flag=1;
+    }
+  });
+  if(flag){
+    return false;
+  }
+  return true;
+}
+
+export { startExam, submitExam, doesQuizExist, isValidAttempt};
