@@ -3,6 +3,7 @@ import express from "express";
 import {
   registerUser,
   loginUser,
+  verifyUser,
   isUserExist,
   isPasswordValid,
 } from "../controllers/auth";
@@ -86,6 +87,32 @@ router.post(
       .withMessage("Invalid Password!"),
   ],
   loginUser
+);
+
+//POST /auth/reactivate account
+router.post(
+  "/verify",
+  [
+    body("email")
+      .trim()
+      .isEmail()
+      .normalizeEmail()
+      .withMessage("Invalid Email!"),
+    body("password")
+      .trim()
+      .isLength({ min: 8 })
+      .custom((password: String) => {
+        return isPasswordValid(password)
+          .then((status: Boolean) => {
+            if (!status) return Promise.reject();
+          })
+          .catch((err) => {
+            return Promise.reject(err);
+          });
+      })
+      .withMessage("Invalid Password!"),
+  ],
+  verifyUser
 );
 
 export default router;

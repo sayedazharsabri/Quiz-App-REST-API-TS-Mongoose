@@ -3,6 +3,7 @@ import { RequestHandler } from "express";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import { validationResult } from "express-validator";
+import sendEmail from "../utils/email";
 
 import User from "../models/user";
 import ProjectError from "../helper/error";
@@ -66,6 +67,24 @@ const loginUser: RequestHandler = async (req, res, next) => {
       err.statusCode = 401;
       throw err;
     }
+
+    //verify if user is deactivated ot not
+
+    console.log();
+    if (user.isDeactivated) {
+      // const emailToken = jwt.sign({ userId: user._id }, "secretmyverysecretkey", {
+      //   expiresIn: "1m",
+      // });
+
+      // const message = `${process.env.BASE_URL}user/verify/${user.id}/${emailToken}`;
+      //  sendEmail(user.email, "Verify Email", message);
+      //  //sendEmail();
+
+      // res.send("An Email sent to your account please verify");
+      const err = new ProjectError("Account is deacivated!");
+      err.statusCode = 401;
+      throw err;
+    }
     //verify password using bcrypt
     const status = await bcrypt.compare(password, user.password);
 
@@ -80,6 +99,56 @@ const loginUser: RequestHandler = async (req, res, next) => {
       const err = new ProjectError("Credential mismatch");
       err.statusCode = 401;
       throw err;
+    }
+  } catch (error) {
+    next(error);
+  }
+};
+
+//re-actiate user
+const verifyUser: RequestHandler = async (req, res, next) => {
+  let resp: ReturnResponse;
+  try {
+    const validationError = validationResult(req);
+    if (!validationError.isEmpty()) {
+      const err = new ProjectError("Validation failed!");
+      err.statusCode = 422;
+      err.data = validationError.array();
+      throw err;
+    }
+
+    const email = req.body.email;
+
+    //find user with email
+    const user = await User.findOne({ email });
+
+    if (!user) {
+      const err = new ProjectError("No user exist");
+      err.statusCode = 401;
+      throw err;
+    }
+
+    //verify if user is deactivated ot not
+
+    console.log();
+    if (user.isDeactivated) {
+      const emailToken = jwt.sign(
+        { userId: user._id },
+        "secretmyverysecretkey",
+        {
+          expiresIn: "1m",
+        }
+      );
+
+      const message = `${process.env.BASE_URL}user/verify/${user.id}/${emailToken}`;
+      sendEmail(user.email, "Verify Email", message);
+      //sendEmail();
+
+      res.send("An Email sent to your account please verify");
+
+      // const err = new ProjectError("User is deactivated");
+      // err.statusCode = 401;
+      // throw err;
     }
   } catch (error) {
     next(error);
@@ -143,4 +212,4 @@ const isPasswordValid = async (password: String) => {
   return false;
 };
 
-export { registerUser, loginUser, isUserExist, isPasswordValid };
+export { registerUser, loginUser, verifyUser, isUserExist, isPasswordValid };

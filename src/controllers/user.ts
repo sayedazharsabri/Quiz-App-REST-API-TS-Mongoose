@@ -1,5 +1,4 @@
 import { RequestHandler } from "express";
-
 import User from "../models/user";
 import ProjectError from "../helper/error";
 import { ReturnResponse } from "../utils/interfaces";
@@ -48,6 +47,8 @@ const updateUser: RequestHandler = async (req, res, next) => {
     }
 
     user.name = req.body.name;
+    user.isDeactivated = req.body.isDeactivated;
+    console.log(user);
     await user.save();
 
     resp = { status: "success", message: "User Updated", data: {} };
@@ -57,4 +58,23 @@ const updateUser: RequestHandler = async (req, res, next) => {
   }
 };
 
-export { getUser, updateUser };
+const verifyUser: RequestHandler = async (req, res, next) => {
+  let resp: ReturnResponse;
+  try {
+    const inactiveUser = await User.findOne({ _id: req.params.id });
+    if (!inactiveUser) {
+      const err = new ProjectError("Invalid link!");
+      err.statusCode = 401;
+      throw err;
+    }
+
+    await User.updateOne({ _id: inactiveUser._id, isDeactivated: false });
+
+    resp = { status: "success", message: "Account activated!", data: {} };
+    res.send(resp);
+  } catch (error) {
+    next(error);
+  }
+};
+
+export { getUser, updateUser, verifyUser };
