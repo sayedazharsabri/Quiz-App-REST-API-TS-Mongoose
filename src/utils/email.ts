@@ -1,4 +1,3 @@
-import { RequestHandler } from "express";
 import nodemailer from "nodemailer";
 import ProjectError from "../helper/error";
 

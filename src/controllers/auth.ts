@@ -2,9 +2,7 @@
 import { RequestHandler } from "express";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
-import { validationResult } from "express-validator";
 import sendEmail from "../utils/email";
-
 import User from "../models/user";
 import ProjectError from "../helper/error";
 
@@ -14,15 +12,6 @@ import { ReturnResponse } from "../utils/interfaces";
 const registerUser: RequestHandler = async (req, res, next) => {
   let resp: ReturnResponse;
   try {
-    //validation
-    const validationError = validationResult(req);
-    if (!validationError.isEmpty()) {
-      const err = new ProjectError("Validation failed!");
-      err.statusCode = 422;
-      err.data = validationError.array();
-      throw err;
-    }
-    //validation end
     const email = req.body.email;
     const name = req.body.name;
     let password = await bcrypt.hash(req.body.password, 12);
@@ -48,14 +37,6 @@ const registerUser: RequestHandler = async (req, res, next) => {
 const loginUser: RequestHandler = async (req, res, next) => {
   let resp: ReturnResponse;
   try {
-    const validationError = validationResult(req);
-    if (!validationError.isEmpty()) {
-      const err = new ProjectError("Validation failed!");
-      err.statusCode = 422;
-      err.data = validationError.array();
-      throw err;
-    }
-
     const email = req.body.email;
     const password = req.body.password;
 
@@ -70,17 +51,7 @@ const loginUser: RequestHandler = async (req, res, next) => {
 
     //verify if user is deactivated ot not
 
-    console.log();
     if (user.isDeactivated) {
-      // const emailToken = jwt.sign({ userId: user._id }, "secretmyverysecretkey", {
-      //   expiresIn: "1m",
-      // });
-
-      // const message = `${process.env.BASE_URL}user/verify/${user.id}/${emailToken}`;
-      //  sendEmail(user.email, "Verify Email", message);
-      //  //sendEmail();
-
-      // res.send("An Email sent to your account please verify");
       const err = new ProjectError("Account is deacivated!");
       err.statusCode = 401;
       throw err;
@@ -105,18 +76,9 @@ const loginUser: RequestHandler = async (req, res, next) => {
   }
 };
 
-//re-actiate user
+//re-activate user
 const verifyUser: RequestHandler = async (req, res, next) => {
-  let resp: ReturnResponse;
   try {
-    const validationError = validationResult(req);
-    if (!validationError.isEmpty()) {
-      const err = new ProjectError("Validation failed!");
-      err.statusCode = 422;
-      err.data = validationError.array();
-      throw err;
-    }
-
     const email = req.body.email;
 
     //find user with email
@@ -130,7 +92,6 @@ const verifyUser: RequestHandler = async (req, res, next) => {
 
     //verify if user is deactivated ot not
 
-    console.log();
     if (user.isDeactivated) {
       const emailToken = jwt.sign(
         { userId: user._id },
@@ -142,13 +103,8 @@ const verifyUser: RequestHandler = async (req, res, next) => {
 
       const message = `${process.env.BASE_URL}user/verify/${user.id}/${emailToken}`;
       sendEmail(user.email, "Verify Email", message);
-      //sendEmail();
 
       res.send("An Email sent to your account please verify");
-
-      // const err = new ProjectError("User is deactivated");
-      // err.statusCode = 401;
-      // throw err;
     }
   } catch (error) {
     next(error);

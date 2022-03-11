@@ -1,9 +1,13 @@
 {
     "env":{
         "CONNECTION_STRING":"",
-        "PORT":3000
+        "PORT":3000,
+        "USER":"enter user email",
+        "PASS":"enter user password",
+        "SERVICE":"gmail",
+        "BASE_URL":"http://localhost:3000/"
     },
     "watch":["src"],
     "ext": "ts,json",
     "exec": "ts-node ./src/app.ts"
-}
+} 

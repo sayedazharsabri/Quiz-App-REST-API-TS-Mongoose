@@ -1,5 +1,7 @@
 // Redirect request to Particular method on Controller
 import express from "express";
+import { body } from "express-validator";
+import {validateRequest} from "../helper/validateRequest";
 import {
   registerUser,
   loginUser,
@@ -7,7 +9,6 @@ import {
   isUserExist,
   isPasswordValid,
 } from "../controllers/auth";
-import { body } from "express-validator";
 
 const router = express.Router();
 
@@ -60,6 +61,7 @@ router.post(
         return true;
       }),
   ],
+  validateRequest,
   registerUser
 );
 
@@ -86,6 +88,7 @@ router.post(
       })
       .withMessage("Invalid Password!"),
   ],
+  validateRequest,
   loginUser
 );
 

@@ -1,6 +1,5 @@
 //model
 import { RequestHandler } from "express";
-import { validationResult } from "express-validator";
 
 import Quiz from "../models/quiz";
 import ProjectError from "../helper/error";
@@ -8,13 +7,6 @@ import { ReturnResponse } from "../utils/interfaces";
 
 const createQuiz: RequestHandler = async (req, res, next) => {
   try {
-    const validationError = validationResult(req);
-    if (!validationError.isEmpty()) {
-      const err = new ProjectError("Validation failed!");
-      err.statusCode = 422;
-      err.data = validationError.array();
-      throw err;
-    }
 
     const created_by = req.userId;
     const name = req.body.name;
@@ -69,13 +61,6 @@ const getQuiz: RequestHandler = async (req, res, next) => {
 
 const updateQuiz: RequestHandler = async (req, res, next) => {
   try {
-    const validationError = validationResult(req);
-    if (!validationError.isEmpty()) {
-      const err = new ProjectError("Validation failed!");
-      err.statusCode = 422;
-      err.data = validationError.array();
-      throw err;
-    }
 
     const quizId = req.body._id;
     const quiz = await Quiz.findById(quizId);
