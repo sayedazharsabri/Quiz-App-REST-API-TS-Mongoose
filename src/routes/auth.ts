@@ -2,10 +2,13 @@
 import express from "express";
 import { body } from "express-validator";
 
-import {validateRequest} from "../helper/validateRequest";
+import { validateRequest } from "../helper/validateRequest";
+
+
 import {
   registerUser,
   loginUser,
+  activateUser,
   isUserExist,
   isPasswordValid,
 } from "../controllers/auth";
@@ -90,6 +93,32 @@ router.post(
   ],
   validateRequest,
   loginUser
+);
+
+//POST /auth/activate account
+router.post(
+  "/activate",
+  [
+    body("email")
+      .trim()
+      .isEmail()
+      .normalizeEmail()
+      .withMessage("Invalid Email!"),
+    body("password")
+      .trim()
+      .isLength({ min: 8 })
+      .custom((password: String) => {
+        return isPasswordValid(password)
+          .then((status: Boolean) => {
+            if (!status) return Promise.reject();
+          })
+          .catch((err) => {
+            return Promise.reject(err);
+          });
+      })
+      .withMessage("Invalid Password!"),
+  ],
+  activateUser
 );
 
 export default router;

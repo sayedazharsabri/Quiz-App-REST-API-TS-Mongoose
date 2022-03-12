@@ -2,6 +2,9 @@
 import { RequestHandler } from "express";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
+import sendEmail from "../utils/email";
+
+
 
 import User from "../models/user";
 import ProjectError from "../helper/error";
@@ -12,7 +15,7 @@ import { ReturnResponse } from "../utils/interfaces";
 const registerUser: RequestHandler = async (req, res, next) => {
   let resp: ReturnResponse;
   try {
-    
+
     const email = req.body.email;
     const name = req.body.name;
     let password = await bcrypt.hash(req.body.password, 12);
@@ -49,6 +52,14 @@ const loginUser: RequestHandler = async (req, res, next) => {
       err.statusCode = 401;
       throw err;
     }
+
+    //verify if user is deactivated ot not
+
+    if (user.isDeactivated) {
+      const err = new ProjectError("Account is deactivated!");
+      err.statusCode = 401;
+      throw err;
+    }
     //verify password using bcrypt
     const status = await bcrypt.compare(password, user.password);
 
@@ -64,6 +75,40 @@ const loginUser: RequestHandler = async (req, res, next) => {
       err.statusCode = 401;
       throw err;
     }
+  } catch (error) {
+    next(error);
+  }
+};
+
+//re-activate user
+const activateUser: RequestHandler = async (req, res, next) => {
+  try {
+    const email = req.body.email;
+
+    //find user with email
+    const user = await User.findOne({ email });
+
+    if (!user) {
+      const err = new ProjectError("No user exist");
+      err.statusCode = 401;
+      throw err;
+    }
+
+    //verify if user is deactivated or not
+    if (!user.isDeactivated) {
+      const err = new ProjectError("User is already activated!");
+      err.statusCode = 422;
+      throw err;
+    }
+
+    const emailToken = jwt.sign({ userId: user._id }, "secretmyverysecretkey", {
+      expiresIn: "5m",
+    });
+
+    const message = `${process.env.BASE_URL}user/activate/${emailToken}`;
+    sendEmail(user.email, "Verify Email", message);
+
+    res.send("An Email has been sent to your account please verify!");
   } catch (error) {
     next(error);
   }
@@ -126,4 +171,4 @@ const isPasswordValid = async (password: String) => {
   return false;
 };
 
-export { registerUser, loginUser, isUserExist, isPasswordValid };
+export { registerUser, loginUser, activateUser, isUserExist, isPasswordValid };

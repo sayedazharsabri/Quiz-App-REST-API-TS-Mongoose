@@ -1,7 +1,11 @@
 {
     "env":{
         "CONNECTION_STRING":"",
-        "PORT":3000
+        "PORT":3000,
+        "USER":"<user email>",
+        "PASS":"<user password>",
+        "SERVICE":"gmail",
+        "BASE_URL":""
     },
     "watch":["src"],
     "ext": "ts,json",
