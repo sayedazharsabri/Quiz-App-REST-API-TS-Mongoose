@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from "express";
 import jwt from "jsonwebtoken";
-
+import { isActiveUser } from "../controllers/user";
 import ProjectError from "../helper/error";
 
 const isAuthenticated = (req: Request, res: Response, next: NextFunction) => {
@@ -26,6 +26,13 @@ const isAuthenticated = (req: Request, res: Response, next: NextFunction) => {
     if (!decodedToken) {
       const err = new ProjectError("Not authenticated");
       err.statusCode = 401;
+      throw err;
+    }
+
+    //isActiveUser in user controller else inactive user
+    if (!!isActiveUser(decodedToken.userId)) {
+      const err = new ProjectError("User is deactivated!");
+      err.statusCode = 422;
       throw err;
     }
 

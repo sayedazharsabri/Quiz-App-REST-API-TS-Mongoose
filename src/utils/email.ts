@@ -21,11 +21,7 @@ const sendEmail = async (
       subject: subject,
       text: text,
     });
-
-    console.log(emailSent);
-    console.log("email sent sucessfully");
   } catch (error) {
-    console.log("email not sent");
     const err = new ProjectError("email not sent");
     err.statusCode = 401;
     throw err;

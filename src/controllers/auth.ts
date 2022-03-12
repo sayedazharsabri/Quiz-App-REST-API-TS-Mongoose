@@ -52,7 +52,7 @@ const loginUser: RequestHandler = async (req, res, next) => {
     //verify if user is deactivated ot not
 
     if (user.isDeactivated) {
-      const err = new ProjectError("Account is deacivated!");
+      const err = new ProjectError("Account is deactivated!");
       err.statusCode = 401;
       throw err;
     }
@@ -77,7 +77,7 @@ const loginUser: RequestHandler = async (req, res, next) => {
 };
 
 //re-activate user
-const verifyUser: RequestHandler = async (req, res, next) => {
+const activateUser: RequestHandler = async (req, res, next) => {
   try {
     const email = req.body.email;
 
@@ -90,22 +90,21 @@ const verifyUser: RequestHandler = async (req, res, next) => {
       throw err;
     }
 
-    //verify if user is deactivated ot not
-
-    if (user.isDeactivated) {
-      const emailToken = jwt.sign(
-        { userId: user._id },
-        "secretmyverysecretkey",
-        {
-          expiresIn: "1m",
-        }
-      );
-
-      const message = `${process.env.BASE_URL}user/verify/${user.id}/${emailToken}`;
-      sendEmail(user.email, "Verify Email", message);
-
-      res.send("An Email sent to your account please verify");
+    //verify if user is deactivated or not
+    if (!user.isDeactivated) {
+      const err = new ProjectError("User is already activated!");
+      err.statusCode = 422;
+      throw err;
     }
+
+    const emailToken = jwt.sign({ userId: user._id }, "secretmyverysecretkey", {
+      expiresIn: "5m",
+    });
+
+    const message = `${process.env.BASE_URL}user/activate/${emailToken}`;
+    sendEmail(user.email, "Verify Email", message);
+
+    res.send("An Email has been sent to your account please verify!");
   } catch (error) {
     next(error);
   }
@@ -168,4 +167,4 @@ const isPasswordValid = async (password: String) => {
   return false;
 };
 
-export { registerUser, loginUser, verifyUser, isUserExist, isPasswordValid };
+export { registerUser, loginUser, activateUser, isUserExist, isPasswordValid };

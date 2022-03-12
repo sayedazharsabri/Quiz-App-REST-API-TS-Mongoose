@@ -1,11 +1,11 @@
 // Redirect request to Particular method on Controller
 import express from "express";
 import { body } from "express-validator";
-import {validateRequest} from "../helper/validateRequest";
+import { validateRequest } from "../helper/validateRequest";
 import {
   registerUser,
   loginUser,
-  verifyUser,
+  activateUser,
   isUserExist,
   isPasswordValid,
 } from "../controllers/auth";
@@ -92,9 +92,9 @@ router.post(
   loginUser
 );
 
-//POST /auth/reactivate account
+//POST /auth/activate account
 router.post(
-  "/verify",
+  "/activate",
   [
     body("email")
       .trim()
@@ -115,7 +115,7 @@ router.post(
       })
       .withMessage("Invalid Password!"),
   ],
-  verifyUser
+  activateUser
 );
 
 export default router;
