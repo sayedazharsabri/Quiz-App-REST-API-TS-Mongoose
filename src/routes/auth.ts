@@ -1,7 +1,10 @@
 // Redirect request to Particular method on Controller
 import express from "express";
 import { body } from "express-validator";
+
 import { validateRequest } from "../helper/validateRequest";
+
+
 import {
   registerUser,
   loginUser,
