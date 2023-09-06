@@ -69,13 +69,15 @@ app.use(
   }
 );
 
-mongoose.connect(connectionString, (err) => {
-  if (err) {
-    console.log(err);
-    return;
-  }
-
-  app.listen(process.env.PORT, () => {
-    console.log("Server Connected");
-  });
-});
+mongoose.connect(connectionString).then( 
+  () => {
+    app.listen(process.env.PORT, () => {
+      console.log("Server Connected");
+    });},
+    err => {
+      if(err){
+        console.log(err);
+        return;
+      }
+    }
+);

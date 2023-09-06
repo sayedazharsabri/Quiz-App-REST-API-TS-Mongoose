@@ -10,6 +10,12 @@ const getReport: RequestHandler = async (req, res, next) => {
       const reportId = req.params.reportId;
       report = await Report.findById(req.params.reportId);
 
+      if(!report) {
+        const err = new ProjectError("No report found!");
+        err.statusCode = 404;
+        throw err;
+      }
+
       if (report.userId.toString() !== req.userId) {
         const err = new ProjectError("You are not allowed");
         err.statusCode = 405;

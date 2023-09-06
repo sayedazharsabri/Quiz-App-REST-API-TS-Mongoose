@@ -30,7 +30,7 @@ const isAuthenticated = (req: Request, res: Response, next: NextFunction) => {
     }
 
     //isActiveUser in user controller else inactive user
-    if (!!isActiveUser(decodedToken.userId)) {
+    if (!isActiveUser(decodedToken.userId)) {
       const err = new ProjectError("User is deactivated!");
       err.statusCode = 422;
       throw err;

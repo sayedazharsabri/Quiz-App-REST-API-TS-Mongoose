@@ -4,7 +4,7 @@
         "PORT":3000,
         "USER":"<user email>",
         "PASS":"<user password>",
-        "SERVICE":"gmail",
+        "HOST":"smtp.gmail.com",
         "BASE_URL":""
     },
     "watch":["src"],

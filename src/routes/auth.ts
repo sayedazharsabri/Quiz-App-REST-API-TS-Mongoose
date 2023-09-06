@@ -38,8 +38,7 @@ router.post(
           .catch((err) => {
             return Promise.reject(err);
           });
-      })
-      .normalizeEmail(),
+      }),
     body("password")
       .trim()
       .isLength({ min: 8 })
@@ -75,7 +74,6 @@ router.post(
     body("email")
       .trim()
       .isEmail()
-      .normalizeEmail()
       .withMessage("Invalid Email!"),
     body("password")
       .trim()
@@ -102,7 +100,6 @@ router.post(
     body("email")
       .trim()
       .isEmail()
-      .normalizeEmail()
       .withMessage("Invalid Email!"),
     body("password")
       .trim()

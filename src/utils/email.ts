@@ -8,7 +8,9 @@ const sendEmail = async (
 ): Promise<any> => {
   try {
     const transporter = nodemailer.createTransport({
-      service: process.env.SERVICE,
+      host: process.env.HOST,
+      port: 465,
+      secure: true,
       auth: {
         user: process.env.USER,
         pass: process.env.PASS,
@@ -21,6 +23,8 @@ const sendEmail = async (
       subject: subject,
       text: text,
     });
+    console.log("message sent: %s",emailSent.messageId);
+    
   } catch (error) {
     const err = new ProjectError("email not sent");
     err.statusCode = 401;
