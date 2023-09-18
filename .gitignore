@@ -1,7 +1,7 @@
 # Logs
 logs
 build
-node_modules/
+node_modules
 
 # TypeScript v1 declaration files
 typings/

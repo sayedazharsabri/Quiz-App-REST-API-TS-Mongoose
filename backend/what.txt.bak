@@ -1,0 +1,194 @@
+1. yarn
+2. express
+3. typescript
+
+
+
+4. What is REST , How, WHy.?
+
+//End Point
+
+mydome/user/
+----- get: Give users detail
+
+mydome/user/<userID>
+--- get: Give this particular user details
+
+mydome/user/
+--- POST: req.data=>>  create user
+
+mydome/user/
+--- PUT: req.data==> update user details
+
+mydomain/user
+== PATHC: req.data=>>> modify 
+
+mydome/user/<id>
+==> DELETE: Delete this user
+
+--> Request
+----- code
+
+
+// Response
+
+
+
+---------------------------------------
+- MongoDB ( offline / online)
+  -- aggregate
+  -- insert :   Lecture
+- mongoose (ODM)
+
+--NodeJS - >> MongoDB : connectionString
+
+-> IP-WhiteListing: 
+-> How to interact with db and precautions
+
+
+//schema
+--> architecture -> name, email, password
+//model
+-> name: User: users
+
+========
+
+-> Response - interface
+-- response format fix
+- postman collection and saving examples
+- different routes for user module
+- dynamic parameter values
+-> req.body
+-> req.params
+-> req.query
+-> async await example
+-> What is BSON
+  //BSONTypeError: Argument passed in must be a string of 12 bytes or a string of 24 hex characters
+-> projection
+
+======
+part 3
+-> Issue: regular build on development
+-> ts-node install
+-->> YARN ts-node 
+    => ts-node : The term 'ts-node' is not recognized as the name of a cmdlet, function, script file, or operable program
+
+-> REPL - link
+-> Benefit: ts-node: direct execute typescript, build effort reduced.
+
+
+
+==
+Nodemon
+- build effor reduced
+- server started automatically
+- justr execute Nodemon
+- add extention
+- add folder watch
+- add exec, what command execute
+- customize nodemon.json
+
+
+------
+Password: Encryption
+ec6 video: object key value
+
+Why not encode base64 or some ecnryption which can be decrypt.
+bcrypt for encryption password
+How to verify the password for login 
+
+
+1: Why we use JWT and What is secret
+
+2: secret ko environment me rakh sakte hain?
+
+==========================================
+
+- Break code -> divided user and auth routes
+- authentication & authorization
+- middleware add in .post or .get() etc methods on routes before forwarding request to controller
+--> promise link
+
+next() -- in middleware
+
+middleware -- routes--->midllewareY>> controller
+
+middlewareY -->>> authentication:: jwt
+--> how to send token jwt from postman(or with request) in  authorization
+--> how to fetch it from authorization
+--> how to decode it
+
+-> how to apply authorization
+->error TS2339: Property 'userId' does not exist on type 'Request<ParamsDictionary, any, any, ParsedQs, Record<string, any>>'.
+
+
+===========================================
+1. Interface mergin
+
+2. class - inheritance
+
+3. Error: listen EADDRINUSE: address already in use :::3000
+    at Server.setupListenHandle [as _listen2] (net.js:1331:16)
+    at listenInCluster (net.js:1379:12)
+    at Server.listen (net.js:1465:7)
+
+4: Error handle in TypeScript
+
+=====================
+How to verify password and confirm password
+How to check, like username or dob or city name is not included in password
+How to access request in express-validator
+How to access request.body in express-validator
+How to access request.param in express-validator
+
+
+Next:
+1: controller - function body
+2: model create for quiz
+3: authentication- postman - to easy - environment setup
+
+
+===
+Authentication:
+
+Question: 
+If user logged in and we sent the JWT token with 1 hour expiry
+  Scene 1 - then token will expire after 1 hour.
+
+  Scene 2 - Token should expire after 1 hour of inactivity..
+
+=======
+21-02
+Implementation of controller functions
+create quiz
+get quiz
+
+Implementation of quiz model
+projection -> how to filter what to show and what to hide
+Update quiz
+delete quiz
+publish quiz
+
+//Authorization
+
+Mongodb - link
+
+=========================
+22 Feb
+-> Restriction on Update and delete of published quiz
+-> Explore postman environment variables
+-> Validation over Quiz routes
+
+=========================
+- fetch result
+- optional variable in paramas /:reportId?
+- req: Request, res: Response, next: NextFunction how to handle it
+- RequestHandler of express
+- handle interface
+
+
+=====
+>> check
+1. update quiz with empty quizname
+2. same user/quiz with upper and lower case change
+3. Optimize mongoose, unbound question list
