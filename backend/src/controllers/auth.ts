@@ -1,21 +1,17 @@
 // import { Request, Response, NextFunction} from 'express';
-import { RequestHandler } from "express";
 import bcrypt from "bcryptjs";
+import { RequestHandler } from "express";
 import jwt from "jsonwebtoken";
+
 import sendEmail from "../utils/email";
-
-
-
-import User from "../models/user";
 import ProjectError from "../helper/error";
-
 import { ReturnResponse } from "../utils/interfaces";
+import User from "../models/user";
 
 //const registerUser:RequestHandler = async (req: Request, res: Response, next: NextFunction) => {
 const registerUser: RequestHandler = async (req, res, next) => {
   let resp: ReturnResponse;
   try {
-
     const email = req.body.email;
     const name = req.body.name;
     let password = await bcrypt.hash(req.body.password, 12);

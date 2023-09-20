@@ -1,9 +1,9 @@
 import { RequestHandler } from "express";
 import jwt from "jsonwebtoken";
-import { Mongoose } from "mongoose";
-import User from "../models/user";
+
 import ProjectError from "../helper/error";
 import { ReturnResponse } from "../utils/interfaces";
+import User from "../models/user";
 
 const getUser: RequestHandler = async (req, res, next) => {
   let resp: ReturnResponse;

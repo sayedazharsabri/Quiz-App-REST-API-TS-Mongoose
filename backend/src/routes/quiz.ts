@@ -2,7 +2,6 @@ import express from "express";
 import { body } from "express-validator";
 
 import { isAuthenticated } from "../middlewares/isAuth";
-import {validateRequest} from "../helper/validateRequest";
 import {
   createQuiz,
   getQuiz,
@@ -12,7 +11,7 @@ import {
   isValidQuiz,
   isValidQuizName,
 } from "../controllers/quiz";
-
+import { validateRequest } from "../helper/validateRequest";
 
 const router = express.Router();
 
@@ -39,8 +38,8 @@ router.post(
             return Promise.reject(err);
           });
       }),
-    body("questions_list").custom((questions_list, { req }) => {
-      return isValidQuiz(questions_list, req.body["answers"])
+    body("questionList").custom((questionList, { req }) => {
+      return isValidQuiz(questionList, req.body["answers"])
         .then((status: Boolean) => {
           if (!status) {
             return Promise.reject(
@@ -75,8 +74,8 @@ router.put(
       .isEmpty()
       .isLength({ min: 10 })
       .withMessage("Please enter a valid name, minimum 10 character long"),
-    body("questions_list").custom((questions_list, { req }) => {
-      return isValidQuiz(questions_list, req.body["answers"])
+    body("questionList").custom((questionList, { req }) => {
+      return isValidQuiz(questionList, req.body["answers"])
         .then((status: Boolean) => {
           if (!status) {
             return Promise.reject(

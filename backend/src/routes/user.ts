@@ -1,12 +1,13 @@
 // Redirect request to Particular method on Controller
 import express from "express";
+
+import { isAuthenticated } from "../middlewares/isAuth";
 import {
   getUser,
   updateUser,
   activateUser,
   deactivateUser,
 } from "../controllers/user";
-import { isAuthenticated } from "../middlewares/isAuth";
 
 const router = express.Router();
 

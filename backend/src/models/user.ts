@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+
 const schema = mongoose.Schema;
 //schema
 const userSchema = new schema(
