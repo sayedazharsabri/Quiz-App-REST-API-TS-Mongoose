@@ -58,7 +58,7 @@ router.post(
 
 // get
 // GET /quiz/:quizId
-router.get("/:quizId", isAuthenticated, getQuiz);
+router.get("/:quizId?", isAuthenticated, getQuiz);
 
 //
 

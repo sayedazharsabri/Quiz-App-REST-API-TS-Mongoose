@@ -28,22 +28,33 @@ const createQuiz: RequestHandler = async (req, res, next) => {
 const getQuiz: RequestHandler = async (req, res, next) => {
   try {
     const quizId = req.params.quizId;
-    const quiz = await Quiz.findById(quizId, {
-      name: 1,
-      questionList: 1,
-      answers: 1,
-      createdBy: 1,
-    });
+    let quiz;
+    if (quizId) {
+      quiz = await Quiz.findById(quizId, {
+        name: 1,
+        questionList: 1,
+        answers: 1,
+        createdBy: 1,
+      });
+
+      if (!quiz) {
+        const err = new ProjectError("No quiz found!");
+        err.statusCode = 404;
+        throw err;
+      }
+
+      if (req.userId !== quiz.createdBy.toString()) {
+        const err = new ProjectError("You are not authorized!");
+        err.statusCode = 403;
+        throw err;
+      }
+    } else {
+      quiz = await Quiz.find({ createdBy: req.userId });
+    }
 
     if (!quiz) {
       const err = new ProjectError("Quiz not found!");
       err.statusCode = 404;
-      throw err;
-    }
-
-    if (req.userId !== quiz.createdBy.toString()) {
-      const err = new ProjectError("You are not authorized!");
-      err.statusCode = 403;
       throw err;
     }
 
