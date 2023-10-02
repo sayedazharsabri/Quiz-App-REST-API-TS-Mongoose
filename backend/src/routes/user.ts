@@ -14,7 +14,7 @@ const router = express.Router();
 // User should be authenticate
 // User should be authorize
 //Get /user/:userId
-router.get("/:userId", isAuthenticated, getUser);
+router.get("/", isAuthenticated, getUser);
 
 // User should be authenticate
 // User should be authorize

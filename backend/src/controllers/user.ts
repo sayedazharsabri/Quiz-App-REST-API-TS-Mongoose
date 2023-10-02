@@ -9,9 +9,9 @@ const getUser: RequestHandler = async (req, res, next) => {
   let resp: ReturnResponse;
 
   try {
-    const userId = req.params.userId;
+    const userId = req.userId;
 
-    if (req.userId != req.params.userId) {
+    if (!userId) {
       const err = new ProjectError("You are not authorized!");
       err.statusCode = 401;
       err.data = { hi: "its error" };
@@ -33,14 +33,14 @@ const getUser: RequestHandler = async (req, res, next) => {
 
 const updateUser: RequestHandler = async (req, res, next) => {
   let resp: ReturnResponse;
+  const userId = req.userId;
   try {
-    if (req.userId != req.body._id) {
+    if (!userId) {
       const err = new ProjectError("You are not authorized!");
       err.statusCode = 401;
       throw err;
     }
 
-    const userId = req.body._id;
     const user = await User.findById(userId);
     if (!user) {
       const err = new ProjectError("No user exist");
@@ -60,14 +60,14 @@ const updateUser: RequestHandler = async (req, res, next) => {
 
 const deactivateUser: RequestHandler = async (req, res, next) => {
   let resp: ReturnResponse;
+  const userId = req.userId;
   try {
-    if (req.userId != req.body._id) {
+    if (!userId) {
       const err = new ProjectError("You are not authorized!");
       err.statusCode = 401;
       throw err;
     }
 
-    const userId = req.body._id;
     const user = await User.findById(userId);
     if (!user) {
       const err = new ProjectError("No user exist");
