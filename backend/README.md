@@ -2,8 +2,7 @@
 
 # Quiz-App-REST-API-TS-Mongoose
 This is Backend - REST API for a Quiz App build using TypeScript and Mongoose.
-### Backend playlist:
-![Static Badge](https://img.shields.io/badge/backend_playlist-1?logo=data%3Aimage%2Fpng%3Bbase64%2CiVBORw0KGgoAAAANSUhEUgAAABwAAAAcCAYAAAByDd%2BUAAAAwklEQVR4AWNwL%2FChKx6GFo5a%2BJ%2BBQRmIfYE4HYgrgLgLiOdA8VqsGCHfBdWTDjVDGaeFQElmIL4CxP%2BpjK%2FgsnA7SAGN8FpsFv6nJUaxECggSmsLQXYgW2hOlKbs7P%2F%2F7ezItVAf2UJfojTNnv0fDNauJcdCX2QLo0iwEAHa2si2MJ1ECxHg1StIUBPWH0V3C%2BkepOQnmi1byE809M8W9M%2F49C%2Fa6F940796wqyAo%2FBUvtuRMZ5KOApk1mibhmI8aiEAWJrZd6IgmiUAAAAASUVORK5CYII%3D&color=grey&link=https%3A%2F%2Fwww.youtube.com%2Fplaylist%3Flist%3DPLIfcYFqzDXHlHjNyVs5J5KCe6B1NYZ7WK)
+### Backend playlist: [Quiz App Backend](https://www.youtube.com/playlist?list=PLIfcYFqzDXHlHjNyVs5J5KCe6B1NYZ7WK)
 
 ## Dependencies:
 ![Static Badge](https://img.shields.io/badge/express-v4.18.2-1?logo=data%3Aimage%2Fpng%3Bbase64%2CiVBORw0KGgoAAAANSUhEUgAAABwAAAAcCAMAAABF0y%2BmAAAAbFBMVEX%2F%2F%2F%2F8%2FPz09PT19fX4%2BPjd3d2ampoAAAAzNDWoqKno6Oh0dHRcXFzIycm5ubktLi4hIiN7e3yLi4tmZ2fi4uI9Pj7S0tIHCQuzs7NJSkru7u6goKB%2Bf3%2FW1taNjo69vb1PT1BsbW0VFRc3ODhehn9TAAAA30lEQVR4Ad3QhXHEMBBA0W8QmAVmTq7%2FHjOeDdSQewNiLfBukjRNM4A0TeCR%2F0wSpY0xtiihMgWPsraNnLWd8yFEE3vyOIwAeprhMQ5Lm8O6uT3hWPwKjQspj%2BzsLvlBuwNmV1DaukS%2Bt3sqs8MWkAU7ejMiGnMhkjoCqnZmQ3CZPwM8Hy%2F8Hd7xF7BWzjQIxulCsJaQbG6r7xXR2zNHrn1s0AwhUdNPjunejTLxTlHedS89EOMwFAkobzR4ewFptRyI9tPY18uZkFIYzUO5akWU22BflYKx2xGX1Rn%2Fyxf%2BuwzyBt%2FvSwAAAABJRU5ErkJggg%3D%3D)
