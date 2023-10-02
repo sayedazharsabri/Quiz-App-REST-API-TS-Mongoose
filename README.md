@@ -16,6 +16,7 @@ Welcome to the QuizApp project! This interactive and engaging quiz application, 
 
 
 ### Connect :
-[Twitter](https://twitter.com/SayedAzharSabri)
-[Linkedin](https://www.linkedin.com/in/sayedazharsabri/)
+- [Twitter](https://twitter.com/SayedAzharSabri)
+
+- [Linkedin](https://www.linkedin.com/in/sayedazharsabri/)
 
