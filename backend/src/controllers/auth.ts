@@ -104,7 +104,11 @@ const activateUser: RequestHandler = async (req, res, next) => {
       expiresIn: "5m",
     });
 
-    const message = `${process.env.BASE_URL}/auth/activate/${emailToken}`;
+    const message = `
+    Click on the below link to activate your account:
+    http://${process.env.BASE_URL}/auth/activate/${emailToken}
+    
+    (Note: If the link is not clickable kindly copy the link and paste it in the browser.)`;
     sendEmail(user.email, "Verify Email", message);
     resp = {
       status: "success",
