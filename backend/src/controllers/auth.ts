@@ -80,6 +80,7 @@ const loginUser: RequestHandler = async (req, res, next) => {
 
 //re-activate user
 const activateUser: RequestHandler = async (req, res, next) => {
+  let resp: ReturnResponse;
   try {
     const email = req.body.email;
 
@@ -103,12 +104,50 @@ const activateUser: RequestHandler = async (req, res, next) => {
       expiresIn: "5m",
     });
 
-    const message = `${process.env.BASE_URL}user/activate/${emailToken}`;
+    const message = `${process.env.BASE_URL}/auth/activate/${emailToken}`;
     sendEmail(user.email, "Verify Email", message);
+    resp = {
+      status: "success",
+      message: "An Email has been sent to your account please verify!",
+      data: {},
+    };
 
-    res
-      .status(200)
-      .send("An Email has been sent to your account please verify!");
+    res.status(200).send(resp);
+  } catch (error) {
+    next(error);
+  }
+};
+
+const activateUserCallback: RequestHandler = async (req, res, next) => {
+  let resp: ReturnResponse;
+  try {
+    //verify token sent
+    const secretKey = process.env.SECRET_KEY || "";
+    let decodedToken;
+    const token = req.params.token;
+    decodedToken = <any>jwt.verify(token, secretKey);
+
+    if (!decodedToken) {
+      const err = new ProjectError("Invalid link!");
+      err.statusCode = 401;
+      throw err;
+    }
+
+    const userId = decodedToken.userId;
+
+    const user = await User.findOne({ _id: userId });
+
+    if (!user) {
+      const err = new ProjectError("User not found!");
+      err.statusCode = 404;
+      throw err;
+    }
+
+    user.isDeactivated = false;
+    await user.save();
+
+    resp = { status: "success", message: "Account activated!", data: {} };
+    res.status(200).send(resp);
   } catch (error) {
     next(error);
   }
@@ -171,4 +210,11 @@ const isPasswordValid = async (password: String) => {
   return false;
 };
 
-export { activateUser, isPasswordValid, isUserExist, loginUser, registerUser };
+export {
+  activateUser,
+  activateUserCallback,
+  isPasswordValid,
+  isUserExist,
+  loginUser,
+  registerUser,
+};

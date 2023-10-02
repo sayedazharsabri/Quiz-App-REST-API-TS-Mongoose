@@ -4,6 +4,7 @@ import { body } from "express-validator";
 
 import {
   activateUser,
+  activateUserCallback,
   isPasswordValid,
   isUserExist,
   loginUser,
@@ -109,5 +110,9 @@ router.post(
   ],
   activateUser
 );
+
+//re-activate link
+// GET /user/activate
+router.get("/activate/:token", activateUserCallback);
 
 export default router;

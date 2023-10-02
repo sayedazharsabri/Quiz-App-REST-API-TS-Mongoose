@@ -1,5 +1,4 @@
 import { RequestHandler } from "express";
-import jwt from "jsonwebtoken";
 
 import ProjectError from "../helper/error";
 import User from "../models/user";
@@ -84,41 +83,6 @@ const deactivateUser: RequestHandler = async (req, res, next) => {
   }
 };
 
-const activateUser: RequestHandler = async (req, res, next) => {
-  let resp: ReturnResponse;
-  try {
-    //verify token sent
-    const secretKey = process.env.SECRET_KEY || "";
-    let decodedToken;
-    const token = req.params.token;
-    decodedToken = <any>jwt.verify(token, secretKey);
-
-    if (!decodedToken) {
-      const err = new ProjectError("Invalid link!");
-      err.statusCode = 401;
-      throw err;
-    }
-
-    const userId = decodedToken.userId;
-
-    const user = await User.findOne({ _id: userId });
-
-    if (!user) {
-      const err = new ProjectError("User not found!");
-      err.statusCode = 404;
-      throw err;
-    }
-
-    user.isDeactivated = false;
-    await user.save();
-
-    resp = { status: "success", message: "Account activated!", data: {} };
-    res.status(200).send(resp);
-  } catch (error) {
-    next(error);
-  }
-};
-
 const isActiveUser = async (userId: String) => {
   const user = await User.findById(userId);
 
@@ -127,12 +91,7 @@ const isActiveUser = async (userId: String) => {
     err.statusCode = 404;
     throw err;
   }
-
-  if (!!user.isDeactivated) {
-    return false;
-  }
-
-  return true;
+  return !user.isDeactivated;
 };
 
-export { activateUser, deactivateUser, getUser, isActiveUser, updateUser };
+export { deactivateUser, getUser, isActiveUser, updateUser };
