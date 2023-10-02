@@ -1,8 +1,9 @@
 {
 	"info": {
-		"_postman_id": "5dc2afde-9124-4b64-84db-cd33fedf9b5f",
+		"_postman_id": "d7778333-837e-49d0-bfaf-1adc508d2633",
 		"name": "QuizClass",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "25820045"
 	},
 	"item": [
 		{
@@ -12,23 +13,14 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"name\":\"arush\",\r\n    \"email\":\"arush@gmail.com\",\r\n    \"password\": \"password\",\r\n    \"confirm_password\":\"password\"\r\n}",
+					"raw": "{\r\n    \"name\":\"Aarush\",\r\n    \"email\":\"aarush@gmail.com\",\r\n    \"password\": \"Password@12345\",\r\n    \"confirmPassword\":\"Password@12345\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
 						}
 					}
 				},
-				"url": {
-					"raw": "localhost:3000/auth",
-					"host": [
-						"localhost"
-					],
-					"port": "3000",
-					"path": [
-						"auth"
-					]
-				},
+				"url": "localhost:3002/auth",
 				"description": "This API wiil use to register user"
 			},
 			"response": [
@@ -39,26 +31,17 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\":\"Arush\",\r\n    \"email\":\"arush1@gmail.com\",\r\n    \"password\": \"password\"\r\n}",
+							"raw": "{\r\n    \"name\":\"Aarush\",\r\n    \"email\":\"aarush@gmail.com\",\r\n    \"password\": \"Password@12345\",\r\n    \"confirmPassword\":\"Password@12345\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
 								}
 							}
 						},
-						"url": {
-							"raw": "localhost:3000/auth",
-							"host": [
-								"localhost"
-							],
-							"port": "3000",
-							"path": [
-								"auth"
-							]
-						}
+						"url": "localhost:3002/auth"
 					},
-					"status": "OK",
-					"code": 200,
+					"status": "Created",
+					"code": 201,
 					"_postman_previewlanguage": "json",
 					"header": [
 						{
@@ -75,11 +58,11 @@
 						},
 						{
 							"key": "ETag",
-							"value": "W/\"60-C9XpcUoHgmxyRRAqfYSpbVw33Rg\""
+							"value": "W/\"60-gZatUJBR51yOMncooFV/H/m9v5I\""
 						},
 						{
 							"key": "Date",
-							"value": "Tue, 15 Feb 2022 17:24:14 GMT"
+							"value": "Mon, 02 Oct 2023 08:48:18 GMT"
 						},
 						{
 							"key": "Connection",
@@ -91,7 +74,79 @@
 						}
 					],
 					"cookie": [],
-					"body": "{\n    \"status\": \"success\",\n    \"message\": \"Registration done!\",\n    \"data\": {\n        \"userId\": \"620be1bea204b1ffc7201d04\"\n    }\n}"
+					"body": "{\n    \"status\": \"success\",\n    \"message\": \"Registration done!\",\n    \"data\": {\n        \"userId\": \"651a83d255af3c91a38f0190\"\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "User Login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\":\"aarush@gmail.com\",\r\n    \"password\": \"Password@12345\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "localhost:3002/auth/login",
+				"description": "Login for user"
+			},
+			"response": [
+				{
+					"name": "User Login",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\":\"aarush@gmail.com\",\r\n    \"password\": \"Password@12345\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "localhost:3002/auth/login"
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "238"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"ee-pYDBk/ZfJuNJzjcNkC5RatW9skk\""
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 02 Oct 2023 08:49:12 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"success\",\n    \"message\": \"Logged in\",\n    \"data\": {\n        \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NTFhODNkMjU1YWYzYzkxYTM4ZjAxOTAiLCJpYXQiOjE2OTYyMzY1NTIsImV4cCI6MTY5NjI0MDE1Mn0.E9B-aeO4EmWeM4fNLcr1V8XakTl5YCMjQ8037mIen78\"\n    }\n}"
 				}
 			]
 		},
@@ -100,27 +155,13 @@
 			"request": {
 				"auth": {
 					"type": "bearer",
-					"bearer": [
-						{
-							"key": "token",
-							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MjExMjI3MTU4MzUwMWY3ZGYwNjg0NmYiLCJpYXQiOjE2NDUyOTAxMTksImV4cCI6MTY0NTI5MzcxOX0.BYjt-ufjFtmm3JdzoO2HUitYUtRrck0GccwDILwFpkY",
-							"type": "string"
-						}
-					]
+					"bearer": {
+						"token": "{{token1}}"
+					}
 				},
 				"method": "GET",
 				"header": [],
-				"url": {
-					"raw": "localhost:3000/user/62112271583501f7df06846f",
-					"host": [
-						"localhost"
-					],
-					"port": "3000",
-					"path": [
-						"user",
-						"62112271583501f7df06846f"
-					]
-				}
+				"url": "localhost:3002/user"
 			},
 			"response": [
 				{
@@ -128,17 +169,7 @@
 					"originalRequest": {
 						"method": "GET",
 						"header": [],
-						"url": {
-							"raw": "localhost:3000/user/6206a40d4773f27b8766a34b",
-							"host": [
-								"localhost"
-							],
-							"port": "3000",
-							"path": [
-								"user",
-								"6206a40d4773f27b8766a34b"
-							]
-						}
+						"url": "localhost:3002/user"
 					},
 					"status": "OK",
 					"code": 200,
@@ -158,11 +189,11 @@
 						},
 						{
 							"key": "ETag",
-							"value": "W/\"80-6x9xbvlI/+JFnIdkQgDzrg/DDz0\""
+							"value": "W/\"80-3KDSHrv5RlGQ1AfVL0CKikhDQhM\""
 						},
 						{
 							"key": "Date",
-							"value": "Sat, 12 Feb 2022 17:39:22 GMT"
+							"value": "Mon, 02 Oct 2023 08:52:10 GMT"
 						},
 						{
 							"key": "Connection",
@@ -174,7 +205,7 @@
 						}
 					],
 					"cookie": [],
-					"body": "{\n    \"status\": \"success\",\n    \"message\": \"User found\",\n    \"data\": {\n        \"_id\": \"6206a40d4773f27b8766a34b\",\n        \"name\": \"Akarsh\",\n        \"email\": \"akarsh@gmail.com\"\n    }\n}"
+					"body": "{\n    \"status\": \"success\",\n    \"message\": \"User found\",\n    \"data\": {\n        \"_id\": \"651a83d255af3c91a38f0190\",\n        \"name\": \"Aarush\",\n        \"email\": \"aarush@gmail.com\"\n    }\n}"
 				}
 			]
 		},
@@ -183,35 +214,22 @@
 			"request": {
 				"auth": {
 					"type": "bearer",
-					"bearer": [
-						{
-							"key": "token",
-							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MjExMjI3MTU4MzUwMWY3ZGYwNjg0NmYiLCJpYXQiOjE2NDUyOTAxMTksImV4cCI6MTY0NTI5MzcxOX0.BYjt-ufjFtmm3JdzoO2HUitYUtRrck0GccwDILwFpkY",
-							"type": "string"
-						}
-					]
+					"bearer": {
+						"token": "{{token1}}"
+					}
 				},
 				"method": "PUT",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n        \"_id\": \"62112271583501f7df06846f\",\r\n        \"name\": \"abcdet\"\r\n    }",
+					"raw": "{\r\n    \"name\": \"Aarush Kashyap\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
 						}
 					}
 				},
-				"url": {
-					"raw": "localhost:3000/user",
-					"host": [
-						"localhost"
-					],
-					"port": "3000",
-					"path": [
-						"user"
-					]
-				}
+				"url": "localhost:3002/user"
 			},
 			"response": [
 				{
@@ -221,23 +239,14 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"_id\": \"6206a40d4773f27b8766a34b\",\r\n    \"name\": \"Akarsh 123\"\r\n}",
+							"raw": "{\r\n\r\n    \"name\": \"Aarush Kashyap\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
 								}
 							}
 						},
-						"url": {
-							"raw": "localhost:3000/user",
-							"host": [
-								"localhost"
-							],
-							"port": "3000",
-							"path": [
-								"user"
-							]
-						}
+						"url": "localhost:3002/user"
 					},
 					"status": "OK",
 					"code": 200,
@@ -261,7 +270,7 @@
 						},
 						{
 							"key": "Date",
-							"value": "Sat, 12 Feb 2022 17:46:34 GMT"
+							"value": "Mon, 02 Oct 2023 08:53:46 GMT"
 						},
 						{
 							"key": "Connection",
@@ -278,131 +287,26 @@
 			]
 		},
 		{
-			"name": "User Login",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"email\":\"azhar@gmail.com\",\r\n    \"password\": \"password\"\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "localhost:3000/auth/login",
-					"host": [
-						"localhost"
-					],
-					"port": "3000",
-					"path": [
-						"auth",
-						"login"
-					]
-				},
-				"description": "Login for user"
-			},
-			"response": [
-				{
-					"name": "User Login",
-					"originalRequest": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"email\":\"arush1@gmail.com\",\r\n    \"password\": \"password\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "localhost:3000/auth/login",
-							"host": [
-								"localhost"
-							],
-							"port": "3000",
-							"path": [
-								"auth",
-								"login"
-							]
-						}
-					},
-					"status": "OK",
-					"code": 200,
-					"_postman_previewlanguage": "json",
-					"header": [
-						{
-							"key": "X-Powered-By",
-							"value": "Express"
-						},
-						{
-							"key": "Content-Type",
-							"value": "application/json; charset=utf-8"
-						},
-						{
-							"key": "Content-Length",
-							"value": "238"
-						},
-						{
-							"key": "ETag",
-							"value": "W/\"ee-gJF1+uNaGm+Brzlz4QJ6mtr6JqU\""
-						},
-						{
-							"key": "Date",
-							"value": "Tue, 15 Feb 2022 17:25:16 GMT"
-						},
-						{
-							"key": "Connection",
-							"value": "keep-alive"
-						},
-						{
-							"key": "Keep-Alive",
-							"value": "timeout=5"
-						}
-					],
-					"cookie": [],
-					"body": "{\n    \"status\": \"success\",\n    \"message\": \"Logged in\",\n    \"data\": {\n        \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MjBiZTFiZWEyMDRiMWZmYzcyMDFkMDQiLCJpYXQiOjE2NDQ5NDU5MTYsImV4cCI6MTY0NDk0OTUxNn0.ZcRklKJP9U_kPrSrQOxlXLtZnH5jMgDUAUMz73VepmU\"\n    }\n}"
-				}
-			]
-		},
-		{
 			"name": "Quiz Create",
 			"request": {
 				"auth": {
 					"type": "bearer",
-					"bearer": [
-						{
-							"key": "token",
-							"value": "{{token}}",
-							"type": "string"
-						}
-					]
+					"bearer": {
+						"token": "{{token1}}"
+					}
 				},
 				"method": "POST",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"name\": \"GK Quiz 101\",\r\n    \"questions_list\": [\r\n        {\r\n            \"question_number\": 1,\r\n            \"question\": \"What is the capital of India?\",\r\n            \"options\": {\r\n                \"1\": \"Bangalore\",\r\n                \"2\": \"Lucknow\",\r\n                \"3\": \"Rajasthan\",\r\n                \"4\": \"New Delhi\"\r\n            }\r\n        },\r\n        {\r\n            \"question_number\": 2,\r\n            \"question\": \"How many players are there in cricket team?\",\r\n            \"options\": {\r\n                \"1\": \"1\",\r\n                \"2\": \"2\",\r\n                \"3\": \"11\",\r\n                \"4\": \"20\"\r\n            }\r\n        }\r\n    ],\r\n    \"answers\": {\r\n        \"1\": 4,\r\n        \"2\": 3\r\n    }\r\n}",
+					"raw": "{\r\n    \"name\": \"GK Quiz 102\",\r\n    \"questionList\": [\r\n        {\r\n            \"questionNumber\": 1,\r\n            \"question\": \"What is the capital of Uttar Pradesh?\",\r\n            \"options\": {\r\n                \"1\": \"Varanasi\",\r\n                \"2\": \"Lucknow\",\r\n                \"3\": \"Dehradun\",\r\n                \"4\": \"Banglore\"\r\n            }\r\n        },\r\n        {\r\n            \"questionNumber\": 2,\r\n            \"question\": \"How many players are there in football team?\",\r\n            \"options\": {\r\n                \"1\": \"1\",\r\n                \"2\": \"2\",\r\n                \"3\": \"11\",\r\n                \"4\": \"20\"\r\n            }\r\n        }\r\n    ],\r\n    \"answers\": {\r\n        \"1\": 2,\r\n        \"2\": 3\r\n    }\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
 						}
 					}
 				},
-				"url": {
-					"raw": "localhost:3000/quiz",
-					"host": [
-						"localhost"
-					],
-					"port": "3000",
-					"path": [
-						"quiz"
-					]
-				}
+				"url": "localhost:3002/quiz"
 			},
 			"response": [
 				{
@@ -412,23 +316,14 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\":\"My Quiz 102\",\r\n    \"questions_list\":[\r\n{\r\n    \"question_number\":1,\r\n    \"question\":\"What is the capital of India?\",\r\n    \"options\":{\r\n        \"1\":\"Bangalore\",\r\n        \"2\":\"Lucknow\",\r\n        \"3\":\"Rajasthan\",\r\n        \"4\":\"New Delhi\"\r\n    }\r\n}\r\n    ],\r\n    \"answers\":{\r\n        \"1\":4\r\n    }\r\n}",
+							"raw": "{\r\n    \"name\": \"GK Quiz 101\",\r\n    \"questionList\": [\r\n        {\r\n            \"questionNumber\": 1,\r\n            \"question\": \"What is the capital of India?\",\r\n            \"options\": {\r\n                \"1\": \"Bangalore\",\r\n                \"2\": \"Lucknow\",\r\n                \"3\": \"Rajasthan\",\r\n                \"4\": \"New Delhi\"\r\n            }\r\n        },\r\n        {\r\n            \"questionNumber\": 2,\r\n            \"question\": \"How many players are there in cricket team?\",\r\n            \"options\": {\r\n                \"1\": \"1\",\r\n                \"2\": \"2\",\r\n                \"3\": \"11\",\r\n                \"4\": \"20\"\r\n            }\r\n        }\r\n    ],\r\n    \"answers\": {\r\n        \"1\": 4,\r\n        \"2\": 3\r\n    }\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
 								}
 							}
 						},
-						"url": {
-							"raw": "localhost:3000/quiz",
-							"host": [
-								"localhost"
-							],
-							"port": "3000",
-							"path": [
-								"quiz"
-							]
-						}
+						"url": "localhost:3002/quiz"
 					},
 					"status": "Created",
 					"code": 201,
@@ -448,11 +343,11 @@
 						},
 						{
 							"key": "ETag",
-							"value": "W/\"67-PjCRwlEu9AHGidhxWEHxoBDOivU\""
+							"value": "W/\"67-aTgCnkzxRLlN8z+LpYkqrPcQHr0\""
 						},
 						{
 							"key": "Date",
-							"value": "Sun, 20 Feb 2022 17:23:22 GMT"
+							"value": "Mon, 02 Oct 2023 08:55:34 GMT"
 						},
 						{
 							"key": "Connection",
@@ -464,7 +359,7 @@
 						}
 					],
 					"cookie": [],
-					"body": "{\n    \"status\": \"success\",\n    \"message\": \"Quiz created successfully\",\n    \"data\": {\n        \"quizId\": \"6212790a5c137c54d7958434\"\n    }\n}"
+					"body": "{\n    \"status\": \"success\",\n    \"message\": \"Quiz created successfully\",\n    \"data\": {\n        \"quizId\": \"651a858655af3c91a38f01a6\"\n    }\n}"
 				}
 			]
 		},
@@ -473,27 +368,13 @@
 			"request": {
 				"auth": {
 					"type": "bearer",
-					"bearer": [
-						{
-							"key": "token",
-							"value": "{{token}}",
-							"type": "string"
-						}
-					]
+					"bearer": {
+						"token": "{{token1}}"
+					}
 				},
 				"method": "GET",
 				"header": [],
-				"url": {
-					"raw": "localhost:3000/quiz/{{quizId}}",
-					"host": [
-						"localhost"
-					],
-					"port": "3000",
-					"path": [
-						"quiz",
-						"{{quizId}}"
-					]
-				},
+				"url": "localhost:3002/quiz",
 				"description": "send quizId for particular quiz otherwise you will get all the quizzes"
 			},
 			"response": [
@@ -502,17 +383,7 @@
 					"originalRequest": {
 						"method": "GET",
 						"header": [],
-						"url": {
-							"raw": "localhost:3000/quiz/6213c011441bac159eca9e11",
-							"host": [
-								"localhost"
-							],
-							"port": "3000",
-							"path": [
-								"quiz",
-								"6213c011441bac159eca9e11"
-							]
-						}
+						"url": "localhost:3000/quiz/6213c011441bac159eca9e11"
 					},
 					"status": "OK",
 					"code": 200,
@@ -549,6 +420,92 @@
 					],
 					"cookie": [],
 					"body": "{\n    \"status\": \"success\",\n    \"message\": \"Quiz\",\n    \"data\": {\n        \"_id\": \"6213c011441bac159eca9e11\",\n        \"name\": \"My Quiz 103\",\n        \"questions_list\": [\n            {\n                \"question_number\": 1,\n                \"question\": \"What is the capital of India?\",\n                \"options\": {\n                    \"1\": \"Bangalore\",\n                    \"2\": \"Lucknow\",\n                    \"3\": \"Rajasthan\",\n                    \"4\": \"New Delhi\"\n                },\n                \"_id\": \"6213c011441bac159eca9e12\"\n            },\n            {\n                \"question_number\": 2,\n                \"question\": \"What is you name?\",\n                \"options\": {\n                    \"1\": \"Azhar\",\n                    \"2\": \"Arush\",\n                    \"3\": \"Ramesh\",\n                    \"4\": \"Ajay\"\n                },\n                \"_id\": \"6213c011441bac159eca9e12\"\n            }\n        ],\n        \"answers\": {\n            \"1\": 4,\n            \"2\": 1\n        }\n    }\n}"
+				},
+				{
+					"name": "Get all quiz",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": "localhost:3002/quiz"
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "1192"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"4a8-QLWtumYjh3MSuBaw2RMiQ2cDoMg\""
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 02 Oct 2023 08:59:45 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"success\",\n    \"message\": \"Quiz\",\n    \"data\": [\n        {\n            \"_id\": \"651a858655af3c91a38f01a6\",\n            \"name\": \"GK Quiz 101\",\n            \"questionList\": [\n                {\n                    \"questionNumber\": 1,\n                    \"question\": \"What is the capital of India?\",\n                    \"options\": {\n                        \"1\": \"Bangalore\",\n                        \"2\": \"Lucknow\",\n                        \"3\": \"Rajasthan\",\n                        \"4\": \"New Delhi\"\n                    },\n                    \"_id\": \"651a858655af3c91a38f01a7\"\n                },\n                {\n                    \"questionNumber\": 2,\n                    \"question\": \"How many players are there in cricket team?\",\n                    \"options\": {\n                        \"1\": \"1\",\n                        \"2\": \"2\",\n                        \"3\": \"11\",\n                        \"4\": \"20\"\n                    },\n                    \"_id\": \"651a858655af3c91a38f01a8\"\n                }\n            ],\n            \"answers\": {\n                \"1\": 4,\n                \"2\": 3\n            },\n            \"createdBy\": \"651a83d255af3c91a38f0190\",\n            \"isPublished\": false,\n            \"createdAt\": \"2023-10-02T08:55:34.799Z\",\n            \"updatedAt\": \"2023-10-02T08:55:34.799Z\",\n            \"__v\": 0\n        },\n        {\n            \"_id\": \"651a866f55af3c91a38f01b0\",\n            \"name\": \"GK Quiz 102\",\n            \"questionList\": [\n                {\n                    \"questionNumber\": 1,\n                    \"question\": \"What is the capital of Uttar Pradesh?\",\n                    \"options\": {\n                        \"1\": \"Varanasi\",\n                        \"2\": \"Lucknow\",\n                        \"3\": \"Dehradun\",\n                        \"4\": \"Banglore\"\n                    },\n                    \"_id\": \"651a866f55af3c91a38f01b1\"\n                },\n                {\n                    \"questionNumber\": 2,\n                    \"question\": \"How many players are there in football team?\",\n                    \"options\": {\n                        \"1\": \"1\",\n                        \"2\": \"2\",\n                        \"3\": \"11\",\n                        \"4\": \"20\"\n                    },\n                    \"_id\": \"651a866f55af3c91a38f01b2\"\n                }\n            ],\n            \"answers\": {\n                \"1\": 2,\n                \"2\": 3\n            },\n            \"createdBy\": \"651a83d255af3c91a38f0190\",\n            \"isPublished\": false,\n            \"createdAt\": \"2023-10-02T08:59:27.095Z\",\n            \"updatedAt\": \"2023-10-02T08:59:27.095Z\",\n            \"__v\": 0\n        }\n    ]\n}"
+				},
+				{
+					"name": "Quiz a particular Quiz",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": "localhost:3002/quiz/651a866f55af3c91a38f01b0"
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "514"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"202-Rr6g9Kl2cmrvVI5cJ0RIBXuGSeo\""
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 02 Oct 2023 09:00:19 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"success\",\n    \"message\": \"Quiz\",\n    \"data\": {\n        \"_id\": \"651a866f55af3c91a38f01b0\",\n        \"name\": \"GK Quiz 102\",\n        \"questionList\": [\n            {\n                \"questionNumber\": 1,\n                \"question\": \"What is the capital of Uttar Pradesh?\",\n                \"options\": {\n                    \"1\": \"Varanasi\",\n                    \"2\": \"Lucknow\",\n                    \"3\": \"Dehradun\",\n                    \"4\": \"Banglore\"\n                },\n                \"_id\": \"651a866f55af3c91a38f01b1\"\n            },\n            {\n                \"questionNumber\": 2,\n                \"question\": \"How many players are there in football team?\",\n                \"options\": {\n                    \"1\": \"1\",\n                    \"2\": \"2\",\n                    \"3\": \"11\",\n                    \"4\": \"20\"\n                },\n                \"_id\": \"651a866f55af3c91a38f01b2\"\n            }\n        ],\n        \"answers\": {\n            \"1\": 2,\n            \"2\": 3\n        },\n        \"createdBy\": \"651a83d255af3c91a38f0190\"\n    }\n}"
 				}
 			]
 		},
@@ -557,35 +514,22 @@
 			"request": {
 				"auth": {
 					"type": "bearer",
-					"bearer": [
-						{
-							"key": "token",
-							"value": "{{token}}",
-							"type": "string"
-						}
-					]
+					"bearer": {
+						"token": "{{token1}}"
+					}
 				},
 				"method": "PUT",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n        \"_id\": \"621518a35960ed1b3e7576f5\",\r\n        \"name\": \"My Quiz 1089\",\r\n        \"questions_list\": [\r\n            {\r\n                \"question_number\": 1,\r\n                \"question\": \"What is the capital of India?\",\r\n                \"options\": {\r\n                    \"1\": \"Bangalore\",\r\n                    \"2\": \"Lucknow\",\r\n                    \"3\": \"Rajasthan\",\r\n                    \"4\": \"New Delhi\"\r\n                },\r\n                \"_id\": \"621518a35960ed1b3e7576f6\"\r\n            }\r\n        ],\r\n        \"answers\": {\r\n            \"1\": 4\r\n        },\r\n        \"created_by\": \"6213c8999e5e78131be7c842\"\r\n    }",
+					"raw": "{\r\n    \"_id\":\"651a866f55af3c91a38f01b0\",\r\n    \"name\": \"GK Quiz 102\",\r\n    \"questionList\": [\r\n        {\r\n            \"questionNumber\": 1,\r\n            \"question\": \"What is the capital of Uttar Pradesh?\",\r\n            \"options\": {\r\n                \"1\": \"Varanasi\",\r\n                \"2\": \"Lucknow\",\r\n                \"3\": \"Dehradun\",\r\n                \"4\": \"Kolkata\"\r\n            }\r\n        },\r\n        {\r\n            \"questionNumber\": 2,\r\n            \"question\": \"How many players are there in football team?\",\r\n            \"options\": {\r\n                \"1\": \"1\",\r\n                \"2\": \"2\",\r\n                \"3\": \"11\",\r\n                \"4\": \"20\"\r\n            }\r\n        }\r\n    ],\r\n    \"answers\": {\r\n        \"1\": 2,\r\n        \"2\": 3\r\n    }\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
 						}
 					}
 				},
-				"url": {
-					"raw": "localhost:3000/quiz",
-					"host": [
-						"localhost"
-					],
-					"port": "3000",
-					"path": [
-						"quiz"
-					]
-				}
+				"url": "localhost:3002/quiz"
 			},
 			"response": [
 				{
@@ -595,23 +539,14 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"_id\": \"6213c011441bac159eca9e11\",\r\n    \"name\": \"My Quiz 103\",\r\n    \"questions_list\": [\r\n        {\r\n            \"question_number\": 1,\r\n            \"question\": \"What is the capital of India?\",\r\n            \"options\": {\r\n                \"1\": \"Bangalore\",\r\n                \"2\": \"Lucknow\",\r\n                \"3\": \"Rajasthan\",\r\n                \"4\": \"New Delhi\"\r\n            },\r\n            \"_id\": \"6213c011441bac159eca9e12\"\r\n        },\r\n        {\r\n            \"question_number\": 2,\r\n            \"question\": \"What is you name?\",\r\n            \"options\": {\r\n                \"1\": \"Azhar\",\r\n                \"2\": \"Arush\",\r\n                \"3\": \"Ramesh\",\r\n                \"4\": \"Ajay\"\r\n            },\r\n            \"_id\": \"6213c011441bac159eca9e12\"\r\n        }\r\n    ],\r\n    \"answers\": {\r\n        \"1\": 4,\r\n        \"2\": 1\r\n    }\r\n}",
+							"raw": "{\r\n    \"_id\":\"651a866f55af3c91a38f01b0\",\r\n    \"name\": \"GK Quiz 102\",\r\n    \"questionList\": [\r\n        {\r\n            \"questionNumber\": 1,\r\n            \"question\": \"What is the capital of Uttar Pradesh?\",\r\n            \"options\": {\r\n                \"1\": \"Varanasi\",\r\n                \"2\": \"Lucknow\",\r\n                \"3\": \"Dehradun\",\r\n                \"4\": \"Kolkata\"\r\n            }\r\n        },\r\n        {\r\n            \"questionNumber\": 2,\r\n            \"question\": \"How many players are there in football team?\",\r\n            \"options\": {\r\n                \"1\": \"1\",\r\n                \"2\": \"2\",\r\n                \"3\": \"11\",\r\n                \"4\": \"20\"\r\n            }\r\n        }\r\n    ],\r\n    \"answers\": {\r\n        \"1\": 2,\r\n        \"2\": 3\r\n    }\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
 								}
 							}
 						},
-						"url": {
-							"raw": "localhost:3000/quiz",
-							"host": [
-								"localhost"
-							],
-							"port": "3000",
-							"path": [
-								"quiz"
-							]
-						}
+						"url": "localhost:3002/quiz"
 					},
 					"status": "OK",
 					"code": 200,
@@ -635,7 +570,7 @@
 						},
 						{
 							"key": "Date",
-							"value": "Mon, 21 Feb 2022 16:53:18 GMT"
+							"value": "Mon, 02 Oct 2023 09:04:07 GMT"
 						},
 						{
 							"key": "Connection",
@@ -656,27 +591,13 @@
 			"request": {
 				"auth": {
 					"type": "bearer",
-					"bearer": [
-						{
-							"key": "token",
-							"value": "{{token}}",
-							"type": "string"
-						}
-					]
+					"bearer": {
+						"token": "{{token1}}"
+					}
 				},
 				"method": "DELETE",
 				"header": [],
-				"url": {
-					"raw": "localhost:3000/quiz/{{quizId}}",
-					"host": [
-						"localhost"
-					],
-					"port": "3000",
-					"path": [
-						"quiz",
-						"{{quizId}}"
-					]
-				}
+				"url": "localhost:3002/quiz/651a866f55af3c91a38f01b0"
 			},
 			"response": [
 				{
@@ -684,17 +605,7 @@
 					"originalRequest": {
 						"method": "DELETE",
 						"header": [],
-						"url": {
-							"raw": "localhost:3000/quiz/6213c011441bac159eca9e11",
-							"host": [
-								"localhost"
-							],
-							"port": "3000",
-							"path": [
-								"quiz",
-								"6213c011441bac159eca9e11"
-							]
-						}
+						"url": "localhost:3002/quiz/651a866f55af3c91a38f01b0"
 					},
 					"status": "OK",
 					"code": 200,
@@ -718,7 +629,7 @@
 						},
 						{
 							"key": "Date",
-							"value": "Mon, 21 Feb 2022 16:57:15 GMT"
+							"value": "Mon, 02 Oct 2023 09:05:14 GMT"
 						},
 						{
 							"key": "Connection",
@@ -739,83 +650,39 @@
 			"request": {
 				"auth": {
 					"type": "bearer",
-					"bearer": [
-						{
-							"key": "token",
-							"value": "{{token}}",
-							"type": "string"
-						}
-					]
+					"bearer": {
+						"token": "{{token1}}"
+					}
 				},
 				"method": "PATCH",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"quizId\":\"{{quizId}}\"\r\n}",
+					"raw": "{\r\n    \"quizId\":\"651a858655af3c91a38f01a6\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
 						}
 					}
 				},
-				"url": {
-					"raw": "localhost:3000/quiz/publish",
-					"host": [
-						"localhost"
-					],
-					"port": "3000",
-					"path": [
-						"quiz",
-						"publish"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Exam start",
-			"request": {
-				"auth": {
-					"type": "bearer",
-					"bearer": [
-						{
-							"key": "token",
-							"value": "{{token_second_user}}",
-							"type": "string"
-						}
-					]
-				},
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "localhost:3000/exam/{{quizId}}",
-					"host": [
-						"localhost"
-					],
-					"port": "3000",
-					"path": [
-						"exam",
-						"{{quizId}}"
-					]
-				}
+				"url": "localhost:3002/quiz/publish"
 			},
 			"response": [
 				{
-					"name": "Exam start",
+					"name": "Quiz publish",
 					"originalRequest": {
-						"method": "GET",
+						"method": "PATCH",
 						"header": [],
-						"url": {
-							"raw": "localhost:3000/exam/{{quizId}}",
-							"host": [
-								"localhost"
-							],
-							"port": "3000",
-							"path": [
-								"exam",
-								"{{quizId}}"
-							]
-						}
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"quizId\":\"651a858655af3c91a38f01a6\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "localhost:3002/quiz/publish"
 					},
 					"status": "OK",
 					"code": 200,
@@ -831,15 +698,15 @@
 						},
 						{
 							"key": "Content-Length",
-							"value": "469"
+							"value": "58"
 						},
 						{
 							"key": "ETag",
-							"value": "W/\"1d5-EcTCqsFLQfY7VZqDAd+FutaXu8M\""
+							"value": "W/\"3a-4YhWawOl3qaik2W5V4kXA1wnO4E\""
 						},
 						{
 							"key": "Date",
-							"value": "Wed, 23 Feb 2022 17:33:58 GMT"
+							"value": "Mon, 02 Oct 2023 09:06:30 GMT"
 						},
 						{
 							"key": "Connection",
@@ -851,7 +718,66 @@
 						}
 					],
 					"cookie": [],
-					"body": "{\n    \"status\": \"success\",\n    \"message\": \"Quiz\",\n    \"data\": {\n        \"_id\": \"621663e402508baa49d244da\",\n        \"name\": \"GK Quiz 101\",\n        \"questions_list\": [\n            {\n                \"question_number\": 1,\n                \"question\": \"What is the capital of India?\",\n                \"options\": {\n                    \"1\": \"Bangalore\",\n                    \"2\": \"Lucknow\",\n                    \"3\": \"Rajasthan\",\n                    \"4\": \"New Delhi\"\n                },\n                \"_id\": \"621663e402508baa49d244db\"\n            },\n            {\n                \"question_number\": 2,\n                \"question\": \"How many players are there in cricket team?\",\n                \"options\": {\n                    \"1\": \"1\",\n                    \"2\": \"2\",\n                    \"3\": \"11\",\n                    \"4\": \"20\"\n                },\n                \"_id\": \"621663e402508baa49d244dc\"\n            }\n        ],\n        \"is_published\": true\n    }\n}"
+					"body": "{\n    \"status\": \"success\",\n    \"message\": \"Quiz published!\",\n    \"data\": {}\n}"
+				}
+			]
+		},
+		{
+			"name": "Exam start",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "{{token2}}"
+					}
+				},
+				"method": "GET",
+				"header": [],
+				"url": "localhost:3002/exam/651a858655af3c91a38f01a6"
+			},
+			"response": [
+				{
+					"name": "Exam start",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": "localhost:3002/exam/651a858655af3c91a38f01a6"
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "464"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"1d0-lVAnvphobr/48QMuOmCBmbTEwWE\""
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 02 Oct 2023 09:07:21 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"success\",\n    \"message\": \"Quiz\",\n    \"data\": {\n        \"_id\": \"651a858655af3c91a38f01a6\",\n        \"name\": \"GK Quiz 101\",\n        \"questionList\": [\n            {\n                \"questionNumber\": 1,\n                \"question\": \"What is the capital of India?\",\n                \"options\": {\n                    \"1\": \"Bangalore\",\n                    \"2\": \"Lucknow\",\n                    \"3\": \"Rajasthan\",\n                    \"4\": \"New Delhi\"\n                },\n                \"_id\": \"651a858655af3c91a38f01a7\"\n            },\n            {\n                \"questionNumber\": 2,\n                \"question\": \"How many players are there in cricket team?\",\n                \"options\": {\n                    \"1\": \"1\",\n                    \"2\": \"2\",\n                    \"3\": \"11\",\n                    \"4\": \"20\"\n                },\n                \"_id\": \"651a858655af3c91a38f01a8\"\n            }\n        ],\n        \"isPublished\": true\n    }\n}"
 				}
 			]
 		},
@@ -860,36 +786,22 @@
 			"request": {
 				"auth": {
 					"type": "bearer",
-					"bearer": [
-						{
-							"key": "token",
-							"value": "{{token_second_user}}",
-							"type": "string"
-						}
-					]
+					"bearer": {
+						"token": "{{token2}}"
+					}
 				},
 				"method": "POST",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"quizId\":\"{{quizId}}\",\r\n    \"attempted_question\":{\r\n        \"1\":4,\r\n        \"2\":1\r\n    }\r\n}",
+					"raw": "{\r\n    \"quizId\":\"651a858655af3c91a38f01a6\",\r\n    \"attemptedQuestion\":{\r\n        \"1\":4,\r\n        \"2\":3\r\n    }\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
 						}
 					}
 				},
-				"url": {
-					"raw": "localhost:3000/exam/",
-					"host": [
-						"localhost"
-					],
-					"port": "3000",
-					"path": [
-						"exam",
-						""
-					]
-				}
+				"url": "localhost:3002/exam"
 			},
 			"response": [
 				{
@@ -899,24 +811,14 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"quizId\":\"{{quizId}}\",\r\n    \"attempted_question\":{\r\n        \"1\":4,\r\n        \"2\":1\r\n    }\r\n}",
+							"raw": "{\r\n    \"quizId\":\"651a858655af3c91a38f01a6\",\r\n    \"attemptedQuestion\":{\r\n        \"1\":4,\r\n        \"2\":1\r\n    }\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
 								}
 							}
 						},
-						"url": {
-							"raw": "localhost:3000/exam/",
-							"host": [
-								"localhost"
-							],
-							"port": "3000",
-							"path": [
-								"exam",
-								""
-							]
-						}
+						"url": "localhost:3002/exam"
 					},
 					"status": "OK",
 					"code": 200,
@@ -936,11 +838,11 @@
 						},
 						{
 							"key": "ETag",
-							"value": "W/\"72-y0yUInAnO94iuqLBj74UHPA4Ke8\""
+							"value": "W/\"72-HjOcudFx2CWS4DUd+e4JUMC4+xM\""
 						},
 						{
 							"key": "Date",
-							"value": "Wed, 23 Feb 2022 17:34:47 GMT"
+							"value": "Mon, 02 Oct 2023 09:08:57 GMT"
 						},
 						{
 							"key": "Connection",
@@ -952,7 +854,7 @@
 						}
 					],
 					"cookie": [],
-					"body": "{\n    \"status\": \"success\",\n    \"message\": \"Quiz submitted\",\n    \"data\": {\n        \"total\": 2,\n        \"score\": 1,\n        \"resultId\": \"621670361f884d47101f4ef4\"\n    }\n}"
+					"body": "{\n    \"status\": \"success\",\n    \"message\": \"Quiz submitted\",\n    \"data\": {\n        \"total\": 2,\n        \"score\": 1,\n        \"reportId\": \"651a88a955af3c91a38f01f2\"\n    }\n}"
 				}
 			]
 		},
@@ -961,74 +863,21 @@
 			"request": {
 				"auth": {
 					"type": "bearer",
-					"bearer": [
-						{
-							"key": "token",
-							"value": "{{token_second_user}}",
-							"type": "string"
-						}
-					]
+					"bearer": {
+						"token": "{{token2}}"
+					}
 				},
 				"method": "GET",
 				"header": [],
-				"url": {
-					"raw": "localhost:3000/report/6217bc471e2f3cabbc47d0d7",
-					"host": [
-						"localhost"
-					],
-					"port": "3000",
-					"path": [
-						"report",
-						"6217bc471e2f3cabbc47d0d7"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Report multiple for a user",
-			"request": {
-				"auth": {
-					"type": "bearer",
-					"bearer": [
-						{
-							"key": "token",
-							"value": "{{token_second_user}}",
-							"type": "string"
-						}
-					]
-				},
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "localhost:3000/report/",
-					"host": [
-						"localhost"
-					],
-					"port": "3000",
-					"path": [
-						"report",
-						""
-					]
-				}
+				"url": "localhost:3002/report/651a88a955af3c91a38f01f2"
 			},
 			"response": [
 				{
-					"name": "Report multiple for a user",
+					"name": "Get all reports of a user",
 					"originalRequest": {
 						"method": "GET",
 						"header": [],
-						"url": {
-							"raw": "localhost:3000/report/",
-							"host": [
-								"localhost"
-							],
-							"port": "3000",
-							"path": [
-								"report",
-								""
-							]
-						}
+						"url": "localhost:3002/report"
 					},
 					"status": "OK",
 					"code": 200,
@@ -1044,15 +893,15 @@
 						},
 						{
 							"key": "Content-Length",
-							"value": "688"
+							"value": "475"
 						},
 						{
 							"key": "ETag",
-							"value": "W/\"2b0-9u06ecoxC7hqp+K55cCT29t2T1o\""
+							"value": "W/\"1db-L0gQixnZxF131LwV0hOXYPCnwV0\""
 						},
 						{
 							"key": "Date",
-							"value": "Thu, 24 Feb 2022 17:11:39 GMT"
+							"value": "Mon, 02 Oct 2023 09:10:12 GMT"
 						},
 						{
 							"key": "Connection",
@@ -1064,24 +913,14 @@
 						}
 					],
 					"cookie": [],
-					"body": "{\n    \"status\": \"success\",\n    \"message\": \"Report!\",\n    \"data\": [\n        {\n            \"_id\": \"6217b644304faa4e5c36e099\",\n            \"userId\": \"6213c8a29e5e78131be7c845\",\n            \"quizId\": \"621663e402508baa49d244da\",\n            \"score\": 1,\n            \"total\": 2,\n            \"createdAt\": \"2022-02-24T16:45:56.760Z\",\n            \"updatedAt\": \"2022-02-24T16:45:56.760Z\",\n            \"__v\": 0\n        },\n        {\n            \"_id\": \"6217bc471e2f3cabbc47d0d7\",\n            \"userId\": \"6213c8a29e5e78131be7c845\",\n            \"quizId\": \"621663e402508baa49d244da\",\n            \"score\": 1,\n            \"total\": 2,\n            \"createdAt\": \"2022-02-24T17:11:35.195Z\",\n            \"updatedAt\": \"2022-02-24T17:11:35.195Z\",\n            \"__v\": 0\n        },\n        {\n            \"_id\": \"6217bc481e2f3cabbc47d0da\",\n            \"userId\": \"6213c8a29e5e78131be7c845\",\n            \"quizId\": \"621663e402508baa49d244da\",\n            \"score\": 1,\n            \"total\": 2,\n            \"createdAt\": \"2022-02-24T17:11:36.394Z\",\n            \"updatedAt\": \"2022-02-24T17:11:36.394Z\",\n            \"__v\": 0\n        }\n    ]\n}"
+					"body": "{\n    \"status\": \"success\",\n    \"message\": \"Report!\",\n    \"data\": [\n        {\n            \"_id\": \"651a88a955af3c91a38f01f2\",\n            \"userId\": \"651a845a55af3c91a38f0194\",\n            \"quizId\": \"651a858655af3c91a38f01a6\",\n            \"score\": 1,\n            \"total\": 2,\n            \"createdAt\": \"2023-10-02T09:08:57.031Z\",\n            \"updatedAt\": \"2023-10-02T09:08:57.031Z\",\n            \"__v\": 0\n        },\n        {\n            \"_id\": \"651a88d055af3c91a38f01fc\",\n            \"userId\": \"651a845a55af3c91a38f0194\",\n            \"quizId\": \"651a858655af3c91a38f01a6\",\n            \"score\": 2,\n            \"total\": 2,\n            \"createdAt\": \"2023-10-02T09:09:36.627Z\",\n            \"updatedAt\": \"2023-10-02T09:09:36.627Z\",\n            \"__v\": 0\n        }\n    ]\n}"
 				},
 				{
-					"name": "Report multiple for a user",
+					"name": "Get a particular report of user",
 					"originalRequest": {
 						"method": "GET",
 						"header": [],
-						"url": {
-							"raw": "localhost:3000/report/",
-							"host": [
-								"localhost"
-							],
-							"port": "3000",
-							"path": [
-								"report",
-								""
-							]
-						}
+						"url": "localhost:3002/report/651a88a955af3c91a38f01f2"
 					},
 					"status": "OK",
 					"code": 200,
@@ -1097,15 +936,15 @@
 						},
 						{
 							"key": "Content-Length",
-							"value": "688"
+							"value": "260"
 						},
 						{
 							"key": "ETag",
-							"value": "W/\"2b0-9u06ecoxC7hqp+K55cCT29t2T1o\""
+							"value": "W/\"104-CJbcw7FpapPeCWJFlClovP3qAMI\""
 						},
 						{
 							"key": "Date",
-							"value": "Thu, 24 Feb 2022 17:11:39 GMT"
+							"value": "Mon, 02 Oct 2023 09:10:35 GMT"
 						},
 						{
 							"key": "Connection",
@@ -1117,7 +956,137 @@
 						}
 					],
 					"cookie": [],
-					"body": "{\n    \"status\": \"success\",\n    \"message\": \"Report!\",\n    \"data\": [\n        {\n            \"_id\": \"6217b644304faa4e5c36e099\",\n            \"userId\": \"6213c8a29e5e78131be7c845\",\n            \"quizId\": \"621663e402508baa49d244da\",\n            \"score\": 1,\n            \"total\": 2,\n            \"createdAt\": \"2022-02-24T16:45:56.760Z\",\n            \"updatedAt\": \"2022-02-24T16:45:56.760Z\",\n            \"__v\": 0\n        },\n        {\n            \"_id\": \"6217bc471e2f3cabbc47d0d7\",\n            \"userId\": \"6213c8a29e5e78131be7c845\",\n            \"quizId\": \"621663e402508baa49d244da\",\n            \"score\": 1,\n            \"total\": 2,\n            \"createdAt\": \"2022-02-24T17:11:35.195Z\",\n            \"updatedAt\": \"2022-02-24T17:11:35.195Z\",\n            \"__v\": 0\n        },\n        {\n            \"_id\": \"6217bc481e2f3cabbc47d0da\",\n            \"userId\": \"6213c8a29e5e78131be7c845\",\n            \"quizId\": \"621663e402508baa49d244da\",\n            \"score\": 1,\n            \"total\": 2,\n            \"createdAt\": \"2022-02-24T17:11:36.394Z\",\n            \"updatedAt\": \"2022-02-24T17:11:36.394Z\",\n            \"__v\": 0\n        }\n    ]\n}"
+					"body": "{\n    \"status\": \"success\",\n    \"message\": \"Report!\",\n    \"data\": {\n        \"_id\": \"651a88a955af3c91a38f01f2\",\n        \"userId\": \"651a845a55af3c91a38f0194\",\n        \"quizId\": \"651a858655af3c91a38f01a6\",\n        \"score\": 1,\n        \"total\": 2,\n        \"createdAt\": \"2023-10-02T09:08:57.031Z\",\n        \"updatedAt\": \"2023-10-02T09:08:57.031Z\",\n        \"__v\": 0\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "Deactivate User",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "{{token2}}"
+					}
+				},
+				"method": "PATCH",
+				"header": [],
+				"url": "localhost:3002/user/deactivate"
+			},
+			"response": [
+				{
+					"name": "New Request",
+					"originalRequest": {
+						"method": "PATCH",
+						"header": [],
+						"url": "localhost:3002/user/deactivate"
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "60"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"3c-xIIx2BZgad1ntQ1qb427U8ScU7E\""
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 02 Oct 2023 09:22:26 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"success\",\n    \"message\": \"User deactivated!\",\n    \"data\": {}\n}"
+				}
+			]
+		},
+		{
+			"name": "Activate User",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\":\"myselfmrv@gmail.com\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "localhost:3002/auth/activate"
+			},
+			"response": [
+				{
+					"name": "New Request",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\":\"myselfmrv@gmail.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "localhost:3002/auth/activate"
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "96"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"60-BzKwkhDKMBolb8VIxai7B3KbRPU\""
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 02 Oct 2023 09:44:09 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"success\",\n    \"message\": \"An Email has been sent to your account please verify!\",\n    \"data\": {}\n}"
 				}
 			]
 		}
