@@ -88,9 +88,10 @@ const activateUser: RequestHandler = async (req, res, next) => {
   let resp: ReturnResponse;
   try {
     //verify token sent
+    const secretKey = process.env.SECRET_KEY || "";
     let decodedToken;
     const token = req.params.token;
-    decodedToken = <any>jwt.verify(token, "secretmyverysecretkey");
+    decodedToken = <any>jwt.verify(token, secretKey);
 
     if (!decodedToken) {
       const err = new ProjectError("Invalid link!");

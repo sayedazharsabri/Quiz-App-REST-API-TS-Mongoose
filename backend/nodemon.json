@@ -1,13 +1,14 @@
 {
-    "env":{
-        "CONNECTION_STRING":"",
-        "PORT":3000,
-        "USER":"<user email>",
-        "PASS":"<user password>",
-        "HOST":"smtp.gmail.com",
-        "BASE_URL":""
-    },
-    "watch":["src"],
-    "ext": "ts,json",
-    "exec": "ts-node ./src/app.ts"
+  "env": {
+    "CONNECTION_STRING": "<DATABASE_CONNECTION_STRING>",
+    "PORT": 3000,
+    "SECRET_KEY": "<ENCRYPTION_SECRET>",
+    "USER": "<USER_EMAIL>",
+    "PASS": "<USER_PASSWORD>",
+    "HOST": "<SERVICE_PROVIDER>",
+    "BASE_URL": "<SERVER_BASE_URL>"
+  },
+  "watch": ["src"],
+  "ext": "ts,json",
+  "exec": "ts-node ./src/app.ts"
 }

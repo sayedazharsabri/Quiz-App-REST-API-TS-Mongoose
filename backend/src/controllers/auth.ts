@@ -8,6 +8,8 @@ import User from "../models/user";
 import sendEmail from "../utils/email";
 import { ReturnResponse } from "../utils/interfaces";
 
+const secretKey = process.env.SECRET_KEY || "";
+
 //const registerUser:RequestHandler = async (req: Request, res: Response, next: NextFunction) => {
 const registerUser: RequestHandler = async (req, res, next) => {
   let resp: ReturnResponse;
@@ -61,7 +63,7 @@ const loginUser: RequestHandler = async (req, res, next) => {
 
     //then decide
     if (status) {
-      const token = jwt.sign({ userId: user._id }, "secretmyverysecretkey", {
+      const token = jwt.sign({ userId: user._id }, secretKey, {
         expiresIn: "1h",
       });
       resp = { status: "success", message: "Logged in", data: { token } };
@@ -97,7 +99,7 @@ const activateUser: RequestHandler = async (req, res, next) => {
       throw err;
     }
 
-    const emailToken = jwt.sign({ userId: user._id }, "secretmyverysecretkey", {
+    const emailToken = jwt.sign({ userId: user._id }, secretKey, {
       expiresIn: "5m",
     });
 
