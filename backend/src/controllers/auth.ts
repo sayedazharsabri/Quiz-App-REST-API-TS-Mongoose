@@ -20,14 +20,14 @@ const registerUser: RequestHandler = async (req, res, next) => {
     const result = await user.save();
     if (!result) {
       resp = { status: "error", message: "No result found", data: {} };
-      res.send(resp);
+      res.status(404).send(resp);
     } else {
       resp = {
         status: "success",
         message: "Registration done!",
         data: { userId: result._id },
       };
-      res.send(resp);
+      res.status(201).send(resp);
     }
   } catch (error) {
     next(error);
@@ -104,7 +104,9 @@ const activateUser: RequestHandler = async (req, res, next) => {
     const message = `${process.env.BASE_URL}user/activate/${emailToken}`;
     sendEmail(user.email, "Verify Email", message);
 
-    res.send("An Email has been sent to your account please verify!");
+    res
+      .status(200)
+      .send("An Email has been sent to your account please verify!");
   } catch (error) {
     next(error);
   }

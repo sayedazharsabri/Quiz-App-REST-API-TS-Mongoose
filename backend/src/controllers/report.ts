@@ -37,7 +37,7 @@ const getReport: RequestHandler = async (req, res, next) => {
       message: "Report!",
       data: report,
     };
-    res.send(resp);
+    res.status(200).send(resp);
   } catch (error) {
     next(error);
   }

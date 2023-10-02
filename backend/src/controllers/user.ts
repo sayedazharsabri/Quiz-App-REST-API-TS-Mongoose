@@ -79,7 +79,7 @@ const deactivateUser: RequestHandler = async (req, res, next) => {
     await user.save();
 
     resp = { status: "success", message: "User deactivated!", data: {} };
-    res.send(resp);
+    res.status(200).send(resp);
   } catch (error) {
     next(error);
   }
@@ -113,7 +113,7 @@ const activateUser: RequestHandler = async (req, res, next) => {
     await user.save();
 
     resp = { status: "success", message: "Account activated!", data: {} };
-    res.send(resp);
+    res.status(200).send(resp);
   } catch (error) {
     next(error);
   }
