@@ -92,22 +92,7 @@ router.post(
 //POST /auth/activate account
 router.post(
   "/activate",
-  [
-    body("email").trim().isEmail().withMessage("Invalid Email!"),
-    body("password")
-      .trim()
-      .isLength({ min: 8 })
-      .custom((password: String) => {
-        return isPasswordValid(password)
-          .then((status: Boolean) => {
-            if (!status) return Promise.reject();
-          })
-          .catch((err) => {
-            return Promise.reject(err);
-          });
-      })
-      .withMessage("Invalid Password!"),
-  ],
+  [body("email").trim().isEmail().withMessage("Invalid Email!")],
   activateUser
 );
 
