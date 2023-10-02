@@ -1,21 +1,19 @@
 // import { Request, Response, NextFunction} from 'express';
-import { RequestHandler } from "express";
 import bcrypt from "bcryptjs";
+import { RequestHandler } from "express";
 import jwt from "jsonwebtoken";
-import sendEmail from "../utils/email";
 
-
-
-import User from "../models/user";
 import ProjectError from "../helper/error";
-
+import User from "../models/user";
+import sendEmail from "../utils/email";
 import { ReturnResponse } from "../utils/interfaces";
+
+const secretKey = process.env.SECRET_KEY || "";
 
 //const registerUser:RequestHandler = async (req: Request, res: Response, next: NextFunction) => {
 const registerUser: RequestHandler = async (req, res, next) => {
   let resp: ReturnResponse;
   try {
-
     const email = req.body.email;
     const name = req.body.name;
     let password = await bcrypt.hash(req.body.password, 12);
@@ -24,14 +22,14 @@ const registerUser: RequestHandler = async (req, res, next) => {
     const result = await user.save();
     if (!result) {
       resp = { status: "error", message: "No result found", data: {} };
-      res.send(resp);
+      res.status(404).send(resp);
     } else {
       resp = {
         status: "success",
         message: "Registration done!",
         data: { userId: result._id },
       };
-      res.send(resp);
+      res.status(201).send(resp);
     }
   } catch (error) {
     next(error);
@@ -65,7 +63,7 @@ const loginUser: RequestHandler = async (req, res, next) => {
 
     //then decide
     if (status) {
-      const token = jwt.sign({ userId: user._id }, "secretmyverysecretkey", {
+      const token = jwt.sign({ userId: user._id }, secretKey, {
         expiresIn: "1h",
       });
       resp = { status: "success", message: "Logged in", data: { token } };
@@ -82,6 +80,7 @@ const loginUser: RequestHandler = async (req, res, next) => {
 
 //re-activate user
 const activateUser: RequestHandler = async (req, res, next) => {
+  let resp: ReturnResponse;
   try {
     const email = req.body.email;
 
@@ -101,14 +100,58 @@ const activateUser: RequestHandler = async (req, res, next) => {
       throw err;
     }
 
-    const emailToken = jwt.sign({ userId: user._id }, "secretmyverysecretkey", {
+    const emailToken = jwt.sign({ userId: user._id }, secretKey, {
       expiresIn: "5m",
     });
 
-    const message = `${process.env.BASE_URL}user/activate/${emailToken}`;
+    const message = `
+    Click on the below link to activate your account:
+    http://${process.env.BASE_URL}/auth/activate/${emailToken}
+    
+    (Note: If the link is not clickable kindly copy the link and paste it in the browser.)`;
     sendEmail(user.email, "Verify Email", message);
+    resp = {
+      status: "success",
+      message: "An Email has been sent to your account please verify!",
+      data: {},
+    };
 
-    res.send("An Email has been sent to your account please verify!");
+    res.status(200).send(resp);
+  } catch (error) {
+    next(error);
+  }
+};
+
+const activateUserCallback: RequestHandler = async (req, res, next) => {
+  let resp: ReturnResponse;
+  try {
+    //verify token sent
+    const secretKey = process.env.SECRET_KEY || "";
+    let decodedToken;
+    const token = req.params.token;
+    decodedToken = <any>jwt.verify(token, secretKey);
+
+    if (!decodedToken) {
+      const err = new ProjectError("Invalid link!");
+      err.statusCode = 401;
+      throw err;
+    }
+
+    const userId = decodedToken.userId;
+
+    const user = await User.findOne({ _id: userId });
+
+    if (!user) {
+      const err = new ProjectError("User not found!");
+      err.statusCode = 404;
+      throw err;
+    }
+
+    user.isDeactivated = false;
+    await user.save();
+
+    resp = { status: "success", message: "Account activated!", data: {} };
+    res.status(200).send(resp);
   } catch (error) {
     next(error);
   }
@@ -171,4 +214,11 @@ const isPasswordValid = async (password: String) => {
   return false;
 };
 
-export { registerUser, loginUser, activateUser, isUserExist, isPasswordValid };
+export {
+  activateUser,
+  activateUserCallback,
+  isPasswordValid,
+  isUserExist,
+  loginUser,
+  registerUser,
+};

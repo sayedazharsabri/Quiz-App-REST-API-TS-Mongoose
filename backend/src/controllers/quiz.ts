@@ -1,19 +1,18 @@
 //model
 import { RequestHandler } from "express";
 
-import Quiz from "../models/quiz";
 import ProjectError from "../helper/error";
+import Quiz from "../models/quiz";
 import { ReturnResponse } from "../utils/interfaces";
 
 const createQuiz: RequestHandler = async (req, res, next) => {
   try {
-
-    const created_by = req.userId;
+    const createdBy = req.userId;
     const name = req.body.name;
-    const questions_list = req.body.questions_list;
+    const questionList = req.body.questionList;
     const answers = req.body.answers;
 
-    const quiz = new Quiz({ name, questions_list, answers, created_by });
+    const quiz = new Quiz({ name, questionList, answers, createdBy });
     const result = await quiz.save();
     const resp: ReturnResponse = {
       status: "success",
@@ -29,22 +28,33 @@ const createQuiz: RequestHandler = async (req, res, next) => {
 const getQuiz: RequestHandler = async (req, res, next) => {
   try {
     const quizId = req.params.quizId;
-    const quiz = await Quiz.findById(quizId, {
-      name: 1,
-      questions_list: 1,
-      answers: 1,
-      created_by: 1,
-    });
+    let quiz;
+    if (quizId) {
+      quiz = await Quiz.findById(quizId, {
+        name: 1,
+        questionList: 1,
+        answers: 1,
+        createdBy: 1,
+      });
+
+      if (!quiz) {
+        const err = new ProjectError("No quiz found!");
+        err.statusCode = 404;
+        throw err;
+      }
+
+      if (req.userId !== quiz.createdBy.toString()) {
+        const err = new ProjectError("You are not authorized!");
+        err.statusCode = 403;
+        throw err;
+      }
+    } else {
+      quiz = await Quiz.find({ createdBy: req.userId });
+    }
 
     if (!quiz) {
       const err = new ProjectError("Quiz not found!");
       err.statusCode = 404;
-      throw err;
-    }
-
-    if (req.userId !== quiz.created_by.toString()) {
-      const err = new ProjectError("You are not authorized!");
-      err.statusCode = 403;
       throw err;
     }
 
@@ -61,7 +71,6 @@ const getQuiz: RequestHandler = async (req, res, next) => {
 
 const updateQuiz: RequestHandler = async (req, res, next) => {
   try {
-
     const quizId = req.body._id;
     const quiz = await Quiz.findById(quizId);
 
@@ -71,13 +80,13 @@ const updateQuiz: RequestHandler = async (req, res, next) => {
       throw err;
     }
 
-    if (req.userId !== quiz.created_by.toString()) {
+    if (req.userId !== quiz.createdBy.toString()) {
       const err = new ProjectError("You are not authorized!");
       err.statusCode = 403;
       throw err;
     }
 
-    if (quiz.is_published) {
+    if (quiz.isPublished) {
       const err = new ProjectError("You cannot update, published Quiz!");
       err.statusCode = 405;
       throw err;
@@ -91,7 +100,7 @@ const updateQuiz: RequestHandler = async (req, res, next) => {
       }
       quiz.name = req.body.name;
     }
-    quiz.questions_list = req.body.questions_list;
+    quiz.questionList = req.body.questionList;
     quiz.answers = req.body.answers;
 
     await quiz.save();
@@ -118,13 +127,13 @@ const deleteQuiz: RequestHandler = async (req, res, next) => {
       throw err;
     }
 
-    if (req.userId !== quiz.created_by.toString()) {
+    if (req.userId !== quiz.createdBy.toString()) {
       const err = new ProjectError("You are not authorized!");
       err.statusCode = 403;
       throw err;
     }
 
-    if (quiz.is_published) {
+    if (quiz.isPublished) {
       const err = new ProjectError("You cannot delete, published Quiz!");
       err.statusCode = 405;
       throw err;
@@ -153,19 +162,19 @@ const publishQuiz: RequestHandler = async (req, res, next) => {
       throw err;
     }
 
-    if (req.userId !== quiz.created_by.toString()) {
+    if (req.userId !== quiz.createdBy.toString()) {
       const err = new ProjectError("You are not authorized!");
       err.statusCode = 403;
       throw err;
     }
 
-    if (!!quiz.is_published) {
+    if (!!quiz.isPublished) {
       const err = new ProjectError("Quiz is already published!");
       err.statusCode = 405;
       throw err;
     }
 
-    quiz.is_published = true;
+    quiz.isPublished = true;
     await quiz.save();
     const resp: ReturnResponse = {
       status: "success",
@@ -179,24 +188,24 @@ const publishQuiz: RequestHandler = async (req, res, next) => {
 };
 
 const isValidQuiz = async (
-  questions_list: [{ question_number: Number; question: String; options: {} }],
+  questionList: [{ questionNumber: Number; question: String; options: {} }],
   answers: {}
 ) => {
-  if (!questions_list.length) {
+  if (!questionList.length) {
     return false;
   }
-  if (questions_list.length != Object.keys(answers).length) {
+  if (questionList.length != Object.keys(answers).length) {
     return false;
   }
   let flag = true;
-  questions_list.forEach(
-    (question: { question_number: Number; question: String; options: {} }) => {
+  questionList.forEach(
+    (question: { questionNumber: Number; question: String; options: {} }) => {
       let opt = Object.keys(question["options"]);
       if (
         opt.indexOf(
           `${
             Object.values(answers)[
-              Object.keys(answers).indexOf(question.question_number.toString())
+              Object.keys(answers).indexOf(question.questionNumber.toString())
             ]
           }`
         ) == -1
@@ -218,10 +227,10 @@ const isValidQuizName = async (name: String) => {
 
 export {
   createQuiz,
-  getQuiz,
-  updateQuiz,
   deleteQuiz,
-  publishQuiz,
+  getQuiz,
   isValidQuiz,
   isValidQuizName,
+  publishQuiz,
+  updateQuiz,
 };

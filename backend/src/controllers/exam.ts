@@ -1,20 +1,18 @@
 import { RequestHandler } from "express";
-
-import Quiz from "../models/quiz";
-import Report from "../models/report";
+import { Mongoose } from "mongoose";
 
 import ProjectError from "../helper/error";
+import Quiz from "../models/quiz";
+import Report from "../models/report";
 import { ReturnResponse } from "../utils/interfaces";
-import { Mongoose } from "mongoose";
-import { validationResult } from "express-validator";
 
 const startExam: RequestHandler = async (req, res, next) => {
   try {
     const quizId = req.params.quizId;
     const quiz = await Quiz.findById(quizId, {
       name: 1,
-      questions_list: 1,
-      is_published: 1,
+      questionList: 1,
+      isPublished: 1,
     });
 
     if (!quiz) {
@@ -23,7 +21,7 @@ const startExam: RequestHandler = async (req, res, next) => {
       throw err;
     }
 
-    if (!quiz.is_published) {
+    if (!quiz.isPublished) {
       const err = new ProjectError("Quiz is not published!");
       err.statusCode = 405;
       throw err;
@@ -42,7 +40,7 @@ const startExam: RequestHandler = async (req, res, next) => {
 const submitExam: RequestHandler = async (req, res, next) => {
   try {
     const quizId = req.body.quizId;
-    const attempted_question = req.body.attempted_question;
+    const attemptedQuestion = req.body.attemptedQuestion;
 
     const quiz = await Quiz.findById(quizId, { answers: 1 });
     if (!quiz) {
@@ -59,10 +57,10 @@ const submitExam: RequestHandler = async (req, res, next) => {
     let score = 0;
 
     for (let i = 0; i < total; i++) {
-      let question_number = allQuestions[i];
+      let questionNumber = allQuestions[i];
       if (
-        !!attempted_question[question_number] &&
-        answers[question_number] == attempted_question[question_number]
+        !!attemptedQuestion[questionNumber] &&
+        answers[questionNumber] == attemptedQuestion[questionNumber]
       ) {
         score = score + 1;
       }
@@ -73,7 +71,7 @@ const submitExam: RequestHandler = async (req, res, next) => {
     const resp: ReturnResponse = {
       status: "success",
       message: "Quiz submitted",
-      data: { total, score, ReportId: data._id },
+      data: { total, score, reportId: data._id },
     };
     res.status(200).send(resp);
   } catch (error) {
@@ -81,36 +79,37 @@ const submitExam: RequestHandler = async (req, res, next) => {
   }
 };
 
-const doesQuizExist = async (quizId:Mongoose["Types"]["ObjectId"])=>{
-  const quiz= await Quiz.findById(quizId);
-  if(!quiz)
-    return false;
+const doesQuizExist = async (quizId: Mongoose["Types"]["ObjectId"]) => {
+  const quiz = await Quiz.findById(quizId);
+  if (!quiz) return false;
   return true;
-}
+};
 
-const isValidAttempt = async (attempted_question:{},quizId:Mongoose["Types"]["ObjectId"])=>{
-  const quiz= await Quiz.findById(quizId);
+const isValidAttempt = async (
+  attemptedQuestion: {},
+  quizId: Mongoose["Types"]["ObjectId"]
+) => {
+  const quiz = await Quiz.findById(quizId);
   if (!quiz) {
     const err = new ProjectError("No quiz found!");
     err.statusCode = 404;
     throw err;
   }
-  const answers=quiz.answers;
-  const questions=Object.keys(answers);
-  const attemptQ=Object.keys(attempted_question);
-  if(attemptQ.length!=questions.length)
-    return false;
+  const answers = quiz.answers;
+  const questions = Object.keys(answers);
+  const attemptQ = Object.keys(attemptedQuestion);
+  if (attemptQ.length != questions.length) return false;
 
-  let flag=0;
-  attemptQ.forEach((e)=>{
-    if(questions.indexOf(e)<0){
-      flag=1;
+  let flag = 0;
+  attemptQ.forEach((e) => {
+    if (questions.indexOf(e) < 0) {
+      flag = 1;
     }
   });
-  if(flag){
+  if (flag) {
     return false;
   }
   return true;
-}
+};
 
-export { startExam, submitExam, doesQuizExist, isValidAttempt};
+export { doesQuizExist, isValidAttempt, startExam, submitExam };

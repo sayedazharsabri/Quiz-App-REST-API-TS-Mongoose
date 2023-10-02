@@ -1,4 +1,5 @@
 import nodemailer from "nodemailer";
+
 import ProjectError from "../helper/error";
 
 const sendEmail = async (
@@ -23,8 +24,7 @@ const sendEmail = async (
       subject: subject,
       text: text,
     });
-    console.log("message sent: %s",emailSent.messageId);
-    
+    console.log("message sent: %s", emailSent.messageId);
   } catch (error) {
     const err = new ProjectError("email not sent");
     err.statusCode = 401;

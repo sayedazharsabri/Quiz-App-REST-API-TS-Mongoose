@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+
 const schema = mongoose.Schema;
 //schema
 const quizSchema = new schema(
@@ -8,19 +9,19 @@ const quizSchema = new schema(
       required: true,
       unique: true,
     },
-    questions_list: [
+    questionList: [
       {
-        question_number: Number,
+        questionNumber: Number,
         question: String,
         options: {},
       },
     ],
     answers: {},
-    created_by: {
+    createdBy: {
       type: mongoose.Types.ObjectId,
       required: true,
     },
-    is_published: {
+    isPublished: {
       type: Boolean,
       default: false,
     },

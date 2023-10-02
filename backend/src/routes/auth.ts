@@ -2,16 +2,15 @@
 import express from "express";
 import { body } from "express-validator";
 
-import { validateRequest } from "../helper/validateRequest";
-
-
 import {
-  registerUser,
-  loginUser,
   activateUser,
-  isUserExist,
+  activateUserCallback,
   isPasswordValid,
+  isUserExist,
+  loginUser,
+  registerUser,
 } from "../controllers/auth";
+import { validateRequest } from "../helper/validateRequest";
 
 const router = express.Router();
 
@@ -54,7 +53,7 @@ router.post(
             return Promise.reject(err);
           });
       }),
-    body("confirm_password")
+    body("confirmPassword")
       .trim()
       .custom((value: String, { req }) => {
         if (value != req.body.password) {
@@ -71,10 +70,7 @@ router.post(
 router.post(
   "/login",
   [
-    body("email")
-      .trim()
-      .isEmail()
-      .withMessage("Invalid Email!"),
+    body("email").trim().isEmail().withMessage("Invalid Credentials!"),
     body("password")
       .trim()
       .isLength({ min: 8 })
@@ -87,7 +83,7 @@ router.post(
             return Promise.reject(err);
           });
       })
-      .withMessage("Invalid Password!"),
+      .withMessage("Invalid Credentials!"),
   ],
   validateRequest,
   loginUser
@@ -97,10 +93,7 @@ router.post(
 router.post(
   "/activate",
   [
-    body("email")
-      .trim()
-      .isEmail()
-      .withMessage("Invalid Email!"),
+    body("email").trim().isEmail().withMessage("Invalid Email!"),
     body("password")
       .trim()
       .isLength({ min: 8 })
@@ -117,5 +110,9 @@ router.post(
   ],
   activateUser
 );
+
+//re-activate link
+// GET /user/activate
+router.get("/activate/:token", activateUserCallback);
 
 export default router;

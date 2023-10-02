@@ -1,12 +1,11 @@
-import express from "express";
-import { Request, Response, NextFunction } from "express";
+import express, { NextFunction, Request, Response } from "express";
 import mongoose from "mongoose";
 
-import UserRoute from "./routes/user";
 import authRoute from "./routes/auth";
-import quizRoute from "./routes/quiz";
 import examRoute from "./routes/exam";
+import quizRoute from "./routes/quiz";
 import reportRoute from "./routes/report";
+import userRoute from "./routes/user";
 
 import ProjectError from "./helper/error";
 import { ReturnResponse } from "./utils/interfaces";
@@ -14,9 +13,9 @@ import { ReturnResponse } from "./utils/interfaces";
 const app = express();
 
 const connectionString = process.env.CONNECTION_STRING || "";
+const port = process.env.PORT;
 
 app.use(express.json());
-
 declare global {
   namespace Express {
     interface Request {
@@ -25,24 +24,24 @@ declare global {
   }
 }
 
-app.get("/", (req, res) => {
-  res.send("Hi hello");
-});
-
-//Redirect /user to UserRoute
-app.use("/user", UserRoute);
-
 //Redirect /auth
 app.use("/auth", authRoute);
-
-//Redirect /quiz
-app.use("/quiz", quizRoute);
 
 //Redirect /exam
 app.use("/exam", examRoute);
 
+//Redirect /quiz
+app.use("/quiz", quizRoute);
+
 //Redirect /report
 app.use("/report", reportRoute);
+
+//Redirect /user to userRoute
+app.use("/user", userRoute);
+
+app.get("/health", (req: Request, res: Response) => {
+  res.status(200).send("Server is working!");
+});
 
 app.use(
   (err: ProjectError, req: Request, res: Response, next: NextFunction) => {
@@ -69,15 +68,16 @@ app.use(
   }
 );
 
-mongoose.connect(connectionString).then( 
+mongoose.connect(connectionString).then(
   () => {
-    app.listen(process.env.PORT, () => {
+    app.listen(port, () => {
       console.log("Server Connected");
-    });},
-    err => {
-      if(err){
-        console.log(err);
-        return;
-      }
+    });
+  },
+  (err) => {
+    if (err) {
+      console.log(err);
+      return;
     }
+  }
 );
