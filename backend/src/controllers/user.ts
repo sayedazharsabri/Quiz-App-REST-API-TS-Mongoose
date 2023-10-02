@@ -14,7 +14,6 @@ const getUser: RequestHandler = async (req, res, next) => {
     if (!userId) {
       const err = new ProjectError("You are not authorized!");
       err.statusCode = 401;
-      err.data = { hi: "its error" };
       throw err;
     }
     const user = await User.findById(userId, { name: 1, email: 1 });
