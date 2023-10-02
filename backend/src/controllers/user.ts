@@ -2,8 +2,8 @@ import { RequestHandler } from "express";
 import jwt from "jsonwebtoken";
 
 import ProjectError from "../helper/error";
-import { ReturnResponse } from "../utils/interfaces";
 import User from "../models/user";
+import { ReturnResponse } from "../utils/interfaces";
 
 const getUser: RequestHandler = async (req, res, next) => {
   let resp: ReturnResponse;
@@ -135,4 +135,4 @@ const isActiveUser = async (userId: String) => {
   return true;
 };
 
-export { getUser, updateUser, activateUser, deactivateUser, isActiveUser };
+export { activateUser, deactivateUser, getUser, isActiveUser, updateUser };

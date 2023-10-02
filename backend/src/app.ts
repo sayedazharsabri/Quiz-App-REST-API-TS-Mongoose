@@ -1,4 +1,4 @@
-import express, { Request, Response, NextFunction } from "express";
+import express, { NextFunction, Request, Response } from "express";
 import mongoose from "mongoose";
 
 import authRoute from "./routes/auth";
@@ -39,8 +39,8 @@ app.use("/report", reportRoute);
 //Redirect /user to userRoute
 app.use("/user", userRoute);
 
-app.get("/", (req, res) => {
-  res.send("Hi hello");
+app.get("/health", (req: Request, res: Response) => {
+  res.status(200).send("Server is working!");
 });
 
 app.use(

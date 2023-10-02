@@ -1,8 +1,8 @@
-import { Request, Response, NextFunction } from "express";
+import { NextFunction, Request, Response } from "express";
 import jwt from "jsonwebtoken";
 
-import ProjectError from "../helper/error";
 import { isActiveUser } from "../controllers/user";
+import ProjectError from "../helper/error";
 
 const isAuthenticated = (req: Request, res: Response, next: NextFunction) => {
   try {

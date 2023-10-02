@@ -2,8 +2,8 @@
 import { RequestHandler } from "express";
 
 import ProjectError from "../helper/error";
-import { ReturnResponse } from "../utils/interfaces";
 import Quiz from "../models/quiz";
+import { ReturnResponse } from "../utils/interfaces";
 
 const createQuiz: RequestHandler = async (req, res, next) => {
   try {
@@ -227,10 +227,10 @@ const isValidQuizName = async (name: String) => {
 
 export {
   createQuiz,
-  getQuiz,
-  updateQuiz,
   deleteQuiz,
-  publishQuiz,
+  getQuiz,
   isValidQuiz,
   isValidQuizName,
+  publishQuiz,
+  updateQuiz,
 };

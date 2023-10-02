@@ -3,10 +3,10 @@ import bcrypt from "bcryptjs";
 import { RequestHandler } from "express";
 import jwt from "jsonwebtoken";
 
-import sendEmail from "../utils/email";
 import ProjectError from "../helper/error";
-import { ReturnResponse } from "../utils/interfaces";
 import User from "../models/user";
+import sendEmail from "../utils/email";
+import { ReturnResponse } from "../utils/interfaces";
 
 //const registerUser:RequestHandler = async (req: Request, res: Response, next: NextFunction) => {
 const registerUser: RequestHandler = async (req, res, next) => {
@@ -169,4 +169,4 @@ const isPasswordValid = async (password: String) => {
   return false;
 };
 
-export { registerUser, loginUser, activateUser, isUserExist, isPasswordValid };
+export { activateUser, isPasswordValid, isUserExist, loginUser, registerUser };

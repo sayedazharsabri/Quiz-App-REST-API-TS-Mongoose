@@ -1,17 +1,17 @@
 import express from "express";
 import { body } from "express-validator";
 
-import { isAuthenticated } from "../middlewares/isAuth";
 import {
   createQuiz,
-  getQuiz,
-  updateQuiz,
   deleteQuiz,
-  publishQuiz,
+  getQuiz,
   isValidQuiz,
   isValidQuizName,
+  publishQuiz,
+  updateQuiz,
 } from "../controllers/quiz";
 import { validateRequest } from "../helper/validateRequest";
+import { isAuthenticated } from "../middlewares/isAuth";
 
 const router = express.Router();
 

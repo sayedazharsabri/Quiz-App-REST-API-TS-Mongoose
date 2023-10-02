@@ -1,8 +1,8 @@
 import { RequestHandler } from "express";
 
 import ProjectError from "../helper/error";
-import { ReturnResponse } from "../utils/interfaces";
 import Report from "../models/report";
+import { ReturnResponse } from "../utils/interfaces";
 
 const getReport: RequestHandler = async (req, res, next) => {
   try {

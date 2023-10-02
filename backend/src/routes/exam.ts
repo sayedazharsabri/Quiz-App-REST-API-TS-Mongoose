@@ -7,8 +7,8 @@ import {
   startExam,
   submitExam,
 } from "../controllers/exam";
-import { isAuthenticated } from "../middlewares/isAuth";
 import { validateRequest } from "../helper/validateRequest";
+import { isAuthenticated } from "../middlewares/isAuth";
 
 const router = express.Router();
 // GET /exam/quizId

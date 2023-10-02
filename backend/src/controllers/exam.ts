@@ -2,9 +2,9 @@ import { RequestHandler } from "express";
 import { Mongoose } from "mongoose";
 
 import ProjectError from "../helper/error";
-import { ReturnResponse } from "../utils/interfaces";
-import Report from "../models/report";
 import Quiz from "../models/quiz";
+import Report from "../models/report";
+import { ReturnResponse } from "../utils/interfaces";
 
 const startExam: RequestHandler = async (req, res, next) => {
   try {
@@ -112,4 +112,4 @@ const isValidAttempt = async (
   return true;
 };
 
-export { startExam, submitExam, doesQuizExist, isValidAttempt };
+export { doesQuizExist, isValidAttempt, startExam, submitExam };

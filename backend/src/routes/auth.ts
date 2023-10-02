@@ -3,11 +3,11 @@ import express from "express";
 import { body } from "express-validator";
 
 import {
-  registerUser,
-  loginUser,
   activateUser,
-  isUserExist,
   isPasswordValid,
+  isUserExist,
+  loginUser,
+  registerUser,
 } from "../controllers/auth";
 import { validateRequest } from "../helper/validateRequest";
 
