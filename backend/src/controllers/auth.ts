@@ -215,12 +215,43 @@ const isPasswordValid = async (password: String) => {
 };
 
 
+import otpGenerator from "otp-generator";
 // OTP send function
 const sendOTP: RequestHandler = async (req, res, next) => { 
 
   let resp: ReturnResponse;
-  resp = { status: "success", message: "OTP send successfully", data: {} };
-  res.status(200).send(resp);
+
+  try {
+
+    const { email } = req.body;
+
+    // check if user already present
+    // Find user with provided email
+    const checkUserPresent = await User.findOne({ email });
+    // to be used in case of sign up
+
+    // if user found then return a error response
+    if (checkUserPresent) {
+      // Return 401 Unauthorized status code with error message
+      const err = new ProjectError("user already Registered..");
+      err.statusCode = 401;
+      throw err;
+    }
+
+    // generate otp 
+    var otp = otpGenerator.generate(6, {
+      upperCaseAlphabets: false,
+      lowerCaseAlphabets: false,
+      specialChars: false
+    })
+
+    resp = { status: "success", message: "OTP send successfully", data: {} };
+    res.status(200).send(resp);
+  } catch (error) {
+    next(error);
+  }
+
+  
 
 }
 
