@@ -214,6 +214,17 @@ const isPasswordValid = async (password: String) => {
   return false;
 };
 
+
+// OTP send function
+const sendOTP: RequestHandler = async (req, res, next) => { 
+
+  let resp: ReturnResponse;
+  resp = { status: "success", message: "OTP send successfully", data: {} };
+  res.status(200).send(resp);
+
+}
+
+
 export {
   activateUser,
   activateUserCallback,
@@ -221,4 +232,5 @@ export {
   isUserExist,
   loginUser,
   registerUser,
+  sendOTP
 };

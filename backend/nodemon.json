@@ -1,6 +1,6 @@
 {
   "env": {
-    "CONNECTION_STRING": "<DATABASE_CONNECTION_STRING>",
+    "CONNECTION_STRING": "mongodb://127.0.0.1:27017/quizAppfinal",
     "PORT": 3000,
     "SECRET_KEY": "<ENCRYPTION_SECRET>",
     "USER": "<USER_EMAIL>",

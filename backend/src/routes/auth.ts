@@ -9,6 +9,7 @@ import {
   isUserExist,
   loginUser,
   registerUser,
+  sendOTP
 } from "../controllers/auth";
 import { validateRequest } from "../helper/validateRequest";
 
@@ -88,6 +89,13 @@ router.post(
   validateRequest,
   loginUser
 );
+
+
+//POST -> /auth/send otp 
+router.post("/send-otp",
+  [body("email").trim().isEmail().withMessage("Invalid Email!")],
+  sendOTP
+)
 
 //POST /auth/activate account
 router.post(
