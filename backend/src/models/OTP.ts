@@ -31,8 +31,7 @@ async function sendVerificationEmail(email:string, otp:string) {
     // Send the email
 
     try {
-        console.log("Email : ", email);
-        console.log("OTP : ", otp);
+        
         const mailResponse = await sendEmail(
             email,
             "Verification OTP Email",
