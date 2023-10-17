@@ -15,6 +15,8 @@ const app = express();
 const connectionString = process.env.CONNECTION_STRING || "";
 const port = process.env.PORT;
 
+console.log("Email : ", process.env.USER);
+
 app.use(express.json());
 declare global {
   namespace Express {

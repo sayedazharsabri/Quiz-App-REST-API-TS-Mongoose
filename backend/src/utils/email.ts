@@ -18,6 +18,9 @@ const sendEmail = async (
       },
     });
 
+
+    console.log("Email send using this mail : ", process.env.USER);
+
     const emailSent = await transporter.sendMail({
       from: process.env.USER,
       to: email,

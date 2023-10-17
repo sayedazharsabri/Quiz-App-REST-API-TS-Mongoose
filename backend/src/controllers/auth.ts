@@ -216,6 +216,7 @@ const isPasswordValid = async (password: String) => {
 
 
 import otpGenerator from "otp-generator";
+import OTP from "../models/OTP"
 // OTP send function
 const sendOTP: RequestHandler = async (req, res, next) => { 
 
@@ -245,7 +246,26 @@ const sendOTP: RequestHandler = async (req, res, next) => {
       specialChars: false
     })
 
-    resp = { status: "success", message: "OTP send successfully", data: {} };
+    const result = await OTP.findOne({ otp: otp });
+    console.log("Result is generate OTP function");
+    console.log("OTP: ", otp);
+    console.log("Result : ", result);
+    // when result find then change the otp always unique otp store in database
+    while (result) {
+      otp = otpGenerator.generate(6, {
+        upperCaseAlphabets: false,
+        lowerCaseAlphabets: false,
+        specialChars: false
+      })      
+    }
+
+    const otpPayload = { email, otp };
+    const otpBody = await OTP.create(otpPayload);
+
+    console.log("Otp Body : ", otpBody);
+
+
+    resp = { status: "success", message: "OTP send successfully", data: {otp} };
     res.status(200).send(resp);
   } catch (error) {
     next(error);

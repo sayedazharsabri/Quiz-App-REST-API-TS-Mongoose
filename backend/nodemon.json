@@ -3,9 +3,9 @@
     "CONNECTION_STRING": "mongodb://127.0.0.1:27017/quizAppfinal",
     "PORT": 3000,
     "SECRET_KEY": "<ENCRYPTION_SECRET>",
-    "USER": "<USER_EMAIL>",
-    "PASS": "<USER_PASSWORD>",
-    "HOST": "<SERVICE_PROVIDER>",
+    "USER": "manish5060773@gmail.com",
+    "PASS": "dqlgxijmnievjsmk",
+    "HOST": "smtp.gmail.com",
     "BASE_URL": "<SERVER_BASE_URL>"
   },
   "watch": ["src"],

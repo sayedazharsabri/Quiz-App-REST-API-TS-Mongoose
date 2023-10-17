@@ -23,7 +23,7 @@ const OTPSchema = new schema({
 
 // Define a function to send emails
 
-async function sendVerificationEmail(email:any, otp:any) {
+async function sendVerificationEmail(email:string, otp:string) {
     // create a transporter to send emails
 
     // Define the email options
@@ -31,12 +31,14 @@ async function sendVerificationEmail(email:any, otp:any) {
     // Send the email
 
     try {
+        console.log("Email : ", email);
+        console.log("OTP : ", otp);
         const mailResponse = await sendEmail(
             email,
             "Verification OTP Email",
             otp
         );
-        console.log("Email send successfully: ", mailResponse.response);
+        console.log("Email send successfully: ", mailResponse);
     }
     catch (error) {
         console.log("Error occured while sending email: ", error);
