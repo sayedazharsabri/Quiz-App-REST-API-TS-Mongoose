@@ -1,5 +1,7 @@
 import mongoose from "mongoose";
 
+import  sendEmail  from "../utils/email"
+
 const schema = mongoose.Schema;
 
 const OTPSchema = new schema({
@@ -18,4 +20,27 @@ const OTPSchema = new schema({
 
     }
 });
+
+// Define a function to send emails
+
+async function sendVerificationEmail(email:any, otp:any) {
+    // create a transporter to send emails
+
+    // Define the email options
+
+    // Send the email
+
+    try {
+        const mailResponse = await sendEmail(
+            email,
+            "Verification OTP Email",
+            otp
+        );
+        console.log("Email send successfully: ", mailResponse.response);
+    }
+    catch (error) {
+        console.log("Error occured while sending email: ", error);
+        throw error;
+    }
+}
 
