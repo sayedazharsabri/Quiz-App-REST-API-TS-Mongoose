@@ -8,6 +8,8 @@ import User from "../models/user";
 import sendEmail from "../utils/email";
 import { ReturnResponse } from "../utils/interfaces";
 
+import OTP from "../models/OTP"
+
 const secretKey = process.env.SECRET_KEY || "";
 
 //const registerUser:RequestHandler = async (req: Request, res: Response, next: NextFunction) => {
@@ -17,6 +19,31 @@ const registerUser: RequestHandler = async (req, res, next) => {
     const email = req.body.email;
     const name = req.body.name;
     let password = await bcrypt.hash(req.body.password, 12);
+
+    const otp = req.body.otp;
+    // Find the most recent OTP for the email
+    const response = await OTP.find({ email }).sort({ createdAt: -1 }).limit(1);
+    console.log("Response OTP : ", response);
+    if (response.length === 0) {
+      // OTP not found for the email
+
+      resp = {
+        status: "error",
+        message: "The otp is not valid because not found in OTP DB",
+        data: {  },
+      };
+      res.status(400).send(resp);
+
+    }
+    else if (otp != response[0].otp) {
+      // The otp is not valid
+      resp = {
+        status: "error",
+        message: "Incorrect OTP",
+        data: {  },
+      };
+      res.status(400).send(resp);
+    }
 
     const user = new User({ email, name, password });
     const result = await user.save();
@@ -216,7 +243,7 @@ const isPasswordValid = async (password: String) => {
 
 
 import otpGenerator from "otp-generator";
-import OTP from "../models/OTP"
+// import OTP from "../models/OTP"
 // OTP send function
 const sendOTP: RequestHandler = async (req, res, next) => { 
 
