@@ -9,10 +9,11 @@ const createQuiz: RequestHandler = async (req, res, next) => {
   try {
     const createdBy = req.userId;
     const name = req.body.name;
+    const category = req.body.category;
     const questionList = req.body.questionList;
     const answers = req.body.answers;
 
-    const quiz = new Quiz({ name, questionList, answers, createdBy });
+    const quiz = new Quiz({ name, category, questionList, answers, createdBy });
     const result = await quiz.save();
     const resp: ReturnResponse = {
       status: "success",
