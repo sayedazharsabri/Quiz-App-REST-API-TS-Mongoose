@@ -33,6 +33,7 @@ const getQuiz: RequestHandler = async (req, res, next) => {
     if (quizId) {
       quiz = await Quiz.findById(quizId, {
         name: 1,
+        category: 1,
         questionList: 1,
         answers: 1,
         createdBy: 1,
