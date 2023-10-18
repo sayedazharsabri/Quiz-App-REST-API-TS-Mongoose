@@ -1,7 +1,7 @@
 // Redirect request to Particular method on Controller
 import express from "express";
 
-import { deactivateUser, getUser, updateUser } from "../controllers/user";
+import { deactivateUser, getUser, updateUser, deactivateUserCallback } from "../controllers/user";
 import { isAuthenticated } from "../middlewares/isAuth";
 
 const router = express.Router();
@@ -18,5 +18,9 @@ router.put("/", isAuthenticated, updateUser);
 
 //PATCH /user/deactivate
 router.patch("/deactivate", isAuthenticated, deactivateUser);
+
+// Get request Verify Email for deactivate user's account
+// GET  /user/deactivate/:token
+router.get("/deactivate/:token", deactivateUserCallback)
 
 export default router;

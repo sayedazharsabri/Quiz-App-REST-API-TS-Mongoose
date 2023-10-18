@@ -105,7 +105,7 @@ router.post(
 );
 
 //re-activate link
-// GET /user/activate
+// GET /auth/activate
 router.get("/activate/:token", activateUserCallback);
 
 export default router;

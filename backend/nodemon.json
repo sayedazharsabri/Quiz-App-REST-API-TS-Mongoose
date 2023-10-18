@@ -6,7 +6,7 @@
     "USER": "manish5060773@gmail.com",
     "PASS": "dqlgxijmnievjsmk",
     "HOST": "smtp.gmail.com",
-    "BASE_URL": "<SERVER_BASE_URL>"
+    "BASE_URL": "localhost:3000"
   },
   "watch": ["src"],
   "ext": "ts,json",
