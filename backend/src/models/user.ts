@@ -25,7 +25,7 @@ const userSchema = new schema(
     },
     RemainingTry: {
       type: Number,
-      default: 3,
+      default: 4,
     }
   },
   { timestamps: true }
