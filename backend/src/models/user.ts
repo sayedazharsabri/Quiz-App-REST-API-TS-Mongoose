@@ -23,6 +23,10 @@ const userSchema = new schema(
       type: Boolean,
       default: false,
     },
+    RemainingTry: {
+      type: Number,
+      default: 3,
+    }
   },
   { timestamps: true }
 );
