@@ -129,7 +129,7 @@ const deactivateUserCallback: RequestHandler = async (req, res, next) => {
       throw err;
     }
 
-    console.log("Decode deactivate link token: ", decodedToken);
+    // console.log("Decode deactivate link token: ", decodedToken);
     const userId = decodedToken.userId;
 
     const user = await User.findOne({ _id: userId });
