@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
 
-import  sendEmail  from "../utils/email"
+import sendEmail from "../utils/email"
+
 
 const schema = mongoose.Schema;
 

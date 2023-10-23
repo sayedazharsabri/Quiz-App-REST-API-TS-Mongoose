@@ -1,10 +1,10 @@
 {
   "env": {
-    "CONNECTION_STRING": "mongodb://127.0.0.1:27017/quizAppfinal",
+    "CONNECTION_STRING": "<CONNECTION_STRING>",
     "PORT": 3000,
     "SECRET_KEY": "<ENCRYPTION_SECRET>",
-    "USER": "manish5060773@gmail.com",
-    "PASS": "dqlgxijmnievjsmk",
+    "USER": "<EMAIL_ID>",
+    "PASS": "<EMAIL_ID_PASSWORD",
     "HOST": "smtp.gmail.com",
     "BASE_URL": "localhost:3000"
   },
