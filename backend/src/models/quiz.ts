@@ -17,6 +17,10 @@ const quizSchema = new schema(
       },
     ],
     answers: {},
+    passing_percentage: {
+      type: Number,
+      required: true
+    },
     createdBy: {
       type: mongoose.Types.ObjectId,
       required: true,
