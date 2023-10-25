@@ -65,8 +65,8 @@ const submitExam: RequestHandler = async (req, res, next) => {
         score = score + 1;
       }
     }
-
-    const report = new Report({ userId, quizId, score, total });
+const percentage = score / total*100;
+    const report = new Report({ userId, quizId, score, total,percentage});
     const data = await report.save();
     const resp: ReturnResponse = {
       status: "success",
