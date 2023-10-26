@@ -83,7 +83,7 @@ const submitExam: RequestHandler = async (req, res, next) => {
     const resp: ReturnResponse = {
       status: "success",
       message: "Quiz submitted",
-      data: { total, score, reportId: data._id },
+      data: { total, score,result, reportId: data._id },
     };
     res.status(200).send(resp);
   } catch (error) {
