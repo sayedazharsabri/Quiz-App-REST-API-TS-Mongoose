@@ -9,11 +9,11 @@ import userRoute from "./routes/user";
 
 import ProjectError from "./helper/error";
 import { ReturnResponse } from "./utils/interfaces";
-
 const app = express();
 
 const connectionString = process.env.CONNECTION_STRING || "";
-const port = process.env.PORT;
+
+const port = process.env.PORT || 3002;
 
 app.use(express.json());
 declare global {
@@ -70,9 +70,9 @@ app.use(
 
 (async () => {
   try {
-    await mongoose.connect(connectionString);
+    await mongoose.connect("mongodb+srv://SirAzharBackend:OutUDQ0nq5tY5Iuw@cluster0.ulvxhsi.mongodb.net/?retryWrites=true&w=majority");
     app.listen(port, () => {
-      console.log("Server Connected");
+      console.log(`Server Connected ${port}`);
     });
   } catch (error) {
     console.log(error);

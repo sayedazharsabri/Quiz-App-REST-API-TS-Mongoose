@@ -1,10 +1,10 @@
 {
   "env": {
-    "CONNECTION_STRING": "<DATABASE_CONNECTION_STRING>",
-    "PORT": 3000,
+    "CONNECTION_STRING": "mongodb+srv://SirAzharBackend:OutUDQ0nq5tY5Iuw@cluster0.ulvxhsi.mongodb.net/?retryWrites=true&w=majority",
+    "PORT": 3002,
     "SECRET_KEY": "<ENCRYPTION_SECRET>",
-    "USER": "<USER_EMAIL>",
-    "PASS": "<USER_PASSWORD>",
+    "USER": "muhammadhaiderbukhari@gmail.com",
+    "PASS": "qbnh eceu lupc cfku",
     "HOST": "<SERVICE_PROVIDER>",
     "BASE_URL": "<SERVER_BASE_URL>"
   },

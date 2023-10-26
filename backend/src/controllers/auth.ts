@@ -1,12 +1,14 @@
+import nodemailer from 'nodemailer';
 // import { Request, Response, NextFunction} from 'express';
 import bcrypt from "bcryptjs";
 import { RequestHandler } from "express";
 import jwt from "jsonwebtoken";
-
 import ProjectError from "../helper/error";
 import User from "../models/user";
 import sendEmail from "../utils/email";
 import { ReturnResponse } from "../utils/interfaces";
+import Mailgen from 'mailgen';
+import { startExam } from './exam';
 
 const secretKey = process.env.SECRET_KEY || "";
 
@@ -41,18 +43,14 @@ const loginUser: RequestHandler = async (req, res, next) => {
   try {
     const email = req.body.email;
     const password = req.body.password;
-
     //find user with email
     const user = await User.findOne({ email });
-
     if (!user) {
       const err = new ProjectError("No user exist");
       err.statusCode = 401;
       throw err;
     }
-
     //verify if user is deactivated ot not
-
     if (user.isDeactivated) {
       const err = new ProjectError("Account is deactivated!");
       err.statusCode = 401;
@@ -60,16 +58,53 @@ const loginUser: RequestHandler = async (req, res, next) => {
     }
     //verify password using bcrypt
     const status = await bcrypt.compare(password, user.password);
-
     //then decide
-    if (status) {
+    if (user?.accountblocked) {
+      const time = 86400 - (new Date().getTime() - user?.FreezeTime.getTime()) / 1000;
+      const hoursLeft = Math.floor(time / (60 * 60));
+      const minutesLeft = Math.floor((time / 60) - (hoursLeft * 60));
+      if (hoursLeft <= 0 && minutesLeft <= 0) {
+        user && (user.RemainingTry = 3);
+        user && (user.accountblocked = false)
+        user && (user.temperoryKey = '')
+        await user?.save();
+      }
+      else {
+        const err = new ProjectError(`Your account have been blocked due to multiple attempts! try back after ${hoursLeft} hours and ${minutesLeft} minutes`);
+        err.statusCode = 401;
+        throw err;
+      }
+    }
+    if (status && !user?.accountblocked) {
       const token = jwt.sign({ userId: user._id }, secretKey, {
         expiresIn: "1h",
       });
+      user && (user.RemainingTry = 3);
+      await user?.save();
       resp = { status: "success", message: "Logged in", data: { token } };
       res.status(200).send(resp);
     } else {
-      const err = new ProjectError("Credential mismatch");
+      const updated = await User.findOneAndUpdate({ email: user.email }, { $inc: { RemainingTry: -1 } }, { new: true })
+      if (updated && updated?.RemainingTry < 0) {
+        if (updated?.temperoryKey.length && !updated?.accountblocked) {
+          user?.istempkeyused && (updated.accountblocked = true);
+          user?.istempkeyused && (updated.temperoryKey = '');
+          updated && (updated.FreezeTime = new Date());
+          await updated?.save();
+          const err = new ProjectError(`${user?.istempkeyused ? "Your account have been blocked due to multiple attempts for 24 hours" : "Account deactivated check your registered email for temporory code to get one extra login attempt!"}`);
+          err.statusCode = 401;
+          throw err;
+        }
+        const temperoryKey = Math.random().toString(36).substring(2, 10);
+        generateEmail(updated?.name || '', temperoryKey);
+        updated && (updated.FreezeTime = new Date());
+        updated && (updated.temperoryKey = temperoryKey);
+        await updated?.save();
+        const err = new ProjectError(`Account deactivated check your registered email for temporory code to get one extra login attempt!`);
+        err.statusCode = 401;
+        throw err;
+      }
+      const err = new ProjectError(`Credential mismatch Try Left ${updated && (updated?.RemainingTry + 1)}`);
       err.statusCode = 401;
       throw err;
     }
@@ -78,6 +113,94 @@ const loginUser: RequestHandler = async (req, res, next) => {
   }
 };
 
+const activateAccount: RequestHandler = async (req, res, next) => {
+  let resp: ReturnResponse;
+  try {
+    const user = await User.findOne({ email: req.body.email });
+    if (!user) {
+      const err = new ProjectError("No user exist");
+      err.statusCode = 401;
+      throw err;
+    }
+    if (req.body.key == user?.temperoryKey) {
+      user && (user.RemainingTry = 1);
+      user && (user.istempkeyused = true)
+      await user?.save();
+      const resp = { status: "success", message: "Key Validated you have only attempt for login" };
+      res.status(302).send(resp);
+    }
+    else if (!user?.temperoryKey.length) {
+      const err = new ProjectError("User is already Activated");
+      err.statusCode = 403;
+      throw err;
+    }
+    else {
+      const err = new ProjectError("Invalid Key");
+      err.statusCode = 401;
+      throw err;
+    }
+  } catch (err) {
+    next(err);
+  }
+}
+
+const generateEmail = (name: string, temperoryKey: string) => {
+  const userEmail = process.env.USER || "";
+  const userPassword = process.env.PASS || "";
+
+  const transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+      user: userEmail,
+      pass: userPassword
+    }
+  });
+
+  let MailGenerator = new Mailgen({
+    theme: "default",
+    product: {
+      name: "Quiz Application",
+      link: '/'
+    }
+  })
+  let response = {
+    body: {
+      name: name,
+      intro: "Your Account has been freezed due to some unusual activity on your account",
+      table: {
+        data: [
+          {
+            "Temporary Key": temperoryKey
+          }
+        ]
+      },
+      action: {
+        instructions: 'If you believe that is by mistake here is your one time temporary key to activate your account after activating your account you can login once after this your account will be deactived for 24 hrs',
+        button: {
+          color: '#22BC66', // Optional action button color
+          text: 'Confirm your account',
+          link: 'https://mailgen.js/confirm?s=d9729feb74992cc3482b350163a1a010'
+        }
+      },
+      outro: "Discover your inner genius - Take the quiz now!"
+    }
+  }
+
+  let mail = MailGenerator.generate(response)
+
+  let message = {
+    from: userEmail,
+    to: "apshaiderbukhari786@gmail.com",
+    subject: "Quiz Account Freezed",
+    html: mail
+  }
+
+  transporter.sendMail(message).then(() => {
+    console.log("Email Sent ");
+  }).catch(error => {
+    console.log("Not sent");
+  })
+}
 //re-activate user
 const activateUser: RequestHandler = async (req, res, next) => {
   let resp: ReturnResponse;
@@ -214,6 +337,7 @@ const isPasswordValid = async (password: String) => {
   return false;
 };
 
+
 export {
   activateUser,
   activateUserCallback,
@@ -221,4 +345,5 @@ export {
   isUserExist,
   loginUser,
   registerUser,
+  activateAccount
 };

@@ -25,13 +25,27 @@ const userSchema = new schema(
     },
     RemainingTry: {
       type: Number,
-      default: 4,
-    }
+      default: 3,
+    },
+    temperoryKey: {
+      type:String,
+      default: ''
+    },
+    FreezeTime: {
+      type: Date,
+      default: new Date()
+    },
+    accountblocked: {
+      type: Boolean,
+      default: false
+    },
+    istempkeyused: {
+      type: Boolean,
+      default: false
+    },
   },
   { timestamps: true }
 );
 
 const User = mongoose.model("User", userSchema);
-//model
-
 export default User;
