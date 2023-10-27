@@ -1,4 +1,5 @@
 import { RequestHandler } from "express";
+import bcrypt from "bcryptjs";
 
 import ProjectError from "../helper/error";
 import User from "../models/user";
@@ -56,6 +57,70 @@ const updateUser: RequestHandler = async (req, res, next) => {
   }
 };
 
+
+const changePassword: RequestHandler = async (req, res, next) => {
+  let resp: ReturnResponse;
+  const userId = req.userId;
+  try {
+    if (!userId) {
+      const err = new ProjectError("You are not authorized!");
+      err.statusCode = 401;
+      throw err;
+    }
+
+    const user = await User.findById(userId);
+    if (!user) {
+      const err = new ProjectError("User does not exist");
+      err.statusCode = 401;
+      throw err;
+    }
+
+    const currentPassword = req.body.currentPassword;
+    let newPassword = await bcrypt.hash(req.body.newPassword, 12);
+    const confirmPassword = req.body.confirmPassword;
+
+    // checking if current password is same as user password
+    const status = await bcrypt.compare(currentPassword, user.password);
+    if (!status) {
+      const err = new ProjectError(
+        "Current Password is incorrect. Please try again."
+      );
+      err.statusCode = 401;
+      throw err;
+    }
+
+    // checking if new password is same as confirm password
+    const isPasswordMatching = await bcrypt.compare(
+      confirmPassword,
+      newPassword
+    );
+    if (!isPasswordMatching) {
+      const err = new ProjectError(
+        "New password does not match. Enter new password again "
+      );
+      err.statusCode = 401;
+      throw err;
+    }
+
+    // checking if current password and new password are same
+    const prevPasswordSame = await bcrypt.compare(currentPassword,newPassword)
+    if(prevPasswordSame){
+      const err = new ProjectError(
+        "Same as current password. Try another one"
+      );
+      err.statusCode = 401;
+      throw err;
+    }
+
+    user.password = newPassword;
+    await user.save();
+    resp = { status: "success", message: "Password updated", data: {} };
+    res.send(resp);
+  } catch (error) {
+    next(error);
+  }
+};
+
 const deactivateUser: RequestHandler = async (req, res, next) => {
   let resp: ReturnResponse;
   const userId = req.userId;
@@ -94,4 +159,4 @@ const isActiveUser = async (userId: String) => {
   return !user.isDeactivated;
 };
 
-export { deactivateUser, getUser, isActiveUser, updateUser };
+export { deactivateUser, getUser, isActiveUser, updateUser, changePassword };
