@@ -70,7 +70,7 @@ const changePassword: RequestHandler = async (req, res, next) => {
 
     const user = await User.findById(userId);
     if (!user) {
-      const err = new ProjectError("No user exist");
+      const err = new ProjectError("User does not exist");
       err.statusCode = 401;
       throw err;
     }
