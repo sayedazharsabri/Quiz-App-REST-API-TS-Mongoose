@@ -105,6 +105,9 @@ const updateQuiz: RequestHandler = async (req, res, next) => {
     }
     quiz.questionList = req.body.questionList;
     quiz.answers = req.body.answers;
+    quiz.passingPercentage = req.body.passingPercentage;
+    quiz.isPublicQuiz = req.body.isPublicQuiz;
+    quiz.allowedUser = req.body.allowedUser;
 
     await quiz.save();
 
@@ -176,6 +179,11 @@ const publishQuiz: RequestHandler = async (req, res, next) => {
       err.statusCode = 405;
       throw err;
     }
+    if(quiz.isPublicQuiz === false && quiz.allowedUser.length === 0){
+      const err = new ProjectError("Specify users for private quiz!");
+          err.statusCode = 404;
+          throw err;
+  }
 
     quiz.isPublished = true;
     await quiz.save();
