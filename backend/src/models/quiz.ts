@@ -25,6 +25,18 @@ const quizSchema = new schema(
       type: Boolean,
       default: false,
     },
+    passingPercentage:{
+      type: Number,
+      required: true
+    },
+    isPublicQuiz: {
+      type: Boolean,
+      required: true
+    },
+    allowedUser: {
+      type: [],
+      default: []
+    }
   },
   { timestamps: true }
 );
