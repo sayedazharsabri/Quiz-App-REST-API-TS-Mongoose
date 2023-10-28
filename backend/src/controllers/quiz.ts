@@ -38,6 +38,9 @@ const getQuiz: RequestHandler = async (req, res, next) => {
         questionList: 1,
         answers: 1,
         createdBy: 1,
+        passingPercentage: 1,
+        isPublicQuiz: 1,
+        allowedUser: 1
       });
 
       if (!quiz) {
@@ -45,7 +48,11 @@ const getQuiz: RequestHandler = async (req, res, next) => {
         err.statusCode = 404;
         throw err;
       }
-
+      if(!quiz.isPublicQuiz && !quiz.allowedUser.includes(req.userId)){
+        const err = new ProjectError("You are not authorized!");
+        err.statusCode = 403;
+        throw err;
+      }
       if (req.userId !== quiz.createdBy.toString()) {
         const err = new ProjectError("You are not authorized!");
         err.statusCode = 403;
