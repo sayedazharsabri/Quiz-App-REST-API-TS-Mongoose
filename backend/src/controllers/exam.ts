@@ -13,6 +13,8 @@ const startExam: RequestHandler = async (req, res, next) => {
       name: 1,
       questionList: 1,
       isPublished: 1,
+      attemptedUsers: 1,
+      attemptsAllowedPerUser: 1
     });
 
     if (!quiz) {
@@ -26,6 +28,39 @@ const startExam: RequestHandler = async (req, res, next) => {
       err.statusCode = 405;
       throw err;
     }
+
+    if (quiz.attemptsAllowedPerUser !== undefined) {
+      /*
+       This if-block needs to be wrapped inside another if block for category(which has not been implemented yet)
+            if(quiz.category==="test"){
+              if(quiz.attemptsAllowedPerUser !== undefined){
+                ....
+              }
+            }
+      */
+
+      if (quiz.attemptedUsers.some(obj => obj.id!.toString() === req.userId.toString())) {
+        const checkUser = quiz.attemptedUsers.find(obj => obj.id!.toString() === req.userId.toString());
+        if (checkUser) {
+          if (checkUser.attemptsLeft! > 0) {
+            checkUser.attemptsLeft! -= 1;
+            const updated = await quiz.save();
+          }
+          else {
+            const err = new ProjectError("You have zero attempts left!");
+            err.statusCode = 405;
+            throw err;
+          }
+        }
+      }
+      else {
+        const newUser = { id: req.userId!.toString(), attemptsLeft: quiz.attemptsAllowedPerUser! - 1 };
+        quiz.attemptedUsers.push(newUser);
+        const updated = await quiz.save();
+      }
+    }
+
+
     const resp: ReturnResponse = {
       status: "success",
       message: "Quiz",

@@ -17,6 +17,9 @@ const quizSchema = new schema(
       },
     ],
     answers: {},
+    attemptsAllowedPerUser: {   //how many times quiz can be attempted by user
+      type: Number              //required is false, if not provided quiz can be attempted multiple times
+    },
     createdBy: {
       type: mongoose.Types.ObjectId,
       required: true,
@@ -25,6 +28,12 @@ const quizSchema = new schema(
       type: Boolean,
       default: false,
     },
+    attemptedUsers: [        //Stores an array of objects users who have attempted the quiz
+      {                      //and number of attempts left
+        id: String,
+        attemptsLeft: Number
+      }
+    ]
   },
   { timestamps: true }
 );

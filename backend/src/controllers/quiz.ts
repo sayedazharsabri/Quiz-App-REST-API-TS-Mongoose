@@ -11,8 +11,10 @@ const createQuiz: RequestHandler = async (req, res, next) => {
     const name = req.body.name;
     const questionList = req.body.questionList;
     const answers = req.body.answers;
+    const attemptsAllowedPerUser = req.body.attemptsAllowedPerUser;
+    const attemptedUsers = req.body.attemptedUsers;
 
-    const quiz = new Quiz({ name, questionList, answers, createdBy });
+    const quiz = new Quiz({ name, questionList, answers, createdBy, attemptsAllowedPerUser, attemptedUsers });
     const result = await quiz.save();
     const resp: ReturnResponse = {
       status: "success",
@@ -203,10 +205,9 @@ const isValidQuiz = async (
       let opt = Object.keys(question["options"]);
       if (
         opt.indexOf(
-          `${
-            Object.values(answers)[
-              Object.keys(answers).indexOf(question.questionNumber.toString())
-            ]
+          `${Object.values(answers)[
+          Object.keys(answers).indexOf(question.questionNumber.toString())
+          ]
           }`
         ) == -1
       ) {

@@ -2,6 +2,7 @@
 logs
 build
 node_modules
+nodemon.json
 
 # TypeScript v1 declaration files
 typings/
