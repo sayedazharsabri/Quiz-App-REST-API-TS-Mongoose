@@ -9,6 +9,7 @@ const createQuiz: RequestHandler = async (req, res, next) => {
   try {
     const createdBy = req.userId;
     const name = req.body.name;
+    const category = req.body.category;
     const questionList = req.body.questionList;
     const answers = req.body.answers;
     const passing_percentage=req.body.passing_percentage;
@@ -33,6 +34,7 @@ const getQuiz: RequestHandler = async (req, res, next) => {
     if (quizId) {
       quiz = await Quiz.findById(quizId, {
         name: 1,
+        category: 1,
         questionList: 1,
         answers: 1,
         createdBy: 1,

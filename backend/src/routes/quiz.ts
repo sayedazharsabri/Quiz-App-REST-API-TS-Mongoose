@@ -38,6 +38,13 @@ router.post(
             return Promise.reject(err);
           });
       }),
+    body("category")
+      .trim()
+      .not()
+      .isEmpty()
+      .toLowerCase()
+      .isIn(['test', 'exam'])
+      .withMessage("category can only be 'test' or 'exam'"),
     body("questionList").custom((questionList, { req }) => {
       return isValidQuiz(questionList, req.body["answers"])
         .then((status: Boolean) => {
