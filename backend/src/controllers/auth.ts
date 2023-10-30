@@ -25,23 +25,16 @@ const registerUser: RequestHandler = async (req, res, next) => {
     console.log("Response OTP : ", response);
     if (response.length === 0) {
       // OTP not found for the email
-
-      resp = {
-        status: "error",
-        message: "The otp is not valid because not found in OTP DB",
-        data: {},
-      };
-      res.status(400).send(resp);
-
+      const err = new ProjectError("OTP has not send on this email ");
+      err.statusCode = 400;
+      throw err;
+            
     }
     else if (otp != response[0].otp) {
       // The otp is not valid
-      resp = {
-        status: "error",
-        message: "Incorrect OTP",
-        data: {},
-      };
-      res.status(400).send(resp);
+      const err = new ProjectError("Incorrect OTP");
+      err.statusCode = 400;
+      throw err;
     }
 
     const user = new User({ email, name, password });
