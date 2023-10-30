@@ -170,6 +170,46 @@ const deactivateUser: RequestHandler = async (req, res, next) => {
   }
 };
 
+// for verify Email link when user want to deactivated account
+// Path -> base_url/user/deactivate/:token
+const deactivateUserCallback: RequestHandler = async (req, res, next) => {
+  let resp: ReturnResponse;
+  try {
+    // find secretKey from env file
+    const secretKey = process.env.SECRET_KEY || "";
+    let decodedToken;
+    // find token from params
+    const token = req.params.token;
+    // decoded token using jwt
+    decodedToken = <any>jwt.verify(token, secretKey);
+
+    // if not decode then link expire or invalid link
+    if (!decodedToken) {
+      const err = new ProjectError("Invalid link!");
+      err.statusCode = 401;
+      throw err;
+    }
+
+    // console.log("Decode deactivate link token: ", decodedToken);
+    const userId = decodedToken.userId;
+
+    const user = await User.findOne({ _id: userId });
+
+    if (!user) {
+      const err = new ProjectError("User not found!");
+      err.statusCode = 404;
+      throw err;
+    }
+    user.isDeactivated = true;
+    await user.save();
+    resp = { status: "success", message: "Account Deactivated! Successfully", data: {} };
+    res.status(200).send(resp);
+  }
+  catch (error) {
+    next(error);
+  }
+}
+
 const isActiveUser = async (userId: String) => {
   const user = await User.findById(userId);
 
@@ -181,4 +221,4 @@ const isActiveUser = async (userId: String) => {
   return !user.isDeactivated;
 };
 
-export { deactivateUser, getUser, isActiveUser, updateUser, changePassword };
+export { deactivateUser, getUser, isActiveUser, updateUser, changePassword, deactivateUserCallback };
