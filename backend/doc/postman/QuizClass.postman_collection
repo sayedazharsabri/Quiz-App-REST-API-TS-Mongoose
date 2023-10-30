@@ -1,9 +1,9 @@
 {
 	"info": {
-		"_postman_id": "8ee691e4-2540-4a5e-9f2c-473614ad0616",
-		"name": "QuizClass",
+		"_postman_id": "69ad381d-b76f-494d-92d3-6c1b6554471d",
+		"name": "QuizClass Copy",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "26186228"
+		"_exporter_id": "23659079"
 	},
 	"item": [
 		{
@@ -1428,6 +1428,42 @@
 					"body": "{\n    \"status\": \"success\",\n    \"message\": \"An Email has been sent to your account please verify!\",\n    \"data\": {}\n}"
 				}
 			]
+		},
+		{
+			"name": "send-otp",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\":\"abc@gmail.com\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3002/auth/send-otp",
+					"host": [
+						"localhost"
+					],
+					"port": "3002",
+					"path": [
+						"auth",
+						"send-otp"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "verify-link",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
 		}
 	]
 }
