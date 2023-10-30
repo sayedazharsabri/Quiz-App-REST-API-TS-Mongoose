@@ -121,6 +121,10 @@ const changePassword: RequestHandler = async (req, res, next) => {
   }
 };
 
+// Email functionality import
+import sendEmail from "../utils/email";
+import jwt from "jsonwebtoken";
+
 const deactivateUser: RequestHandler = async (req, res, next) => {
   let resp: ReturnResponse;
   const userId = req.userId;
@@ -138,10 +142,28 @@ const deactivateUser: RequestHandler = async (req, res, next) => {
       throw err;
     }
 
-    user.isDeactivated = true;
-    await user.save();
+    // Email verification when User wants to deactivated account
+    const secretKey = process.env.SECRET_KEY || "";
+    const emailToken = jwt.sign({ userId: user._id }, secretKey, {
+      expiresIn: "5m",
+    });
 
-    resp = { status: "success", message: "User deactivated!", data: {} };
+    const message = `
+    Click on the below link to deactivate your account:
+    http://${process.env.BASE_URL}/user/deactivate/${emailToken}
+    
+    (Note: If the link is not clickable kindly copy the link and paste it in the browser.)`;
+    sendEmail(user.email, "Verify Email", message);
+    resp = {
+      status: "success",
+      message: "An Email has been sent to your account please verify!",
+      data: {},
+    };
+
+    // user.isDeactivated = true;
+    // await user.save();
+
+    // resp = { status: "success", message: "User deactivated!", data: {} };
     res.status(200).send(resp);
   } catch (error) {
     next(error);
