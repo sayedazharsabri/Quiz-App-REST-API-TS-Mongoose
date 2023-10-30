@@ -12,8 +12,9 @@ const createQuiz: RequestHandler = async (req, res, next) => {
     const category = req.body.category;
     const questionList = req.body.questionList;
     const answers = req.body.answers;
-
-    const quiz = new Quiz({ name, category, questionList, answers, createdBy });
+    const passing_percentage=req.body.passing_percentage;
+    
+    const quiz = new Quiz({ name, category, questionList, answers, passing_percentage, createdBy });
     const result = await quiz.save();
     const resp: ReturnResponse = {
       status: "success",
