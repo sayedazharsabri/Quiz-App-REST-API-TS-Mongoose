@@ -9,6 +9,10 @@ const quizSchema = new schema(
       required: true,
       unique: true,
     },
+    category: {
+      type: String,
+      required: true
+    },
     questionList: [
       {
         questionNumber: Number,

@@ -1,9 +1,9 @@
 {
 	"info": {
-		"_postman_id": "a25002c0-a52b-4bef-b888-2b22c83f0e9a",
+		"_postman_id": "8ee691e4-2540-4a5e-9f2c-473614ad0616",
 		"name": "QuizClass",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "29326444"
+		"_exporter_id": "26186228"
 	},
 	"item": [
 		{
@@ -385,7 +385,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"name\": \"GK Quiz 102\",\r\n    \"questionList\": [\r\n        {\r\n            \"questionNumber\": 1,\r\n            \"question\": \"What is the capital of Uttar Pradesh?\",\r\n            \"options\": {\r\n                \"1\": \"Varanasi\",\r\n                \"2\": \"Lucknow\",\r\n                \"3\": \"Dehradun\",\r\n                \"4\": \"Banglore\"\r\n            }\r\n        },\r\n        {\r\n            \"questionNumber\": 2,\r\n            \"question\": \"How many players are there in football team?\",\r\n            \"options\": {\r\n                \"1\": \"1\",\r\n                \"2\": \"2\",\r\n                \"3\": \"11\",\r\n                \"4\": \"20\"\r\n            }\r\n        }\r\n    ],\r\n    \"answers\": {\r\n        \"1\": 2,\r\n        \"2\": 3\r\n    }\r\n}",
+					"raw": "{\r\n    \"name\": \"GK Quiz 102\",\r\n    \"category\": \"test\",\r\n    \"questionList\": [\r\n        {\r\n            \"questionNumber\": 1,\r\n            \"question\": \"What is the capital of Uttar Pradesh?\",\r\n            \"options\": {\r\n                \"1\": \"Varanasi\",\r\n                \"2\": \"Lucknow\",\r\n                \"3\": \"Dehradun\",\r\n                \"4\": \"Banglore\"\r\n            }\r\n        },\r\n        {\r\n            \"questionNumber\": 2,\r\n            \"question\": \"How many players are there in football team?\",\r\n            \"options\": {\r\n                \"1\": \"1\",\r\n                \"2\": \"2\",\r\n                \"3\": \"11\",\r\n                \"4\": \"20\"\r\n            }\r\n        }\r\n    ],\r\n    \"answers\": {\r\n        \"1\": 2,\r\n        \"2\": 3\r\n    }\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -770,14 +770,14 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "localhost:3002/quiz/651a866f55af3c91a38f01b0",
+					"raw": "localhost:3002/quiz/653bd175e31adc60bd18cb43",
 					"host": [
 						"localhost"
 					],
 					"port": "3002",
 					"path": [
 						"quiz",
-						"651a866f55af3c91a38f01b0"
+						"653bd175e31adc60bd18cb43"
 					]
 				}
 			},
@@ -1426,76 +1426,6 @@
 					],
 					"cookie": [],
 					"body": "{\n    \"status\": \"success\",\n    \"message\": \"An Email has been sent to your account please verify!\",\n    \"data\": {}\n}"
-				}
-			]
-		},
-		{
-			"name": "Change Password",
-			"request": {
-				"auth": {
-					"type": "bearer",
-					"bearer": [
-						{
-							"key": "token",
-							"value": "{{token1}}",
-							"type": "string"
-						}
-					]
-				},
-				"method": "PUT",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"currentPassword\":\"Password@12345\",\r\n    \"newPassword\":\"Password@111\",\r\n    \"confirmPassword\":\"Password@111\"\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "localhost:3002/user/changePassword",
-					"host": [
-						"localhost"
-					],
-					"port": "3002",
-					"path": [
-						"user",
-						"changePassword"
-					]
-				}
-			},
-			"response": [
-				{
-					"name": "Change Password",
-					"originalRequest": {
-						"method": "PUT",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"currentPassword\":\"Password@12345\",\r\n    \"newPassword\":\"Password@111\",\r\n    \"confirmPassword\":\"Password@111\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "localhost:3002/user/changePassword",
-							"host": [
-								"localhost"
-							],
-							"port": "3002",
-							"path": [
-								"user",
-								"changePassword"
-							]
-						}
-					},
-					"_postman_previewlanguage": null,
-					"header": null,
-					"cookie": [],
-					"body": "{\r\n    \"status\": \"success\",\r\n    \"message\": \"Password updated\",\r\n    \"data\": {}\r\n}"
 				}
 			]
 		}
