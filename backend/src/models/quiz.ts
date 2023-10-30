@@ -11,7 +11,7 @@ const quizSchema = new schema(
     },
     category: {
       type: String,
-      require: true
+      required: true
     },
     questionList: [
       {
