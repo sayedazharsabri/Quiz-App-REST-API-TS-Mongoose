@@ -214,6 +214,65 @@ const isPasswordValid = async (password: String) => {
   return false;
 };
 
+import otpGenerator from "otp-generator";
+import OTP from "../models/OTP"
+// OTP send function
+const sendOTP: RequestHandler = async (req, res, next) => {
+
+  let resp: ReturnResponse;
+
+  try {
+
+    const { email } = req.body;
+
+    // check if user already present
+    // Find user with provided email
+    const checkUserPresent = await User.findOne({ email });
+    // to be used in case of sign up
+
+    // if user found then return a error response
+    if (checkUserPresent) {
+      // Return 401 Unauthorized status code with error message
+      const err = new ProjectError("user already Registered..");
+      err.statusCode = 401;
+      throw err;
+    }
+
+    // generate otp 
+    var otp = otpGenerator.generate(6, {
+      upperCaseAlphabets: false,
+      lowerCaseAlphabets: false,
+      specialChars: false
+    })
+
+    const result = await OTP.findOne({ otp: otp });
+    console.log("Result is generate OTP function");
+    console.log("OTP: ", otp);
+    console.log("Result : ", result);
+    // when result find then change the otp always unique otp store in database
+    while (result) {
+      otp = otpGenerator.generate(6, {
+        upperCaseAlphabets: false,
+        lowerCaseAlphabets: false,
+        specialChars: false
+      })
+    }
+
+    const otpPayload = { email, otp };
+    const otpBody = await OTP.create(otpPayload);
+
+    console.log("Otp Body : ", otpBody);
+
+
+    resp = { status: "success", message: "OTP send successfully", data: { otp } };
+    res.status(200).send(resp);
+  } catch (error) {
+    next(error);
+  }
+
+}
+
+
 export {
   activateUser,
   activateUserCallback,
@@ -221,4 +280,5 @@ export {
   isUserExist,
   loginUser,
   registerUser,
+  sendOTP
 };
