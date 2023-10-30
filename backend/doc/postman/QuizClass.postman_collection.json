@@ -385,7 +385,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"name\": \"GK Quiz 102\",\r\n    \"category\": \"test\",\r\n    \"questionList\": [\r\n        {\r\n            \"questionNumber\": 1,\r\n            \"question\": \"What is the capital of Uttar Pradesh?\",\r\n            \"options\": {\r\n                \"1\": \"Varanasi\",\r\n                \"2\": \"Lucknow\",\r\n                \"3\": \"Dehradun\",\r\n                \"4\": \"Banglore\"\r\n            }\r\n        },\r\n        {\r\n            \"questionNumber\": 2,\r\n            \"question\": \"How many players are there in football team?\",\r\n            \"options\": {\r\n                \"1\": \"1\",\r\n                \"2\": \"2\",\r\n                \"3\": \"11\",\r\n                \"4\": \"20\"\r\n            }\r\n        }\r\n    ],\r\n    \"answers\": {\r\n        \"1\": 2,\r\n        \"2\": 3\r\n    }\r\n}",
+					"raw": "{\r\n    \"name\": \"GK Quiz 101\",\r\n    \"questionList\": [\r\n        {\r\n            \"questionNumber\": 1,\r\n            \"question\": \"What is the capital of Uttar Pradesh?\",\r\n            \"options\": {\r\n                \"1\": \"Varanasi\",\r\n                \"2\": \"Lucknow\",\r\n                \"3\": \"Dehradun\",\r\n                \"4\": \"Banglore\"\r\n            }\r\n        },\r\n        {\r\n            \"questionNumber\": 2,\r\n            \"question\": \"How many players are there in football team?\",\r\n            \"options\": {\r\n                \"1\": \"1\",\r\n                \"2\": \"2\",\r\n                \"3\": \"11\",\r\n                \"4\": \"20\"\r\n            }\r\n        },\r\n        {\r\n            \"questionNumber\": 3,\r\n            \"question\": \"Sun temple is located in ____?\",\r\n            \"options\": {\r\n                \"1\": \"Konark\",\r\n                \"2\": \"Goa\",\r\n                \"3\": \"Delhi\",\r\n                \"4\": \"Gujrat\"\r\n            }\r\n        },\r\n        {\r\n            \"questionNumber\": 4,\r\n            \"question\": \"Which animal is know as ship of the desert?\",\r\n            \"options\": {\r\n                \"1\": \"Goat\",\r\n                \"2\": \"Cow\",\r\n                \"3\": \"Camel\",\r\n                \"4\": \"Titanic\"\r\n            }\r\n        },\r\n        {\r\n            \"questionNumber\": 5,\r\n            \"question\": \"How many letter are in the English alphabet?\",\r\n            \"options\": {\r\n                \"1\": \"27\",\r\n                \"2\": \"24\",\r\n                \"3\": \"25\",\r\n                \"4\": \"26\"\r\n            }\r\n        }\r\n    ],\r\n    \"answers\": {\r\n        \"1\": 2,\r\n        \"2\": 3,\r\n        \"3\": 1,\r\n        \"4\": 3,\r\n        \"5\": 4\r\n    },\r\n    \"passing_percentage\":80\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -411,7 +411,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"GK Quiz 101\",\r\n    \"questionList\": [\r\n        {\r\n            \"questionNumber\": 1,\r\n            \"question\": \"What is the capital of India?\",\r\n            \"options\": {\r\n                \"1\": \"Bangalore\",\r\n                \"2\": \"Lucknow\",\r\n                \"3\": \"Rajasthan\",\r\n                \"4\": \"New Delhi\"\r\n            }\r\n        },\r\n        {\r\n            \"questionNumber\": 2,\r\n            \"question\": \"How many players are there in cricket team?\",\r\n            \"options\": {\r\n                \"1\": \"1\",\r\n                \"2\": \"2\",\r\n                \"3\": \"11\",\r\n                \"4\": \"20\"\r\n            }\r\n        }\r\n    ],\r\n    \"answers\": {\r\n        \"1\": 4,\r\n        \"2\": 3\r\n    }\r\n}",
+							"raw": "{\r\n    \"name\": \"GK Quiz 101\",\r\n    \"questionList\": [\r\n        {\r\n            \"questionNumber\": 1,\r\n            \"question\": \"What is the capital of Uttar Pradesh?\",\r\n            \"options\": {\r\n                \"1\": \"Varanasi\",\r\n                \"2\": \"Lucknow\",\r\n                \"3\": \"Dehradun\",\r\n                \"4\": \"Banglore\"\r\n            }\r\n        },\r\n        {\r\n            \"questionNumber\": 2,\r\n            \"question\": \"How many players are there in football team?\",\r\n            \"options\": {\r\n                \"1\": \"1\",\r\n                \"2\": \"2\",\r\n                \"3\": \"11\",\r\n                \"4\": \"20\"\r\n            }\r\n        },\r\n        {\r\n            \"questionNumber\": 3,\r\n            \"question\": \"Sun temple is located in ____?\",\r\n            \"options\": {\r\n                \"1\": \"Konark\",\r\n                \"2\": \"Goa\",\r\n                \"3\": \"Delhi\",\r\n                \"4\": \"Gujrat\"\r\n            }\r\n        },\r\n        {\r\n            \"questionNumber\": 4,\r\n            \"question\": \"Which animal is know as ship of the desert?\",\r\n            \"options\": {\r\n                \"1\": \"Goat\",\r\n                \"2\": \"Cow\",\r\n                \"3\": \"Camel\",\r\n                \"4\": \"Titanic\"\r\n            }\r\n        },\r\n        {\r\n            \"questionNumber\": 5,\r\n            \"question\": \"How many letter are in the English alphabet?\",\r\n            \"options\": {\r\n                \"1\": \"27\",\r\n                \"2\": \"24\",\r\n                \"3\": \"25\",\r\n                \"4\": \"26\"\r\n            }\r\n        }\r\n    ],\r\n    \"answers\": {\r\n        \"1\": 2,\r\n        \"2\": 3,\r\n        \"3\": 1,\r\n        \"4\": 3,\r\n        \"5\": 4\r\n    },\r\n    \"passing_percentage\":80\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -447,11 +447,11 @@
 						},
 						{
 							"key": "ETag",
-							"value": "W/\"67-aTgCnkzxRLlN8z+LpYkqrPcQHr0\""
+							"value": "W/\"67-mNfczonkl3YxzkVkvIoqjHl+EpA\""
 						},
 						{
 							"key": "Date",
-							"value": "Mon, 02 Oct 2023 08:55:34 GMT"
+							"value": "Mon, 30 Oct 2023 06:06:56 GMT"
 						},
 						{
 							"key": "Connection",
@@ -463,7 +463,7 @@
 						}
 					],
 					"cookie": [],
-					"body": "{\n    \"status\": \"success\",\n    \"message\": \"Quiz created successfully\",\n    \"data\": {\n        \"quizId\": \"651a858655af3c91a38f01a6\"\n    }\n}"
+					"body": "{\n    \"status\": \"success\",\n    \"message\": \"Quiz created successfully\",\n    \"data\": {\n        \"quizId\": \"653f480005f6d6dbea8a5f7a\"\n    }\n}"
 				}
 			]
 		},
@@ -770,14 +770,14 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "localhost:3002/quiz/653bd175e31adc60bd18cb43",
+					"raw": "localhost:3002/quiz/651a866f55af3c91a38f01b0",
 					"host": [
 						"localhost"
 					],
 					"port": "3002",
 					"path": [
 						"quiz",
-						"653bd175e31adc60bd18cb43"
+						"651a866f55af3c91a38f01b0"
 					]
 				}
 			},
@@ -1038,7 +1038,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"quizId\":\"651a858655af3c91a38f01a6\",\r\n    \"attemptedQuestion\":{\r\n        \"1\":4,\r\n        \"2\":3\r\n    }\r\n}",
+					"raw": "{\r\n    \"quizId\":\"653f480005f6d6dbea8a5f7a\",\r\n    \"attemptedQuestion\":{\r\n        \"1\":1,\r\n        \"2\":2,\r\n        \"3\":2,\r\n        \"4\":4,\r\n        \"5\":2\r\n    }\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -1064,7 +1064,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"quizId\":\"651a858655af3c91a38f01a6\",\r\n    \"attemptedQuestion\":{\r\n        \"1\":4,\r\n        \"2\":1\r\n    }\r\n}",
+							"raw": "{\r\n    \"quizId\":\"653f480005f6d6dbea8a5f7a\",\r\n    \"attemptedQuestion\":{\r\n        \"1\":1,\r\n        \"2\":2,\r\n        \"3\":2,\r\n        \"4\":4,\r\n        \"5\":2\r\n    }\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1096,15 +1096,15 @@
 						},
 						{
 							"key": "Content-Length",
-							"value": "114"
+							"value": "130"
 						},
 						{
 							"key": "ETag",
-							"value": "W/\"72-HjOcudFx2CWS4DUd+e4JUMC4+xM\""
+							"value": "W/\"82-hwJfk0eSnvd8F/ManiWFA4UceLw\""
 						},
 						{
 							"key": "Date",
-							"value": "Mon, 02 Oct 2023 09:08:57 GMT"
+							"value": "Mon, 30 Oct 2023 06:14:13 GMT"
 						},
 						{
 							"key": "Connection",
@@ -1116,7 +1116,7 @@
 						}
 					],
 					"cookie": [],
-					"body": "{\n    \"status\": \"success\",\n    \"message\": \"Quiz submitted\",\n    \"data\": {\n        \"total\": 2,\n        \"score\": 1,\n        \"reportId\": \"651a88a955af3c91a38f01f2\"\n    }\n}"
+					"body": "{\n    \"status\": \"success\",\n    \"message\": \"Quiz submitted\",\n    \"data\": {\n        \"total\": 5,\n        \"score\": 0,\n        \"result\": \"Fail\",\n        \"reportId\": \"653f49b505f6d6dbea8a5fd5\"\n    }\n}"
 				}
 			]
 		},
@@ -1149,6 +1149,59 @@
 			},
 			"response": [
 				{
+					"name": "Get a particular report of user",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3002/report/653f4ae305f6d6dbea8a6020",
+							"host": [
+								"localhost"
+							],
+							"port": "3002",
+							"path": [
+								"report",
+								"653f4ae305f6d6dbea8a6020"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "276"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"114-3yIArh9GVMz7/DQm/m6A71+LgpY\""
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 30 Oct 2023 06:25:42 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"success\",\n    \"message\": \"Report!\",\n    \"data\": {\n        \"_id\": \"653f4ae305f6d6dbea8a6020\",\n        \"userId\": \"6537a2eb0cb6997220849f3e\",\n        \"quizId\": \"653f480005f6d6dbea8a5f7a\",\n        \"score\": 5,\n        \"total\": 5,\n        \"result\": \"Pass\",\n        \"createdAt\": \"2023-10-30T06:19:15.145Z\",\n        \"updatedAt\": \"2023-10-30T06:19:15.145Z\",\n        \"__v\": 0\n    }\n}"
+				},
+				{
 					"name": "Get all reports of a user",
 					"originalRequest": {
 						"method": "GET",
@@ -1178,15 +1231,15 @@
 						},
 						{
 							"key": "Content-Length",
-							"value": "475"
+							"value": "965"
 						},
 						{
 							"key": "ETag",
-							"value": "W/\"1db-L0gQixnZxF131LwV0hOXYPCnwV0\""
+							"value": "W/\"3c5-YnQXODtub57fUTouAqaJaigQkas\""
 						},
 						{
 							"key": "Date",
-							"value": "Mon, 02 Oct 2023 09:10:12 GMT"
+							"value": "Mon, 30 Oct 2023 06:27:07 GMT"
 						},
 						{
 							"key": "Connection",
@@ -1198,60 +1251,7 @@
 						}
 					],
 					"cookie": [],
-					"body": "{\n    \"status\": \"success\",\n    \"message\": \"Report!\",\n    \"data\": [\n        {\n            \"_id\": \"651a88a955af3c91a38f01f2\",\n            \"userId\": \"651a845a55af3c91a38f0194\",\n            \"quizId\": \"651a858655af3c91a38f01a6\",\n            \"score\": 1,\n            \"total\": 2,\n            \"createdAt\": \"2023-10-02T09:08:57.031Z\",\n            \"updatedAt\": \"2023-10-02T09:08:57.031Z\",\n            \"__v\": 0\n        },\n        {\n            \"_id\": \"651a88d055af3c91a38f01fc\",\n            \"userId\": \"651a845a55af3c91a38f0194\",\n            \"quizId\": \"651a858655af3c91a38f01a6\",\n            \"score\": 2,\n            \"total\": 2,\n            \"createdAt\": \"2023-10-02T09:09:36.627Z\",\n            \"updatedAt\": \"2023-10-02T09:09:36.627Z\",\n            \"__v\": 0\n        }\n    ]\n}"
-				},
-				{
-					"name": "Get a particular report of user",
-					"originalRequest": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "localhost:3002/report/651a88a955af3c91a38f01f2",
-							"host": [
-								"localhost"
-							],
-							"port": "3002",
-							"path": [
-								"report",
-								"651a88a955af3c91a38f01f2"
-							]
-						}
-					},
-					"status": "OK",
-					"code": 200,
-					"_postman_previewlanguage": "json",
-					"header": [
-						{
-							"key": "X-Powered-By",
-							"value": "Express"
-						},
-						{
-							"key": "Content-Type",
-							"value": "application/json; charset=utf-8"
-						},
-						{
-							"key": "Content-Length",
-							"value": "260"
-						},
-						{
-							"key": "ETag",
-							"value": "W/\"104-CJbcw7FpapPeCWJFlClovP3qAMI\""
-						},
-						{
-							"key": "Date",
-							"value": "Mon, 02 Oct 2023 09:10:35 GMT"
-						},
-						{
-							"key": "Connection",
-							"value": "keep-alive"
-						},
-						{
-							"key": "Keep-Alive",
-							"value": "timeout=5"
-						}
-					],
-					"cookie": [],
-					"body": "{\n    \"status\": \"success\",\n    \"message\": \"Report!\",\n    \"data\": {\n        \"_id\": \"651a88a955af3c91a38f01f2\",\n        \"userId\": \"651a845a55af3c91a38f0194\",\n        \"quizId\": \"651a858655af3c91a38f01a6\",\n        \"score\": 1,\n        \"total\": 2,\n        \"createdAt\": \"2023-10-02T09:08:57.031Z\",\n        \"updatedAt\": \"2023-10-02T09:08:57.031Z\",\n        \"__v\": 0\n    }\n}"
+					"body": "{\n    \"status\": \"success\",\n    \"message\": \"Report!\",\n    \"data\": [\n        {\n            \"_id\": \"653f4aab05f6d6dbea8a5ff0\",\n            \"userId\": \"6537a2eb0cb6997220849f3e\",\n            \"quizId\": \"653f480005f6d6dbea8a5f7a\",\n            \"score\": 0,\n            \"total\": 5,\n            \"result\": \"Fail\",\n            \"createdAt\": \"2023-10-30T06:18:19.423Z\",\n            \"updatedAt\": \"2023-10-30T06:18:19.423Z\",\n            \"__v\": 0\n        },\n        {\n            \"_id\": \"653f4acc05f6d6dbea8a6000\",\n            \"userId\": \"6537a2eb0cb6997220849f3e\",\n            \"quizId\": \"653f480005f6d6dbea8a5f7a\",\n            \"score\": 3,\n            \"total\": 5,\n            \"result\": \"Fail\",\n            \"createdAt\": \"2023-10-30T06:18:52.563Z\",\n            \"updatedAt\": \"2023-10-30T06:18:52.563Z\",\n            \"__v\": 0\n        },\n        {\n            \"_id\": \"653f4adc05f6d6dbea8a6010\",\n            \"userId\": \"6537a2eb0cb6997220849f3e\",\n            \"quizId\": \"653f480005f6d6dbea8a5f7a\",\n            \"score\": 4,\n            \"total\": 5,\n            \"result\": \"Pass\",\n            \"createdAt\": \"2023-10-30T06:19:08.455Z\",\n            \"updatedAt\": \"2023-10-30T06:19:08.455Z\",\n            \"__v\": 0\n        },\n        {\n            \"_id\": \"653f4ae305f6d6dbea8a6020\",\n            \"userId\": \"6537a2eb0cb6997220849f3e\",\n            \"quizId\": \"653f480005f6d6dbea8a5f7a\",\n            \"score\": 5,\n            \"total\": 5,\n            \"result\": \"Pass\",\n            \"createdAt\": \"2023-10-30T06:19:15.145Z\",\n            \"updatedAt\": \"2023-10-30T06:19:15.145Z\",\n            \"__v\": 0\n        }\n    ]\n}"
 				}
 			]
 		},
