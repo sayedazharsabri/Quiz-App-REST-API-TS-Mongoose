@@ -101,7 +101,7 @@ router.post('/activateaccount', [
 router.post(
   "/activate",
   [body("email").trim().isEmail().withMessage("Invalid Email!")],
-  activateAccount
+  activateUser
 );
 
 
