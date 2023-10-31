@@ -9,6 +9,7 @@ import {
   isValidQuizName,
   publishQuiz,
   updateQuiz,
+  getallQuiz
 } from "../controllers/quiz";
 import { validateRequest } from "../helper/validateRequest";
 import { isAuthenticated } from "../middlewares/isAuth";
@@ -106,5 +107,8 @@ router.delete("/:quizId", isAuthenticated, deleteQuiz);
 //Publish
 // PATCH quiz/publish
 router.patch("/publish", isAuthenticated, publishQuiz);
+
+//Get  quiz/allpublished quiz
+router.get("/allpublished",isAuthenticated, getallQuiz);
 
 export default router;
