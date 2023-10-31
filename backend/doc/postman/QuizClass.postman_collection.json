@@ -1,9 +1,9 @@
 {
 	"info": {
-		"_postman_id": "8ee691e4-2540-4a5e-9f2c-473614ad0616",
-		"name": "QuizClass",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "26186228"
+		"_postman_id": "3df68714-f01b-4ba9-91fa-6b885d38e018",
+		"name": "QuizClass Copy",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "30240998"
 	},
 	"item": [
 		{
@@ -20,16 +20,7 @@
 						}
 					}
 				},
-				"url": {
-					"raw": "localhost:3002/auth",
-					"host": [
-						"localhost"
-					],
-					"port": "3002",
-					"path": [
-						"auth"
-					]
-				},
+				"url": "localhost:3002/auth",
 				"description": "This API wiil use to register user"
 			},
 			"response": [
@@ -47,16 +38,7 @@
 								}
 							}
 						},
-						"url": {
-							"raw": "localhost:3002/auth",
-							"host": [
-								"localhost"
-							],
-							"port": "3002",
-							"path": [
-								"auth"
-							]
-						}
+						"url": "localhost:3002/auth"
 					},
 					"status": "Created",
 					"code": 201,
@@ -110,17 +92,7 @@
 						}
 					}
 				},
-				"url": {
-					"raw": "localhost:3002/auth/login",
-					"host": [
-						"localhost"
-					],
-					"port": "3002",
-					"path": [
-						"auth",
-						"login"
-					]
-				},
+				"url": "localhost:3002/auth/login",
 				"description": "Login for user"
 			},
 			"response": [
@@ -138,17 +110,7 @@
 								}
 							}
 						},
-						"url": {
-							"raw": "localhost:3002/auth/login",
-							"host": [
-								"localhost"
-							],
-							"port": "3002",
-							"path": [
-								"auth",
-								"login"
-							]
-						}
+						"url": "localhost:3002/auth/login"
 					},
 					"status": "OK",
 					"code": 200,
@@ -193,26 +155,13 @@
 			"request": {
 				"auth": {
 					"type": "bearer",
-					"bearer": [
-						{
-							"key": "token",
-							"value": "{{token1}}",
-							"type": "string"
-						}
-					]
+					"bearer": {
+						"token": "{{token1}}"
+					}
 				},
 				"method": "GET",
 				"header": [],
-				"url": {
-					"raw": "localhost:3002/user",
-					"host": [
-						"localhost"
-					],
-					"port": "3002",
-					"path": [
-						"user"
-					]
-				}
+				"url": "localhost:3002/user"
 			},
 			"response": [
 				{
@@ -220,16 +169,7 @@
 					"originalRequest": {
 						"method": "GET",
 						"header": [],
-						"url": {
-							"raw": "localhost:3002/user",
-							"host": [
-								"localhost"
-							],
-							"port": "3002",
-							"path": [
-								"user"
-							]
-						}
+						"url": "localhost:3002/user"
 					},
 					"status": "OK",
 					"code": 200,
@@ -274,13 +214,9 @@
 			"request": {
 				"auth": {
 					"type": "bearer",
-					"bearer": [
-						{
-							"key": "token",
-							"value": "{{token1}}",
-							"type": "string"
-						}
-					]
+					"bearer": {
+						"token": "{{token1}}"
+					}
 				},
 				"method": "PUT",
 				"header": [],
@@ -293,16 +229,7 @@
 						}
 					}
 				},
-				"url": {
-					"raw": "localhost:3002/user",
-					"host": [
-						"localhost"
-					],
-					"port": "3002",
-					"path": [
-						"user"
-					]
-				}
+				"url": "localhost:3002/user"
 			},
 			"response": [
 				{
@@ -319,16 +246,7 @@
 								}
 							}
 						},
-						"url": {
-							"raw": "localhost:3002/user",
-							"host": [
-								"localhost"
-							],
-							"port": "3002",
-							"path": [
-								"user"
-							]
-						}
+						"url": "localhost:3002/user"
 					},
 					"status": "OK",
 					"code": 200,
@@ -373,13 +291,9 @@
 			"request": {
 				"auth": {
 					"type": "bearer",
-					"bearer": [
-						{
-							"key": "token",
-							"value": "{{token1}}",
-							"type": "string"
-						}
-					]
+					"bearer": {
+						"token": "{{token1}}"
+					}
 				},
 				"method": "POST",
 				"header": [],
@@ -392,16 +306,7 @@
 						}
 					}
 				},
-				"url": {
-					"raw": "localhost:3002/quiz",
-					"host": [
-						"localhost"
-					],
-					"port": "3002",
-					"path": [
-						"quiz"
-					]
-				}
+				"url": "localhost:3002/quiz"
 			},
 			"response": [
 				{
@@ -418,16 +323,7 @@
 								}
 							}
 						},
-						"url": {
-							"raw": "localhost:3002/quiz",
-							"host": [
-								"localhost"
-							],
-							"port": "3002",
-							"path": [
-								"quiz"
-							]
-						}
+						"url": "localhost:3002/quiz"
 					},
 					"status": "Created",
 					"code": 201,
@@ -472,26 +368,13 @@
 			"request": {
 				"auth": {
 					"type": "bearer",
-					"bearer": [
-						{
-							"key": "token",
-							"value": "{{token1}}",
-							"type": "string"
-						}
-					]
+					"bearer": {
+						"token": "{{token1}}"
+					}
 				},
 				"method": "GET",
 				"header": [],
-				"url": {
-					"raw": "localhost:3002/quiz",
-					"host": [
-						"localhost"
-					],
-					"port": "3002",
-					"path": [
-						"quiz"
-					]
-				},
+				"url": "localhost:3002/quiz",
 				"description": "send quizId for particular quiz otherwise you will get all the quizzes"
 			},
 			"response": [
@@ -500,17 +383,7 @@
 					"originalRequest": {
 						"method": "GET",
 						"header": [],
-						"url": {
-							"raw": "localhost:3000/quiz/6213c011441bac159eca9e11",
-							"host": [
-								"localhost"
-							],
-							"port": "3000",
-							"path": [
-								"quiz",
-								"6213c011441bac159eca9e11"
-							]
-						}
+						"url": "localhost:3000/quiz/6213c011441bac159eca9e11"
 					},
 					"status": "OK",
 					"code": 200,
@@ -553,16 +426,7 @@
 					"originalRequest": {
 						"method": "GET",
 						"header": [],
-						"url": {
-							"raw": "localhost:3002/quiz",
-							"host": [
-								"localhost"
-							],
-							"port": "3002",
-							"path": [
-								"quiz"
-							]
-						}
+						"url": "localhost:3002/quiz"
 					},
 					"status": "OK",
 					"code": 200,
@@ -605,17 +469,7 @@
 					"originalRequest": {
 						"method": "GET",
 						"header": [],
-						"url": {
-							"raw": "localhost:3002/quiz/651a866f55af3c91a38f01b0",
-							"host": [
-								"localhost"
-							],
-							"port": "3002",
-							"path": [
-								"quiz",
-								"651a866f55af3c91a38f01b0"
-							]
-						}
+						"url": "localhost:3002/quiz/651a866f55af3c91a38f01b0"
 					},
 					"status": "OK",
 					"code": 200,
@@ -660,13 +514,9 @@
 			"request": {
 				"auth": {
 					"type": "bearer",
-					"bearer": [
-						{
-							"key": "token",
-							"value": "{{token1}}",
-							"type": "string"
-						}
-					]
+					"bearer": {
+						"token": "{{token1}}"
+					}
 				},
 				"method": "PUT",
 				"header": [],
@@ -679,16 +529,7 @@
 						}
 					}
 				},
-				"url": {
-					"raw": "localhost:3002/quiz",
-					"host": [
-						"localhost"
-					],
-					"port": "3002",
-					"path": [
-						"quiz"
-					]
-				}
+				"url": "localhost:3002/quiz"
 			},
 			"response": [
 				{
@@ -705,16 +546,7 @@
 								}
 							}
 						},
-						"url": {
-							"raw": "localhost:3002/quiz",
-							"host": [
-								"localhost"
-							],
-							"port": "3002",
-							"path": [
-								"quiz"
-							]
-						}
+						"url": "localhost:3002/quiz"
 					},
 					"status": "OK",
 					"code": 200,
@@ -759,27 +591,13 @@
 			"request": {
 				"auth": {
 					"type": "bearer",
-					"bearer": [
-						{
-							"key": "token",
-							"value": "{{token1}}",
-							"type": "string"
-						}
-					]
+					"bearer": {
+						"token": "{{token1}}"
+					}
 				},
 				"method": "DELETE",
 				"header": [],
-				"url": {
-					"raw": "localhost:3002/quiz/651a866f55af3c91a38f01b0",
-					"host": [
-						"localhost"
-					],
-					"port": "3002",
-					"path": [
-						"quiz",
-						"651a866f55af3c91a38f01b0"
-					]
-				}
+				"url": "localhost:3002/quiz/651a866f55af3c91a38f01b0"
 			},
 			"response": [
 				{
@@ -787,17 +605,7 @@
 					"originalRequest": {
 						"method": "DELETE",
 						"header": [],
-						"url": {
-							"raw": "localhost:3002/quiz/651a866f55af3c91a38f01b0",
-							"host": [
-								"localhost"
-							],
-							"port": "3002",
-							"path": [
-								"quiz",
-								"651a866f55af3c91a38f01b0"
-							]
-						}
+						"url": "localhost:3002/quiz/651a866f55af3c91a38f01b0"
 					},
 					"status": "OK",
 					"code": 200,
@@ -842,13 +650,9 @@
 			"request": {
 				"auth": {
 					"type": "bearer",
-					"bearer": [
-						{
-							"key": "token",
-							"value": "{{token1}}",
-							"type": "string"
-						}
-					]
+					"bearer": {
+						"token": "{{token1}}"
+					}
 				},
 				"method": "PATCH",
 				"header": [],
@@ -861,17 +665,7 @@
 						}
 					}
 				},
-				"url": {
-					"raw": "localhost:3002/quiz/publish",
-					"host": [
-						"localhost"
-					],
-					"port": "3002",
-					"path": [
-						"quiz",
-						"publish"
-					]
-				}
+				"url": "localhost:3002/quiz/publish"
 			},
 			"response": [
 				{
@@ -888,17 +682,7 @@
 								}
 							}
 						},
-						"url": {
-							"raw": "localhost:3002/quiz/publish",
-							"host": [
-								"localhost"
-							],
-							"port": "3002",
-							"path": [
-								"quiz",
-								"publish"
-							]
-						}
+						"url": "localhost:3002/quiz/publish"
 					},
 					"status": "OK",
 					"code": 200,
@@ -943,27 +727,13 @@
 			"request": {
 				"auth": {
 					"type": "bearer",
-					"bearer": [
-						{
-							"key": "token",
-							"value": "{{token2}}",
-							"type": "string"
-						}
-					]
+					"bearer": {
+						"token": "{{token2}}"
+					}
 				},
 				"method": "GET",
 				"header": [],
-				"url": {
-					"raw": "localhost:3002/exam/651a858655af3c91a38f01a6",
-					"host": [
-						"localhost"
-					],
-					"port": "3002",
-					"path": [
-						"exam",
-						"651a858655af3c91a38f01a6"
-					]
-				}
+				"url": "localhost:3002/exam/651a858655af3c91a38f01a6"
 			},
 			"response": [
 				{
@@ -971,17 +741,7 @@
 					"originalRequest": {
 						"method": "GET",
 						"header": [],
-						"url": {
-							"raw": "localhost:3002/exam/651a858655af3c91a38f01a6",
-							"host": [
-								"localhost"
-							],
-							"port": "3002",
-							"path": [
-								"exam",
-								"651a858655af3c91a38f01a6"
-							]
-						}
+						"url": "localhost:3002/exam/651a858655af3c91a38f01a6"
 					},
 					"status": "OK",
 					"code": 200,
@@ -1026,13 +786,9 @@
 			"request": {
 				"auth": {
 					"type": "bearer",
-					"bearer": [
-						{
-							"key": "token",
-							"value": "{{token2}}",
-							"type": "string"
-						}
-					]
+					"bearer": {
+						"token": "{{token2}}"
+					}
 				},
 				"method": "POST",
 				"header": [],
@@ -1045,16 +801,7 @@
 						}
 					}
 				},
-				"url": {
-					"raw": "localhost:3002/exam",
-					"host": [
-						"localhost"
-					],
-					"port": "3002",
-					"path": [
-						"exam"
-					]
-				}
+				"url": "localhost:3002/exam"
 			},
 			"response": [
 				{
@@ -1071,16 +818,7 @@
 								}
 							}
 						},
-						"url": {
-							"raw": "localhost:3002/exam",
-							"host": [
-								"localhost"
-							],
-							"port": "3002",
-							"path": [
-								"exam"
-							]
-						}
+						"url": "localhost:3002/exam"
 					},
 					"status": "OK",
 					"code": 200,
@@ -1125,27 +863,13 @@
 			"request": {
 				"auth": {
 					"type": "bearer",
-					"bearer": [
-						{
-							"key": "token",
-							"value": "{{token2}}",
-							"type": "string"
-						}
-					]
+					"bearer": {
+						"token": "{{token2}}"
+					}
 				},
 				"method": "GET",
 				"header": [],
-				"url": {
-					"raw": "localhost:3002/report/651a88a955af3c91a38f01f2",
-					"host": [
-						"localhost"
-					],
-					"port": "3002",
-					"path": [
-						"report",
-						"651a88a955af3c91a38f01f2"
-					]
-				}
+				"url": "localhost:3002/report/651a88a955af3c91a38f01f2"
 			},
 			"response": [
 				{
@@ -1153,17 +877,7 @@
 					"originalRequest": {
 						"method": "GET",
 						"header": [],
-						"url": {
-							"raw": "localhost:3002/report/653f4ae305f6d6dbea8a6020",
-							"host": [
-								"localhost"
-							],
-							"port": "3002",
-							"path": [
-								"report",
-								"653f4ae305f6d6dbea8a6020"
-							]
-						}
+						"url": "localhost:3002/report/653f4ae305f6d6dbea8a6020"
 					},
 					"status": "OK",
 					"code": 200,
@@ -1206,16 +920,7 @@
 					"originalRequest": {
 						"method": "GET",
 						"header": [],
-						"url": {
-							"raw": "localhost:3002/report",
-							"host": [
-								"localhost"
-							],
-							"port": "3002",
-							"path": [
-								"report"
-							]
-						}
+						"url": "localhost:3002/report"
 					},
 					"status": "OK",
 					"code": 200,
@@ -1260,27 +965,13 @@
 			"request": {
 				"auth": {
 					"type": "bearer",
-					"bearer": [
-						{
-							"key": "token",
-							"value": "{{token2}}",
-							"type": "string"
-						}
-					]
+					"bearer": {
+						"token": "{{token2}}"
+					}
 				},
 				"method": "PATCH",
 				"header": [],
-				"url": {
-					"raw": "localhost:3002/user/deactivate",
-					"host": [
-						"localhost"
-					],
-					"port": "3002",
-					"path": [
-						"user",
-						"deactivate"
-					]
-				}
+				"url": "localhost:3002/user/deactivate"
 			},
 			"response": [
 				{
@@ -1288,17 +979,7 @@
 					"originalRequest": {
 						"method": "PATCH",
 						"header": [],
-						"url": {
-							"raw": "localhost:3002/user/deactivate",
-							"host": [
-								"localhost"
-							],
-							"port": "3002",
-							"path": [
-								"user",
-								"deactivate"
-							]
-						}
+						"url": "localhost:3002/user/deactivate"
 					},
 					"status": "OK",
 					"code": 200,
@@ -1352,17 +1033,7 @@
 						}
 					}
 				},
-				"url": {
-					"raw": "localhost:3002/auth/activate",
-					"host": [
-						"localhost"
-					],
-					"port": "3002",
-					"path": [
-						"auth",
-						"activate"
-					]
-				}
+				"url": "localhost:3002/auth/activate"
 			},
 			"response": [
 				{
@@ -1379,17 +1050,7 @@
 								}
 							}
 						},
-						"url": {
-							"raw": "localhost:3002/auth/activate",
-							"host": [
-								"localhost"
-							],
-							"port": "3002",
-							"path": [
-								"auth",
-								"activate"
-							]
-						}
+						"url": "localhost:3002/auth/activate"
 					},
 					"status": "OK",
 					"code": 200,
@@ -1426,6 +1087,65 @@
 					],
 					"cookie": [],
 					"body": "{\n    \"status\": \"success\",\n    \"message\": \"An Email has been sent to your account please verify!\",\n    \"data\": {}\n}"
+				}
+			]
+		},
+		{
+			"name": "All Published Quiz",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "{{token1}}"
+					}
+				},
+				"method": "GET",
+				"header": [],
+				"url": "localhost:3002/allquiz/"
+			},
+			"response": [
+				{
+					"name": "All Published Quiz",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": "localhost:3002/allquiz/"
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "1410"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"582-ciBNKN+cfShEc1G9/BiaSGX6jrY\""
+						},
+						{
+							"key": "Date",
+							"value": "Tue, 31 Oct 2023 09:56:42 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"success\",\n    \"message\": \"All Published Quiz\",\n    \"data\": [\n        {\n            \"_id\": \"6540b471338a054c3ff6b097\",\n            \"name\": \"GK Quiz 102\",\n            \"questionList\": [\n                {\n                    \"questionNumber\": 1,\n                    \"question\": \"What is the capital of Uttar Pradesh?\",\n                    \"options\": {\n                        \"1\": \"Varanasi\",\n                        \"2\": \"Lucknow\",\n                        \"3\": \"Dehradun\",\n                        \"4\": \"Banglore\"\n                    },\n                    \"_id\": \"6540b471338a054c3ff6b098\"\n                },\n                {\n                    \"questionNumber\": 2,\n                    \"question\": \"How many players are there in football team?\",\n                    \"options\": {\n                        \"1\": \"1\",\n                        \"2\": \"2\",\n                        \"3\": \"11\",\n                        \"4\": \"20\"\n                    },\n                    \"_id\": \"6540b471338a054c3ff6b099\"\n                }\n            ],\n            \"createdBy\": \"65296bc7c4cb804ff3001893\"\n        },\n        {\n            \"_id\": \"6540bb5c09b0d8d5494e9978\",\n            \"name\": \"GK Quiz 103\",\n            \"questionList\": [\n                {\n                    \"questionNumber\": 1,\n                    \"question\": \"Which is the national animal of India?\",\n                    \"options\": {\n                        \"1\": \"Tiger\",\n                        \"2\": \"Lion\",\n                        \"3\": \"Adler\",\n                        \"4\": \"Peacock\"\n                    },\n                    \"_id\": \"6540bb5c09b0d8d5494e9979\"\n                },\n                {\n                    \"questionNumber\": 2,\n                    \"question\": \"Who is known as Father of nation in india?\",\n                    \"options\": {\n                        \"1\": \"MK Gajni\",\n                        \"2\": \"MK Gandhi\",\n                        \"3\": \"Jawahar lal nehru\",\n                        \"4\": \"None\"\n                    },\n                    \"_id\": \"6540bb5c09b0d8d5494e997a\"\n                }\n            ],\n            \"createdBy\": \"65296bc7c4cb804ff3001893\"\n        },\n        {\n            \"_id\": \"6540c202f6e4f0e26336b814\",\n            \"name\": \"GK Quiz 104\",\n            \"questionList\": [\n                {\n                    \"questionNumber\": 1,\n                    \"question\": \"What is the capital of Karnataka?\",\n                    \"options\": {\n                        \"1\": \"Varanasi\",\n                        \"2\": \"Lucknow\",\n                        \"3\": \"Dehradun\",\n                        \"4\": \"Banglore\"\n                    },\n                    \"_id\": \"6540c202f6e4f0e26336b815\"\n                },\n                {\n                    \"questionNumber\": 2,\n                    \"question\": \"How many colors are there in Indian Flag?\",\n                    \"options\": {\n                        \"1\": \"1\",\n                        \"2\": \"2\",\n                        \"3\": \"3\",\n                        \"4\": \"4\"\n                    },\n                    \"_id\": \"6540c202f6e4f0e26336b816\"\n                }\n            ],\n            \"createdBy\": \"6540bc3a09b0d8d5494e9989\"\n        }\n    ]\n}"
 				}
 			]
 		}
