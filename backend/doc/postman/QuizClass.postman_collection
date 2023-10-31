@@ -1,7 +1,7 @@
 {
 	"info": {
-		"_postman_id": "69ad381d-b76f-494d-92d3-6c1b6554471d",
-		"name": "QuizClass Copy",
+		"_postman_id": "d96f1815-bf67-40ce-85c6-cd90c8cd2e82",
+		"name": "QuizClass Copy 2",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "23659079"
 	},
@@ -13,7 +13,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"name\":\"Aarush\",\r\n    \"email\":\"aarush@gmail.com\",\r\n    \"password\": \"Password@12345\",\r\n    \"confirmPassword\":\"Password@12345\"\r\n}",
+					"raw": "{\r\n    \"name\":\"Aarush\",\r\n    \"email\":\"aarush@gmail.com\",\r\n    \"password\": \"Password@12345\",\r\n    \"confirmPassword\":\"Password@12345\",\r\n    \"otp\":165558\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -40,7 +40,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\":\"Aarush\",\r\n    \"email\":\"aarush@gmail.com\",\r\n    \"password\": \"Password@12345\",\r\n    \"confirmPassword\":\"Password@12345\"\r\n}",
+							"raw": "{\r\n    \"name\":\"Aarush\",\r\n    \"email\":\"aarush@gmail.com\",\r\n    \"password\": \"Password@12345\",\r\n    \"confirmPassword\":\"Password@12345\",\r\n    \"otp\":165558\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -92,7 +92,7 @@
 						}
 					],
 					"cookie": [],
-					"body": "{\n    \"status\": \"success\",\n    \"message\": \"Registration done!\",\n    \"data\": {\n        \"userId\": \"651a83d255af3c91a38f0190\"\n    }\n}"
+					"body": "{\n    \"status\": \"success\",\n    \"message\": \"Registration done!\",\n    \"data\": {\n        \"userId\": \"65413b371340caa90756951b\"\n    }\n}"
 				}
 			]
 		},
@@ -385,7 +385,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"name\": \"GK Quiz 101\",\r\n    \"questionList\": [\r\n        {\r\n            \"questionNumber\": 1,\r\n            \"question\": \"What is the capital of Uttar Pradesh?\",\r\n            \"options\": {\r\n                \"1\": \"Varanasi\",\r\n                \"2\": \"Lucknow\",\r\n                \"3\": \"Dehradun\",\r\n                \"4\": \"Banglore\"\r\n            }\r\n        },\r\n        {\r\n            \"questionNumber\": 2,\r\n            \"question\": \"How many players are there in football team?\",\r\n            \"options\": {\r\n                \"1\": \"1\",\r\n                \"2\": \"2\",\r\n                \"3\": \"11\",\r\n                \"4\": \"20\"\r\n            }\r\n        },\r\n        {\r\n            \"questionNumber\": 3,\r\n            \"question\": \"Sun temple is located in ____?\",\r\n            \"options\": {\r\n                \"1\": \"Konark\",\r\n                \"2\": \"Goa\",\r\n                \"3\": \"Delhi\",\r\n                \"4\": \"Gujrat\"\r\n            }\r\n        },\r\n        {\r\n            \"questionNumber\": 4,\r\n            \"question\": \"Which animal is know as ship of the desert?\",\r\n            \"options\": {\r\n                \"1\": \"Goat\",\r\n                \"2\": \"Cow\",\r\n                \"3\": \"Camel\",\r\n                \"4\": \"Titanic\"\r\n            }\r\n        },\r\n        {\r\n            \"questionNumber\": 5,\r\n            \"question\": \"How many letter are in the English alphabet?\",\r\n            \"options\": {\r\n                \"1\": \"27\",\r\n                \"2\": \"24\",\r\n                \"3\": \"25\",\r\n                \"4\": \"26\"\r\n            }\r\n        }\r\n    ],\r\n    \"answers\": {\r\n        \"1\": 2,\r\n        \"2\": 3,\r\n        \"3\": 1,\r\n        \"4\": 3,\r\n        \"5\": 4\r\n    },\r\n    \"passing_percentage\":80\r\n}",
+					"raw": "{\r\n    \"name\": \"GK Quiz 101\",\r\n    \"category\": \"exam\",\r\n    \"questionList\": [\r\n        {\r\n            \"questionNumber\": 1,\r\n            \"question\": \"What is the capital of Uttar Pradesh?\",\r\n            \"options\": {\r\n                \"1\": \"Varanasi\",\r\n                \"2\": \"Lucknow\",\r\n                \"3\": \"Dehradun\",\r\n                \"4\": \"Banglore\"\r\n            }\r\n        },\r\n        {\r\n            \"questionNumber\": 2,\r\n            \"question\": \"How many players are there in football team?\",\r\n            \"options\": {\r\n                \"1\": \"1\",\r\n                \"2\": \"2\",\r\n                \"3\": \"11\",\r\n                \"4\": \"20\"\r\n            }\r\n        },\r\n        {\r\n            \"questionNumber\": 3,\r\n            \"question\": \"Sun temple is located in ____?\",\r\n            \"options\": {\r\n                \"1\": \"Konark\",\r\n                \"2\": \"Goa\",\r\n                \"3\": \"Delhi\",\r\n                \"4\": \"Gujrat\"\r\n            }\r\n        },\r\n        {\r\n            \"questionNumber\": 4,\r\n            \"question\": \"Which animal is know as ship of the desert?\",\r\n            \"options\": {\r\n                \"1\": \"Goat\",\r\n                \"2\": \"Cow\",\r\n                \"3\": \"Camel\",\r\n                \"4\": \"Titanic\"\r\n            }\r\n        },\r\n        {\r\n            \"questionNumber\": 5,\r\n            \"question\": \"How many letter are in the English alphabet?\",\r\n            \"options\": {\r\n                \"1\": \"27\",\r\n                \"2\": \"24\",\r\n                \"3\": \"25\",\r\n                \"4\": \"26\"\r\n            }\r\n        }\r\n    ],\r\n    \"answers\": {\r\n        \"1\": 2,\r\n        \"2\": 3,\r\n        \"3\": 1,\r\n        \"4\": 3,\r\n        \"5\": 4\r\n    },\r\n    \"passing_percentage\":80\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -770,14 +770,14 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "localhost:3002/quiz/651a866f55af3c91a38f01b0",
+					"raw": "localhost:3002/quiz/653bd175e31adc60bd18cb43",
 					"host": [
 						"localhost"
 					],
 					"port": "3002",
 					"path": [
 						"quiz",
-						"651a866f55af3c91a38f01b0"
+						"653bd175e31adc60bd18cb43"
 					]
 				}
 			},
@@ -1334,7 +1334,7 @@
 						}
 					],
 					"cookie": [],
-					"body": "{\n    \"status\": \"success\",\n    \"message\": \"User deactivated!\",\n    \"data\": {}\n}"
+					"body": "{\n    \"status\": \"success\",\n    \"message\": \"An Email has been sent to your account please verify!\",\n    \"data\": {}\n}"
 				}
 			]
 		},
@@ -1430,13 +1430,83 @@
 			]
 		},
 		{
+			"name": "Change Password",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token1}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"currentPassword\":\"Password@12345\",\r\n    \"newPassword\":\"Password@111\",\r\n    \"confirmPassword\":\"Password@111\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3002/user/changePassword",
+					"host": [
+						"localhost"
+					],
+					"port": "3002",
+					"path": [
+						"user",
+						"changePassword"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Change Password",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"currentPassword\":\"Password@12345\",\r\n    \"newPassword\":\"Password@111\",\r\n    \"confirmPassword\":\"Password@111\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3002/user/changePassword",
+							"host": [
+								"localhost"
+							],
+							"port": "3002",
+							"path": [
+								"user",
+								"changePassword"
+							]
+						}
+					},
+					"_postman_previewlanguage": "Text",
+					"header": [],
+					"cookie": [],
+					"body": "{\r\n    \"status\": \"success\",\r\n    \"message\": \"Password updated\",\r\n    \"data\": {}\r\n}"
+				}
+			]
+		},
+		{
 			"name": "send-otp",
 			"request": {
 				"method": "POST",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"email\":\"abc@gmail.com\"\r\n}",
+					"raw": "{\r\n    \"email\":\"aarush@gmail.com\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -1455,13 +1525,58 @@
 					]
 				}
 			},
-			"response": []
+			"response": [
+				{
+					"name": "send-otp",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\":\"aarush@gmail.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3002/auth/send-otp",
+							"host": [
+								"localhost"
+							],
+							"port": "3002",
+							"path": [
+								"auth",
+								"send-otp"
+							]
+						}
+					},
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": "{\r\n    \"status\": \"success\",\r\n    \"message\": \"OTP send successfully\",\r\n    \"data\": {\r\n        \"otp\": \"165558\"\r\n    }\r\n}"
+				}
+			]
 		},
 		{
-			"name": "verify-link",
+			"name": "verify-email-links",
 			"request": {
 				"method": "GET",
-				"header": []
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3002/user/deactivate/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NTNmZmYxY2U2ZGU4ODAzYjQyMmFmOTEiLCJpYXQiOjE2OTg2OTMwMTksImV4cCI6MTY5ODY5MzMxOX0.eZe7n05B_SvZAnGaZ1BQ6yDykQFr16qSwfQUVp8zAj8",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3002",
+					"path": [
+						"user",
+						"deactivate",
+						"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NTNmZmYxY2U2ZGU4ODAzYjQyMmFmOTEiLCJpYXQiOjE2OTg2OTMwMTksImV4cCI6MTY5ODY5MzMxOX0.eZe7n05B_SvZAnGaZ1BQ6yDykQFr16qSwfQUVp8zAj8"
+					]
+				}
 			},
 			"response": []
 		}
