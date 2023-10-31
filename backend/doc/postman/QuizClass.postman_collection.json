@@ -1,9 +1,16 @@
 {
 	"info": {
+<<<<<<< HEAD
 		"_postman_id": "3df68714-f01b-4ba9-91fa-6b885d38e018",
 		"name": "QuizClass Copy",
 		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
 		"_exporter_id": "30240998"
+=======
+		"_postman_id": "7daa2e24-0428-4610-9cb8-50ca161a86a6",
+		"name": "QuizClass",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "29326444"
+>>>>>>> master
 	},
 	"item": [
 		{
@@ -1091,6 +1098,7 @@
 			]
 		},
 		{
+<<<<<<< HEAD
 			"name": "All Published Quiz",
 			"request": {
 				"auth": {
@@ -1146,6 +1154,74 @@
 					],
 					"cookie": [],
 					"body": "{\n    \"status\": \"success\",\n    \"message\": \"All Published Quiz\",\n    \"data\": [\n        {\n            \"_id\": \"6540b471338a054c3ff6b097\",\n            \"name\": \"GK Quiz 102\",\n            \"questionList\": [\n                {\n                    \"questionNumber\": 1,\n                    \"question\": \"What is the capital of Uttar Pradesh?\",\n                    \"options\": {\n                        \"1\": \"Varanasi\",\n                        \"2\": \"Lucknow\",\n                        \"3\": \"Dehradun\",\n                        \"4\": \"Banglore\"\n                    },\n                    \"_id\": \"6540b471338a054c3ff6b098\"\n                },\n                {\n                    \"questionNumber\": 2,\n                    \"question\": \"How many players are there in football team?\",\n                    \"options\": {\n                        \"1\": \"1\",\n                        \"2\": \"2\",\n                        \"3\": \"11\",\n                        \"4\": \"20\"\n                    },\n                    \"_id\": \"6540b471338a054c3ff6b099\"\n                }\n            ],\n            \"createdBy\": \"65296bc7c4cb804ff3001893\"\n        },\n        {\n            \"_id\": \"6540bb5c09b0d8d5494e9978\",\n            \"name\": \"GK Quiz 103\",\n            \"questionList\": [\n                {\n                    \"questionNumber\": 1,\n                    \"question\": \"Which is the national animal of India?\",\n                    \"options\": {\n                        \"1\": \"Tiger\",\n                        \"2\": \"Lion\",\n                        \"3\": \"Adler\",\n                        \"4\": \"Peacock\"\n                    },\n                    \"_id\": \"6540bb5c09b0d8d5494e9979\"\n                },\n                {\n                    \"questionNumber\": 2,\n                    \"question\": \"Who is known as Father of nation in india?\",\n                    \"options\": {\n                        \"1\": \"MK Gajni\",\n                        \"2\": \"MK Gandhi\",\n                        \"3\": \"Jawahar lal nehru\",\n                        \"4\": \"None\"\n                    },\n                    \"_id\": \"6540bb5c09b0d8d5494e997a\"\n                }\n            ],\n            \"createdBy\": \"65296bc7c4cb804ff3001893\"\n        },\n        {\n            \"_id\": \"6540c202f6e4f0e26336b814\",\n            \"name\": \"GK Quiz 104\",\n            \"questionList\": [\n                {\n                    \"questionNumber\": 1,\n                    \"question\": \"What is the capital of Karnataka?\",\n                    \"options\": {\n                        \"1\": \"Varanasi\",\n                        \"2\": \"Lucknow\",\n                        \"3\": \"Dehradun\",\n                        \"4\": \"Banglore\"\n                    },\n                    \"_id\": \"6540c202f6e4f0e26336b815\"\n                },\n                {\n                    \"questionNumber\": 2,\n                    \"question\": \"How many colors are there in Indian Flag?\",\n                    \"options\": {\n                        \"1\": \"1\",\n                        \"2\": \"2\",\n                        \"3\": \"3\",\n                        \"4\": \"4\"\n                    },\n                    \"_id\": \"6540c202f6e4f0e26336b816\"\n                }\n            ],\n            \"createdBy\": \"6540bc3a09b0d8d5494e9989\"\n        }\n    ]\n}"
+=======
+			"name": "Change Password",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token1}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"currentPassword\":\"Password@12345\",\r\n    \"newPassword\":\"Password@111\",\r\n    \"confirmPassword\":\"Password@111\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3002/user/changePassword",
+					"host": [
+						"localhost"
+					],
+					"port": "3002",
+					"path": [
+						"user",
+						"changePassword"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Change Password",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"currentPassword\":\"Password@12345\",\r\n    \"newPassword\":\"Password@111\",\r\n    \"confirmPassword\":\"Password@111\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3002/user/changePassword",
+							"host": [
+								"localhost"
+							],
+							"port": "3002",
+							"path": [
+								"user",
+								"changePassword"
+							]
+						}
+					},
+					"_postman_previewlanguage": "Text",
+					"header": [],
+					"cookie": [],
+					"body": "{\r\n    \"status\": \"success\",\r\n    \"message\": \"Password updated\",\r\n    \"data\": {}\r\n}"
+>>>>>>> master
 				}
 			]
 		}
