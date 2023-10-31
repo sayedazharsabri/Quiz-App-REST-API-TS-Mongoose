@@ -6,7 +6,6 @@ import examRoute from "./routes/exam";
 import quizRoute from "./routes/quiz";
 import reportRoute from "./routes/report";
 import userRoute from "./routes/user";
-import quizallRoute from "./routes/quizall";
 
 import ProjectError from "./helper/error";
 import { ReturnResponse } from "./utils/interfaces";
@@ -39,9 +38,6 @@ app.use("/report", reportRoute);
 
 //Redirect /user to userRoute
 app.use("/user", userRoute);
-
-//Get all the quizzes in the DB
-app.use("/allquiz", quizallRoute);
 
 app.get("/health", (req: Request, res: Response) => {
   res.status(200).send("Server is working!");
