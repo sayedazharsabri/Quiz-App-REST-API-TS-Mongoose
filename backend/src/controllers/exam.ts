@@ -29,6 +29,11 @@ const startExam: RequestHandler = async (req, res, next) => {
       err.statusCode = 405;
       throw err;
     }
+    if(!quiz.isPublicQuiz && !quiz.allowedUser.includes(req.userId)){
+      const err = new ProjectError("You are not authorized!");
+      err.statusCode = 403;
+      throw err;
+    }
     const resp: ReturnResponse = {
       status: "success",
       message: "Quiz",
