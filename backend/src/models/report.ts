@@ -20,6 +20,10 @@ const reportSchema = new schema(
       type: Number,
       required: true,
     },
+    result: {
+      type: String,
+      required: true
+    },
   },
   { timestamps: true }
 );

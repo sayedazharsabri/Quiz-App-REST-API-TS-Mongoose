@@ -72,16 +72,13 @@ app.use(
   }
 );
 
-mongoose.connect(connectionString).then(
-  () => {
+(async () => {
+  try {
+    await mongoose.connect(connectionString);
     app.listen(port, () => {
       console.log("Server Connected");
     });
-  },
-  (err) => {
-    if (err) {
-      console.log(err);
-      return;
-    }
+  } catch (error) {
+    console.log(error);
   }
-);
+})();

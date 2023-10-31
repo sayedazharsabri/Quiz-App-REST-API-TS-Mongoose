@@ -9,6 +9,10 @@ const quizSchema = new schema(
       required: true,
       unique: true,
     },
+    category: {
+      type: String,
+      required: true
+    },
     questionList: [
       {
         questionNumber: Number,
@@ -17,6 +21,10 @@ const quizSchema = new schema(
       },
     ],
     answers: {},
+    passing_percentage: {
+      type: Number,
+      required: true
+    },
     createdBy: {
       type: mongoose.Types.ObjectId,
       required: true,
