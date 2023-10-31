@@ -13,6 +13,9 @@ const startExam: RequestHandler = async (req, res, next) => {
       name: 1,
       questionList: 1,
       isPublished: 1,
+      passingPercentage:1,
+      isPublicQuiz:1,
+      allowedUser:1
     });
 
     if (!quiz) {

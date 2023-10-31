@@ -51,6 +51,12 @@ router.post(
           return Promise.reject(err);
         });
     }),
+    body("passingPercentage").custom((passingPercentage:Number)=>{
+      if(passingPercentage==0){
+        return Promise.reject("Passing percentage can not be zero..");
+      }
+      return true;
+    })
   ],
   validateRequest,
   createQuiz
@@ -87,6 +93,12 @@ router.put(
           return Promise.reject(err);
         });
     }),
+    body("passingPercentage").custom((passingPercentage:Number)=>{
+      if(passingPercentage==0){
+        return Promise.reject("Passing percentage can not be zero..");
+      }
+      return true;
+    })
   ],
   validateRequest,
   updateQuiz
