@@ -1,9 +1,9 @@
 {
 	"info": {
-		"_postman_id": "8ee691e4-2540-4a5e-9f2c-473614ad0616",
+		"_postman_id": "7daa2e24-0428-4610-9cb8-50ca161a86a6",
 		"name": "QuizClass",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "26186228"
+		"_exporter_id": "29326444"
 	},
 	"item": [
 		{
@@ -1426,6 +1426,76 @@
 					],
 					"cookie": [],
 					"body": "{\n    \"status\": \"success\",\n    \"message\": \"An Email has been sent to your account please verify!\",\n    \"data\": {}\n}"
+				}
+			]
+		},
+		{
+			"name": "Change Password",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token1}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"currentPassword\":\"Password@12345\",\r\n    \"newPassword\":\"Password@111\",\r\n    \"confirmPassword\":\"Password@111\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3002/user/changePassword",
+					"host": [
+						"localhost"
+					],
+					"port": "3002",
+					"path": [
+						"user",
+						"changePassword"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Change Password",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"currentPassword\":\"Password@12345\",\r\n    \"newPassword\":\"Password@111\",\r\n    \"confirmPassword\":\"Password@111\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3002/user/changePassword",
+							"host": [
+								"localhost"
+							],
+							"port": "3002",
+							"path": [
+								"user",
+								"changePassword"
+							]
+						}
+					},
+					"_postman_previewlanguage": "Text",
+					"header": [],
+					"cookie": [],
+					"body": "{\r\n    \"status\": \"success\",\r\n    \"message\": \"Password updated\",\r\n    \"data\": {}\r\n}"
 				}
 			]
 		}
