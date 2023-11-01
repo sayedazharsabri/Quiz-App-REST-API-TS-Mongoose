@@ -65,7 +65,7 @@ router.post(
 );
 
 //Get  quiz/allpublished quiz
-router.get("/allPublishedQuiz",isAuthenticated, getallQuiz);
+router.get("/allpublishedquiz",isAuthenticated, getallQuiz);
 
 // get
 // GET /quiz/:quizId

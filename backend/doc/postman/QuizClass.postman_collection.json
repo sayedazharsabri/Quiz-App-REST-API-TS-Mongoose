@@ -515,12 +515,12 @@
 				"auth": {
 					"type": "bearer",
 					"bearer": {
-						"token": "{{token2}}"
+						"token": "{{token1}}"
 					}
 				},
 				"method": "GET",
 				"header": [],
-				"url": "localhost:3002/quiz/allPublishedQuiz"
+				"url": "localhost:3002/quiz/allpublishedquiz"
 			},
 			"response": [
 				{
