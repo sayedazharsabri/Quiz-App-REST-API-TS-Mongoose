@@ -14,7 +14,7 @@ const createQuiz: RequestHandler = async (req, res, next) => {
     const answers = req.body.answers;
     const passing_percentage=req.body.passing_percentage;
     
-    const quiz = new Quiz({ name, questionList, answers, passing_percentage, createdBy });
+    const quiz = new Quiz({ name, category, questionList, answers, passing_percentage, createdBy });
     const result = await quiz.save();
     const resp: ReturnResponse = {
       status: "success",
@@ -76,6 +76,7 @@ const getallQuiz: RequestHandler = async (req, res, next) => {
   try {
       const quiz = await Quiz.find({ isPublished: true }, {
           name: 1,
+          category:1,
           questionList: 1,
           createdBy: 1
       });
