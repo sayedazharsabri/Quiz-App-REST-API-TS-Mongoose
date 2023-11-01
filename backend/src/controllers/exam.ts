@@ -78,7 +78,7 @@ const submitExam: RequestHandler = async (req, res, next) => {
       result+="Fail";
     }
 
-    const report = new Report({ userId, quizId, score, total, result });
+    const report = new Report({ userId, quizId, score, total,percentage, result });
     const data = await report.save();
     const resp: ReturnResponse = {
       status: "success",

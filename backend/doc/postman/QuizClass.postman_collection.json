@@ -1,9 +1,9 @@
 {
 	"info": {
-		"_postman_id": "b4457950-6f85-4af4-aa33-3ae4786d7fb2",
+		"_postman_id": "3ec93788-bae4-45a8-8801-66810014d38b",
 		"name": "QuizClass",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "26186228"
+		"_exporter_id": "29359795"
 	},
 	"item": [
 		{
@@ -1154,14 +1154,14 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:3002/report/653f4ae305f6d6dbea8a6020",
+							"raw": "localhost:3002/report/65420ef4929a1fd62d7525ab",
 							"host": [
 								"localhost"
 							],
 							"port": "3002",
 							"path": [
 								"report",
-								"653f4ae305f6d6dbea8a6020"
+								"65420ef4929a1fd62d7525ab"
 							]
 						}
 					},
@@ -1179,15 +1179,15 @@
 						},
 						{
 							"key": "Content-Length",
-							"value": "276"
+							"value": "293"
 						},
 						{
 							"key": "ETag",
-							"value": "W/\"114-3yIArh9GVMz7/DQm/m6A71+LgpY\""
+							"value": "W/\"125-EK/HdReH48/1UT/gj9v5H5hcR48\""
 						},
 						{
 							"key": "Date",
-							"value": "Mon, 30 Oct 2023 06:25:42 GMT"
+							"value": "Wed, 01 Nov 2023 08:43:31 GMT"
 						},
 						{
 							"key": "Connection",
@@ -1199,10 +1199,10 @@
 						}
 					],
 					"cookie": [],
-					"body": "{\n    \"status\": \"success\",\n    \"message\": \"Report!\",\n    \"data\": {\n        \"_id\": \"653f4ae305f6d6dbea8a6020\",\n        \"userId\": \"6537a2eb0cb6997220849f3e\",\n        \"quizId\": \"653f480005f6d6dbea8a5f7a\",\n        \"score\": 5,\n        \"total\": 5,\n        \"result\": \"Pass\",\n        \"createdAt\": \"2023-10-30T06:19:15.145Z\",\n        \"updatedAt\": \"2023-10-30T06:19:15.145Z\",\n        \"__v\": 0\n    }\n}"
+					"body": "{\n    \"status\": \"success\",\n    \"message\": \"Report!\",\n    \"data\": {\n        \"_id\": \"65420ef4929a1fd62d7525ab\",\n        \"userId\": \"65390312d8ba86cfea694786\",\n        \"quizId\": \"65420d1272ac731dee378c8a\",\n        \"score\": 5,\n        \"total\": 5,\n        \"percentage\": 100,\n        \"result\": \"Pass\",\n        \"createdAt\": \"2023-11-01T08:40:20.842Z\",\n        \"updatedAt\": \"2023-11-01T08:40:20.842Z\",\n        \"__v\": 0\n    }\n}"
 				},
 				{
-					"name": "Get all reports of a user",
+					"name": "Get all reports of user",
 					"originalRequest": {
 						"method": "GET",
 						"header": [],
@@ -1231,15 +1231,15 @@
 						},
 						{
 							"key": "Content-Length",
-							"value": "965"
+							"value": "2187"
 						},
 						{
 							"key": "ETag",
-							"value": "W/\"3c5-YnQXODtub57fUTouAqaJaigQkas\""
+							"value": "W/\"88b-TcttA66QidJn8OzOAI3Fo3NIXqs\""
 						},
 						{
 							"key": "Date",
-							"value": "Mon, 30 Oct 2023 06:27:07 GMT"
+							"value": "Wed, 01 Nov 2023 08:44:16 GMT"
 						},
 						{
 							"key": "Connection",
@@ -1251,7 +1251,7 @@
 						}
 					],
 					"cookie": [],
-					"body": "{\n    \"status\": \"success\",\n    \"message\": \"Report!\",\n    \"data\": [\n        {\n            \"_id\": \"653f4aab05f6d6dbea8a5ff0\",\n            \"userId\": \"6537a2eb0cb6997220849f3e\",\n            \"quizId\": \"653f480005f6d6dbea8a5f7a\",\n            \"score\": 0,\n            \"total\": 5,\n            \"result\": \"Fail\",\n            \"createdAt\": \"2023-10-30T06:18:19.423Z\",\n            \"updatedAt\": \"2023-10-30T06:18:19.423Z\",\n            \"__v\": 0\n        },\n        {\n            \"_id\": \"653f4acc05f6d6dbea8a6000\",\n            \"userId\": \"6537a2eb0cb6997220849f3e\",\n            \"quizId\": \"653f480005f6d6dbea8a5f7a\",\n            \"score\": 3,\n            \"total\": 5,\n            \"result\": \"Fail\",\n            \"createdAt\": \"2023-10-30T06:18:52.563Z\",\n            \"updatedAt\": \"2023-10-30T06:18:52.563Z\",\n            \"__v\": 0\n        },\n        {\n            \"_id\": \"653f4adc05f6d6dbea8a6010\",\n            \"userId\": \"6537a2eb0cb6997220849f3e\",\n            \"quizId\": \"653f480005f6d6dbea8a5f7a\",\n            \"score\": 4,\n            \"total\": 5,\n            \"result\": \"Pass\",\n            \"createdAt\": \"2023-10-30T06:19:08.455Z\",\n            \"updatedAt\": \"2023-10-30T06:19:08.455Z\",\n            \"__v\": 0\n        },\n        {\n            \"_id\": \"653f4ae305f6d6dbea8a6020\",\n            \"userId\": \"6537a2eb0cb6997220849f3e\",\n            \"quizId\": \"653f480005f6d6dbea8a5f7a\",\n            \"score\": 5,\n            \"total\": 5,\n            \"result\": \"Pass\",\n            \"createdAt\": \"2023-10-30T06:19:15.145Z\",\n            \"updatedAt\": \"2023-10-30T06:19:15.145Z\",\n            \"__v\": 0\n        }\n    ]\n}"
+					"body": "{\n    \"status\": \"success\",\n    \"message\": \"Report!\",\n    \"data\": [\n        {\n            \"_id\": \"653903eed8ba86cfea694798\",\n            \"userId\": \"65390312d8ba86cfea694786\",\n            \"quizId\": \"653902b2d8ba86cfea69477a\",\n            \"score\": 1,\n            \"total\": 2,\n            \"createdAt\": \"2023-10-25T12:02:54.607Z\",\n            \"updatedAt\": \"2023-10-25T12:02:54.607Z\",\n            \"__v\": 0\n        },\n        {\n            \"_id\": \"6539082a6663f6bfd8f23394\",\n            \"userId\": \"65390312d8ba86cfea694786\",\n            \"quizId\": \"653902b2d8ba86cfea69477a\",\n            \"score\": 1,\n            \"total\": 2,\n            \"percentage\": 50,\n            \"createdAt\": \"2023-10-25T12:20:58.294Z\",\n            \"updatedAt\": \"2023-10-25T12:20:58.294Z\",\n            \"__v\": 0\n        },\n        {\n            \"_id\": \"653908ae663a8600cb514148\",\n            \"userId\": \"65390312d8ba86cfea694786\",\n            \"quizId\": \"653902b2d8ba86cfea69477a\",\n            \"score\": 1,\n            \"total\": 3,\n            \"percentage\": 33.33333333333333,\n            \"createdAt\": \"2023-10-25T12:23:10.964Z\",\n            \"updatedAt\": \"2023-10-25T12:23:10.964Z\",\n            \"__v\": 0\n        },\n        {\n            \"_id\": \"65390996ed4e7e9ec35894a6\",\n            \"userId\": \"65390312d8ba86cfea694786\",\n            \"quizId\": \"65390962ed4e7e9ec358948c\",\n            \"score\": 1,\n            \"total\": 3,\n            \"percentage\": 33.33333333333333,\n            \"createdAt\": \"2023-10-25T12:27:02.023Z\",\n            \"updatedAt\": \"2023-10-25T12:27:02.023Z\",\n            \"__v\": 0\n        },\n        {\n            \"_id\": \"65390a84ad208306ed00d02b\",\n            \"userId\": \"65390312d8ba86cfea694786\",\n            \"quizId\": \"65390962ed4e7e9ec358948c\",\n            \"score\": 1,\n            \"total\": 3,\n            \"percentage\": 33.33333333333333,\n            \"createdAt\": \"2023-10-25T12:31:00.884Z\",\n            \"updatedAt\": \"2023-10-25T12:31:00.884Z\",\n            \"__v\": 0\n        },\n        {\n            \"_id\": \"65390d4977d346329a241e46\",\n            \"userId\": \"65390312d8ba86cfea694786\",\n            \"quizId\": \"65390962ed4e7e9ec358948c\",\n            \"score\": 1,\n            \"total\": 3,\n            \"percentage\": 33.33333333333333,\n            \"createdAt\": \"2023-10-25T12:42:49.479Z\",\n            \"updatedAt\": \"2023-10-25T12:42:49.479Z\",\n            \"__v\": 0\n        },\n        {\n            \"_id\": \"653f59d810b78b178316e291\",\n            \"userId\": \"65390312d8ba86cfea694786\",\n            \"quizId\": \"653f59a110b78b178316e26b\",\n            \"score\": 0,\n            \"total\": 5,\n            \"percentage\": 0,\n            \"createdAt\": \"2023-10-30T07:23:04.821Z\",\n            \"updatedAt\": \"2023-10-30T07:23:04.821Z\",\n            \"__v\": 0\n        },\n        {\n            \"_id\": \"65420da972ac731dee378ca7\",\n            \"userId\": \"65390312d8ba86cfea694786\",\n            \"quizId\": \"65420d1272ac731dee378c8a\",\n            \"score\": 5,\n            \"total\": 5,\n            \"percentage\": 100,\n            \"result\": \"Pass\",\n            \"createdAt\": \"2023-11-01T08:34:49.540Z\",\n            \"updatedAt\": \"2023-11-01T08:34:49.540Z\",\n            \"__v\": 0\n        },\n        {\n            \"_id\": \"65420ef4929a1fd62d7525ab\",\n            \"userId\": \"65390312d8ba86cfea694786\",\n            \"quizId\": \"65420d1272ac731dee378c8a\",\n            \"score\": 5,\n            \"total\": 5,\n            \"percentage\": 100,\n            \"result\": \"Pass\",\n            \"createdAt\": \"2023-11-01T08:40:20.842Z\",\n            \"updatedAt\": \"2023-11-01T08:40:20.842Z\",\n            \"__v\": 0\n        }\n    ]\n}"
 				}
 			]
 		},
