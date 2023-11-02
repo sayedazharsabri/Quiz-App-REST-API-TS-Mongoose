@@ -12,9 +12,9 @@ const createQuiz: RequestHandler = async (req, res, next) => {
     const category = req.body.category;
     const questionList = req.body.questionList;
     const answers = req.body.answers;
-    const passing_percentage = req.body.passing_percentage;
+    const passingPercentage = req.body.passingPercentage;
 
-    const quiz = new Quiz({ name, category, questionList, answers, passing_percentage, createdBy });
+    const quiz = new Quiz({ name, category, questionList, answers, passingPercentage, createdBy });
     const result = await quiz.save();
     const resp: ReturnResponse = {
       status: "success",
@@ -227,13 +227,14 @@ const isValidQuizName = async (name: String) => {
   return false;
 };
 
-const getallQuiz: RequestHandler = async (req, res, next) => {
+const getAllQuiz: RequestHandler = async (req, res, next) => {
   try {
     let quiz = await Quiz.find({ isPublished: true }, {
       name: 1,
       category: 1,
       questionList: 1,
-      createdBy: 1
+      createdBy: 1,
+      passingPercentage: 1
     });
     //filter quizzes created by user itself
     quiz = quiz.filter(item => item.createdBy.toString() !== req.userId);
@@ -263,5 +264,5 @@ export {
   isValidQuizName,
   publishQuiz,
   updateQuiz,
-  getallQuiz
+  getAllQuiz
 };
