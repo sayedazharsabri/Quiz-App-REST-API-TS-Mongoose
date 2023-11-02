@@ -299,7 +299,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"name\": \"GK Quiz 101\",\r\n    \"category\": \"exam\",\r\n    \"questionList\": [\r\n        {\r\n            \"questionNumber\": 1,\r\n            \"question\": \"What is the capital of Uttar Pradesh?\",\r\n            \"options\": {\r\n                \"1\": \"Varanasi\",\r\n                \"2\": \"Lucknow\",\r\n                \"3\": \"Dehradun\",\r\n                \"4\": \"Banglore\"\r\n            }\r\n        },\r\n        {\r\n            \"questionNumber\": 2,\r\n            \"question\": \"How many players are there in football team?\",\r\n            \"options\": {\r\n                \"1\": \"1\",\r\n                \"2\": \"2\",\r\n                \"3\": \"11\",\r\n                \"4\": \"20\"\r\n            }\r\n        },\r\n        {\r\n            \"questionNumber\": 3,\r\n            \"question\": \"Sun temple is located in ____?\",\r\n            \"options\": {\r\n                \"1\": \"Konark\",\r\n                \"2\": \"Goa\",\r\n                \"3\": \"Delhi\",\r\n                \"4\": \"Gujrat\"\r\n            }\r\n        },\r\n        {\r\n            \"questionNumber\": 4,\r\n            \"question\": \"Which animal is know as ship of the desert?\",\r\n            \"options\": {\r\n                \"1\": \"Goat\",\r\n                \"2\": \"Cow\",\r\n                \"3\": \"Camel\",\r\n                \"4\": \"Titanic\"\r\n            }\r\n        },\r\n        {\r\n            \"questionNumber\": 5,\r\n            \"question\": \"How many letter are in the English alphabet?\",\r\n            \"options\": {\r\n                \"1\": \"27\",\r\n                \"2\": \"24\",\r\n                \"3\": \"25\",\r\n                \"4\": \"26\"\r\n            }\r\n        }\r\n    ],\r\n    \"answers\": {\r\n        \"1\": 2,\r\n        \"2\": 3,\r\n        \"3\": 1,\r\n        \"4\": 3,\r\n        \"5\": 4\r\n    },\r\n    \"passing_percentage\":80\r\n}",
+					"raw": "{\r\n    \"name\": \"GK Quiz 101\",\r\n    \"category\": \"exam\",\r\n    \"questionList\": [\r\n        {\r\n            \"questionNumber\": 1,\r\n            \"question\": \"What is the capital of Uttar Pradesh?\",\r\n            \"options\": {\r\n                \"1\": \"Varanasi\",\r\n                \"2\": \"Lucknow\",\r\n                \"3\": \"Dehradun\",\r\n                \"4\": \"Banglore\"\r\n            }\r\n        },\r\n        {\r\n            \"questionNumber\": 2,\r\n            \"question\": \"How many players are there in football team?\",\r\n            \"options\": {\r\n                \"1\": \"1\",\r\n                \"2\": \"2\",\r\n                \"3\": \"11\",\r\n                \"4\": \"20\"\r\n            }\r\n        },\r\n        {\r\n            \"questionNumber\": 3,\r\n            \"question\": \"Sun temple is located in ____?\",\r\n            \"options\": {\r\n                \"1\": \"Konark\",\r\n                \"2\": \"Goa\",\r\n                \"3\": \"Delhi\",\r\n                \"4\": \"Gujrat\"\r\n            }\r\n        },\r\n        {\r\n            \"questionNumber\": 4,\r\n            \"question\": \"Which animal is know as ship of the desert?\",\r\n            \"options\": {\r\n                \"1\": \"Goat\",\r\n                \"2\": \"Cow\",\r\n                \"3\": \"Camel\",\r\n                \"4\": \"Titanic\"\r\n            }\r\n        },\r\n        {\r\n            \"questionNumber\": 5,\r\n            \"question\": \"How many letter are in the English alphabet?\",\r\n            \"options\": {\r\n                \"1\": \"27\",\r\n                \"2\": \"24\",\r\n                \"3\": \"25\",\r\n                \"4\": \"26\"\r\n            }\r\n        }\r\n    ],\r\n    \"answers\": {\r\n        \"1\": 2,\r\n        \"2\": 3,\r\n        \"3\": 1,\r\n        \"4\": 3,\r\n        \"5\": 4\r\n    },\r\n    \"passingPercentage\":80\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -316,7 +316,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"GK Quiz 101\",\r\n    \"questionList\": [\r\n        {\r\n            \"questionNumber\": 1,\r\n            \"question\": \"What is the capital of Uttar Pradesh?\",\r\n            \"options\": {\r\n                \"1\": \"Varanasi\",\r\n                \"2\": \"Lucknow\",\r\n                \"3\": \"Dehradun\",\r\n                \"4\": \"Banglore\"\r\n            }\r\n        },\r\n        {\r\n            \"questionNumber\": 2,\r\n            \"question\": \"How many players are there in football team?\",\r\n            \"options\": {\r\n                \"1\": \"1\",\r\n                \"2\": \"2\",\r\n                \"3\": \"11\",\r\n                \"4\": \"20\"\r\n            }\r\n        },\r\n        {\r\n            \"questionNumber\": 3,\r\n            \"question\": \"Sun temple is located in ____?\",\r\n            \"options\": {\r\n                \"1\": \"Konark\",\r\n                \"2\": \"Goa\",\r\n                \"3\": \"Delhi\",\r\n                \"4\": \"Gujrat\"\r\n            }\r\n        },\r\n        {\r\n            \"questionNumber\": 4,\r\n            \"question\": \"Which animal is know as ship of the desert?\",\r\n            \"options\": {\r\n                \"1\": \"Goat\",\r\n                \"2\": \"Cow\",\r\n                \"3\": \"Camel\",\r\n                \"4\": \"Titanic\"\r\n            }\r\n        },\r\n        {\r\n            \"questionNumber\": 5,\r\n            \"question\": \"How many letter are in the English alphabet?\",\r\n            \"options\": {\r\n                \"1\": \"27\",\r\n                \"2\": \"24\",\r\n                \"3\": \"25\",\r\n                \"4\": \"26\"\r\n            }\r\n        }\r\n    ],\r\n    \"answers\": {\r\n        \"1\": 2,\r\n        \"2\": 3,\r\n        \"3\": 1,\r\n        \"4\": 3,\r\n        \"5\": 4\r\n    },\r\n    \"passing_percentage\":80\r\n}",
+							"raw": "{\r\n    \"name\": \"GK Quiz 101\",\r\n    \"questionList\": [\r\n        {\r\n            \"questionNumber\": 1,\r\n            \"question\": \"What is the capital of Uttar Pradesh?\",\r\n            \"options\": {\r\n                \"1\": \"Varanasi\",\r\n                \"2\": \"Lucknow\",\r\n                \"3\": \"Dehradun\",\r\n                \"4\": \"Banglore\"\r\n            }\r\n        },\r\n        {\r\n            \"questionNumber\": 2,\r\n            \"question\": \"How many players are there in football team?\",\r\n            \"options\": {\r\n                \"1\": \"1\",\r\n                \"2\": \"2\",\r\n                \"3\": \"11\",\r\n                \"4\": \"20\"\r\n            }\r\n        },\r\n        {\r\n            \"questionNumber\": 3,\r\n            \"question\": \"Sun temple is located in ____?\",\r\n            \"options\": {\r\n                \"1\": \"Konark\",\r\n                \"2\": \"Goa\",\r\n                \"3\": \"Delhi\",\r\n                \"4\": \"Gujrat\"\r\n            }\r\n        },\r\n        {\r\n            \"questionNumber\": 4,\r\n            \"question\": \"Which animal is know as ship of the desert?\",\r\n            \"options\": {\r\n                \"1\": \"Goat\",\r\n                \"2\": \"Cow\",\r\n                \"3\": \"Camel\",\r\n                \"4\": \"Titanic\"\r\n            }\r\n        },\r\n        {\r\n            \"questionNumber\": 5,\r\n            \"question\": \"How many letter are in the English alphabet?\",\r\n            \"options\": {\r\n                \"1\": \"27\",\r\n                \"2\": \"24\",\r\n                \"3\": \"25\",\r\n                \"4\": \"26\"\r\n            }\r\n        }\r\n    ],\r\n    \"answers\": {\r\n        \"1\": 2,\r\n        \"2\": 3,\r\n        \"3\": 1,\r\n        \"4\": 3,\r\n        \"5\": 4\r\n    },\r\n    \"passingPercentage\":80\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -846,14 +846,14 @@
 				"auth": {
 					"type": "bearer",
 					"bearer": {
-						"token": "{{token2}}"
+						"token": "{{token1}}"
 					}
 				},
 				"method": "POST",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"quizId\":\"653f480005f6d6dbea8a5f7a\",\r\n    \"attemptedQuestion\":{\r\n        \"1\":1,\r\n        \"2\":2,\r\n        \"3\":2,\r\n        \"4\":4,\r\n        \"5\":2\r\n    }\r\n}",
+					"raw": "{\r\n    \"quizId\":\"65434b10d2bd136ff622335b\",\r\n    \"attemptedQuestion\":{\r\n        \"1\":2,\r\n        \"2\":3,\r\n        \"3\":1,\r\n        \"4\":3,\r\n        \"5\":4\r\n    }\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -914,6 +914,58 @@
 					],
 					"cookie": [],
 					"body": "{\n    \"status\": \"success\",\n    \"message\": \"Quiz submitted\",\n    \"data\": {\n        \"total\": 5,\n        \"score\": 0,\n        \"result\": \"Fail\",\n        \"reportId\": \"653f49b505f6d6dbea8a5fd5\"\n    }\n}"
+				},
+				{
+					"name": "Exam submit",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"quizId\":\"65434b10d2bd136ff622335b\",\r\n    \"attemptedQuestion\":{\r\n        \"1\":2,\r\n        \"2\":3,\r\n        \"3\":1,\r\n        \"4\":3,\r\n        \"5\":4\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "localhost:3002/exam"
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "130"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"82-SflFh7BaoSCx0MKu5vcCQMpOZPo\""
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 02 Nov 2023 07:10:32 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"success\",\n    \"message\": \"Quiz submitted\",\n    \"data\": {\n        \"total\": 5,\n        \"score\": 5,\n        \"result\": \"Pass\",\n        \"reportId\": \"65434b68d2bd136ff622337f\"\n    }\n}"
 				}
 			]
 		},
@@ -1169,7 +1221,7 @@
 						}
 					}
 				},
-				"url": "localhost:3002/user/changePassword"
+				"url": "localhost:3002/user/changepassword"
 			},
 			"response": [
 				{
@@ -1186,7 +1238,7 @@
 								}
 							}
 						},
-						"url": "localhost:3002/user/changePassword"
+						"url": "localhost:3002/user/changepassword"
 					},
 					"status": "OK",
 					"code": 200,
