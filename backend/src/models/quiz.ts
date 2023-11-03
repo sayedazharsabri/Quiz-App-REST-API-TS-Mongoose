@@ -21,7 +21,7 @@ const quizSchema = new schema(
       },
     ],
     answers: {},
-    passing_percentage: {
+    passingPercentage: {
       type: Number,
       required: true
     },

@@ -9,6 +9,7 @@ import {
   isValidQuizName,
   publishQuiz,
   updateQuiz,
+  getAllQuiz
 } from "../controllers/quiz";
 import { validateRequest } from "../helper/validateRequest";
 import { isAuthenticated } from "../middlewares/isAuth";
@@ -62,6 +63,9 @@ router.post(
   validateRequest,
   createQuiz
 );
+
+//Get  quiz/allpublished quiz
+router.get("/allpublishedquiz",isAuthenticated, getAllQuiz);
 
 // get
 // GET /quiz/:quizId

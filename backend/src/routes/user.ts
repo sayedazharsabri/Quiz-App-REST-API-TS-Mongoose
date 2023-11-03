@@ -30,7 +30,7 @@ router.patch("/deactivate", isAuthenticated, deactivateUser);
 
 //Put  /user/changepassword
 router.put(
-  "/changePassword",
+  "/changepassword",
   isAuthenticated,
   [
     body("newPassword")
