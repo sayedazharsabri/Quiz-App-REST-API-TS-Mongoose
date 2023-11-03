@@ -11,8 +11,11 @@ const startExam: RequestHandler = async (req, res, next) => {
     const quizId = req.params.quizId;
     const quiz = await Quiz.findById(quizId, {
       name: 1,
+      category: 1,
       questionList: 1,
       isPublished: 1,
+      attemptedUsers: 1,
+      attemptsAllowedPerUser: 1
     });
 
     if (!quiz) {
@@ -26,6 +29,33 @@ const startExam: RequestHandler = async (req, res, next) => {
       err.statusCode = 405;
       throw err;
     }
+
+    if (quiz.category === "test") {
+
+      if (quiz.attemptsAllowedPerUser !== undefined) {
+
+        if (quiz.attemptedUsers.some(obj => obj.id!.toString() === req.userId.toString())) {
+          const checkUser = quiz.attemptedUsers.find(obj => obj.id!.toString() === req.userId.toString());
+          if (checkUser) {
+            if (checkUser.attemptsLeft! > 0) {
+              checkUser.attemptsLeft! -= 1;
+              const updated = await quiz.save();
+            }
+            else {
+              const err = new ProjectError("You have zero attempts left!");
+              err.statusCode = 405;
+              throw err;
+            }
+          }
+        }
+        else {
+          const newUser = { id: req.userId!.toString(), attemptsLeft: quiz.attemptsAllowedPerUser! - 1 };
+          quiz.attemptedUsers.push(newUser);
+          const updated = await quiz.save();
+        }
+      }
+    }
+
     const resp: ReturnResponse = {
       status: "success",
       message: "Quiz",
@@ -42,14 +72,14 @@ const submitExam: RequestHandler = async (req, res, next) => {
     const quizId = req.body.quizId;
     const attemptedQuestion = req.body.attemptedQuestion;
 
-    const quiz = await Quiz.findById(quizId, { answers: 1, passingPercentage:1 });
+    const quiz = await Quiz.findById(quizId, { answers: 1, passingPercentage: 1 });
     if (!quiz) {
       const err = new ProjectError("No quiz found!");
       err.statusCode = 404;
       throw err;
     }
     const answers = quiz.answers;
-    const passingPercentage=quiz.passingPercentage;
+    const passingPercentage = quiz.passingPercentage;
 
     const userId = req.userId;
     const allQuestions = Object.keys(answers);
@@ -66,24 +96,24 @@ const submitExam: RequestHandler = async (req, res, next) => {
         score = score + 1;
       }
     }
-    
-    let result="";
-    let percentage=0;
-    percentage=score/total*100;
 
-    if(percentage>=passingPercentage){
-      result+="Pass";
+    let result = "";
+    let percentage = 0;
+    percentage = score / total * 100;
+
+    if (percentage >= passingPercentage) {
+      result += "Pass";
     }
-    else{
-      result+="Fail";
+    else {
+      result += "Fail";
     }
 
-    const report = new Report({ userId, quizId, score, total,percentage, result });
+    const report = new Report({ userId, quizId, score, total, percentage, result });
     const data = await report.save();
     const resp: ReturnResponse = {
       status: "success",
       message: "Quiz submitted",
-      data: { total, score,result, reportId: data._id },
+      data: { total, score, result, reportId: data._id },
     };
     res.status(200).send(resp);
   } catch (error) {

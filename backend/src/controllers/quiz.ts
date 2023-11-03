@@ -13,8 +13,10 @@ const createQuiz: RequestHandler = async (req, res, next) => {
     const questionList = req.body.questionList;
     const answers = req.body.answers;
     const passingPercentage = req.body.passingPercentage;
+    const attemptsAllowedPerUser = req.body.attemptsAllowedPerUser;
+    const attemptedUsers = req.body.attemptedUsers;
 
-    const quiz = new Quiz({ name, category, questionList, answers, passingPercentage, createdBy });
+    const quiz = new Quiz({ name, category, questionList, answers, passingPercentage, createdBy, attemptsAllowedPerUser, attemptedUsers });
     const result = await quiz.save();
     const resp: ReturnResponse = {
       status: "success",
@@ -234,11 +236,12 @@ const getAllQuiz: RequestHandler = async (req, res, next) => {
       category: 1,
       questionList: 1,
       createdBy: 1,
-      passingPercentage: 1
+      passingPercentage: 1,
+      attemptsAllowedPerUser: 1
     });
     //filter quizzes created by user itself
     quiz = quiz.filter(item => item.createdBy.toString() !== req.userId);
-    
+
     if (!quiz) {
       const err = new ProjectError("No quiz found!");
       err.statusCode = 404;
