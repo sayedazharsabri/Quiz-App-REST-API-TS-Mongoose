@@ -6,9 +6,9 @@ import examRoute from "./routes/exam";
 import quizRoute from "./routes/quiz";
 import reportRoute from "./routes/report";
 import userRoute from "./routes/user";
-
 import ProjectError from "./helper/error";
 import { ReturnResponse } from "./utils/interfaces";
+
 const app = express();
 
 const connectionString = process.env.CONNECTION_STRING || "";
