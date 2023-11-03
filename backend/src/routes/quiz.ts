@@ -9,6 +9,7 @@ import {
   isValidQuizName,
   publishQuiz,
   updateQuiz,
+  getAllQuiz
 } from "../controllers/quiz";
 import { validateRequest } from "../helper/validateRequest";
 import { isAuthenticated } from "../middlewares/isAuth";
@@ -38,6 +39,13 @@ router.post(
             return Promise.reject(err);
           });
       }),
+    body("category")
+      .trim()
+      .not()
+      .isEmpty()
+      .toLowerCase()
+      .isIn(['test', 'exam'])
+      .withMessage("category can only be 'test' or 'exam'"),
     body("questionList").custom((questionList, { req }) => {
       return isValidQuiz(questionList, req.body["answers"])
         .then((status: Boolean) => {
@@ -55,6 +63,9 @@ router.post(
   validateRequest,
   createQuiz
 );
+
+//Get  quiz/allpublished quiz
+router.get("/allpublishedquiz",isAuthenticated, getAllQuiz);
 
 // get
 // GET /quiz/:quizId

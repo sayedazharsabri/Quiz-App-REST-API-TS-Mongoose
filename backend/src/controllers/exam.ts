@@ -42,13 +42,14 @@ const submitExam: RequestHandler = async (req, res, next) => {
     const quizId = req.body.quizId;
     const attemptedQuestion = req.body.attemptedQuestion;
 
-    const quiz = await Quiz.findById(quizId, { answers: 1 });
+    const quiz = await Quiz.findById(quizId, { answers: 1, passingPercentage:1 });
     if (!quiz) {
       const err = new ProjectError("No quiz found!");
       err.statusCode = 404;
       throw err;
     }
     const answers = quiz.answers;
+    const passingPercentage=quiz.passingPercentage;
 
     const userId = req.userId;
     const allQuestions = Object.keys(answers);
@@ -65,13 +66,24 @@ const submitExam: RequestHandler = async (req, res, next) => {
         score = score + 1;
       }
     }
+    
+    let result="";
+    let percentage=0;
+    percentage=score/total*100;
 
-    const report = new Report({ userId, quizId, score, total });
+    if(percentage>=passingPercentage){
+      result+="Pass";
+    }
+    else{
+      result+="Fail";
+    }
+
+    const report = new Report({ userId, quizId, score, total,percentage, result });
     const data = await report.save();
     const resp: ReturnResponse = {
       status: "success",
       message: "Quiz submitted",
-      data: { total, score, reportId: data._id },
+      data: { total, score,result, reportId: data._id },
     };
     res.status(200).send(resp);
   } catch (error) {
