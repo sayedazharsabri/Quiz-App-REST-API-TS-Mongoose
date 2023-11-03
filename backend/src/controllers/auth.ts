@@ -59,13 +59,13 @@ const loginUser: RequestHandler = async (req, res, next) => {
     //verify password using bcrypt
     const status = await bcrypt.compare(password, user.password);
     //then decide
-    if (user?.accountblocked) { //if account is blocked due to multiple attempts it is checking the remaining time left to unblock the account
-      const time = 86400 - (new Date().getTime() - user?.FreezeTime.getTime()) / 1000;
+    if (user?.accountBlocked) { //if account is blocked due to multiple attempts it is checking the remaining time left to unblock the account
+      const time = 86400 - (new Date().getTime() - user?.freezeTime.getTime()) / 1000;
       const hoursLeft = Math.floor(time / (60 * 60));
       const minutesLeft = Math.floor((time / 60) - (hoursLeft * 60));
       if (hoursLeft <= 0 && minutesLeft <= 0) { //This function is used if the limit of time is over it will unblock the account
-        user && (user.RemainingTry = 3);
-        user && (user.accountblocked = false)
+        user && (user.remainingTry = 3);
+        user && (user.accountBlocked = false)
         user && (user.temperoryKey = '')
         await user?.save();
       }
@@ -75,31 +75,31 @@ const loginUser: RequestHandler = async (req, res, next) => {
         throw err;
       }
     }
-    if (status && !user?.accountblocked) {
+    if (status && !user?.accountBlocked) {
       const token = jwt.sign({ userId: user._id }, secretKey, {
         expiresIn: "1h",
       });
 
-      user && (user.RemainingTry = 3);
+      user && (user.remainingTry = 3);
       user && (user.temperoryKey = '');
-      user && (user.accountblocked = false);
-      user && (user.istempkeyused = false);
+      user && (user.accountBlocked = false);
+      user && (user.isTempKeyUsed = false);
 
       await user?.save();
       resp = { status: "success", message: "Logged in", data: { token } };
       res.status(200).send(resp);
     } else {  //This function is used if the password is wrong it will decrease the remaining try by 1 and if the remaining try is 0 it will throw an error for the maximum invalid attempts
-      const updated = await User.findOneAndUpdate({ email: user.email }, { $inc: { RemainingTry: -1 } }, { new: true })
-      if (updated && updated?.RemainingTry < 1) {
-        if (updated?.temperoryKey.length && !updated?.accountblocked) {
-          user?.istempkeyused && (updated.accountblocked = true);
-          user?.istempkeyused && (updated.temperoryKey = '');
-          updated && (updated.FreezeTime = new Date());
+      const updated = await User.findOneAndUpdate({ email: user.email }, { $inc: { remainingTry: -1 } }, { new: true })
+      if (updated && updated?.remainingTry < 1) {
+        if (updated?.temperoryKey.length && !updated?.accountBlocked) {
+          user?.isTempKeyUsed && (updated.accountBlocked = true);
+          user?.isTempKeyUsed && (updated.temperoryKey = '');
+          updated && (updated.freezeTime = new Date());
           await updated?.save();
 
           //This function is used if the account is blocked user will recieve an email with a temperory key to activate the account if it is used and still invalid tries take place it will blocks the account for 24 hours otherwise it will tell the user to check your registered email address
 
-          const err = new ProjectError(`${user?.istempkeyused ? "Your account have been blocked due to multiple attempts for 24 hours" : "Your Account has been deactivated check your registered email for further instructions!"}`);
+          const err = new ProjectError(`${user?.isTempKeyUsed ? "Your account have been blocked due to multiple attempts for 24 hours" : "Your Account has been deactivated check your registered email for further instructions!"}`);
           err.statusCode = 401;
           throw err;
         }
@@ -107,7 +107,7 @@ const loginUser: RequestHandler = async (req, res, next) => {
         //The following formula is used to generate an 8 digit temperory key and generate the email to the user and calculate the freezee time and temperory key
         const temperoryKey = Math.random().toString(36).substring(2, 10);
         generateEmail(updated?.name || '', temperoryKey, updated?.email || '');
-        updated && (updated.FreezeTime = new Date());
+        updated && (updated.freezeTime = new Date());
         updated && (updated.temperoryKey = temperoryKey);
         await updated?.save();
         const err = new ProjectError(`Your Account has been deactivated check your registered email for further instructions`);
@@ -115,7 +115,7 @@ const loginUser: RequestHandler = async (req, res, next) => {
         throw err;
       }
       //If the password is wrong it will throw an error with the remaining try
-      const err = new ProjectError(`Credential mismatch Try Left ${updated && (updated?.RemainingTry)}`);
+      const err = new ProjectError(`Credential mismatch Try Left ${updated && (updated?.remainingTry)}`);
       err.statusCode = 401;
       throw err;
     }
@@ -135,8 +135,8 @@ const activateAccount: RequestHandler = async (req, res, next) => {
       throw err;
     }
     if (req.body.key == user?.temperoryKey) {
-      user && (user.RemainingTry = 1);
-      user && (user.istempkeyused = true)
+      user && (user.remainingTry = 1);
+      user && (user.isTempKeyUsed = true)
       await user?.save();
       const resp = { status: "success", message: "Key Validated you have only attempt for login" };
       res.status(302).send(resp);

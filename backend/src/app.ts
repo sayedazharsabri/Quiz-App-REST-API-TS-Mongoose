@@ -13,7 +13,7 @@ const app = express();
 
 const connectionString = process.env.CONNECTION_STRING || "";
 
-const port = process.env.PORT || 3002;
+const port = process.env.PORT;
 
 app.use(express.json());
 declare global {

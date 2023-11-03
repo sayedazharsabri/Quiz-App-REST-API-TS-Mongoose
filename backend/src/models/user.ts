@@ -23,7 +23,7 @@ const userSchema = new schema(
       type: Boolean,
       default: false,
     },
-    RemainingTry: {
+    remainingTry: {
       type: Number,
       default: 3,
     },
@@ -31,15 +31,15 @@ const userSchema = new schema(
       type:String,
       default: ''
     },
-    FreezeTime: { //It is used to calculate the remaining try if account is blocked due to maximum invalid tries
+    freezeTime: { //It is used to calculate the remaining try if account is blocked due to maximum invalid tries
       type: Date,
       default: new Date()
     },
-    accountblocked: { //It shows whether the account is blocked or not
+    accountBlocked: { //It shows whether the account is blocked or not
       type: Boolean,
       default: false
     },
-    istempkeyused: { //It shows whether the temperory key is used or not
+    isTempKeyUsed: { //It shows whether the temperory key is used or not
       type: Boolean,
       default: false
     },
