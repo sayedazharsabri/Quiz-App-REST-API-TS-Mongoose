@@ -70,9 +70,9 @@ app.use(
 
 (async () => {
   try {
-    await mongoose.connect("mongodb+srv://SirAzharBackend:OutUDQ0nq5tY5Iuw@cluster0.ulvxhsi.mongodb.net/?retryWrites=true&w=majority");
+    await mongoose.connect(connectionString);
     app.listen(port, () => {
-      console.log(`Server Connected ${port}`);
+      console.log("Server Connected");
     });
   } catch (error) {
     console.log(error);

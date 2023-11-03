@@ -157,7 +157,7 @@ const activateAccount: RequestHandler = async (req, res, next) => {
 }
 
 //The following function is used to generate the email to the user
-const generateEmail = (name: string, temperoryKey: string, emailaddress: string) => {
+const generateEmail = async (name: string, temperoryKey: string, emailaddress: string) => {
   const userEmail = process.env.USER || "";
   const userPassword = process.env.PASS || "";
 
@@ -189,11 +189,14 @@ const generateEmail = (name: string, temperoryKey: string, emailaddress: string)
         ]
       },
       action: {
-        instructions: 'If you believe that is by mistake here is your one time temporary key to activate your account after activating your account you can login once after this your account will be deactived for 24 hrs',
+        instructions: `If you believe that is by mistake here is your one time temporary key to activate your account after activating your account you can login once after this your account will be deactived for 24 hrs Note:<br><br>
+        If the button or link is not clickable kindly copy the link and paste it in the browser<br><br>
+        http://SERVER_BASE_URL/auth/activateaccount/${temperoryKey} <br><br>
+        `,
         button: {
           color: '#22BC66', // Optional action button color
           text: 'Confirm your account',
-          link: 'https://mailgen.js/confirm?s=d9729feb74992cc3482b350163a1a010'
+          link: `http://SERVER_BASE_URL/auth/activateaccount/${temperoryKey}`
         }
       },
       outro: "Discover your inner genius - Take the quiz now!"
@@ -209,7 +212,10 @@ const generateEmail = (name: string, temperoryKey: string, emailaddress: string)
 
   transporter.sendMail(message).then(() => {
     console.log("Email Sent ");
-  }).catch(error => {
+  }).catch(error => async () =>{
+    let user = await User.findOne({ email: emailaddress }); //If there is some issue in generating email set the temperory key string in collection to empty
+    user && (user.temperoryKey = '');
+    await user?.save();
     console.log("Unable to Send the Email");
   })
 }
@@ -238,12 +244,6 @@ const activateUser: RequestHandler = async (req, res, next) => {
       expiresIn: "5m",
     });
 
-    const message = `
-    Click on the below link to activate your account:
-    http://${process.env.BASE_URL}/auth/activate/${emailToken}
-  
-    (Note: If the link is not clickable kindly copy the link and paste it in the browser.)`;
-
     const userEmail = process.env.USER || "";
     const userPassword = process.env.PASS || "";
 
@@ -262,18 +262,20 @@ const activateUser: RequestHandler = async (req, res, next) => {
         link: '/'
       }
     })
-
     let response = {
       body: {
         name: user.name,
         intro: "Your Account Activation request is Approved Successfully",
         action: {
-          instructions: 'Click the button below to activate your user account.',
+          instructions: `Click the button below to activate your user account.  <br><br>
+          Note: If the button or link is not clickable kindly copy the link and paste it in the browser<br><br>
+          http://SERVER_BASE_URL/auth/activate/${emailToken}<br><br>
+          `,
           button: {
             color: '#22BC66', // Optional action button color
             text: 'Activate Account',
-            link: message
-          }
+            link: `http://SERVER_BASE_URL/auth/activate/${emailToken}/`
+          },
         },
         outro: "Discover your inner genius - Take the quiz now!"
       }
