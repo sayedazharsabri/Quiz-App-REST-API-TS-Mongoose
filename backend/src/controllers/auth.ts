@@ -22,6 +22,25 @@ const registerUser: RequestHandler = async (req, res, next) => {
     const name = req.body.name;
     let password = await bcrypt.hash(req.body.password, 12);
 
+
+    const otp = req.body.otp;
+    // Find the most recent OTP for the email
+    const response = await OTP.find({ email }).sort({ createdAt: -1 }).limit(1);
+    console.log("Response OTP : ", response);
+    if (response.length === 0) {
+      // OTP not found for the email
+      const err = new ProjectError("OTP has not send on this email ");
+      err.statusCode = 400;
+      throw err;
+
+    }
+    else if (otp != response[0].otp) {
+      // The otp is not valid
+      const err = new ProjectError("Incorrect OTP");
+      err.statusCode = 400;
+      throw err;
+    }
+
     const user = new User({ email, name, password });
     const result = await user.save();
     if (!result) {
