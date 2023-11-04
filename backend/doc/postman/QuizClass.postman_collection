@@ -1,9 +1,9 @@
 {
 	"info": {
-		"_postman_id": "e38e85b7-a785-416c-8c12-b2624f020e8d",
-		"name": "QuizClass Copy",
-		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
-		"_exporter_id": "30240998"
+		"_postman_id": "7988ba49-34ca-4223-a831-06de32da5423",
+		"name": "QuizClass Copy 3",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "23659079"
 	},
 	"item": [
 		{
@@ -13,14 +13,23 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"name\":\"Aarush\",\r\n    \"email\":\"aarush@gmail.com\",\r\n    \"password\": \"Password@12345\",\r\n    \"confirmPassword\":\"Password@12345\"\r\n}",
+					"raw": "{\r\n    \"name\":\"Aarush\",\r\n    \"email\":\"aarush@gmail.com\",\r\n    \"password\": \"Password@12345\",\r\n    \"confirmPassword\":\"Password@12345\",\r\n    \"otp\":432156\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
 						}
 					}
 				},
-				"url": "localhost:3002/auth",
+				"url": {
+					"raw": "localhost:3002/auth",
+					"host": [
+						"localhost"
+					],
+					"port": "3002",
+					"path": [
+						"auth"
+					]
+				},
 				"description": "This API wiil use to register user"
 			},
 			"response": [
@@ -31,14 +40,23 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\":\"Aarush\",\r\n    \"email\":\"aarush@gmail.com\",\r\n    \"password\": \"Password@12345\",\r\n    \"confirmPassword\":\"Password@12345\"\r\n}",
+							"raw": "{\r\n    \"name\":\"Aarush\",\r\n    \"email\":\"aarush@gmail.com\",\r\n    \"password\": \"Password@12345\",\r\n    \"confirmPassword\":\"Password@12345\",\r\n    \"otp\":432156\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
 								}
 							}
 						},
-						"url": "localhost:3002/auth"
+						"url": {
+							"raw": "localhost:3002/auth",
+							"host": [
+								"localhost"
+							],
+							"port": "3002",
+							"path": [
+								"auth"
+							]
+						}
 					},
 					"status": "Created",
 					"code": 201,
@@ -92,7 +110,17 @@
 						}
 					}
 				},
-				"url": "localhost:3002/auth/login",
+				"url": {
+					"raw": "localhost:3002/auth/login",
+					"host": [
+						"localhost"
+					],
+					"port": "3002",
+					"path": [
+						"auth",
+						"login"
+					]
+				},
 				"description": "Login for user"
 			},
 			"response": [
@@ -110,7 +138,17 @@
 								}
 							}
 						},
-						"url": "localhost:3002/auth/login"
+						"url": {
+							"raw": "localhost:3002/auth/login",
+							"host": [
+								"localhost"
+							],
+							"port": "3002",
+							"path": [
+								"auth",
+								"login"
+							]
+						}
 					},
 					"status": "OK",
 					"code": 200,
@@ -247,13 +285,26 @@
 			"request": {
 				"auth": {
 					"type": "bearer",
-					"bearer": {
-						"token": "{{token1}}"
-					}
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token1}}",
+							"type": "string"
+						}
+					]
 				},
 				"method": "GET",
 				"header": [],
-				"url": "localhost:3002/user"
+				"url": {
+					"raw": "localhost:3002/user",
+					"host": [
+						"localhost"
+					],
+					"port": "3002",
+					"path": [
+						"user"
+					]
+				}
 			},
 			"response": [
 				{
@@ -261,7 +312,16 @@
 					"originalRequest": {
 						"method": "GET",
 						"header": [],
-						"url": "localhost:3002/user"
+						"url": {
+							"raw": "localhost:3002/user",
+							"host": [
+								"localhost"
+							],
+							"port": "3002",
+							"path": [
+								"user"
+							]
+						}
 					},
 					"status": "OK",
 					"code": 200,
@@ -306,9 +366,13 @@
 			"request": {
 				"auth": {
 					"type": "bearer",
-					"bearer": {
-						"token": "{{token1}}"
-					}
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token1}}",
+							"type": "string"
+						}
+					]
 				},
 				"method": "PUT",
 				"header": [],
@@ -321,7 +385,16 @@
 						}
 					}
 				},
-				"url": "localhost:3002/user"
+				"url": {
+					"raw": "localhost:3002/user",
+					"host": [
+						"localhost"
+					],
+					"port": "3002",
+					"path": [
+						"user"
+					]
+				}
 			},
 			"response": [
 				{
@@ -338,7 +411,16 @@
 								}
 							}
 						},
-						"url": "localhost:3002/user"
+						"url": {
+							"raw": "localhost:3002/user",
+							"host": [
+								"localhost"
+							],
+							"port": "3002",
+							"path": [
+								"user"
+							]
+						}
 					},
 					"status": "OK",
 					"code": 200,
@@ -383,9 +465,13 @@
 			"request": {
 				"auth": {
 					"type": "bearer",
-					"bearer": {
-						"token": "{{token1}}"
-					}
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token1}}",
+							"type": "string"
+						}
+					]
 				},
 				"method": "POST",
 				"header": [],
@@ -398,7 +484,16 @@
 						}
 					}
 				},
-				"url": "localhost:3002/quiz"
+				"url": {
+					"raw": "localhost:3002/quiz",
+					"host": [
+						"localhost"
+					],
+					"port": "3002",
+					"path": [
+						"quiz"
+					]
+				}
 			},
 			"response": [
 				{
@@ -415,7 +510,16 @@
 								}
 							}
 						},
-						"url": "localhost:3002/quiz"
+						"url": {
+							"raw": "localhost:3002/quiz",
+							"host": [
+								"localhost"
+							],
+							"port": "3002",
+							"path": [
+								"quiz"
+							]
+						}
 					},
 					"status": "Created",
 					"code": 201,
@@ -460,13 +564,26 @@
 			"request": {
 				"auth": {
 					"type": "bearer",
-					"bearer": {
-						"token": "{{token1}}"
-					}
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token1}}",
+							"type": "string"
+						}
+					]
 				},
 				"method": "GET",
 				"header": [],
-				"url": "localhost:3002/quiz",
+				"url": {
+					"raw": "localhost:3002/quiz",
+					"host": [
+						"localhost"
+					],
+					"port": "3002",
+					"path": [
+						"quiz"
+					]
+				},
 				"description": "send quizId for particular quiz otherwise you will get all the quizzes"
 			},
 			"response": [
@@ -475,7 +592,17 @@
 					"originalRequest": {
 						"method": "GET",
 						"header": [],
-						"url": "localhost:3002/quiz/654221eff3a51d95a2002ed2"
+						"url": {
+							"raw": "localhost:3002/quiz/654221eff3a51d95a2002ed2",
+							"host": [
+								"localhost"
+							],
+							"port": "3002",
+							"path": [
+								"quiz",
+								"654221eff3a51d95a2002ed2"
+							]
+						}
 					},
 					"status": "OK",
 					"code": 200,
@@ -518,7 +645,16 @@
 					"originalRequest": {
 						"method": "GET",
 						"header": [],
-						"url": "localhost:3002/quiz"
+						"url": {
+							"raw": "localhost:3002/quiz",
+							"host": [
+								"localhost"
+							],
+							"port": "3002",
+							"path": [
+								"quiz"
+							]
+						}
 					},
 					"status": "OK",
 					"code": 200,
@@ -561,7 +697,17 @@
 					"originalRequest": {
 						"method": "GET",
 						"header": [],
-						"url": "localhost:3002/quiz/651a866f55af3c91a38f01b0"
+						"url": {
+							"raw": "localhost:3002/quiz/651a866f55af3c91a38f01b0",
+							"host": [
+								"localhost"
+							],
+							"port": "3002",
+							"path": [
+								"quiz",
+								"651a866f55af3c91a38f01b0"
+							]
+						}
 					},
 					"status": "OK",
 					"code": 200,
@@ -606,13 +752,27 @@
 			"request": {
 				"auth": {
 					"type": "bearer",
-					"bearer": {
-						"token": "{{token1}}"
-					}
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token1}}",
+							"type": "string"
+						}
+					]
 				},
 				"method": "GET",
 				"header": [],
-				"url": "localhost:3002/quiz/allpublishedquiz"
+				"url": {
+					"raw": "localhost:3002/quiz/allpublishedquiz",
+					"host": [
+						"localhost"
+					],
+					"port": "3002",
+					"path": [
+						"quiz",
+						"allpublishedquiz"
+					]
+				}
 			},
 			"response": [
 				{
@@ -620,7 +780,17 @@
 					"originalRequest": {
 						"method": "GET",
 						"header": [],
-						"url": "localhost:3002/quiz/allPublishedQuiz"
+						"url": {
+							"raw": "localhost:3002/quiz/allPublishedQuiz",
+							"host": [
+								"localhost"
+							],
+							"port": "3002",
+							"path": [
+								"quiz",
+								"allPublishedQuiz"
+							]
+						}
 					},
 					"status": "OK",
 					"code": 200,
@@ -665,9 +835,13 @@
 			"request": {
 				"auth": {
 					"type": "bearer",
-					"bearer": {
-						"token": "{{token1}}"
-					}
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token1}}",
+							"type": "string"
+						}
+					]
 				},
 				"method": "PUT",
 				"header": [],
@@ -680,7 +854,16 @@
 						}
 					}
 				},
-				"url": "localhost:3002/quiz"
+				"url": {
+					"raw": "localhost:3002/quiz",
+					"host": [
+						"localhost"
+					],
+					"port": "3002",
+					"path": [
+						"quiz"
+					]
+				}
 			},
 			"response": [
 				{
@@ -697,7 +880,16 @@
 								}
 							}
 						},
-						"url": "localhost:3002/quiz"
+						"url": {
+							"raw": "localhost:3002/quiz",
+							"host": [
+								"localhost"
+							],
+							"port": "3002",
+							"path": [
+								"quiz"
+							]
+						}
 					},
 					"status": "OK",
 					"code": 200,
@@ -742,13 +934,27 @@
 			"request": {
 				"auth": {
 					"type": "bearer",
-					"bearer": {
-						"token": "{{token1}}"
-					}
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token1}}",
+							"type": "string"
+						}
+					]
 				},
 				"method": "DELETE",
 				"header": [],
-				"url": "localhost:3002/quiz/653bd175e31adc60bd18cb43"
+				"url": {
+					"raw": "localhost:3002/quiz/653bd175e31adc60bd18cb43",
+					"host": [
+						"localhost"
+					],
+					"port": "3002",
+					"path": [
+						"quiz",
+						"653bd175e31adc60bd18cb43"
+					]
+				}
 			},
 			"response": [
 				{
@@ -756,7 +962,17 @@
 					"originalRequest": {
 						"method": "DELETE",
 						"header": [],
-						"url": "localhost:3002/quiz/651a866f55af3c91a38f01b0"
+						"url": {
+							"raw": "localhost:3002/quiz/651a866f55af3c91a38f01b0",
+							"host": [
+								"localhost"
+							],
+							"port": "3002",
+							"path": [
+								"quiz",
+								"651a866f55af3c91a38f01b0"
+							]
+						}
 					},
 					"status": "OK",
 					"code": 200,
@@ -801,9 +1017,13 @@
 			"request": {
 				"auth": {
 					"type": "bearer",
-					"bearer": {
-						"token": "{{token1}}"
-					}
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token1}}",
+							"type": "string"
+						}
+					]
 				},
 				"method": "PATCH",
 				"header": [],
@@ -816,7 +1036,17 @@
 						}
 					}
 				},
-				"url": "localhost:3002/quiz/publish"
+				"url": {
+					"raw": "localhost:3002/quiz/publish",
+					"host": [
+						"localhost"
+					],
+					"port": "3002",
+					"path": [
+						"quiz",
+						"publish"
+					]
+				}
 			},
 			"response": [
 				{
@@ -833,7 +1063,17 @@
 								}
 							}
 						},
-						"url": "localhost:3002/quiz/publish"
+						"url": {
+							"raw": "localhost:3002/quiz/publish",
+							"host": [
+								"localhost"
+							],
+							"port": "3002",
+							"path": [
+								"quiz",
+								"publish"
+							]
+						}
 					},
 					"status": "OK",
 					"code": 200,
@@ -878,13 +1118,27 @@
 			"request": {
 				"auth": {
 					"type": "bearer",
-					"bearer": {
-						"token": "{{token2}}"
-					}
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token2}}",
+							"type": "string"
+						}
+					]
 				},
 				"method": "GET",
 				"header": [],
-				"url": "localhost:3002/exam/651a858655af3c91a38f01a6"
+				"url": {
+					"raw": "localhost:3002/exam/651a858655af3c91a38f01a6",
+					"host": [
+						"localhost"
+					],
+					"port": "3002",
+					"path": [
+						"exam",
+						"651a858655af3c91a38f01a6"
+					]
+				}
 			},
 			"response": [
 				{
@@ -892,7 +1146,17 @@
 					"originalRequest": {
 						"method": "GET",
 						"header": [],
-						"url": "localhost:3002/exam/651a858655af3c91a38f01a6"
+						"url": {
+							"raw": "localhost:3002/exam/651a858655af3c91a38f01a6",
+							"host": [
+								"localhost"
+							],
+							"port": "3002",
+							"path": [
+								"exam",
+								"651a858655af3c91a38f01a6"
+							]
+						}
 					},
 					"status": "OK",
 					"code": 200,
@@ -937,9 +1201,13 @@
 			"request": {
 				"auth": {
 					"type": "bearer",
-					"bearer": {
-						"token": "{{token1}}"
-					}
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token1}}",
+							"type": "string"
+						}
+					]
 				},
 				"method": "POST",
 				"header": [],
@@ -952,7 +1220,16 @@
 						}
 					}
 				},
-				"url": "localhost:3002/exam"
+				"url": {
+					"raw": "localhost:3002/exam",
+					"host": [
+						"localhost"
+					],
+					"port": "3002",
+					"path": [
+						"exam"
+					]
+				}
 			},
 			"response": [
 				{
@@ -969,7 +1246,16 @@
 								}
 							}
 						},
-						"url": "localhost:3002/exam"
+						"url": {
+							"raw": "localhost:3002/exam",
+							"host": [
+								"localhost"
+							],
+							"port": "3002",
+							"path": [
+								"exam"
+							]
+						}
 					},
 					"status": "OK",
 					"code": 200,
@@ -1021,7 +1307,16 @@
 								}
 							}
 						},
-						"url": "localhost:3002/exam"
+						"url": {
+							"raw": "localhost:3002/exam",
+							"host": [
+								"localhost"
+							],
+							"port": "3002",
+							"path": [
+								"exam"
+							]
+						}
 					},
 					"status": "OK",
 					"code": 200,
@@ -1066,13 +1361,27 @@
 			"request": {
 				"auth": {
 					"type": "bearer",
-					"bearer": {
-						"token": "{{token2}}"
-					}
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token2}}",
+							"type": "string"
+						}
+					]
 				},
 				"method": "GET",
 				"header": [],
-				"url": "localhost:3002/report/651a88a955af3c91a38f01f2"
+				"url": {
+					"raw": "localhost:3002/report/651a88a955af3c91a38f01f2",
+					"host": [
+						"localhost"
+					],
+					"port": "3002",
+					"path": [
+						"report",
+						"651a88a955af3c91a38f01f2"
+					]
+				}
 			},
 			"response": [
 				{
@@ -1080,7 +1389,17 @@
 					"originalRequest": {
 						"method": "GET",
 						"header": [],
-						"url": "localhost:3002/report/65420ef4929a1fd62d7525ab"
+						"url": {
+							"raw": "localhost:3002/report/65420ef4929a1fd62d7525ab",
+							"host": [
+								"localhost"
+							],
+							"port": "3002",
+							"path": [
+								"report",
+								"65420ef4929a1fd62d7525ab"
+							]
+						}
 					},
 					"status": "OK",
 					"code": 200,
@@ -1123,7 +1442,16 @@
 					"originalRequest": {
 						"method": "GET",
 						"header": [],
-						"url": "localhost:3002/report"
+						"url": {
+							"raw": "localhost:3002/report",
+							"host": [
+								"localhost"
+							],
+							"port": "3002",
+							"path": [
+								"report"
+							]
+						}
 					},
 					"status": "OK",
 					"code": 200,
@@ -1168,13 +1496,27 @@
 			"request": {
 				"auth": {
 					"type": "bearer",
-					"bearer": {
-						"token": "{{token2}}"
-					}
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token2}}",
+							"type": "string"
+						}
+					]
 				},
 				"method": "PATCH",
 				"header": [],
-				"url": "localhost:3002/user/deactivate"
+				"url": {
+					"raw": "localhost:3002/user/deactivate",
+					"host": [
+						"localhost"
+					],
+					"port": "3002",
+					"path": [
+						"user",
+						"deactivate"
+					]
+				}
 			},
 			"response": [
 				{
@@ -1182,7 +1524,17 @@
 					"originalRequest": {
 						"method": "PATCH",
 						"header": [],
-						"url": "localhost:3002/user/deactivate"
+						"url": {
+							"raw": "localhost:3002/user/deactivate",
+							"host": [
+								"localhost"
+							],
+							"port": "3002",
+							"path": [
+								"user",
+								"deactivate"
+							]
+						}
 					},
 					"status": "OK",
 					"code": 200,
@@ -1218,7 +1570,7 @@
 						}
 					],
 					"cookie": [],
-					"body": "{\n    \"status\": \"success\",\n    \"message\": \"User deactivated!\",\n    \"data\": {}\n}"
+					"body": "{\n    \"status\": \"success\",\n    \"message\": \"An Email has been sent to your account please verify!\",\n    \"data\": {}\n}"
 				}
 			]
 		},
@@ -1236,7 +1588,17 @@
 						}
 					}
 				},
-				"url": "localhost:3002/auth/activate"
+				"url": {
+					"raw": "localhost:3002/auth/activate",
+					"host": [
+						"localhost"
+					],
+					"port": "3002",
+					"path": [
+						"auth",
+						"activate"
+					]
+				}
 			},
 			"response": [
 				{
@@ -1253,7 +1615,17 @@
 								}
 							}
 						},
-						"url": "localhost:3002/auth/activate"
+						"url": {
+							"raw": "localhost:3002/auth/activate",
+							"host": [
+								"localhost"
+							],
+							"port": "3002",
+							"path": [
+								"auth",
+								"activate"
+							]
+						}
 					},
 					"status": "OK",
 					"code": 200,
@@ -1298,9 +1670,13 @@
 			"request": {
 				"auth": {
 					"type": "bearer",
-					"bearer": {
-						"token": "{{token1}}"
-					}
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token1}}",
+							"type": "string"
+						}
+					]
 				},
 				"method": "PUT",
 				"header": [],
@@ -1313,7 +1689,17 @@
 						}
 					}
 				},
-				"url": "localhost:3002/user/changepassword"
+				"url": {
+					"raw": "localhost:3002/user/changepassword",
+					"host": [
+						"localhost"
+					],
+					"port": "3002",
+					"path": [
+						"user",
+						"changepassword"
+					]
+				}
 			},
 			"response": [
 				{
@@ -1330,7 +1716,17 @@
 								}
 							}
 						},
-						"url": "localhost:3002/user/changepassword"
+						"url": {
+							"raw": "localhost:3002/user/changepassword",
+							"host": [
+								"localhost"
+							],
+							"port": "3002",
+							"path": [
+								"user",
+								"changepassword"
+							]
+						}
 					},
 					"status": "OK",
 					"code": 200,
@@ -1369,6 +1765,87 @@
 					"body": "{\n    \"status\": \"success\",\n    \"message\": \"Password updated\",\n    \"data\": {}\n}"
 				}
 			]
+		},
+		{
+			"name": "otp-send",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\":\"aarush@gmail.com\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3002/auth/send-otp",
+					"host": [
+						"localhost"
+					],
+					"port": "3002",
+					"path": [
+						"auth",
+						"send-otp"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "otp-send",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\":\"aarush@gmail.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3002/auth/send-otp",
+							"host": [
+								"localhost"
+							],
+							"port": "3002",
+							"path": [
+								"auth",
+								"send-otp"
+							]
+						}
+					},
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": "{\r\n    \"status\": \"success\",\r\n    \"message\": \"OTP send successfully\",\r\n    \"data\": {\r\n        \"otp\": \"165558\"\r\n    }\r\n}"
+				}
+			]
+		},
+		{
+			"name": "verify-email-link",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3002/user/deactivate/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NTNmZmYxY2U2ZGU4ODAzYjQyMmFmOTEiLCJpYXQiOjE2OTg2OTMwMTksImV4cCI6MTY5ODY5MzMxOX0.eZe7n05B_SvZAnGaZ1BQ6yDykQFr16qSwfQUVp8zAj8",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3002",
+					"path": [
+						"user",
+						"deactivate",
+						"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NTNmZmYxY2U2ZGU4ODAzYjQyMmFmOTEiLCJpYXQiOjE2OTg2OTMwMTksImV4cCI6MTY5ODY5MzMxOX0.eZe7n05B_SvZAnGaZ1BQ6yDykQFr16qSwfQUVp8zAj8"
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }
