@@ -7,6 +7,7 @@ import {
   getUser,
   updateUser,
   changePassword,
+  deactivateUserCallback
 } from "../controllers/user";
 import { isAuthenticated } from "../middlewares/isAuth";
 import { isPasswordValid } from "../controllers/auth";
@@ -27,6 +28,9 @@ router.put("/", isAuthenticated, updateUser);
 //PATCH /user/deactivate
 router.patch("/deactivate", isAuthenticated, deactivateUser);
 
+// Get request Verify Email for deactivate user's account
+// GET  /user/deactivate/:token
+router.get("/deactivate/:token", deactivateUserCallback)
 
 //Put  /user/changepassword
 router.put(
