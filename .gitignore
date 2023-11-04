@@ -2,6 +2,7 @@
 logs
 build
 node_modules
+yarn-error.log
 
 # TypeScript v1 declaration files
 typings/
