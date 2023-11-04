@@ -9,7 +9,8 @@ import {
   isUserExist,
   loginUser,
   registerUser,
-  activateAccount
+  activateAccount,
+  sendOTP
 } from "../controllers/auth";
 import { validateRequest } from "../helper/validateRequest";
 
@@ -98,6 +99,13 @@ router.post('/activateaccount', [
   body("email").trim().isEmail().withMessage("Invalid Email!")
 ], activateAccount)
 
+
+//POST -> /auth/send otp 
+router.post("/send-otp",
+  [body("email").trim().isEmail().withMessage("Invalid Email!")],
+  sendOTP
+)
+
 router.post(
   "/activate",
   [body("email").trim().isEmail().withMessage("Invalid Email!")],
@@ -108,5 +116,7 @@ router.post(
 //re-activate link
 // GET /user/activate
 router.get("/activate/:token", activateUserCallback);
+
+
 
 export default router;
