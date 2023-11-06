@@ -12,9 +12,9 @@ const createQuiz: RequestHandler = async (req, res, next) => {
     const category = req.body.category;
     const questionList = req.body.questionList;
     const answers = req.body.answers;
-    const passing_percentage=req.body.passing_percentage;
-    
-    const quiz = new Quiz({ name, questionList, answers, passing_percentage, createdBy });
+    const passingPercentage = req.body.passingPercentage;
+
+    const quiz = new Quiz({ name, category, questionList, answers, passingPercentage, createdBy });
     const result = await quiz.save();
     const resp: ReturnResponse = {
       status: "success",
@@ -206,10 +206,9 @@ const isValidQuiz = async (
       let opt = Object.keys(question["options"]);
       if (
         opt.indexOf(
-          `${
-            Object.values(answers)[
-              Object.keys(answers).indexOf(question.questionNumber.toString())
-            ]
+          `${Object.values(answers)[
+          Object.keys(answers).indexOf(question.questionNumber.toString())
+          ]
           }`
         ) == -1
       ) {
@@ -228,6 +227,35 @@ const isValidQuizName = async (name: String) => {
   return false;
 };
 
+const getAllQuiz: RequestHandler = async (req, res, next) => {
+  try {
+    let quiz = await Quiz.find({ isPublished: true }, {
+      name: 1,
+      category: 1,
+      questionList: 1,
+      createdBy: 1,
+      passingPercentage: 1
+    });
+    //filter quizzes created by user itself
+    quiz = quiz.filter(item => item.createdBy.toString() !== req.userId);
+    
+    if (!quiz) {
+      const err = new ProjectError("No quiz found!");
+      err.statusCode = 404;
+      throw err;
+    }
+    const resp: ReturnResponse = {
+      status: "success",
+      message: "All Published Quiz",
+      data: quiz,
+    };
+    res.status(200).send(resp);
+
+  } catch (error) {
+    next(error);
+  }
+};
+
 export {
   createQuiz,
   deleteQuiz,
@@ -236,4 +264,5 @@ export {
   isValidQuizName,
   publishQuiz,
   updateQuiz,
+  getAllQuiz
 };
