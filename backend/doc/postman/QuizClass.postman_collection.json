@@ -1,9 +1,9 @@
 {
 	"info": {
-		"_postman_id": "7988ba49-34ca-4223-a831-06de32da5423",
-		"name": "QuizClass Copy 3",
+		"_postman_id": "a5524660-6f23-4262-bf64-fe7ecee71c79",
+		"name": "QuizClass",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "23659079"
+		"_exporter_id": "29326444"
 	},
 	"item": [
 		{
@@ -1819,8 +1819,8 @@
 							]
 						}
 					},
-					"_postman_previewlanguage": null,
-					"header": null,
+					"_postman_previewlanguage": "Text",
+					"header": [],
 					"cookie": [],
 					"body": "{\r\n    \"status\": \"success\",\r\n    \"message\": \"OTP send successfully\",\r\n    \"data\": {\r\n        \"otp\": \"165558\"\r\n    }\r\n}"
 				}
