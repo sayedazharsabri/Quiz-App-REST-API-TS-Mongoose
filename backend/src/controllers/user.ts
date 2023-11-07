@@ -225,7 +225,8 @@ const addFavQues: RequestHandler = async (req, res, next) => {
       throw err;
     }
     
-    const favQues = new Fav({ question, options,userId });    const favQuestion = await favQues.save();
+    const favQues = new Fav({ question, options,userId });    
+    await favQues.save();
     resp = { status: "success", message: "Question added to Favourites!", data: {} };
     res.status(200).send(resp);
   }
@@ -238,8 +239,8 @@ const showFavQues: RequestHandler = async (req, res, next) => {
   const userId = req.userId;
   let resp: ReturnResponse;
   try {
-    const fav = await Fav.find({userId}); 
-      resp = { status: "success", message: "Favourite Questions!", data: {fav} };
+    const favQuestion = await Fav.find({userId}); 
+      resp = { status: "success", message: "Favourite Questions!", data: {favQuestion} };
       res.status(200).send(resp);
   } 
   catch (error) {
@@ -251,7 +252,7 @@ const showFavQues: RequestHandler = async (req, res, next) => {
 
 const removeFavQues: RequestHandler = async (req, res, next) => {
 
-  const questionId = req.body.favQuestionId;
+  const questionId = req.params.favquestionId;
   try {
     await Fav.deleteOne({_id:questionId});
     const resp: ReturnResponse = {
