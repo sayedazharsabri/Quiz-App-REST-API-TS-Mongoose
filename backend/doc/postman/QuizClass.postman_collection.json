@@ -1288,35 +1288,35 @@
 						"token": "{{token1}}"
 					}
 				},
-				"method": "POST",
+				"method": "DELETE",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"favQuestionId\":\"6547572710979608762f5953\"\r\n}   ",
+					"raw": "",
 					"options": {
 						"raw": {
 							"language": "json"
 						}
 					}
 				},
-				"url": "localhost:3002/user/removefavques"
+				"url": "localhost:3002/user/removefavques/654a6c12eb8b8b0f41f7308e"
 			},
 			"response": [
 				{
 					"name": "Remove FavQues",
 					"originalRequest": {
-						"method": "POST",
+						"method": "DELETE",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"favQuestionId\":\"6549f6e64f7f60a0f057cfd2\"\r\n}   ",
+							"raw": "",
 							"options": {
 								"raw": {
 									"language": "json"
 								}
 							}
 						},
-						"url": "localhost:3002/user/removefavques"
+						"url": "localhost:3002/user/removefavques/654a6c12eb8b8b0f41f7308e"
 					},
 					"status": "OK",
 					"code": 200,
@@ -1340,7 +1340,7 @@
 						},
 						{
 							"key": "Date",
-							"value": "Tue, 07 Nov 2023 15:55:56 GMT"
+							"value": "Tue, 07 Nov 2023 16:58:04 GMT"
 						},
 						{
 							"key": "Connection",
