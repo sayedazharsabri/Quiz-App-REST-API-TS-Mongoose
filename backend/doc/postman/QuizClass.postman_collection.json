@@ -1,9 +1,9 @@
 {
 	"info": {
-		"_postman_id": "a5524660-6f23-4262-bf64-fe7ecee71c79",
+		"_postman_id": "49dd2b6a-347a-422b-94e4-02d35428e607",
 		"name": "QuizClass",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "29326444"
+		"_exporter_id": "29362692"
 	},
 	"item": [
 		{
@@ -1846,6 +1846,89 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "Log Out",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token1}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "localhost:3002/user/logout",
+					"host": [
+						"localhost"
+					],
+					"port": "3002",
+					"path": [
+						"user",
+						"logout"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Log Out",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "localhost:3002/user/logout",
+							"host": [
+								"localhost"
+							],
+							"port": "3002",
+							"path": [
+								"user",
+								"logout"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "66"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"42-vAXt4WrgRyqwanFETU4pLtDlaPU\""
+						},
+						{
+							"key": "Date",
+							"value": "Tue, 07 Nov 2023 15:58:22 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"success\",\n    \"message\": \"Logged out succesfully!\",\n    \"data\": {}\n}"
+				}
+			]
 		}
 	]
 }
