@@ -7,7 +7,10 @@ import {
   getUser,
   updateUser,
   changePassword,
-  deactivateUserCallback
+  deactivateUserCallback,
+  addFavQues,
+  showFavQues,
+  removeFavQues
 } from "../controllers/user";
 import { isAuthenticated } from "../middlewares/isAuth";
 import { isPasswordValid } from "../controllers/auth";
@@ -31,6 +34,15 @@ router.patch("/deactivate", isAuthenticated, deactivateUser);
 // Get request Verify Email for deactivate user's account
 // GET  /user/deactivate/:token
 router.get("/deactivate/:token", deactivateUserCallback)
+
+//Post /user/addfavques
+router.post("/addfavques", isAuthenticated,addFavQues );
+
+//Get /user/favques
+router.get("/favques", isAuthenticated,showFavQues );
+
+//Post /user/removefavques
+router.post("/removefavques", isAuthenticated,removeFavQues );
 
 //Put  /user/changepassword
 router.put(
