@@ -58,7 +58,7 @@ router.put(
   changePassword
 );
 
-// /user/logout
+// POST /user/logout
 router.post("/logout",isAuthenticated,logOut);
 
 export default router;
