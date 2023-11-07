@@ -6,7 +6,7 @@ import User from "../models/user";
 import { ReturnResponse } from "../utils/interfaces";
 
 import sendEmail from "../utils/email";
-import jwt from "jsonwebtoken";
+import jwt, { decode } from "jsonwebtoken";
 
 const getUser: RequestHandler = async (req, res, next) => {
   let resp: ReturnResponse;
@@ -222,4 +222,34 @@ const isActiveUser = async (userId: String) => {
   return !user.isDeactivated;
 };
 
-export { deactivateUser, getUser, isActiveUser, updateUser, changePassword, deactivateUserCallback };
+
+const logOut: RequestHandler = async (req, res, next) => {
+  let resp: ReturnResponse;
+  try {
+    const authHeader = req.get("Authorization");
+
+    if (!authHeader) {
+      const err = new ProjectError("Something went wrong!");
+      err.statusCode = 424;
+      throw err;
+    }
+    else {
+      const token = authHeader.split(" ")[1];
+
+      let decodedToken: { userId: String; iat: Number; exp: Number };
+      const secretKey = process.env.SECRET_KEY || "";
+      decodedToken = <any>jwt.verify(token, secretKey);
+
+      const issuedAt = decodedToken.iat;
+      const expiryAt = decodedToken.exp;
+
+    
+    }
+  }
+  catch (error) {
+    next(error);
+  }
+}
+
+
+export { deactivateUser, getUser, isActiveUser, updateUser, changePassword, deactivateUserCallback, logOut };
