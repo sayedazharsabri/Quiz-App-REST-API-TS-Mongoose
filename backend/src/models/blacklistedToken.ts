@@ -9,10 +9,6 @@ const blacklistSchema = new schema(
             required: true,
             unique: true,
         },
-        issuedAt: {
-            type: Number,
-            required: true
-        },
         expiryAt: {
             type: Number,
             required: true

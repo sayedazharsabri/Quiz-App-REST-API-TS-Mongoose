@@ -5,6 +5,7 @@ import ProjectError from "../helper/error";
 import User from "../models/user";
 import { ReturnResponse } from "../utils/interfaces";
 import Blacklist from "../models/blacklistedToken";
+import clearBlacklistScheduler from "../utils/clearBlacklist";
 import sendEmail from "../utils/email";
 import jwt, { decode } from "jsonwebtoken";
 
@@ -106,8 +107,8 @@ const changePassword: RequestHandler = async (req, res, next) => {
     }
 
     // checking if current password and new password are same
-    const prevPasswordSame = await bcrypt.compare(currentPassword,newPassword)
-    if(prevPasswordSame){
+    const prevPasswordSame = await bcrypt.compare(currentPassword, newPassword)
+    if (prevPasswordSame) {
       const err = new ProjectError(
         "Same as current password. Try another one"
       );
@@ -240,10 +241,9 @@ const logOut: RequestHandler = async (req, res, next) => {
       const secretKey = process.env.SECRET_KEY || "";
       decodedToken = <any>jwt.verify(token, secretKey);
 
-      const issuedAt = decodedToken.iat;
       const expiryAt = decodedToken.exp;
 
-      const blacklistedToken = new Blacklist({ token, issuedAt, expiryAt });
+      const blacklistedToken = new Blacklist({ token, expiryAt });
       const result = await blacklistedToken.save();
       if (!result) {
         resp = { status: "error", message: "Something went wrong!", data: {} };
@@ -252,7 +252,7 @@ const logOut: RequestHandler = async (req, res, next) => {
         resp = { status: "success", message: "Logged out succesfully!", data: {} };
         res.status(200).send(resp);
       }
-
+      clearBlacklistScheduler;
     }
   }
   catch (error) {
