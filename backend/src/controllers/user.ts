@@ -4,10 +4,10 @@ import bcrypt from "bcryptjs";
 import ProjectError from "../helper/error";
 import User from "../models/user";
 import { ReturnResponse } from "../utils/interfaces";
-import Fav from "../models/fav";
-
+import favQuestion from "../models/fav";
 import sendEmail from "../utils/email";
 import jwt from "jsonwebtoken";
+
 
 const getUser: RequestHandler = async (req, res, next) => {
   let resp: ReturnResponse;
@@ -225,7 +225,7 @@ const addFavQues: RequestHandler = async (req, res, next) => {
       throw err;
     }
     
-    const favQues = new Fav({ question, options,userId });    
+    const favQues = new favQuestion({ question, options,userId });    
     await favQues.save();
     resp = { status: "success", message: "Question added to Favourites!", data: {} };
     res.status(200).send(resp);
@@ -239,8 +239,8 @@ const showFavQues: RequestHandler = async (req, res, next) => {
   const userId = req.userId;
   let resp: ReturnResponse;
   try {
-    const favQuestion = await Fav.find({userId}); 
-      resp = { status: "success", message: "Favourite Questions!", data: {favQuestion} };
+    const favQues = await favQuestion.find({userId}); 
+      resp = { status: "success", message: "Favourite Questions!", data: {favQues} };
       res.status(200).send(resp);
   } 
   catch (error) {
@@ -254,7 +254,7 @@ const removeFavQues: RequestHandler = async (req, res, next) => {
 
   const questionId = req.params.favquestionId;
   try {
-    await Fav.deleteOne({_id:questionId});
+    await favQuestion.deleteOne({_id:questionId});
     const resp: ReturnResponse = {
       status: "success",
       message: "Question removed from favourites successfully",

@@ -15,6 +15,6 @@ const favSchema = new schema(
     },
 );
 
-const Fav = mongoose.model("FavouriteQuestion", favSchema);
+const favQuestion = mongoose.model("FavouriteQuestion", favSchema);
 
-export default Fav;
+export default favQuestion;
