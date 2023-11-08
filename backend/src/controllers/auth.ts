@@ -517,6 +517,53 @@ const sendOTP: RequestHandler = async (req, res, next) => {
 }
 
 
+// Verify Registration Email OTP
+
+const verifyRegistrationOTP: RequestHandler = async (req, res, next) => {
+  try {
+    let resp: ReturnResponse;
+    const email = req.params.email;
+    const otp = req.body.otp;
+    // console.log("Email from params : ", email);
+    // console.log("Email from BODY OTP : ", otp);
+    const user = await User.findOne({ email });
+    if (!user) {
+      const err = new ProjectError("No user exist..");
+      err.statusCode = 401;
+      throw err;
+    }
+
+    const matchOTP = await OTP.find({ email }).sort({ createdAt: -1 }).limit(1);
+    console.log("Match OTP : ", matchOTP);
+    if (matchOTP.length === 0) {
+      // OTP not found for the email
+      const err = new ProjectError("OTP has not send on this email ");
+      err.statusCode = 400;
+      throw err;
+
+    }
+    else if (otp != matchOTP[0].otp) {
+      // The otp is not valid
+      const err = new ProjectError("Incorrect OTP");
+      err.statusCode = 400;
+      throw err;
+    }
+
+    user.isVerified = true;
+    const result = await user.save();
+    if (!result) {
+      resp = { status: "error", message: "Error while Save Data into DataBase", data: { } };
+      res.status(200).send({ message: "verify" });
+    }
+    resp = { status: "success", message: "Registration Done !!", data: { userId : user._id } };
+    res.status(200).send(resp);
+  } catch (error) {
+    console.log("Error in verify Registration OTP : ", error);
+    next(error);
+   }
+}
+
+
 
 export {
   activateUser,
@@ -526,5 +573,6 @@ export {
   loginUser,
   registerUser,
   activateAccount,
+  verifyRegistrationOTP,
   sendOTP
 };
