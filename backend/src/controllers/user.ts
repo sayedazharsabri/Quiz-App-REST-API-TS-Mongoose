@@ -4,7 +4,7 @@ import bcrypt from "bcryptjs";
 import ProjectError from "../helper/error";
 import User from "../models/user";
 import { ReturnResponse } from "../utils/interfaces";
-import favQuestion from "../models/fav";
+import favQuestion from "../models/favQuestion";
 import sendEmail from "../utils/email";
 import jwt from "jsonwebtoken";
 
@@ -211,7 +211,7 @@ const deactivateUserCallback: RequestHandler = async (req, res, next) => {
   }
 }
 
-const addFavQues: RequestHandler = async (req, res, next) => {
+const addFavQuestion: RequestHandler = async (req, res, next) => {
   let resp: ReturnResponse;
   const userId = req.userId;
   const options = req.body.options;
@@ -235,7 +235,7 @@ const addFavQues: RequestHandler = async (req, res, next) => {
   }
 };
 
-const showFavQues: RequestHandler = async (req, res, next) => {
+const showFavQuestion: RequestHandler = async (req, res, next) => {
   const userId = req.userId;
   let resp: ReturnResponse;
   try {
@@ -250,7 +250,7 @@ const showFavQues: RequestHandler = async (req, res, next) => {
 
 //user will get favourites only when he is authenticated,and once he get the id from fav collection he can delete it.
 
-const removeFavQues: RequestHandler = async (req, res, next) => {
+const removeFavQuestion: RequestHandler = async (req, res, next) => {
 
   const questionId = req.params.favquestionId;
   try {
@@ -278,4 +278,4 @@ const isActiveUser = async (userId: String) => {
   return !user.isDeactivated;
 };
 
-export { deactivateUser, getUser, isActiveUser, updateUser, changePassword, deactivateUserCallback, addFavQues, showFavQues, removeFavQues};
+export { deactivateUser, getUser, isActiveUser, updateUser, changePassword, deactivateUserCallback, addFavQuestion, showFavQuestion, removeFavQuestion};

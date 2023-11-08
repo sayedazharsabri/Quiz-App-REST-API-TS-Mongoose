@@ -1144,7 +1144,7 @@
 			]
 		},
 		{
-			"name": "Add FavQues",
+			"name": "Add FavQuestion",
 			"request": {
 				"auth": {
 					"type": "bearer",
@@ -1167,7 +1167,7 @@
 			},
 			"response": [
 				{
-					"name": "Add FavQues",
+					"name": "Add FavQuestion",
 					"originalRequest": {
 						"method": "POST",
 						"header": [],
@@ -1221,7 +1221,7 @@
 			]
 		},
 		{
-			"name": "Show FavQues",
+			"name": "Show FavQuestion",
 			"request": {
 				"auth": {
 					"type": "bearer",
@@ -1235,7 +1235,7 @@
 			},
 			"response": [
 				{
-					"name": "Show FavQues",
+					"name": "Show FavQuestion",
 					"originalRequest": {
 						"method": "GET",
 						"header": [],
@@ -1280,7 +1280,7 @@
 			]
 		},
 		{
-			"name": "Remove FavQues",
+			"name": "Remove FavQuestion",
 			"request": {
 				"auth": {
 					"type": "bearer",
@@ -1303,7 +1303,7 @@
 			},
 			"response": [
 				{
-					"name": "Remove FavQues",
+					"name": "Remove FavQuestion",
 					"originalRequest": {
 						"method": "DELETE",
 						"header": [],
