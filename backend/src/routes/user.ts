@@ -8,10 +8,14 @@ import {
   updateUser,
   changePassword,
   deactivateUserCallback,
+} from "../controllers/user";
+
+import { 
   addFavQuestion,
   showFavQuestion,
   removeFavQuestion
-} from "../controllers/user";
+ } from "../controllers/favQuestion";
+
 import { isAuthenticated } from "../middlewares/isAuth";
 import { isPasswordValid } from "../controllers/auth";
 import { validateRequest } from "../helper/validateRequest";
