@@ -99,7 +99,7 @@ const loginUser: RequestHandler = async (req, res, next) => {
     }
     if (status && !user?.accountBlocked) {
       const token = jwt.sign({ userId: user._id }, secretKey, {
-        expiresIn: "1h",
+        expiresIn: "10h",
       });
 
       user && (user.remainingTry = 3);
