@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 const schema = mongoose.Schema;
 //schema
-const favSchema = new schema(
+const favQuestionSchema = new schema(
     {
         userId:{
             type:mongoose.Types.ObjectId
@@ -15,6 +15,6 @@ const favSchema = new schema(
     },
 );
 
-const favQuestion = mongoose.model("FavouriteQuestion", favSchema);
+const favQuestion = mongoose.model("FavouriteQuestion", favQuestionSchema);
 
 export default favQuestion;
