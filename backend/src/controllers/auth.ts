@@ -48,23 +48,50 @@ const registerUser: RequestHandler = async (req, res, next) => {
 
     const sendOtp = await sendEmailOTPRegister(email);
     if (sendOtp) {
-      console.log("OTP sent I am in register function");
+      // console.log("OTP sent I am in register function");
+      const checkUserExits = await User.findOne({ email });
+      if (checkUserExits) {
+           checkUserExits.name = name;
+           checkUserExits.password = password;
+           resp = {
+              status: "success",
+              message: "OTP has sent on your email. Please Verify..",
+              data: { userId: checkUserExits._id },
+          };
+          res.status(201).send(resp);
+      }
+      else {
+            const user = new User({ email, name, password });
+            const result = await user.save();
+             if (!result) {
+                resp = { status: "error", message: "No result found", data: {} };
+                res.status(404).send(resp);
+             }
+             else {
+                 resp = {
+                 status: "success",
+                   message: "OTP has sent on your email. Please Verify",
+                  data: { userId: result._id },
+              };
+              res.status(201).send(resp);
+         }
+      }
     }
 
 
-    const user = new User({ email, name, password });
-    const result = await user.save();
-    if (!result) {
-      resp = { status: "error", message: "No result found", data: {} };
-      res.status(404).send(resp);
-    } else {
-      resp = {
-        status: "success",
-        message: "Registration done!",
-        data: { userId: result._id },
-      };
-      res.status(201).send(resp);
-    }
+    // const user = new User({ email, name, password });
+    // const result = await user.save();
+    // if (!result) {
+    //   resp = { status: "error", message: "No result found", data: {} };
+    //   res.status(404).send(resp);
+    // } else {
+    //   resp = {
+    //     status: "success",
+    //     message: "Registration done!",
+    //     data: { userId: result._id },
+    //   };
+    //   res.status(201).send(resp);
+    // }
   } catch (error) {
     next(error);
   }
