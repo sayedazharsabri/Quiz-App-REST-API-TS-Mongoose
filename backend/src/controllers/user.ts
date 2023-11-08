@@ -8,6 +8,7 @@ import BlacklistedToken from "../models/blacklistedToken";
 import sendEmail from "../utils/email";
 import jwt, { decode } from "jsonwebtoken";
 
+
 const getUser: RequestHandler = async (req, res, next) => {
   let resp: ReturnResponse;
 
@@ -210,7 +211,6 @@ const deactivateUserCallback: RequestHandler = async (req, res, next) => {
   }
 }
 
-
 const isActiveUser = async (userId: String) => {
   const user = await User.findById(userId);
 
@@ -260,4 +260,4 @@ const logOut: RequestHandler = async (req, res, next) => {
 }
 
 
-export { deactivateUser, getUser, isActiveUser, updateUser, changePassword, deactivateUserCallback, logOut };
+export { deactivateUser, getUser, isActiveUser, updateUser, changePassword, deactivateUserCallback, logOut};

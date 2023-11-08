@@ -1,9 +1,9 @@
 {
 	"info": {
-		"_postman_id": "49dd2b6a-347a-422b-94e4-02d35428e607",
+		"_postman_id": "7c2bf8e7-721a-4597-9bdb-50559b44907d",
 		"name": "QuizClass",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "29362692"
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "29415455"
 	},
 	"item": [
 		{
@@ -13,7 +13,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"name\":\"Aarush\",\r\n    \"email\":\"aarush@gmail.com\",\r\n    \"password\": \"Password@12345\",\r\n    \"confirmPassword\":\"Password@12345\",\r\n    \"otp\":494229\r\n}",
+					"raw": "{\r\n    \"name\":\"Aarush\",\r\n    \"email\":\"aarush@gmail.com\",\r\n    \"password\": \"Password@12345\",\r\n    \"confirmPassword\":\"Password@12345\",\r\n    \"otp\":432156\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -371,7 +371,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"name\": \"GK Quiz 101\",\r\n    \"category\": \"test\",\r\n    \"questionList\": [\r\n        {\r\n            \"questionNumber\": 1,\r\n            \"question\": \"What is the capital of Uttar Pradesh?\",\r\n            \"options\": {\r\n                \"1\": \"Varanasi\",\r\n                \"2\": \"Lucknow\",\r\n                \"3\": \"Dehradun\",\r\n                \"4\": \"Banglore\"\r\n            }\r\n        },\r\n        {\r\n            \"questionNumber\": 2,\r\n            \"question\": \"How many players are there in football team?\",\r\n            \"options\": {\r\n                \"1\": \"1\",\r\n                \"2\": \"2\",\r\n                \"3\": \"11\",\r\n                \"4\": \"20\"\r\n            }\r\n        },\r\n        {\r\n            \"questionNumber\": 3,\r\n            \"question\": \"Sun temple is located in ____?\",\r\n            \"options\": {\r\n                \"1\": \"Konark\",\r\n                \"2\": \"Goa\",\r\n                \"3\": \"Delhi\",\r\n                \"4\": \"Gujrat\"\r\n            }\r\n        },\r\n        {\r\n            \"questionNumber\": 4,\r\n            \"question\": \"Which animal is know as ship of the desert?\",\r\n            \"options\": {\r\n                \"1\": \"Goat\",\r\n                \"2\": \"Cow\",\r\n                \"3\": \"Camel\",\r\n                \"4\": \"Titanic\"\r\n            }\r\n        },\r\n        {\r\n            \"questionNumber\": 5,\r\n            \"question\": \"How many letter are in the English alphabet?\",\r\n            \"options\": {\r\n                \"1\": \"27\",\r\n                \"2\": \"24\",\r\n                \"3\": \"25\",\r\n                \"4\": \"26\"\r\n            }\r\n        }\r\n    ],\r\n    \"answers\": {\r\n        \"1\": 2,\r\n        \"2\": 3,\r\n        \"3\": 1,\r\n        \"4\": 3,\r\n        \"5\": 4\r\n    },\r\n    \"passingPercentage\":80,\r\n    \"attemptsAllowedPerUser\":2\r\n}",
+					"raw": "{\r\n    \"name\": \"GK Quiz 101\",\r\n    \"category\": \"exam\",\r\n    \"questionList\": [\r\n        {\r\n            \"questionNumber\": 1,\r\n            \"question\": \"What is the capital of Uttar Pradesh?\",\r\n            \"options\": {\r\n                \"1\": \"Varanasi\",\r\n                \"2\": \"Lucknow\",\r\n                \"3\": \"Dehradun\",\r\n                \"4\": \"Banglore\"\r\n            }\r\n        },\r\n        {\r\n            \"questionNumber\": 2,\r\n            \"question\": \"How many players are there in football team?\",\r\n            \"options\": {\r\n                \"1\": \"1\",\r\n                \"2\": \"2\",\r\n                \"3\": \"11\",\r\n                \"4\": \"20\"\r\n            }\r\n        },\r\n        {\r\n            \"questionNumber\": 3,\r\n            \"question\": \"Sun temple is located in ____?\",\r\n            \"options\": {\r\n                \"1\": \"Konark\",\r\n                \"2\": \"Goa\",\r\n                \"3\": \"Delhi\",\r\n                \"4\": \"Gujrat\"\r\n            }\r\n        },\r\n        {\r\n            \"questionNumber\": 4,\r\n            \"question\": \"Which animal is know as ship of the desert?\",\r\n            \"options\": {\r\n                \"1\": \"Goat\",\r\n                \"2\": \"Cow\",\r\n                \"3\": \"Camel\",\r\n                \"4\": \"Titanic\"\r\n            }\r\n        },\r\n        {\r\n            \"questionNumber\": 5,\r\n            \"question\": \"How many letter are in the English alphabet?\",\r\n            \"options\": {\r\n                \"1\": \"27\",\r\n                \"2\": \"24\",\r\n                \"3\": \"25\",\r\n                \"4\": \"26\"\r\n            }\r\n        }\r\n    ],\r\n    \"answers\": {\r\n        \"1\": 2,\r\n        \"2\": 3,\r\n        \"3\": 1,\r\n        \"4\": 3,\r\n        \"5\": 4\r\n    },\r\n    \"passingPercentage\":80\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -789,7 +789,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"quizId\":\"6549e7c774fd66c21a712828\"\r\n}",
+					"raw": "{\r\n    \"quizId\":\"651a858655af3c91a38f01a6\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -864,7 +864,7 @@
 				},
 				"method": "GET",
 				"header": [],
-				"url": "localhost:3002/exam/6549e7c774fd66c21a712828"
+				"url": "localhost:3002/exam/651a858655af3c91a38f01a6"
 			},
 			"response": [
 				{
@@ -918,14 +918,14 @@
 				"auth": {
 					"type": "bearer",
 					"bearer": {
-						"token": "{{token2}}"
+						"token": "{{token1}}"
 					}
 				},
 				"method": "POST",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"quizId\":\"6549e7c774fd66c21a712828\",\r\n    \"attemptedQuestion\":{\r\n        \"1\":2,\r\n        \"2\":3,\r\n        \"3\":1,\r\n        \"4\":3,\r\n        \"5\":4\r\n    }\r\n}",
+					"raw": "{\r\n    \"quizId\":\"65434b10d2bd136ff622335b\",\r\n    \"attemptedQuestion\":{\r\n        \"1\":2,\r\n        \"2\":3,\r\n        \"3\":1,\r\n        \"4\":3,\r\n        \"5\":4\r\n    }\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -1140,6 +1140,219 @@
 					],
 					"cookie": [],
 					"body": "{\n    \"status\": \"success\",\n    \"message\": \"Report!\",\n    \"data\": [\n        {\n            \"_id\": \"653903eed8ba86cfea694798\",\n            \"userId\": \"65390312d8ba86cfea694786\",\n            \"quizId\": \"653902b2d8ba86cfea69477a\",\n            \"score\": 1,\n            \"total\": 2,\n            \"createdAt\": \"2023-10-25T12:02:54.607Z\",\n            \"updatedAt\": \"2023-10-25T12:02:54.607Z\",\n            \"__v\": 0\n        },\n        {\n            \"_id\": \"6539082a6663f6bfd8f23394\",\n            \"userId\": \"65390312d8ba86cfea694786\",\n            \"quizId\": \"653902b2d8ba86cfea69477a\",\n            \"score\": 1,\n            \"total\": 2,\n            \"percentage\": 50,\n            \"createdAt\": \"2023-10-25T12:20:58.294Z\",\n            \"updatedAt\": \"2023-10-25T12:20:58.294Z\",\n            \"__v\": 0\n        },\n        {\n            \"_id\": \"653908ae663a8600cb514148\",\n            \"userId\": \"65390312d8ba86cfea694786\",\n            \"quizId\": \"653902b2d8ba86cfea69477a\",\n            \"score\": 1,\n            \"total\": 3,\n            \"percentage\": 33.33333333333333,\n            \"createdAt\": \"2023-10-25T12:23:10.964Z\",\n            \"updatedAt\": \"2023-10-25T12:23:10.964Z\",\n            \"__v\": 0\n        },\n        {\n            \"_id\": \"65390996ed4e7e9ec35894a6\",\n            \"userId\": \"65390312d8ba86cfea694786\",\n            \"quizId\": \"65390962ed4e7e9ec358948c\",\n            \"score\": 1,\n            \"total\": 3,\n            \"percentage\": 33.33333333333333,\n            \"createdAt\": \"2023-10-25T12:27:02.023Z\",\n            \"updatedAt\": \"2023-10-25T12:27:02.023Z\",\n            \"__v\": 0\n        },\n        {\n            \"_id\": \"65390a84ad208306ed00d02b\",\n            \"userId\": \"65390312d8ba86cfea694786\",\n            \"quizId\": \"65390962ed4e7e9ec358948c\",\n            \"score\": 1,\n            \"total\": 3,\n            \"percentage\": 33.33333333333333,\n            \"createdAt\": \"2023-10-25T12:31:00.884Z\",\n            \"updatedAt\": \"2023-10-25T12:31:00.884Z\",\n            \"__v\": 0\n        },\n        {\n            \"_id\": \"65390d4977d346329a241e46\",\n            \"userId\": \"65390312d8ba86cfea694786\",\n            \"quizId\": \"65390962ed4e7e9ec358948c\",\n            \"score\": 1,\n            \"total\": 3,\n            \"percentage\": 33.33333333333333,\n            \"createdAt\": \"2023-10-25T12:42:49.479Z\",\n            \"updatedAt\": \"2023-10-25T12:42:49.479Z\",\n            \"__v\": 0\n        },\n        {\n            \"_id\": \"653f59d810b78b178316e291\",\n            \"userId\": \"65390312d8ba86cfea694786\",\n            \"quizId\": \"653f59a110b78b178316e26b\",\n            \"score\": 0,\n            \"total\": 5,\n            \"percentage\": 0,\n            \"createdAt\": \"2023-10-30T07:23:04.821Z\",\n            \"updatedAt\": \"2023-10-30T07:23:04.821Z\",\n            \"__v\": 0\n        },\n        {\n            \"_id\": \"65420da972ac731dee378ca7\",\n            \"userId\": \"65390312d8ba86cfea694786\",\n            \"quizId\": \"65420d1272ac731dee378c8a\",\n            \"score\": 5,\n            \"total\": 5,\n            \"percentage\": 100,\n            \"result\": \"Pass\",\n            \"createdAt\": \"2023-11-01T08:34:49.540Z\",\n            \"updatedAt\": \"2023-11-01T08:34:49.540Z\",\n            \"__v\": 0\n        },\n        {\n            \"_id\": \"65420ef4929a1fd62d7525ab\",\n            \"userId\": \"65390312d8ba86cfea694786\",\n            \"quizId\": \"65420d1272ac731dee378c8a\",\n            \"score\": 5,\n            \"total\": 5,\n            \"percentage\": 100,\n            \"result\": \"Pass\",\n            \"createdAt\": \"2023-11-01T08:40:20.842Z\",\n            \"updatedAt\": \"2023-11-01T08:40:20.842Z\",\n            \"__v\": 0\n        }\n    ]\n}"
+				}
+			]
+		},
+		{
+			"name": "Add FavQuestion",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "{{token1}}"
+					}
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"questionName\":\"hello\"\r\n}   ",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "localhost:3002/user/favques"
+			},
+			"response": [
+				{
+					"name": "Add FavQuestion",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"question\": \"Which animal is know as ship of the desert?\",\r\n                \"options\": {\r\n                    \"1\": \"Goat\",\r\n                    \"2\": \"Cow\",\r\n                    \"3\": \"Camel\",\r\n                    \"4\": \"Titanic\"\r\n                }\r\n}   ",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "localhost:3002/favquestion"
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "72"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"48-rHl85lyzCsVyIClsP9+8mB/vUs8\""
+						},
+						{
+							"key": "Date",
+							"value": "Tue, 07 Nov 2023 15:49:46 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"success\",\n    \"message\": \"Question added to Favourites!\",\n    \"data\": {}\n}"
+				}
+			]
+		},
+		{
+			"name": "Show FavQuestion",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "{{token1}}"
+					}
+				},
+				"method": "GET",
+				"header": [],
+				"url": "localhost:3002/user/favques"
+			},
+			"response": [
+				{
+					"name": "Show FavQuestion",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": "localhost:3002/favquestion"
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "450"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"1c2-0wIZaRgdR427hURRns8i8haUpXw\""
+						},
+						{
+							"key": "Date",
+							"value": "Tue, 07 Nov 2023 15:50:11 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"success\",\n    \"message\": \"Favourite Questions!\",\n    \"data\": {\n        \"fav\": [\n            {\n                \"_id\": \"6549f6114f7f60a0f057cfbc\",\n                \"userId\": \"6549f4b73d6bb1ca1eb18791\",\n                \"question\": \"How many letter are in the English alphabet?\",\n                \"options\": {\n                    \"1\": \"27\",\n                    \"2\": \"24\",\n                    \"3\": \"25\",\n                    \"4\": \"26\"\n                },\n                \"__v\": 0\n            },\n            {\n                \"_id\": \"654a5c8944db071e69bb7b68\",\n                \"userId\": \"6549f4b73d6bb1ca1eb18791\",\n                \"question\": \"Which animal is know as ship of the desert?\",\n                \"options\": {\n                    \"1\": \"Goat\",\n                    \"2\": \"Cow\",\n                    \"3\": \"Camel\",\n                    \"4\": \"Titanic\"\n                },\n                \"__v\": 0\n            }\n        ]\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "Remove FavQuestion",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "{{token1}}"
+					}
+				},
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "localhost:3002/user/removefavques/654a6c12eb8b8b0f41f7308e"
+			},
+			"response": [
+				{
+					"name": "Remove FavQuestion",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "localhost:3002/favquestion/654b8e9714cf299ce460f216"
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "88"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"58-WgK1jEEDZbCiQKfGo6g2A62x9SE\""
+						},
+						{
+							"key": "Date",
+							"value": "Tue, 07 Nov 2023 16:58:04 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"success\",\n    \"message\": \"Question removed from favourites successfully\",\n    \"data\": {}\n}"
 				}
 			]
 		},
