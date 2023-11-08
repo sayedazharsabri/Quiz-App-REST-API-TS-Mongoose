@@ -12,7 +12,8 @@ import {
   activateAccount,
   sendOTP,
   forgotPassword,
-  forgotPasswordCallback
+  forgotPasswordCallback,
+  resetPassword
 } from "../controllers/auth";
 import { validateRequest } from "../helper/validateRequest";
 
@@ -127,5 +128,34 @@ router.post(
 );
 
 router.get("/forgotpassword/:token",forgotPasswordCallback);
+
+router.post("/forgotpassword/:userId",
+[
+  body("password")
+      .trim()
+      .isLength({ min: 8 })
+      .custom((password: String) => {
+        return isPasswordValid(password)
+          .then((status: Boolean) => {
+            if (!status)
+              return Promise.reject(
+                "Enter a valid password, having atleast 8 characters including 1 small alphabet, 1 capital albhabet, 1 digit and 1 special character($,@,!,#,*)."
+              );
+          })
+          .catch((err) => {
+            return Promise.reject(err);
+          });
+      }),
+    body("confirmPassword")
+      .trim()
+      .custom((value: String, { req }) => {
+        if (value != req.body.password) {
+          return Promise.reject("Password mismatched!");
+        }
+        return true;
+      }),
+],
+resetPassword
+);
 
 export default router;

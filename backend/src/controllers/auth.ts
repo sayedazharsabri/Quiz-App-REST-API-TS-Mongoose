@@ -425,6 +425,41 @@ const forgotPasswordCallback: RequestHandler = async (req, res, next) => {
   }
 };
 
+const resetPassword: RequestHandler = async(req, res, next) => {
+  let resp: ReturnResponse;
+  try {
+
+    const userId = req.params.userId;
+    const user = await User.findOne({ _id: userId });
+
+    if (!user) {
+      const err = new ProjectError("User not found!");
+      err.statusCode = 404;
+      throw err;
+    }
+
+    let password = await bcrypt.hash(req.body.password, 12);
+    const confirmPassword = req.body.confirmPassword;
+
+    // checking if password and confirmpassword are the same
+    const isPasswordMatching = await bcrypt.compare(confirmPassword,password);
+    if (!isPasswordMatching) {
+      const err = new ProjectError(
+        "New password does not match. Enter new password again "
+      );
+      err.statusCode = 401;
+      throw err;
+    }
+
+    user.password = password;
+    await user.save();
+    resp = { status: "success", message: "Password updated", data: {} };
+    res.send(resp);
+  } catch (error) {
+    next(error);
+  }
+}
+
 const isUserExist = async (email: String) => {
   const user = await User.findOne({ email });
   if (!user) {
@@ -551,5 +586,6 @@ export {
   activateAccount,
   sendOTP,
   forgotPassword,
-  forgotPasswordCallback
+  forgotPasswordCallback,
+  resetPassword
 };
