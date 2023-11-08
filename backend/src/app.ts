@@ -8,7 +8,7 @@ import reportRoute from "./routes/report";
 import userRoute from "./routes/user";
 import ProjectError from "./helper/error";
 import { ReturnResponse } from "./utils/interfaces";
-import clearBlacklistScheduler from "./utils/clearBlacklistScheduler";
+import clearBlacklistedTokenScheduler from "./utils/clearBlacklistedTokenScheduler";
 
 const app = express();
 
@@ -69,7 +69,7 @@ app.use(
   }
 );
 
-clearBlacklistScheduler;
+clearBlacklistedTokenScheduler;
 
 (async () => {
   try {

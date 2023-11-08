@@ -4,7 +4,7 @@ import bcrypt from "bcryptjs";
 import ProjectError from "../helper/error";
 import User from "../models/user";
 import { ReturnResponse } from "../utils/interfaces";
-import Blacklist from "../models/blacklistedToken";
+import BlacklistedToken from "../models/blacklistedToken";
 import sendEmail from "../utils/email";
 import jwt, { decode } from "jsonwebtoken";
 
@@ -242,7 +242,7 @@ const logOut: RequestHandler = async (req, res, next) => {
 
       const expiryAt = decodedToken.exp;
 
-      const blacklistedToken = new Blacklist({ token, expiryAt });
+      const blacklistedToken = new BlacklistedToken({ token, expiryAt });
       const result = await blacklistedToken.save();
       if (!result) {
         resp = { status: "error", message: "Something went wrong!", data: {} };

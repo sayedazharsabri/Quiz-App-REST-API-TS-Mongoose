@@ -2,8 +2,8 @@ import cron from 'node-cron';
 import {clearBlacklist} from '../controllers/blacklistedToken';
 
 // Schedule a daily cleanup task
-const clearBlacklistScheduler =   cron.schedule('* * * * *', () => {
+const clearBlacklistedTokenScheduler =   cron.schedule('0 0 * * *', () => {
     clearBlacklist();
 });
 
-export default clearBlacklistScheduler ;
+export default clearBlacklistedTokenScheduler ;
