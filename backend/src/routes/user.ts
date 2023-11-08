@@ -7,8 +7,14 @@ import {
   getUser,
   updateUser,
   changePassword,
+<<<<<<< HEAD
   deactivateUserCallback
+=======
+  deactivateUserCallback,
+  logOut,
+>>>>>>> master
 } from "../controllers/user";
+
 import { isAuthenticated } from "../middlewares/isAuth";
 import { isPasswordValid } from "../controllers/auth";
 import { validateRequest } from "../helper/validateRequest";
@@ -56,5 +62,8 @@ router.put(
   validateRequest,
   changePassword
 );
+
+// POST /user/logout
+router.post("/logout",isAuthenticated,logOut);
 
 export default router;

@@ -9,11 +9,14 @@ import sendEmail from "../utils/email";
 import { ReturnResponse } from "../utils/interfaces";
 import Mailgen from 'mailgen';
 import { startExam } from './exam';
-import otpGenerator from "otp-generator";
+
+import otpGenerator from "otp-generator"
 // import OTP from "../models/otp"
 import OTP from "../models/OTP"
 
+
 const secretKey = process.env.SECRET_KEY || "";
+const SERVER_BASE_URL = process.env.BASE_URL;
 
 //const registerUser:RequestHandler = async (req: Request, res: Response, next: NextFunction) => {
 const registerUser: RequestHandler = async (req, res, next) => {
@@ -99,7 +102,7 @@ const loginUser: RequestHandler = async (req, res, next) => {
     }
     if (status && !user?.accountBlocked) {
       const token = jwt.sign({ userId: user._id }, secretKey, {
-        expiresIn: "1h",
+        expiresIn: "10h",
       });
 
       user && (user.remainingTry = 3);
@@ -213,12 +216,12 @@ const generateEmail = async (name: string, temperoryKey: string, emailaddress: s
       action: {
         instructions: `If you believe that is by mistake here is your one time temporary key to activate your account after activating your account you can login once after this your account will be deactived for 24 hrs Note:<br><br>
         If the button or link is not clickable kindly copy the link and paste it in the browser<br><br>
-        http://SERVER_BASE_URL/auth/activateaccount/${temperoryKey} <br><br>
+        http://${SERVER_BASE_URL}/auth/activateaccount/${temperoryKey} <br><br>
         `,
         button: {
           color: '#22BC66', // Optional action button color
           text: 'Confirm your account',
-          link: `http://SERVER_BASE_URL/auth/activateaccount/${temperoryKey}`
+          link: `http://${SERVER_BASE_URL}/auth/activateaccount/${temperoryKey}`
         }
       },
       outro: "Discover your inner genius - Take the quiz now!"
@@ -291,12 +294,12 @@ const activateUser: RequestHandler = async (req, res, next) => {
         action: {
           instructions: `Click the button below to activate your user account.  <br><br>
           Note: If the button or link is not clickable kindly copy the link and paste it in the browser<br><br>
-          http://SERVER_BASE_URL/auth/activate/${emailToken}<br><br>
+          http://${SERVER_BASE_URL}/auth/activate/${emailToken}<br><br>
           `,
           button: {
             color: '#22BC66', // Optional action button color
             text: 'Activate Account',
-            link: `http://SERVER_BASE_URL/auth/activate/${emailToken}/`
+            link: `http://${SERVER_BASE_URL}/auth/activate/${emailToken}/`
           },
         },
         outro: "Discover your inner genius - Take the quiz now!"
