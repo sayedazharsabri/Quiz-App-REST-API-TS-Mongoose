@@ -4,9 +4,9 @@ import bcrypt from "bcryptjs";
 import ProjectError from "../helper/error";
 import User from "../models/user";
 import { ReturnResponse } from "../utils/interfaces";
-
 import sendEmail from "../utils/email";
 import jwt from "jsonwebtoken";
+
 
 const getUser: RequestHandler = async (req, res, next) => {
   let resp: ReturnResponse;
@@ -210,7 +210,6 @@ const deactivateUserCallback: RequestHandler = async (req, res, next) => {
   }
 }
 
-
 const isActiveUser = async (userId: String) => {
   const user = await User.findById(userId);
 
@@ -222,4 +221,4 @@ const isActiveUser = async (userId: String) => {
   return !user.isDeactivated;
 };
 
-export { deactivateUser, getUser, isActiveUser, updateUser, changePassword, deactivateUserCallback };
+export { deactivateUser, getUser, isActiveUser, updateUser, changePassword, deactivateUserCallback};

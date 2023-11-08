@@ -7,8 +7,9 @@ import {
   getUser,
   updateUser,
   changePassword,
-  deactivateUserCallback
+  deactivateUserCallback,
 } from "../controllers/user";
+
 import { isAuthenticated } from "../middlewares/isAuth";
 import { isPasswordValid } from "../controllers/auth";
 import { validateRequest } from "../helper/validateRequest";
