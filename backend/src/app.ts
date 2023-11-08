@@ -9,6 +9,7 @@ import userRoute from "./routes/user";
 import favQuestionRoute from "./routes/favQuestion";
 import ProjectError from "./helper/error";
 import { ReturnResponse } from "./utils/interfaces";
+import clearBlacklistedTokenScheduler from "./utils/clearBlacklistedTokenScheduler";
 
 const app = express();
 
@@ -71,6 +72,8 @@ app.use(
     res.status(statusCode).send(resp);
   }
 );
+
+clearBlacklistedTokenScheduler;
 
 (async () => {
   try {

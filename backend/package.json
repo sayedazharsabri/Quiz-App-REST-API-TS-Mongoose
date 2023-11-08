@@ -17,6 +17,7 @@
     "jsonwebtoken": "^9.0.1",
     "mailgen": "^2.0.27",
     "mongoose": "^7.5.0",
+    "node-cron": "^3.0.2",
     "nodemailer": "^6.9.7",
     "otp-generator": "^4.0.1",
     "typescript": "^5.2.2"
@@ -28,6 +29,7 @@
     "start:dev": "nodemon"
   },
   "devDependencies": {
+    "@types/node-cron": "^3.0.10",
     "nodemon": "^3.0.1",
     "ts-node": "^10.9.1"
   }

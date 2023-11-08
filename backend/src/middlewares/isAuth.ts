@@ -3,6 +3,7 @@ import jwt from "jsonwebtoken";
 
 import { isActiveUser } from "../controllers/user";
 import ProjectError from "../helper/error";
+import { blacklistedTokenCheck } from "../controllers/blacklistedToken";
 
 const isAuthenticated = async (
   req: Request,
@@ -20,6 +21,9 @@ const isAuthenticated = async (
     }
 
     const token = authHeader.split(" ")[1];
+
+    await blacklistedTokenCheck(token);
+
     let decodedToken: { userId: String; iat: Number; exp: Number };
     try {
       decodedToken = <any>jwt.verify(token, secretKey);

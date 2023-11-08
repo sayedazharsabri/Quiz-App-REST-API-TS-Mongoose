@@ -4,8 +4,9 @@ import bcrypt from "bcryptjs";
 import ProjectError from "../helper/error";
 import User from "../models/user";
 import { ReturnResponse } from "../utils/interfaces";
+import BlacklistedToken from "../models/blacklistedToken";
 import sendEmail from "../utils/email";
-import jwt from "jsonwebtoken";
+import jwt, { decode } from "jsonwebtoken";
 
 
 const getUser: RequestHandler = async (req, res, next) => {
@@ -106,8 +107,8 @@ const changePassword: RequestHandler = async (req, res, next) => {
     }
 
     // checking if current password and new password are same
-    const prevPasswordSame = await bcrypt.compare(currentPassword,newPassword)
-    if(prevPasswordSame){
+    const prevPasswordSame = await bcrypt.compare(currentPassword, newPassword)
+    if (prevPasswordSame) {
       const err = new ProjectError(
         "Same as current password. Try another one"
       );
@@ -221,4 +222,42 @@ const isActiveUser = async (userId: String) => {
   return !user.isDeactivated;
 };
 
-export { deactivateUser, getUser, isActiveUser, updateUser, changePassword, deactivateUserCallback};
+
+const logOut: RequestHandler = async (req, res, next) => {
+  let resp: ReturnResponse;
+  try {
+    const authHeader = req.get("Authorization");
+
+    if (!authHeader) {
+      const err = new ProjectError("Something went wrong!");
+      err.statusCode = 424;
+      throw err;
+    }
+  
+      const token = authHeader.split(" ")[1];
+
+      let decodedToken: { userId: String; iat: Number; exp: Number };
+      const secretKey = process.env.SECRET_KEY || "";
+      decodedToken = <any>jwt.verify(token, secretKey);
+
+      const expiryAt = decodedToken.exp;
+
+      const blacklistedToken = new BlacklistedToken({ token, expiryAt });
+      const result = await blacklistedToken.save();
+      if (!result) {
+        resp = { status: "error", message: "Something went wrong!", data: {} };
+        res.status(424).send(resp);
+      } else {
+        resp = { status: "success", message: "Logged out succesfully!", data: {} };
+        res.status(200).send(resp);
+      }
+  
+    }
+  
+  catch (error) {
+    next(error);
+  }
+}
+
+
+export { deactivateUser, getUser, isActiveUser, updateUser, changePassword, deactivateUserCallback, logOut};
