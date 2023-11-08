@@ -109,6 +109,13 @@ const loginUser: RequestHandler = async (req, res, next) => {
       err.statusCode = 401;
       throw err;
     }
+    // if user has not verified email otp.
+    if (!user.isVerified) {
+      const err = new ProjectError("Account is not Verified. Please verify your account");
+      err.statusCode = 401;
+      throw err;
+    }
+
     //verify if user is deactivated ot not
     if (user.isDeactivated) {
       const err = new ProjectError("Account is deactivated!");
@@ -529,6 +536,11 @@ const verifyRegistrationOTP: RequestHandler = async (req, res, next) => {
     const user = await User.findOne({ email });
     if (!user) {
       const err = new ProjectError("No user exist..");
+      err.statusCode = 401;
+      throw err;
+    }
+    if (user && user.isVerified) {
+      const err = new ProjectError("User already exist");
       err.statusCode = 401;
       throw err;
     }
