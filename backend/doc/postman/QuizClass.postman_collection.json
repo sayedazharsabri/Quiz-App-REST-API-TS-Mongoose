@@ -1180,7 +1180,7 @@
 								}
 							}
 						},
-						"url": "localhost:3002/user/addfavques"
+						"url": "localhost:3002/favquestion"
 					},
 					"status": "OK",
 					"code": 200,
@@ -1239,7 +1239,7 @@
 					"originalRequest": {
 						"method": "GET",
 						"header": [],
-						"url": "localhost:3002/user/favques"
+						"url": "localhost:3002/favquestion"
 					},
 					"status": "OK",
 					"code": 200,
@@ -1316,7 +1316,7 @@
 								}
 							}
 						},
-						"url": "localhost:3002/user/removefavques/654a6c12eb8b8b0f41f7308e"
+						"url": "localhost:3002/favquestion/654b8e9714cf299ce460f216"
 					},
 					"status": "OK",
 					"code": 200,
