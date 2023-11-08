@@ -898,7 +898,7 @@ lru-cache@^6.0.0:
   dependencies:
     yallist "^4.0.0"
 
-mailgen@^2.0.27:
+mailgen@^2.0.28:
   version "2.0.28"
   resolved "https://registry.yarnpkg.com/mailgen/-/mailgen-2.0.28.tgz#685ce4ead41a8cd51b935391b4de453753d8171f"
   integrity sha512-6g8vyKwMjAvNLuoDuGpJ4UhpvmroQQH9ZYzERC+/tL21Qvrzs2CM/li561rVIsSE+zroC4xSjXYYQ6pfPYYCXQ==
