@@ -5,7 +5,6 @@ import ProjectError from "../helper/error";
 import User from "../models/user";
 import { ReturnResponse } from "../utils/interfaces";
 import Blacklist from "../models/blacklistedToken";
-import clearBlacklistScheduler from "../utils/clearBlacklist";
 import sendEmail from "../utils/email";
 import jwt, { decode } from "jsonwebtoken";
 
@@ -234,7 +233,7 @@ const logOut: RequestHandler = async (req, res, next) => {
       err.statusCode = 424;
       throw err;
     }
-    else {
+  
       const token = authHeader.split(" ")[1];
 
       let decodedToken: { userId: String; iat: Number; exp: Number };
@@ -252,9 +251,9 @@ const logOut: RequestHandler = async (req, res, next) => {
         resp = { status: "success", message: "Logged out succesfully!", data: {} };
         res.status(200).send(resp);
       }
-      clearBlacklistScheduler;
+  
     }
-  }
+  
   catch (error) {
     next(error);
   }

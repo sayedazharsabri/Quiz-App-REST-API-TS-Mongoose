@@ -8,6 +8,7 @@ import reportRoute from "./routes/report";
 import userRoute from "./routes/user";
 import ProjectError from "./helper/error";
 import { ReturnResponse } from "./utils/interfaces";
+import clearBlacklistScheduler from "./utils/clearBlacklistScheduler";
 
 const app = express();
 
@@ -67,6 +68,8 @@ app.use(
     res.status(statusCode).send(resp);
   }
 );
+
+clearBlacklistScheduler;
 
 (async () => {
   try {
