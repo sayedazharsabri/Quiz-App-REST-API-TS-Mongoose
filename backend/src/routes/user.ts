@@ -7,12 +7,8 @@ import {
   getUser,
   updateUser,
   changePassword,
-<<<<<<< HEAD
-  deactivateUserCallback
-=======
-  deactivateUserCallback,
-  logOut,
->>>>>>> master
+  // deactivateUserCallback,
+  // logOut,
 } from "../controllers/user";
 
 import { isAuthenticated } from "../middlewares/isAuth";
@@ -36,7 +32,7 @@ router.patch("/deactivate", isAuthenticated, deactivateUser);
 
 // Get request Verify Email for deactivate user's account
 // GET  /user/deactivate/:token
-router.get("/deactivate/:token", deactivateUserCallback)
+// router.get("/deactivate/:token", deactivateUserCallback)
 
 //Put  /user/changepassword
 router.put(
@@ -64,6 +60,6 @@ router.put(
 );
 
 // POST /user/logout
-router.post("/logout",isAuthenticated,logOut);
+// router.post("/logout",isAuthenticated,logOut);
 
 export default router;

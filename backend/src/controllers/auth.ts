@@ -12,6 +12,7 @@ import { startExam } from './exam';
 
 import otpGenerator from "otp-generator"
 import OTP from "../models/otp"
+import sendEmailOTPRegister from "./otp"
 
 
 
@@ -27,23 +28,29 @@ const registerUser: RequestHandler = async (req, res, next) => {
     let password = await bcrypt.hash(req.body.password, 12);
 
 
-    const otp = req.body.otp;
-    // Find the most recent OTP for the email
-    const response = await OTP.find({ email }).sort({ createdAt: -1 }).limit(1);
-    console.log("Response OTP : ", response);
-    if (response.length === 0) {
-      // OTP not found for the email
-      const err = new ProjectError("OTP has not send on this email ");
-      err.statusCode = 400;
-      throw err;
+    // const otp = req.body.otp;
+    // // Find the most recent OTP for the email
+    // const response = await OTP.find({ email }).sort({ createdAt: -1 }).limit(1);
+    // console.log("Response OTP : ", response);
+    // if (response.length === 0) {
+    //   // OTP not found for the email
+    //   const err = new ProjectError("OTP has not send on this email ");
+    //   err.statusCode = 400;
+    //   throw err;
 
+    // }
+    // else if (otp != response[0].otp) {
+    //   // The otp is not valid
+    //   const err = new ProjectError("Incorrect OTP");
+    //   err.statusCode = 400;
+    //   throw err;
+    // }
+
+    const sendOtp = await sendEmailOTPRegister(email);
+    if (sendOtp) {
+      console.log("OTP sent I am in register function");
     }
-    else if (otp != response[0].otp) {
-      // The otp is not valid
-      const err = new ProjectError("Incorrect OTP");
-      err.statusCode = 400;
-      throw err;
-    }
+
 
     const user = new User({ email, name, password });
     const result = await user.save();
@@ -368,6 +375,9 @@ const activateUserCallback: RequestHandler = async (req, res, next) => {
 const isUserExist = async (email: String) => {
   const user = await User.findOne({ email });
   if (!user) {
+    return false;
+  }
+  else if (user && !user.isVerified) {
     return false;
   }
   return true;
