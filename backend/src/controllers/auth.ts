@@ -399,6 +399,32 @@ const forgotPassword: RequestHandler = async (req, res, next) => {
   }
 };
 
+const forgotPasswordCallback: RequestHandler = async (req, res, next) => {
+  let resp: ReturnResponse;
+  try {
+    //verify token sent
+    const secretKey = process.env.SECRET_KEY || "";
+    let decodedToken;
+    const token = req.params.token;
+    decodedToken = <any>jwt.verify(token, secretKey);
+
+    if (!decodedToken) {
+      const err = new ProjectError("Invalid link!");
+      err.statusCode = 401;
+      throw err;
+    }
+
+    const userId = decodedToken.userId;
+
+    // const redirectLink = `http://${process.env.BASE_URL}/auth/forgotpassword/${userId}`;
+    // res.redirect(redirectLink);
+    console.log(`http://${process.env.BASE_URL}/auth/forgotpassword/${userId}`);
+
+  } catch (error) {
+    next(error);
+  }
+};
+
 const isUserExist = async (email: String) => {
   const user = await User.findOne({ email });
   if (!user) {
@@ -524,5 +550,6 @@ export {
   registerUser,
   activateAccount,
   sendOTP,
-  forgotPassword
+  forgotPassword,
+  forgotPasswordCallback
 };

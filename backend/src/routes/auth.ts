@@ -11,7 +11,8 @@ import {
   registerUser,
   activateAccount,
   sendOTP,
-  forgotPassword
+  forgotPassword,
+  forgotPasswordCallback
 } from "../controllers/auth";
 import { validateRequest } from "../helper/validateRequest";
 
@@ -125,6 +126,6 @@ router.post(
   forgotPassword
 );
 
-
+router.get("/forgotpassword/:token",forgotPasswordCallback);
 
 export default router;
