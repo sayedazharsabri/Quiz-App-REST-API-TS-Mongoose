@@ -362,6 +362,43 @@ const activateUserCallback: RequestHandler = async (req, res, next) => {
   }
 };
 
+//forgot password
+const forgotPassword: RequestHandler = async (req, res, next) => {
+  let resp: ReturnResponse;
+  try {
+    const email = req.body.email;
+
+    //find user with email
+    const user = await User.findOne({ email });
+
+    if (!user) {
+      const err = new ProjectError("No user exist");
+      err.statusCode = 401;
+      throw err;
+    }
+
+    const emailToken = jwt.sign({ userId: user._id }, secretKey, {
+      expiresIn: "5m",
+    });
+
+    const message = `
+    Click on the below link to reset the password of your account:
+    http://${process.env.BASE_URL}/auth/forgotpassword/${emailToken}
+    
+    (Note: If the link is not clickable kindly copy the link and paste it in the browser.)`;
+    sendEmail(user.email, "Verify Email", message);
+    resp = {
+      status: "success",
+      message: "An Email has been sent to your account please verify!",
+      data: {},
+    };
+
+    res.status(200).send(resp);
+  } catch (error) {
+    next(error);
+  }
+};
+
 const isUserExist = async (email: String) => {
   const user = await User.findOne({ email });
   if (!user) {
@@ -486,5 +523,6 @@ export {
   loginUser,
   registerUser,
   activateAccount,
-  sendOTP
+  sendOTP,
+  forgotPassword
 };

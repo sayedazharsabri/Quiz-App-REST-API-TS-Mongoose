@@ -10,7 +10,8 @@ import {
   loginUser,
   registerUser,
   activateAccount,
-  sendOTP
+  sendOTP,
+  forgotPassword
 } from "../controllers/auth";
 import { validateRequest } from "../helper/validateRequest";
 
@@ -116,6 +117,13 @@ router.post(
 //re-activate link
 // GET /user/activate
 router.get("/activate/:token", activateUserCallback);
+
+//POST 
+router.post(
+  "/forgotpassword",
+  [body("email").trim().isEmail().withMessage("Invalid Email!")],
+  forgotPassword
+);
 
 
 
