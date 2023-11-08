@@ -10,6 +10,7 @@ import { ReturnResponse } from "../utils/interfaces";
 import Mailgen from 'mailgen';
 import { startExam } from './exam';
 import otpGenerator from "otp-generator";
+// import OTP from "../models/otp"
 import OTP from "../models/OTP"
 
 const secretKey = process.env.SECRET_KEY || "";

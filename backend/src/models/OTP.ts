@@ -17,7 +17,7 @@ const OTPSchema = new schema({
     createdAt: {
         type: Date,
         default: Date.now,
-        expires: 60 * 2,  // This document will be automatically deleted after 5 minutes of its creation time
+        expires: 60 * 2,  // This document will be automatically deleted after 2 minutes of its creation time
 
     }
 });
