@@ -7,6 +7,7 @@ import {
   getUser,
   updateUser,
   changePassword,
+  verifyDeactivateAccountOTP,
   // deactivateUserCallback,
   // logOut,
 } from "../controllers/user";
@@ -29,6 +30,10 @@ router.put("/", isAuthenticated, updateUser);
 
 //PATCH /user/deactivate
 router.patch("/deactivate", isAuthenticated, deactivateUser);
+
+// Verify Deactivate Account Email OTP
+// POST -> /user/deactivate/verify-deactivate-account-otp
+router.post("/deactivate/verify-deactivate-account-otp",isAuthenticated,verifyDeactivateAccountOTP)
 
 // Get request Verify Email for deactivate user's account
 // GET  /user/deactivate/:token

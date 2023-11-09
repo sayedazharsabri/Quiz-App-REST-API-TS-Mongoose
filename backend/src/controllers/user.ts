@@ -123,6 +123,9 @@ const changePassword: RequestHandler = async (req, res, next) => {
   }
 };
 
+
+import { sendDeactivateEmailOTP } from "./otp";
+
 const deactivateUser: RequestHandler = async (req, res, next) => {
   let resp: ReturnResponse;
   const userId = req.userId;
@@ -140,33 +143,98 @@ const deactivateUser: RequestHandler = async (req, res, next) => {
       throw err;
     }
 
-    // Email verification when User wants to deactivated account
-    const secretKey = process.env.SECRET_KEY || "";
-    const emailToken = jwt.sign({ userId: user._id }, secretKey, {
-      expiresIn: "5m",
-    });
-
-    const message = `
-    Click on the below link to deactivate your account:
-    http://${process.env.BASE_URL}/user/deactivate/${emailToken}
-    
-    (Note: If the link is not clickable kindly copy the link and paste it in the browser.)`;
-    sendEmail(user.email, "Verify Email", message);
+    const sendDeactivateOTP = sendDeactivateEmailOTP(user.email);
+    if (!sendDeactivateOTP) {
+      const err = new ProjectError("Email OTP has not sent..");
+      err.statusCode = 401;
+      throw err;
+    }
     resp = {
       status: "success",
-      message: "An Email has been sent to your account please verify!",
+      message: "An Email OTP has been sent to your account please verify!",
       data: {},
     };
+    res.status(200).send(resp);
+
+    // // Email verification when User wants to deactivated account
+    // const secretKey = process.env.SECRET_KEY || "";
+    // const emailToken = jwt.sign({ userId: user._id }, secretKey, {
+    //   expiresIn: "5m",
+    // });
+
+    // const message = `
+    // Click on the below link to deactivate your account:
+    // http://${process.env.BASE_URL}/user/deactivate/${emailToken}
+    
+    // (Note: If the link is not clickable kindly copy the link and paste it in the browser.)`;
+    // sendEmail(user.email, "Verify Email", message);
+    // resp = {
+    //   status: "success",
+    //   message: "An Email has been sent to your account please verify!",
+    //   data: {},
+    // };
 
     // user.isDeactivated = true;
     // await user.save();
 
-    // resp = { status: "success", message: "User deactivated!", data: {} };
-    res.status(200).send(resp);
+    //  resp = { status: "success", message: "User deactivated!", data: {} };
+    // res.status(200).send(resp);
   } catch (error) {
     next(error);
   }
 };
+
+import OTP from "../models/otp"
+//Verify Deactivate Email OTP
+const verifyDeactivateAccountOTP: RequestHandler = async (req, res, next) => {
+  try {
+    let resp: ReturnResponse;
+    const otp = req.body.otp;
+    const userId = req.userId;
+    const user = await User.findById({ _id: userId });
+    if (!user) {
+      const err = new ProjectError("User Not Fount..");
+      err.statusCode = 401;
+      throw err;
+    }
+    if (user && user.isDeactivated) {
+      const err = new ProjectError("User already Deactivaated");
+      err.statusCode = 401;
+      throw err;
+    }
+
+    const email = user.email;
+    const matchOTP = await OTP.find({ email }).sort({ createdAt: -1 }).limit(1);
+    console.log("Match OTP : ", matchOTP);
+    if (matchOTP.length === 0) {
+      // OTP not found for the email
+      const err = new ProjectError("OTP has not send on this email ");
+      err.statusCode = 400;
+      throw err;
+
+    }
+    else if (otp != matchOTP[0].otp) {      
+      // The otp is not Correct
+      const err = new ProjectError("Incorrect OTP");
+      err.statusCode = 400;
+      throw err;
+    }
+
+    user.isDeactivated = true;
+    const result = await user.save();
+    if (!result) {
+      resp = { status: "error", message: "Error while Deactivate Account Save Data into DataBase", data: {} };
+      res.status(200).send({ message: "verify" });
+    }
+    resp = { status: "success", message: "Deactivate Account Successfull !!", data: { userId: user._id,email:email } };
+    res.status(200).send(resp);
+
+  } catch (error) {
+    next(error);
+  }
+}
+
+
 
 const isActiveUser = async (userId: String) => {
   const user = await User.findById(userId);
@@ -179,4 +247,4 @@ const isActiveUser = async (userId: String) => {
   return !user.isDeactivated;
 };
 
-export { deactivateUser, getUser, isActiveUser, updateUser, changePassword };
+export { deactivateUser, getUser, isActiveUser, updateUser, changePassword, verifyDeactivateAccountOTP };
