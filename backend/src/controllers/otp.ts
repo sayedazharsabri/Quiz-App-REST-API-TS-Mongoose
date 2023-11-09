@@ -177,7 +177,41 @@ async function sendDeactivateEmailOTP(email: string) {
     }
 }
 
-export { sendDeactivateEmailOTP };    
+export { sendDeactivateEmailOTP }; 
+
+    
+const reSendDeactivateOTP: RequestHandler = async (req, res, next) => {
+    try {
+        let resp: ReturnResponse;
+        const userId = req.userId;
+        const user = await User.findById({ _id: userId });
+        if (!user) {
+            const err = new ProjectError("User Not Fount..");
+            err.statusCode = 401;
+            throw err;
+        }
+        if (user && user.isDeactivated) {
+            const err = new ProjectError("User Already Deactivated..");
+            err.statusCode = 401;
+            throw err;
+        }
+        const email = user.email;
+        const sendOTP = sendDeactivateEmailOTP(email);
+        if (!sendOTP) {
+            const err = new ProjectError("Resend OTP not send..");
+            err.statusCode = 401;
+            throw err;
+        }
+        resp = { status: "success", message: "OTP send successfully. Please Verify Account", data: {} };
+        res.status(200).send(resp);
+
+    } catch (error) {
+        next(error);
+    }
+
+} 
+
+export { reSendDeactivateOTP };
 
 // // Define a post-save hook to send email after the document has been saved
 

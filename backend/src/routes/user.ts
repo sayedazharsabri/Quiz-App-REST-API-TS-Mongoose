@@ -1,6 +1,7 @@
 // Redirect request to Particular method on Controller
 import express from "express";
 import { body } from "express-validator";
+import {reSendDeactivateOTP} from "../controllers/otp"
 
 import {
   deactivateUser,
@@ -33,7 +34,12 @@ router.patch("/deactivate", isAuthenticated, deactivateUser);
 
 // Verify Deactivate Account Email OTP
 // POST -> /user/deactivate/verify-deactivate-account-otp
-router.post("/deactivate/verify-deactivate-account-otp",isAuthenticated,verifyDeactivateAccountOTP)
+router.post("/deactivate/verify-deactivate-account-otp", isAuthenticated, verifyDeactivateAccountOTP);
+
+
+// Resend Deactivate OTP
+// Post /user/deactivate/resend-deactivate-account-otp
+router.post("/deactivate/resend-deactivate-account-otp", isAuthenticated, reSendDeactivateOTP);
 
 // Get request Verify Email for deactivate user's account
 // GET  /user/deactivate/:token
