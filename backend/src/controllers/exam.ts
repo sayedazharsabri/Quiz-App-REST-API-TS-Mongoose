@@ -17,7 +17,10 @@ const startExam: RequestHandler = async (req, res, next) => {
       createdBy: 1,
       category: 1,
       attemptsAllowedPerUser: 1,
-      attemptedUsers: 1
+      attemptedUsers: 1,
+      passingPercentage:1,
+      isPublicQuiz:1,
+      allowedUser:1
     });
 
     if (!quiz) {
@@ -31,13 +34,15 @@ const startExam: RequestHandler = async (req, res, next) => {
       err.statusCode = 405;
       throw err;
     }
-
     if (quiz.createdBy.toString() === userId) {
       const err = new ProjectError("You can't attend your own quiz!");
       err.statusCode = 405;
+    }
+    if(!quiz.isPublicQuiz && !quiz.allowedUser.includes(req.userId)){
+      const err = new ProjectError("You are not authorized!");
+      err.statusCode = 403;
       throw err;
     }
-
     if (quiz.category === "test") {
       if (quiz.attemptsAllowedPerUser) {
 
@@ -69,7 +74,6 @@ const startExam: RequestHandler = async (req, res, next) => {
         }
       }
     }
-
     const resp: ReturnResponse = {
       status: "success",
       message: "Quiz",
