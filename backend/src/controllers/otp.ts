@@ -4,6 +4,7 @@ import User from "../models/user"
 import otpGenerator from "otp-generator"
 import ProjectError from "../helper/error";
 import { ReturnResponse } from "../utils/interfaces";
+import { RequestHandler } from "express";
 
 
 
@@ -53,7 +54,7 @@ async function sendEmailOTPRegister(email: string) {
         const mailResponse = await sendEmail(
             email,
             "Verification OTP Email",
-            otp
+            `Registration OTP is ${otp}`
         );
         console.log("Email send successfully: ", mailResponse);
         const saveOTP = new OTP({ email, otp });
@@ -76,6 +77,38 @@ async function sendEmailOTPRegister(email: string) {
 }
 
 export default sendEmailOTPRegister;
+
+
+const resendRegistrationOTP: RequestHandler = async (req, res, next) => {
+    try {
+        let resp: ReturnResponse;
+        const email = req.params.email;
+        const checkUserExits = await User.findOne({ email });
+        if (!checkUserExits) {
+            const err = new ProjectError("User not exist..");
+            err.statusCode = 401;
+            throw err;
+        }
+        if (checkUserExits && checkUserExits.isVerified) {
+            const err = new ProjectError("Already Verified your Account");
+            err.statusCode = 401;
+            throw err;
+        }
+        const sendOTP = await sendEmailOTPRegister(email);
+        if (!sendOTP) {
+            const err = new ProjectError("Resend otp Error");
+            err.statusCode = 401;
+            throw err;
+        }
+        resp = { status: "success", message: "OTP send successfully. Please Verify Account", data: {  } };
+        res.status(200).send(resp);
+        
+    } catch (error) {
+        next(error);
+    }
+}
+
+export { resendRegistrationOTP };
 
 // // Define a post-save hook to send email after the document has been saved
 

@@ -1,6 +1,7 @@
 // Redirect request to Particular method on Controller
 import express from "express";
 import { body } from "express-validator";
+import { resendRegistrationOTP } from "../controllers/otp";
 
 import {
   activateUser,
@@ -110,6 +111,11 @@ router.post("/send-otp",
 //Verify Registration otp route
 // POST -> /auth/verify-registration-otp/:email  (use params)
 router.post("/verify-registration-otp/:email", verifyRegistrationOTP);
+
+
+// Resend otp for registration
+// POST -> /auth/resend-registration-otp/:email  (use Params)
+router.post("/resend-registration-otp/:email", resendRegistrationOTP);
 
 router.post(
   "/activate",
