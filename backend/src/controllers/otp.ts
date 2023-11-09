@@ -11,12 +11,7 @@ import { RequestHandler } from "express";
 // Define a function to send emails
 
 async function sendEmailOTPRegister(email: string) {
-    // create a transporter to send emails
-
-    // Define the email options
-
-    // Send the email
-
+    
     try {
         let resp: ReturnResponse;
         // check if user already present
@@ -112,11 +107,6 @@ export { resendRegistrationOTP };
     
     
 async function sendDeactivateEmailOTP(email: string) {
-    // create a transporter to send emails
-
-    // Define the email options
-
-    // Send the email
 
     try {
         let resp: ReturnResponse;
@@ -213,14 +203,3 @@ const reSendDeactivateOTP: RequestHandler = async (req, res, next) => {
 
 export { reSendDeactivateOTP };
 
-// // Define a post-save hook to send email after the document has been saved
-
-// OTP.pre("save", async function (next:any) {
-//     console.log("New document saved to database");
-
-//     // only send an email when a new document is created
-//     if (this.isNew) {
-//         await sendVerificationEmail(this.email, this.otp);
-//     }
-//     next();
-// });

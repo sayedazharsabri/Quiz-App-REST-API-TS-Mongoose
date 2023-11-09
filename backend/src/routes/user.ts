@@ -9,7 +9,7 @@ import {
   updateUser,
   changePassword,
   verifyDeactivateAccountOTP,
-  // deactivateUserCallback,
+ 
   // logOut,
 } from "../controllers/user";
 
@@ -41,9 +41,7 @@ router.post("/deactivate/verify-deactivate-account-otp", isAuthenticated, verify
 // Post /user/deactivate/resend-deactivate-account-otp
 router.post("/deactivate/resend-deactivate-account-otp", isAuthenticated, reSendDeactivateOTP);
 
-// Get request Verify Email for deactivate user's account
-// GET  /user/deactivate/:token
-// router.get("/deactivate/:token", deactivateUserCallback)
+
 
 //Put  /user/changepassword
 router.put(

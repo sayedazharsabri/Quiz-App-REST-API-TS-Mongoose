@@ -12,7 +12,7 @@ import {
   registerUser,
   activateAccount,
   verifyRegistrationOTP,
-  sendOTP
+ 
 } from "../controllers/auth";
 import { validateRequest } from "../helper/validateRequest";
 
@@ -102,11 +102,7 @@ router.post('/activateaccount', [
 ], activateAccount)
 
 
-//POST -> /auth/send otp 
-router.post("/send-otp",
-  [body("email").trim().isEmail().withMessage("Invalid Email!")],
-  sendOTP
-)
+
 
 //Verify Registration otp route
 // POST -> /auth/verify-registration-otp/:email  (use params)
