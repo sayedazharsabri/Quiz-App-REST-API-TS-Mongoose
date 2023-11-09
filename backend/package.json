@@ -17,7 +17,7 @@
     "jsonwebtoken": "^9.0.1",
     "mailgen": "^2.0.28",
     "mongoose": "^7.5.0",
-    "node-cron": "^3.0.2",
+    "node-cron": "^3.0.3",
     "nodemailer": "^6.9.7",
     "otp-generator": "^4.0.1",
     "typescript": "^5.2.2"

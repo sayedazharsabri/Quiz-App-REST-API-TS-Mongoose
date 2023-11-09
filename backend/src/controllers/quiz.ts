@@ -251,16 +251,25 @@ const getAllQuiz: RequestHandler = async (req, res, next) => {
       category: 1,
       questionList: 1,
       createdBy: 1,
-      passingPercentage: 1
+      passingPercentage: 1,
+      isPublicQuiz:1,
+      allowedUser:1
     });
+    
     //filter quizzes created by user itself
-    quiz = quiz.filter(item => item.createdBy.toString() !== req.userId);
+    quiz = quiz.filter(item => {
+      if(item.isPublicQuiz || item.allowedUser.includes(req.userId)){
+          return item.createdBy.toString() !== req.userId;
+      }
+      
+    });
     
     if (!quiz) {
       const err = new ProjectError("No quiz found!");
       err.statusCode = 404;
       throw err;
     }
+    
     const resp: ReturnResponse = {
       status: "success",
       message: "All Published Quiz",
