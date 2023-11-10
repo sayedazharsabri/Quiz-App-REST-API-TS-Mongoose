@@ -376,6 +376,104 @@ const activateUserCallback: RequestHandler = async (req, res, next) => {
   }
 };
 
+//forgot password
+const forgotPassword: RequestHandler = async (req, res, next) => {
+  let resp: ReturnResponse;
+  try {
+    const email = req.body.email;
+
+    //find user with email
+    const user = await User.findOne({ email });
+
+    if (!user) {
+      const err = new ProjectError("No user exist");
+      err.statusCode = 401;
+      throw err;
+    }
+
+    const emailToken = jwt.sign({ userId: user._id }, secretKey, {
+      expiresIn: "5m",
+    });
+
+    const message = `
+    Click on the below link to reset the password of your account:
+    http://${process.env.BASE_URL}/auth/forgotpassword/${emailToken}
+    
+    (Note: If the link is not clickable kindly copy the link and paste it in the browser.)`;
+    sendEmail(user.email, "Verify Email", message);
+    resp = {
+      status: "success",
+      message: "An Email has been sent to your account please verify!",
+      data: {},
+    };
+
+    res.status(200).send(resp);
+  } catch (error) {
+    next(error);
+  }
+};
+
+const forgotPasswordCallback: RequestHandler = async (req, res, next) => {
+  let resp: ReturnResponse;
+  try {
+    //verify token sent
+    const secretKey = process.env.SECRET_KEY || "";
+    let decodedToken;
+    const token = req.params.token;
+    decodedToken = <any>jwt.verify(token, secretKey);
+
+    if (!decodedToken) {
+      const err = new ProjectError("Invalid link!");
+      err.statusCode = 401;
+      throw err;
+    }
+
+    const userId = decodedToken.userId;
+
+    // const redirectLink = `http://${process.env.BASE_URL}/auth/forgotpassword/${userId}`;
+    // res.redirect(redirectLink);
+    console.log(`http://${process.env.BASE_URL}/auth/forgotpassword/${userId}`);
+
+  } catch (error) {
+    next(error);
+  }
+};
+
+const resetPassword: RequestHandler = async(req, res, next) => {
+  let resp: ReturnResponse;
+  try {
+
+    const userId = req.params.userId;
+    const user = await User.findOne({ _id: userId });
+
+    if (!user) {
+      const err = new ProjectError("User not found!");
+      err.statusCode = 404;
+      throw err;
+    }
+
+    let password = await bcrypt.hash(req.body.password, 12);
+    const confirmPassword = req.body.confirmPassword;
+
+    // checking if password and confirmpassword are the same
+    const isPasswordMatching = await bcrypt.compare(confirmPassword,password);
+    if (!isPasswordMatching) {
+      const err = new ProjectError(
+        "New password does not match. Enter new password again "
+      );
+      err.statusCode = 401;
+      throw err;
+    }
+
+    user.password = password;
+    await user.save();
+    resp = { status: "success", message: "Password updated", data: {} };
+    res.send(resp);
+  } catch (error) {
+    next(error);
+  }
+}
+
 const isUserExist = async (email: String) => {
   const user = await User.findOne({ email });
   if (!user) {
@@ -505,6 +603,8 @@ export {
   loginUser,
   registerUser,
   activateAccount,
-  verifyRegistrationOTP,
- 
+  forgotPassword,
+  forgotPasswordCallback,
+  resetPassword,
+  verifyRegistrationOTP
 };

@@ -33,6 +33,15 @@ const quizSchema = new schema(
       type: Boolean,
       default: false,
     },
+    
+    isPublicQuiz: {
+      type: Boolean,
+      required: true
+    },
+    allowedUser: {
+      type: [],
+      default: []
+    },
     attemptsAllowedPerUser: {   //how many times quiz can be attempted by user
       type: Number              //required is false, if not provided quiz can be attempted multiple times
     },
@@ -42,6 +51,7 @@ const quizSchema = new schema(
         attemptsLeft: Number
       }
     ]
+    
   },
   { timestamps: true }
 );
