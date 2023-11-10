@@ -27,7 +27,7 @@ const registerUser: RequestHandler = async (req, res, next) => {
     const name = req.body.name;
     let password = await bcrypt.hash(req.body.password, 12);
 
-
+    const token = jwt.sign({ email: email }, secretKey);
     const sendOtp = await sendEmailOTPRegister(email);
     if (sendOtp) {
       // console.log("OTP sent I am in register function");
@@ -38,7 +38,7 @@ const registerUser: RequestHandler = async (req, res, next) => {
            resp = {
               status: "success",
               message: "OTP has sent on your email. Please Verify..",
-              data: { userId: checkUserExits._id },
+              data: { userId: checkUserExits._id, token:token },
           };
           res.status(201).send(resp);
       }

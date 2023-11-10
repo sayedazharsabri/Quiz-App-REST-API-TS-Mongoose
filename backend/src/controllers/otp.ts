@@ -73,11 +73,15 @@ async function sendEmailOTPRegister(email: string) {
 
 export default sendEmailOTPRegister;
 
-
+import jwt from "jsonwebtoken";
 const resendRegistrationOTP: RequestHandler = async (req, res, next) => {
     try {
         let resp: ReturnResponse;
-        const email = req.params.email;
+        // const email = req.params.email;
+        const secretKey = process.env.SECRET_KEY || "";
+        
+       const decodedToken = <any>jwt.verify(req.params.token, secretKey);
+        const email = decodedToken;
         const checkUserExits = await User.findOne({ email });
         if (!checkUserExits) {
             const err = new ProjectError("User not exist..");
