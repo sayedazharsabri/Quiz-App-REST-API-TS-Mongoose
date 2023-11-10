@@ -89,6 +89,21 @@ const resendRegistrationOTP: RequestHandler = async (req, res, next) => {
             err.statusCode = 401;
             throw err;
         }
+        const otpExist = await OTP.findOne({ email });
+        
+        if (otpExist) {
+            const otpExistCreatedAt = new Date(otpExist.createdAt); // Assuming otpExist.createdAt is a Date object
+
+            const currentTime = new Date();
+            const timeDifferenceInMilliseconds = currentTime.getTime() - otpExistCreatedAt.getTime();
+            const timeDifferenceInMinutes = Math.floor(timeDifferenceInMilliseconds / (1000 * 60));
+
+            const timeExpire = timeDifferenceInMinutes;
+
+            const err = new ProjectError(`Resend OTP after ${timeExpire} minutes`);
+            err.statusCode = 401;
+            throw err;
+        }
         const sendOTP = await sendEmailOTPRegister(email);
         if (!sendOTP) {
             const err = new ProjectError("Resend otp Error");
