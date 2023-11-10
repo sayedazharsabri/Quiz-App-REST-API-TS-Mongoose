@@ -442,7 +442,11 @@ const isPasswordValid = async (password: String) => {
 const verifyRegistrationOTP: RequestHandler = async (req, res, next) => {
   try {
     let resp: ReturnResponse;
-    const email = req.params.email;
+    // const email = req.params.email;
+    const secretKey = process.env.SECRET_KEY || "";
+
+    const decodedToken = <any>jwt.verify(req.params.token, secretKey);
+    const email = decodedToken;
     const otp = req.body.otp;
     // console.log("Email from params : ", email);
     // console.log("Email from BODY OTP : ", otp);
