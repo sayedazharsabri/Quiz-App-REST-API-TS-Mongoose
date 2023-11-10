@@ -1,9 +1,9 @@
 {
 	"info": {
-		"_postman_id": "1f7b76a5-3219-46b6-81e0-b89b8d5bcf61",
-		"name": "QuizClass",
+		"_postman_id": "f96c2d4d-9d18-46ad-aa6e-8e0584ca8d38",
+		"name": "QuizClass Copy 4",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "29765543"
+		"_exporter_id": "23659079"
 	},
 	"item": [
 		{
@@ -13,7 +13,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"name\":\"Samriti\",\r\n    \"email\":\"samritidogra9062@gmail.com\",\r\n    \"password\": \"Password@12345\",\r\n    \"confirmPassword\":\"Password@12345\",\r\n    \"otp\":463841\r\n}",
+					"raw": "{\r\n    \"name\":\"Aarush\",\r\n    \"email\":\"aarush@gmail.com\",\r\n    \"password\": \"Password@12345\",\r\n    \"confirmPassword\":\"Password@12345\",\r\n    \r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -40,7 +40,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\":\"Aarush\",\r\n    \"email\":\"aarush@gmail.com\",\r\n    \"password\": \"Password@12345\",\r\n    \"confirmPassword\":\"Password@12345\",\r\n    \"otp\":432156\r\n}",
+							"raw": "{\r\n    \"name\":\"Aarush\",\r\n    \"email\":\"aarush@gmail.com\",\r\n    \"password\": \"Password@12345\",\r\n    \"confirmPassword\":\"Password@12345\",\r\n   \r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -92,7 +92,7 @@
 						}
 					],
 					"cookie": [],
-					"body": "{\n    \"status\": \"success\",\n    \"message\": \"Registration done!\",\n    \"data\": {\n        \"userId\": \"651a83d255af3c91a38f0190\"\n    }\n}"
+					"body": "{\n    \"status\": \"success\",\n    \"message\": \"OTP has sent on your email. Please Verify\",\n    \"data\": {\n        \"email\": \"aarush@gmail.com\",\n        \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im5tazUwNjA3NzNAZ21haWwuY29tIiwiaWF0IjoxNjk5NjM3MjA3fQ.a4d7MaFukyeS410_zbwssc_r4jctsvTsAdkLVlmSngE\"\n    }\n}"
 				}
 			]
 		},
@@ -2051,66 +2051,6 @@
 			]
 		},
 		{
-			"name": "otp-send",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"email\":\"samritidogra9062@gmail.com\"\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "localhost:3002/auth/send-otp",
-					"host": [
-						"localhost"
-					],
-					"port": "3002",
-					"path": [
-						"auth",
-						"send-otp"
-					]
-				}
-			},
-			"response": [
-				{
-					"name": "otp-send",
-					"originalRequest": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"email\":\"aarush@gmail.com\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "localhost:3002/auth/send-otp",
-							"host": [
-								"localhost"
-							],
-							"port": "3002",
-							"path": [
-								"auth",
-								"send-otp"
-							]
-						}
-					},
-					"_postman_previewlanguage": "Text",
-					"header": [],
-					"cookie": [],
-					"body": "{\r\n    \"status\": \"success\",\r\n    \"message\": \"OTP send successfully\",\r\n    \"data\": {\r\n        \"otp\": \"165558\"\r\n    }\r\n}"
-				}
-			]
-		},
-		{
 			"name": "verify-email-link",
 			"request": {
 				"method": "GET",
@@ -2280,6 +2220,186 @@
 					"header": [],
 					"cookie": [],
 					"body": ""
+				}
+			]
+		},
+		{
+			"name": "verify-registration-otp",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"otp\":234236\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3002/auth/verify-registration-otp/{{registrationToken}}",
+					"host": [
+						"localhost"
+					],
+					"port": "3002",
+					"path": [
+						"auth",
+						"verify-registration-otp",
+						"{{registrationToken}}"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "verify-registration-otp",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"otp\":234236\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3002/auth/verify-registration-otp/{{registrationToken}}",
+							"host": [
+								"localhost"
+							],
+							"port": "3002",
+							"path": [
+								"auth",
+								"verify-registration-otp",
+								"{{registrationToken}}"
+							]
+						}
+					},
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": "{\r\n    \"status\": \"success\",\r\n    \"message\": \"Registration Done !!\",\r\n    \"data\": {\r\n        \"userId\": \"654e67da0b09322db15994ca\",\r\n        \"email\": \"aarush@gmail.com\"\r\n    }\r\n}"
+				}
+			]
+		},
+		{
+			"name": "resend-registration-otp",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:3002/auth/resend-registration-otp/{{registrationToken}}",
+					"host": [
+						"localhost"
+					],
+					"port": "3002",
+					"path": [
+						"auth",
+						"resend-registration-otp",
+						"{{registrationToken}}"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "resend-registration-otp",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3002/auth/resend-registration-otp/{{registrationToken}}",
+							"host": [
+								"localhost"
+							],
+							"port": "3002",
+							"path": [
+								"auth",
+								"resend-registration-otp",
+								"{{registrationToken}}"
+							]
+						}
+					},
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": "{\r\n    \"status\": \"success\",\r\n    \"message\": \"OTP send successfully. Please Verify Account\",\r\n    \"data\": {}\r\n}"
+				}
+			]
+		},
+		{
+			"name": "verify-deactivate-otp",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token2}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"otp\":234768\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3002/user/deactivate/verify-deactivate-account-otp",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3002",
+					"path": [
+						"user",
+						"deactivate",
+						"verify-deactivate-account-otp"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "verify-deactivate-otp",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"otp\":234768\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3002/user/deactivate/verify-deactivate-account-otp",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3002",
+							"path": [
+								"user",
+								"deactivate",
+								"verify-deactivate-account-otp"
+							]
+						}
+					},
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": "{\r\n    \"status\": \"success\",\r\n    \"message\": \"Deactivate Account Successfull !!\",\r\n    \"data\": {\r\n        \"userId\": \"654e67da0b09322db15994ca\",\r\n        \"email\": \"aarush@gmail.com\"\r\n    }\r\n}"
 				}
 			]
 		}
