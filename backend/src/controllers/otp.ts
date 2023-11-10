@@ -79,9 +79,10 @@ const resendRegistrationOTP: RequestHandler = async (req, res, next) => {
         let resp: ReturnResponse;
         // const email = req.params.email;
         const secretKey = process.env.SECRET_KEY || "";
-        
-       const decodedToken = <any>jwt.verify(req.params.token, secretKey);
-        const email = decodedToken;
+        let decodedToken : {email : String}
+         decodedToken = <any>jwt.verify(req.params.token, secretKey);
+        const email = decodedToken.email.toString();
+        console.log("Email in resend Email : ", email);
         const checkUserExits = await User.findOne({ email });
         if (!checkUserExits) {
             const err = new ProjectError("User not exist..");
@@ -99,10 +100,10 @@ const resendRegistrationOTP: RequestHandler = async (req, res, next) => {
             const otpExistCreatedAt = new Date(otpExist.createdAt); // Assuming otpExist.createdAt is a Date object
 
             const currentTime = new Date();
-            const timeDifferenceInMilliseconds = currentTime.getTime() - otpExistCreatedAt.getTime();
+            const timeDifferenceInMilliseconds = (otpExistCreatedAt.getTime() + 120000) - currentTime.getTime();
             const timeDifferenceInMinutes = Math.floor(timeDifferenceInMilliseconds / (1000 * 60));
 
-            const timeExpire = timeDifferenceInMinutes;
+            const timeExpire = timeDifferenceInMinutes+1;
 
             const err = new ProjectError(`Resend OTP after ${timeExpire} minutes`);
             err.statusCode = 401;

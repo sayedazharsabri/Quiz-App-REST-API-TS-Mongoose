@@ -38,7 +38,8 @@ const registerUser: RequestHandler = async (req, res, next) => {
            resp = {
               status: "success",
               message: "OTP has sent on your email. Please Verify..",
-              data: { userId: checkUserExits._id, token:token },
+              // data: { userId: checkUserExits._id, token:token },
+             data: { email, token: token },
           };
           res.status(201).send(resp);
       }
@@ -53,7 +54,7 @@ const registerUser: RequestHandler = async (req, res, next) => {
                  resp = {
                  status: "success",
                    message: "OTP has sent on your email. Please Verify",
-                  data: { userId: result._id },
+                  data: { email,token:token },
               };
               res.status(201).send(resp);
          }
@@ -445,8 +446,10 @@ const verifyRegistrationOTP: RequestHandler = async (req, res, next) => {
     // const email = req.params.email;
     const secretKey = process.env.SECRET_KEY || "";
 
-    const decodedToken = <any>jwt.verify(req.params.token, secretKey);
-    const email = decodedToken;
+    let decodedToken: { email: String }
+    decodedToken = <any>jwt.verify(req.params.token, secretKey);
+    const email = decodedToken.email.toString();
+    console.log("Email in Verify Registration OTP Email : ", email);
     const otp = req.body.otp;
     // console.log("Email from params : ", email);
     // console.log("Email from BODY OTP : ", otp);
@@ -484,7 +487,7 @@ const verifyRegistrationOTP: RequestHandler = async (req, res, next) => {
       resp = { status: "error", message: "Error while Save Data into DataBase", data: { } };
       res.status(200).send({ message: "verify" });
     }
-    resp = { status: "success", message: "Registration Done !!", data: { userId : user._id } };
+    resp = { status: "success", message: "Registration Done !!", data: { userId : user._id,email } };
     res.status(200).send(resp);
   } catch (error) {
     console.log("Error in verify Registration OTP : ", error);
