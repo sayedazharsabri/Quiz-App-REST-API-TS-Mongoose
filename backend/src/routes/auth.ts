@@ -113,7 +113,7 @@ router.post("/verify-registration-otp/:token", verifyRegistrationOTP);
 
 // Resend otp for registration
 // POST -> /auth/resend-registration-otp/:email  (use Params)
-router.post("/resend-registration-otp/:token", resendRegistrationOTP);
+router.get("/resend-registration-otp/:token", resendRegistrationOTP);
 
 router.post(
   "/activate",

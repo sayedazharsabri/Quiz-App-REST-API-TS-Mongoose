@@ -142,6 +142,22 @@ const deactivateUser: RequestHandler = async (req, res, next) => {
       err.statusCode = 401;
       throw err;
     }
+    
+    const otpExist = await OTP.findOne({ email:user.email });
+
+    if (otpExist) {
+      const otpExistCreatedAt = new Date(otpExist.createdAt); // Assuming otpExist.createdAt is a Date object
+
+      const currentTime = new Date();
+      const timeDifferenceInMilliseconds = (otpExistCreatedAt.getTime() + 120000) - currentTime.getTime();
+      const timeDifferenceInMinutes = Math.floor(timeDifferenceInMilliseconds / (1000 * 60));
+
+      const timeExpire = timeDifferenceInMinutes;
+
+      const err = new ProjectError(`Resend OTP after ${timeExpire + 1} minutes`);
+      err.statusCode = 401;
+      throw err;
+    }
 
     const sendDeactivateOTP = sendDeactivateEmailOTP(user.email);
     if (!sendDeactivateOTP) {

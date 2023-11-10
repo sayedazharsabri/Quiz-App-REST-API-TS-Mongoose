@@ -103,9 +103,9 @@ const resendRegistrationOTP: RequestHandler = async (req, res, next) => {
             const timeDifferenceInMilliseconds = (otpExistCreatedAt.getTime() + 120000) - currentTime.getTime();
             const timeDifferenceInMinutes = Math.floor(timeDifferenceInMilliseconds / (1000 * 60));
 
-            const timeExpire = timeDifferenceInMinutes+1;
+            const timeExpire = timeDifferenceInMinutes;
 
-            const err = new ProjectError(`Resend OTP after ${timeExpire} minutes`);
+            const err = new ProjectError(`Resend OTP after ${timeExpire+1} minutes`);
             err.statusCode = 401;
             throw err;
         }
