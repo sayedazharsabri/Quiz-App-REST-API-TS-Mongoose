@@ -107,12 +107,12 @@ router.post('/activateaccount', [
 
 
 //Verify Registration otp route
-// POST -> /auth/verify-registration-otp/:email  (use params)
+// POST -> /auth/verify-registration-otp/:token  (use params)
 router.post("/verify-registration-otp/:token", verifyRegistrationOTP);
 
 
 // Resend otp for registration
-// POST -> /auth/resend-registration-otp/:email  (use Params)
+// POST -> /auth/resend-registration-otp/:token  (use Params)
 router.get("/resend-registration-otp/:token", resendRegistrationOTP);
 
 router.post(

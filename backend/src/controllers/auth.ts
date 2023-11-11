@@ -23,16 +23,23 @@ const SERVER_BASE_URL = process.env.BASE_URL;
 const registerUser: RequestHandler = async (req, res, next) => {
   let resp: ReturnResponse;
   try {
+    // take email , name , password from body
     const email = req.body.email;
     const name = req.body.name;
+    // using bcrypt hash the password
     let password = await bcrypt.hash(req.body.password, 12);
 
+    //create a token using email
     const token = jwt.sign({ email: email }, secretKey);
+    // send email otp for registration
     const sendOtp = await sendEmailOTPRegister(email);
+    // if email send successfull
     if (sendOtp) {
-      // console.log("OTP sent I am in register function");
+      // check user already present in User DataBase or not
       const checkUserExits = await User.findOne({ email });
+      // if User present in databse then only update the data 
       if (checkUserExits) {
+           // update data
            checkUserExits.name = name;
            checkUserExits.password = password;
            resp = {
@@ -44,6 +51,7 @@ const registerUser: RequestHandler = async (req, res, next) => {
           res.status(201).send(resp);
       }
       else {
+        // if user does not present in Databse then create a new entry 
             const user = new User({ email, name, password });
             const result = await user.save();
              if (!result) {
@@ -59,6 +67,11 @@ const registerUser: RequestHandler = async (req, res, next) => {
               res.status(201).send(resp);
          }
       }
+    }
+    else {
+      const err = new ProjectError("OTP not send..");
+      err.statusCode = 401;
+      throw err;
     }
 
 
@@ -543,35 +556,43 @@ const verifyRegistrationOTP: RequestHandler = async (req, res, next) => {
     let resp: ReturnResponse;
     // const email = req.params.email;
     const secretKey = process.env.SECRET_KEY || "";
-
+    // decode the params token
     let decodedToken: { email: String }
     decodedToken = <any>jwt.verify(req.params.token, secretKey);
+    // convert Object String to string
     const email = decodedToken.email.toString();
     console.log("Email in Verify Registration OTP Email : ", email);
+    // take otp from body
     const otp = req.body.otp;
     // console.log("Email from params : ", email);
     // console.log("Email from BODY OTP : ", otp);
+
+    // Check User present or not
     const user = await User.findOne({ email });
     if (!user) {
       const err = new ProjectError("No user exist..");
       err.statusCode = 401;
       throw err;
     }
+    // Check User already verified or not
     if (user && user.isVerified) {
       const err = new ProjectError("User already exist");
       err.statusCode = 401;
       throw err;
     }
 
+    // find last send otp for this email 
     const matchOTP = await OTP.find({ email }).sort({ createdAt: -1 }).limit(1);
     console.log("Match OTP : ", matchOTP);
+    // if otp not present for this email
     if (matchOTP.length === 0) {
       // OTP not found for the email
-      const err = new ProjectError("OTP has not send on this email ");
+      const err = new ProjectError("OTP has not send on this email or Invalid OTP");
       err.statusCode = 400;
       throw err;
 
     }
+    // if otp not present
     else if (otp != matchOTP[0].otp) {
       // The otp is not valid
       const err = new ProjectError("Incorrect OTP");
@@ -579,6 +600,7 @@ const verifyRegistrationOTP: RequestHandler = async (req, res, next) => {
       throw err;
     }
 
+    // update data verified true 
     user.isVerified = true;
     const result = await user.save();
     if (!result) {

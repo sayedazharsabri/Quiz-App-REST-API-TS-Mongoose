@@ -7,6 +7,10 @@ import { ReturnResponse } from "../utils/interfaces";
 import BlacklistedToken from "../models/blacklistedToken";
 import sendEmail from "../utils/email";
 import jwt, { decode } from "jsonwebtoken";
+
+import OTP from "../models/otp"
+import { sendDeactivateEmailOTP } from "./otp";
+
 const getUser: RequestHandler = async (req, res, next) => {
   let resp: ReturnResponse;
 
@@ -124,34 +128,43 @@ const changePassword: RequestHandler = async (req, res, next) => {
 };
 
 
-import { sendDeactivateEmailOTP } from "./otp";
 
+// Send otp for deactivate user account
 const deactivateUser: RequestHandler = async (req, res, next) => {
   let resp: ReturnResponse;
+  // get userId from authorization token
   const userId = req.userId;
   try {
+    // if userId not found then throw a not authorized error
     if (!userId) {
       const err = new ProjectError("You are not authorized!");
       err.statusCode = 401;
       throw err;
     }
 
+    // find user in User DataBase
     const user = await User.findById(userId);
+    //if user does not exist then throw a Error User not exist
     if (!user) {
       const err = new ProjectError("No user exist");
       err.statusCode = 401;
       throw err;
     }
     
+    // find OTP for same email if already present then resend otp take time
     const otpExist = await OTP.findOne({ email:user.email });
 
+    // otp found then throw an error as resend otp after some time
     if (otpExist) {
+      // find Create otp time
       const otpExistCreatedAt = new Date(otpExist.createdAt); // Assuming otpExist.createdAt is a Date object
-
+      // find current time
       const currentTime = new Date();
+      // change time into milliseconds and find difference between them
       const timeDifferenceInMilliseconds = (otpExistCreatedAt.getTime() + 120000) - currentTime.getTime();
+      // convert milliseconds to minutes
       const timeDifferenceInMinutes = Math.floor(timeDifferenceInMilliseconds / (1000 * 60));
-
+      // get rest expire time
       const timeExpire = timeDifferenceInMinutes;
 
       const err = new ProjectError(`Resend OTP after ${timeExpire + 1} minutes`);
@@ -159,12 +172,15 @@ const deactivateUser: RequestHandler = async (req, res, next) => {
       throw err;
     }
 
+    // Send a deactivate email OTP
     const sendDeactivateOTP = sendDeactivateEmailOTP(user.email);
+    // if otp not send then throw an error OTP not send
     if (!sendDeactivateOTP) {
       const err = new ProjectError("Email OTP has not sent..");
       err.statusCode = 401;
       throw err;
     }
+    // if OTP send sucessfully then return a response otp send
     resp = {
       status: "success",
       message: "An Email OTP has been sent to your account please verify!",
@@ -177,19 +193,24 @@ const deactivateUser: RequestHandler = async (req, res, next) => {
   }
 };
 
-import OTP from "../models/otp"
+
 //Verify Deactivate Email OTP
 const verifyDeactivateAccountOTP: RequestHandler = async (req, res, next) => {
   try {
     let resp: ReturnResponse;
+    // take otp from body
     const otp = req.body.otp;
+    // take userid from authorization token
     const userId = req.userId;
+    // find user exits or not
     const user = await User.findById({ _id: userId });
+    // if user does not exist then throw an error User not found
     if (!user) {
       const err = new ProjectError("User Not Fount..");
       err.statusCode = 401;
       throw err;
     }
+    // Check user already deactivate or not
     if (user && user.isDeactivated) {
       const err = new ProjectError("User already Deactivaated");
       err.statusCode = 401;
@@ -197,8 +218,10 @@ const verifyDeactivateAccountOTP: RequestHandler = async (req, res, next) => {
     }
 
     const email = user.email;
+    //find last send otp of same email
     const matchOTP = await OTP.find({ email }).sort({ createdAt: -1 }).limit(1);
     console.log("Match OTP : ", matchOTP);
+    // if otp not found for this email then throw an error
     if (matchOTP.length === 0) {
       // OTP not found for the email
       const err = new ProjectError("OTP has not send on this email ");
@@ -206,6 +229,7 @@ const verifyDeactivateAccountOTP: RequestHandler = async (req, res, next) => {
       throw err;
 
     }
+    // Check OTP match or not, if not match then throw an error Incorrect OTP
     else if (otp != matchOTP[0].otp) {      
       // The otp is not Correct
       const err = new ProjectError("Incorrect OTP");
@@ -213,7 +237,9 @@ const verifyDeactivateAccountOTP: RequestHandler = async (req, res, next) => {
       throw err;
     }
 
+    // Deactivate Account
     user.isDeactivated = true;
+    // Save result into database
     const result = await user.save();
     if (!result) {
       resp = { status: "error", message: "Error while Deactivate Account Save Data into DataBase", data: {} };
