@@ -9,8 +9,12 @@ import sendEmail from "../utils/email";
 import { ReturnResponse } from "../utils/interfaces";
 import Mailgen from 'mailgen';
 import { startExam } from './exam';
-import otpGenerator from "otp-generator";
-import OTP from "../models/OTP"
+
+
+import OTP from "../models/otp"
+import sendEmailOTPRegister from "./otp"
+
+
 
 const secretKey = process.env.SECRET_KEY || "";
 const SERVER_BASE_URL = process.env.BASE_URL;
@@ -19,42 +23,58 @@ const SERVER_BASE_URL = process.env.BASE_URL;
 const registerUser: RequestHandler = async (req, res, next) => {
   let resp: ReturnResponse;
   try {
+    // take email , name , password from body
     const email = req.body.email;
     const name = req.body.name;
+    // using bcrypt hash the password
     let password = await bcrypt.hash(req.body.password, 12);
 
-
-    const otp = req.body.otp;
-    // Find the most recent OTP for the email
-    const response = await OTP.find({ email }).sort({ createdAt: -1 }).limit(1);
-    console.log("Response OTP : ", response);
-    if (response.length === 0) {
-      // OTP not found for the email
-      const err = new ProjectError("OTP has not send on this email ");
-      err.statusCode = 400;
+    //create a token using email
+    const token = jwt.sign({ email: email }, secretKey);
+    // send email otp for registration
+    const sendOtp = await sendEmailOTPRegister(email);
+    // if email send successfull
+    if (sendOtp) {
+      // check user already present in User DataBase or not
+      const checkUserExits = await User.findOne({ email });
+      // if User present in databse then only update the data 
+      if (checkUserExits) {
+           // update data
+           checkUserExits.name = name;
+           checkUserExits.password = password;
+           resp = {
+              status: "success",
+              message: "OTP has sent on your email. Please Verify..",
+              // data: { userId: checkUserExits._id, token:token },
+             data: { email, token: token },
+          };
+          res.status(201).send(resp);
+      }
+      else {
+        // if user does not present in Databse then create a new entry 
+            const user = new User({ email, name, password });
+            const result = await user.save();
+             if (!result) {
+                resp = { status: "error", message: "No result found", data: {} };
+                res.status(404).send(resp);
+             }
+             else {
+                 resp = {
+                 status: "success",
+                   message: "OTP has sent on your email. Please Verify",
+                  data: { email,token:token },
+              };
+              res.status(201).send(resp);
+         }
+      }
+    }
+    else {
+      const err = new ProjectError("OTP not send..");
+      err.statusCode = 401;
       throw err;
-
-    }
-    else if (otp != response[0].otp) {
-      // The otp is not valid
-      const err = new ProjectError("Incorrect OTP");
-      err.statusCode = 400;
-      throw err;
     }
 
-    const user = new User({ email, name, password });
-    const result = await user.save();
-    if (!result) {
-      resp = { status: "error", message: "No result found", data: {} };
-      res.status(404).send(resp);
-    } else {
-      resp = {
-        status: "success",
-        message: "Registration done!",
-        data: { userId: result._id },
-      };
-      res.status(201).send(resp);
-    }
+
   } catch (error) {
     next(error);
   }
@@ -72,6 +92,13 @@ const loginUser: RequestHandler = async (req, res, next) => {
       err.statusCode = 401;
       throw err;
     }
+    // if user has not verified email otp.
+    if (!user.isVerified) {
+      const err = new ProjectError("Account is not Verified. Please verify your account");
+      err.statusCode = 401;
+      throw err;
+    }
+
     //verify if user is deactivated ot not
     if (user.isDeactivated) {
       const err = new ProjectError("Account is deactivated!");
@@ -465,6 +492,9 @@ const isUserExist = async (email: String) => {
   if (!user) {
     return false;
   }
+  else if (user && !user.isVerified) {
+    return false;
+  }
   return true;
 };
 
@@ -518,60 +548,71 @@ const isPasswordValid = async (password: String) => {
 };
 
 
-// OTP send function
-const sendOTP: RequestHandler = async (req, res, next) => {
 
-  let resp: ReturnResponse;
+// Verify Registration Email OTP
 
+const verifyRegistrationOTP: RequestHandler = async (req, res, next) => {
   try {
+    let resp: ReturnResponse;
+    // const email = req.params.email;
+    const secretKey = process.env.SECRET_KEY || "";
+    // decode the params token
+    let decodedToken: { email: String }
+    decodedToken = <any>jwt.verify(req.params.token, secretKey);
+    // convert Object String to string
+    const email = decodedToken.email.toString();
+    console.log("Email in Verify Registration OTP Email : ", email);
+    // take otp from body
+    const otp = req.body.otp;
+    // console.log("Email from params : ", email);
+    // console.log("Email from BODY OTP : ", otp);
 
-    const { email } = req.body;
-
-    // check if user already present
-    // Find user with provided email
-    const checkUserPresent = await User.findOne({ email });
-    // to be used in case of sign up
-
-    // if user found then return a error response
-    if (checkUserPresent) {
-      // Return 401 Unauthorized status code with error message
-      const err = new ProjectError("user already Registered..");
+    // Check User present or not
+    const user = await User.findOne({ email });
+    if (!user) {
+      const err = new ProjectError("No user exist..");
+      err.statusCode = 401;
+      throw err;
+    }
+    // Check User already verified or not
+    if (user && user.isVerified) {
+      const err = new ProjectError("User already exist");
       err.statusCode = 401;
       throw err;
     }
 
-    // generate otp 
-    var otp = otpGenerator.generate(6, {
-      upperCaseAlphabets: false,
-      lowerCaseAlphabets: false,
-      specialChars: false
-    })
+    // find last send otp for this email 
+    const matchOTP = await OTP.find({ email }).sort({ createdAt: -1 }).limit(1);
+    console.log("Match OTP : ", matchOTP);
+    // if otp not present for this email
+    if (matchOTP.length === 0) {
+      // OTP not found for the email
+      const err = new ProjectError("OTP has not send on this email or Invalid OTP");
+      err.statusCode = 400;
+      throw err;
 
-    const result = await OTP.findOne({ otp: otp });
-    console.log("Result is generate OTP function");
-    console.log("OTP: ", otp);
-    console.log("Result : ", result);
-    // when result find then change the otp always unique otp store in database
-    while (result) {
-      otp = otpGenerator.generate(6, {
-        upperCaseAlphabets: false,
-        lowerCaseAlphabets: false,
-        specialChars: false
-      })
+    }
+    // if otp not present
+    else if (otp != matchOTP[0].otp) {
+      // The otp is not valid
+      const err = new ProjectError("Incorrect OTP");
+      err.statusCode = 400;
+      throw err;
     }
 
-    const otpPayload = { email, otp };
-    const otpBody = await OTP.create(otpPayload);
-
-    console.log("Otp Body : ", otpBody);
-
-
-    resp = { status: "success", message: "OTP send successfully", data: { otp } };
+    // update data verified true 
+    user.isVerified = true;
+    const result = await user.save();
+    if (!result) {
+      resp = { status: "error", message: "Error while Save Data into DataBase", data: { } };
+      res.status(200).send({ message: "verify" });
+    }
+    resp = { status: "success", message: "Registration Done !!", data: { userId : user._id,email } };
     res.status(200).send(resp);
   } catch (error) {
+    console.log("Error in verify Registration OTP : ", error);
     next(error);
-  }
-
+   }
 }
 
 
@@ -584,8 +625,8 @@ export {
   loginUser,
   registerUser,
   activateAccount,
-  sendOTP,
   forgotPassword,
   forgotPasswordCallback,
-  resetPassword
+  resetPassword,
+  verifyRegistrationOTP
 };

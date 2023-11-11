@@ -1,6 +1,7 @@
 // Redirect request to Particular method on Controller
 import express from "express";
 import { body } from "express-validator";
+import { resendRegistrationOTP } from "../controllers/otp";
 
 import {
   activateUser,
@@ -10,10 +11,10 @@ import {
   loginUser,
   registerUser,
   activateAccount,
-  sendOTP,
   forgotPassword,
   forgotPasswordCallback,
-  resetPassword
+  resetPassword,
+  verifyRegistrationOTP,
 } from "../controllers/auth";
 import { validateRequest } from "../helper/validateRequest";
 
@@ -103,11 +104,16 @@ router.post('/activateaccount', [
 ], activateAccount)
 
 
-//POST -> /auth/send otp 
-router.post("/send-otp",
-  [body("email").trim().isEmail().withMessage("Invalid Email!")],
-  sendOTP
-)
+
+
+//Verify Registration otp route
+// POST -> /auth/verify-registration-otp/:token  (use params)
+router.post("/verify-registration-otp/:token", verifyRegistrationOTP);
+
+
+// Resend otp for registration
+// POST -> /auth/resend-registration-otp/:token  (use Params)
+router.get("/resend-registration-otp/:token", resendRegistrationOTP);
 
 router.post(
   "/activate",

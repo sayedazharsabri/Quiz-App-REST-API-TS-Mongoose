@@ -18,7 +18,10 @@ const userSchema = new schema(
       type: String,
       required: true,
     },
-
+    isVerified: {
+      type: Boolean,
+      default: false,
+    },
     isDeactivated: {
       type: Boolean,
       default: false,

@@ -8,6 +8,8 @@ import BlacklistedToken from "../models/blacklistedToken";
 import sendEmail from "../utils/email";
 import jwt, { decode } from "jsonwebtoken";
 
+import OTP from "../models/otp"
+import { sendDeactivateEmailOTP } from "./otp";
 
 const getUser: RequestHandler = async (req, res, next) => {
   let resp: ReturnResponse;
@@ -125,91 +127,133 @@ const changePassword: RequestHandler = async (req, res, next) => {
   }
 };
 
+
+
+// Send otp for deactivate user account
 const deactivateUser: RequestHandler = async (req, res, next) => {
   let resp: ReturnResponse;
+  // get userId from authorization token
   const userId = req.userId;
   try {
+    // if userId not found then throw a not authorized error
     if (!userId) {
       const err = new ProjectError("You are not authorized!");
       err.statusCode = 401;
       throw err;
     }
 
+    // find user in User DataBase
     const user = await User.findById(userId);
+    //if user does not exist then throw a Error User not exist
     if (!user) {
       const err = new ProjectError("No user exist");
       err.statusCode = 401;
       throw err;
     }
-
-    // Email verification when User wants to deactivated account
-    const secretKey = process.env.SECRET_KEY || "";
-    const emailToken = jwt.sign({ userId: user._id }, secretKey, {
-      expiresIn: "5m",
-    });
-
-    const message = `
-    Click on the below link to deactivate your account:
-    http://${process.env.BASE_URL}/user/deactivate/${emailToken}
     
-    (Note: If the link is not clickable kindly copy the link and paste it in the browser.)`;
-    sendEmail(user.email, "Verify Email", message);
+    // find OTP for same email if already present then resend otp take time
+    const otpExist = await OTP.findOne({ email:user.email });
+
+    // otp found then throw an error as resend otp after some time
+    if (otpExist) {
+      // find Create otp time
+      const otpExistCreatedAt = new Date(otpExist.createdAt); // Assuming otpExist.createdAt is a Date object
+      // find current time
+      const currentTime = new Date();
+      // change time into milliseconds and find difference between them
+      const timeDifferenceInMilliseconds = (otpExistCreatedAt.getTime() + 120000) - currentTime.getTime();
+      // convert milliseconds to minutes
+      const timeDifferenceInMinutes = Math.floor(timeDifferenceInMilliseconds / (1000 * 60));
+      // get rest expire time
+      const timeExpire = timeDifferenceInMinutes;
+
+      const err = new ProjectError(`Resend OTP after ${timeExpire + 1} minutes`);
+      err.statusCode = 401;
+      throw err;
+    }
+
+    // Send a deactivate email OTP
+    const sendDeactivateOTP = sendDeactivateEmailOTP(user.email);
+    // if otp not send then throw an error OTP not send
+    if (!sendDeactivateOTP) {
+      const err = new ProjectError("Email OTP has not sent..");
+      err.statusCode = 401;
+      throw err;
+    }
+    // if OTP send sucessfully then return a response otp send
     resp = {
       status: "success",
-      message: "An Email has been sent to your account please verify!",
+      message: "An Email OTP has been sent to your account please verify!",
       data: {},
     };
-
-    // user.isDeactivated = true;
-    // await user.save();
-
-    // resp = { status: "success", message: "User deactivated!", data: {} };
     res.status(200).send(resp);
-  } catch (error) {
+
+    } catch (error) {
     next(error);
   }
 };
 
 
-// for verify Email link when user want to deactivated account
-// Path -> base_url/user/deactivate/:token
-const deactivateUserCallback: RequestHandler = async (req, res, next) => {
-  let resp: ReturnResponse;
+//Verify Deactivate Email OTP
+const verifyDeactivateAccountOTP: RequestHandler = async (req, res, next) => {
   try {
-    // find secretKey from env file
-    const secretKey = process.env.SECRET_KEY || "";
-    let decodedToken;
-    // find token from params
-    const token = req.params.token;
-    // decoded token using jwt
-    decodedToken = <any>jwt.verify(token, secretKey);
-
-    // if not decode then link expire or invalid link
-    if (!decodedToken) {
-      const err = new ProjectError("Invalid link!");
+    let resp: ReturnResponse;
+    // take otp from body
+    const otp = req.body.otp;
+    // take userid from authorization token
+    const userId = req.userId;
+    // find user exits or not
+    const user = await User.findById({ _id: userId });
+    // if user does not exist then throw an error User not found
+    if (!user) {
+      const err = new ProjectError("User Not Fount..");
+      err.statusCode = 401;
+      throw err;
+    }
+    // Check user already deactivate or not
+    if (user && user.isDeactivated) {
+      const err = new ProjectError("User already Deactivaated");
       err.statusCode = 401;
       throw err;
     }
 
-    // console.log("Decode deactivate link token: ", decodedToken);
-    const userId = decodedToken.userId;
+    const email = user.email;
+    //find last send otp of same email
+    const matchOTP = await OTP.find({ email }).sort({ createdAt: -1 }).limit(1);
+    console.log("Match OTP : ", matchOTP);
+    // if otp not found for this email then throw an error
+    if (matchOTP.length === 0) {
+      // OTP not found for the email
+      const err = new ProjectError("OTP has not send on this email ");
+      err.statusCode = 400;
+      throw err;
 
-    const user = await User.findOne({ _id: userId });
-
-    if (!user) {
-      const err = new ProjectError("User not found!");
-      err.statusCode = 404;
+    }
+    // Check OTP match or not, if not match then throw an error Incorrect OTP
+    else if (otp != matchOTP[0].otp) {      
+      // The otp is not Correct
+      const err = new ProjectError("Incorrect OTP");
+      err.statusCode = 400;
       throw err;
     }
+
+    // Deactivate Account
     user.isDeactivated = true;
-    await user.save();
-    resp = { status: "success", message: "Account Deactivated! Successfully", data: {} };
+    // Save result into database
+    const result = await user.save();
+    if (!result) {
+      resp = { status: "error", message: "Error while Deactivate Account Save Data into DataBase", data: {} };
+      res.status(200).send({ message: "verify" });
+    }
+    resp = { status: "success", message: "Deactivate Account Successfull !!", data: { userId: user._id,email:email } };
     res.status(200).send(resp);
-  }
-  catch (error) {
+
+  } catch (error) {
     next(error);
   }
 }
+
+
 
 const isActiveUser = async (userId: String) => {
   const user = await User.findById(userId);
@@ -222,42 +266,4 @@ const isActiveUser = async (userId: String) => {
   return !user.isDeactivated;
 };
 
-
-const logOut: RequestHandler = async (req, res, next) => {
-  let resp: ReturnResponse;
-  try {
-    const authHeader = req.get("Authorization");
-
-    if (!authHeader) {
-      const err = new ProjectError("Something went wrong!");
-      err.statusCode = 424;
-      throw err;
-    }
-  
-      const token = authHeader.split(" ")[1];
-
-      let decodedToken: { userId: String; iat: Number; exp: Number };
-      const secretKey = process.env.SECRET_KEY || "";
-      decodedToken = <any>jwt.verify(token, secretKey);
-
-      const expiryAt = decodedToken.exp;
-
-      const blacklistedToken = new BlacklistedToken({ token, expiryAt });
-      const result = await blacklistedToken.save();
-      if (!result) {
-        resp = { status: "error", message: "Something went wrong!", data: {} };
-        res.status(424).send(resp);
-      } else {
-        resp = { status: "success", message: "Logged out succesfully!", data: {} };
-        res.status(200).send(resp);
-      }
-  
-    }
-  
-  catch (error) {
-    next(error);
-  }
-}
-
-
-export { deactivateUser, getUser, isActiveUser, updateUser, changePassword, deactivateUserCallback, logOut};
+export { deactivateUser, getUser, isActiveUser, updateUser, changePassword, verifyDeactivateAccountOTP };

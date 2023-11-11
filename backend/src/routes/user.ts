@@ -2,13 +2,15 @@
 import express from "express";
 import { body } from "express-validator";
 
+
 import {
   deactivateUser,
   getUser,
   updateUser,
   changePassword,
-  deactivateUserCallback,
-  logOut,
+  verifyDeactivateAccountOTP,
+ 
+  // logOut,
 } from "../controllers/user";
 
 import { isAuthenticated } from "../middlewares/isAuth";
@@ -30,9 +32,14 @@ router.put("/", isAuthenticated, updateUser);
 //PATCH /user/deactivate
 router.patch("/deactivate", isAuthenticated, deactivateUser);
 
-// Get request Verify Email for deactivate user's account
-// GET  /user/deactivate/:token
-router.get("/deactivate/:token", deactivateUserCallback)
+// Verify Deactivate Account Email OTP
+// POST -> /user/deactivate/verify-deactivate-account-otp
+router.post("/deactivate/verify-deactivate-account-otp", isAuthenticated, verifyDeactivateAccountOTP);
+
+
+
+
+
 
 //Put  /user/changepassword
 router.put(
@@ -60,6 +67,6 @@ router.put(
 );
 
 // POST /user/logout
-router.post("/logout",isAuthenticated,logOut);
+// router.post("/logout",isAuthenticated,logOut);
 
 export default router;
