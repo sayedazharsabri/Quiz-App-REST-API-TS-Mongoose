@@ -116,6 +116,11 @@
   resolved "https://registry.yarnpkg.com/@types/mime/-/mime-1.3.4.tgz#a4ed836e069491414bab92c31fdea9e557aca0d9"
   integrity sha512-1Gjee59G25MrQGk8bsNvC6fxNiRgUlGn2wlhGf95a59DrprnnHk80FIMMFG9XHMdrfsuA119ht06QPDXA1Z7tw==
 
+"@types/node-cron@^3.0.10":
+  version "3.0.10"
+  resolved "https://registry.yarnpkg.com/@types/node-cron/-/node-cron-3.0.10.tgz#be11a794ef99312830531f23bfe31d71f57649f0"
+  integrity sha512-8thdLSpV7na8+bsmiyMH/KKQWOBg4WmoLInlGxWz7JJn8Mie+53QWaygSlc7f/AsMsCB5bBTVjoueAU6tRutTw==
+
 "@types/node@*":
   version "20.8.10"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-20.8.10.tgz#a5448b895c753ae929c26ce85cab557c6d4a365e"
@@ -898,7 +903,7 @@ lru-cache@^6.0.0:
   dependencies:
     yallist "^4.0.0"
 
-mailgen@^2.0.27:
+mailgen@^2.0.28:
   version "2.0.28"
   resolved "https://registry.yarnpkg.com/mailgen/-/mailgen-2.0.28.tgz#685ce4ead41a8cd51b935391b4de453753d8171f"
   integrity sha512-6g8vyKwMjAvNLuoDuGpJ4UhpvmroQQH9ZYzERC+/tL21Qvrzs2CM/li561rVIsSE+zroC4xSjXYYQ6pfPYYCXQ==
@@ -1036,6 +1041,13 @@ negotiator@0.6.3:
   version "0.6.3"
   resolved "https://registry.yarnpkg.com/negotiator/-/negotiator-0.6.3.tgz#58e323a72fedc0d6f9cd4d31fe49f51479590ccd"
   integrity sha512-+EUsqGPLsM+j/zdChZjsnX51g4XrHFOIXwfnCVPGlQk/k5giakcKsuxCObBRu6DSm9opw/O6slWbJdghQM4bBg==
+
+node-cron@^3.0.3:
+  version "3.0.3"
+  resolved "https://registry.yarnpkg.com/node-cron/-/node-cron-3.0.3.tgz#c4bc7173dd96d96c50bdb51122c64415458caff2"
+  integrity sha512-dOal67//nohNgYWb+nWmg5dkFdIwDm8EpeGYMekPMrngV3637lqnX0lbUcCtgibHTz6SEz7DAIjKvKDFYCnO1A==
+  dependencies:
+    uuid "8.3.2"
 
 node-fetch@^2.6.0:
   version "2.7.0"
@@ -1388,6 +1400,11 @@ utils-merge@1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/utils-merge/-/utils-merge-1.0.1.tgz#9f95710f50a267947b2ccc124741c1028427e713"
   integrity sha512-pMZTvIkT1d+TFGvDOqodOclx0QWkkgi6Tdoa8gC8ffGAAqz9pzPTZWAybbsHHoED/ztMtkv/VoYTYyShUn81hA==
+
+uuid@8.3.2:
+  version "8.3.2"
+  resolved "https://registry.yarnpkg.com/uuid/-/uuid-8.3.2.tgz#80d5b5ced271bb9af6c445f21a1a04c606cefbe2"
+  integrity sha512-+NYs2QeMWy+GWFOEm9xnn6HCDp0l7QBD7ml8zLUmJ+93Q5NF0NocErnwkTkXVFNiX3/fpC6afS8Dhb/gz7R7eg==
 
 v8-compile-cache-lib@^3.0.1:
   version "3.0.1"

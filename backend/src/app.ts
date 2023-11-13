@@ -6,8 +6,10 @@ import examRoute from "./routes/exam";
 import quizRoute from "./routes/quiz";
 import reportRoute from "./routes/report";
 import userRoute from "./routes/user";
+import favQuestionRoute from "./routes/favQuestion";
 import ProjectError from "./helper/error";
 import { ReturnResponse } from "./utils/interfaces";
+import clearBlacklistedTokenScheduler from "./utils/clearBlacklistedTokenScheduler";
 
 const app = express();
 
@@ -39,6 +41,9 @@ app.use("/report", reportRoute);
 //Redirect /user to userRoute
 app.use("/user", userRoute);
 
+//Redirect /favQuestion to favQuestionRoute
+app.use("/favquestion",favQuestionRoute);
+
 app.get("/health", (req: Request, res: Response) => {
   res.status(200).send("Server is working!");
 });
@@ -67,6 +72,8 @@ app.use(
     res.status(statusCode).send(resp);
   }
 );
+
+clearBlacklistedTokenScheduler;
 
 (async () => {
   try {
