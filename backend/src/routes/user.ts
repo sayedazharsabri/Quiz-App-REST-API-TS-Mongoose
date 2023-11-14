@@ -9,9 +9,9 @@ import {
   updateUser,
   changePassword,
   verifyDeactivateAccountOTP,
-   logOut,
 } from "../controllers/user";
 
+import { logOut } from "../controllers/blacklistedToken";
 import { isAuthenticated } from "../middlewares/isAuth";
 import { isPasswordValid } from "../controllers/auth";
 import { validateRequest } from "../helper/validateRequest";
@@ -34,11 +34,6 @@ router.patch("/deactivate", isAuthenticated, deactivateUser);
 // Verify Deactivate Account Email OTP
 // POST -> /user/deactivate/verify-deactivate-account-otp
 router.post("/deactivate/verify-deactivate-account-otp", isAuthenticated, verifyDeactivateAccountOTP);
-
-
-
-
-
 
 //Put  /user/changepassword
 router.put(
@@ -66,6 +61,6 @@ router.put(
 );
 
 // POST /user/logout
-router.post("/logout",isAuthenticated,logOut);
+router.post("/logout", isAuthenticated, logOut);
 
 export default router;

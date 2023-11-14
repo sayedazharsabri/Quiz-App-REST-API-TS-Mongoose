@@ -8,7 +8,6 @@ import User from "../models/user";
 import sendEmail from "../utils/email";
 import { ReturnResponse } from "../utils/interfaces";
 import Mailgen from 'mailgen';
-import { startExam } from './exam';
 
 
 import OTP from "../models/otp"
