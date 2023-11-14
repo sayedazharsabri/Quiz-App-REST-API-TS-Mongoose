@@ -35,9 +35,6 @@ async function sendEmailOTPRegister(email: string) {
         })
 
         const result = await OTP.findOne({ otp: otp });
-        console.log("Result is generate OTP function");
-        console.log("OTP: ", otp);
-        console.log("Result : ", result);
         // when result find then change the otp always unique otp store in database
         while (result) {
             otp = otpGenerator.generate(6, {
@@ -51,7 +48,7 @@ async function sendEmailOTPRegister(email: string) {
             "Verification Registration Email OTP ",
             `Registration OTP is ${otp}`
         );
-        console.log("Email send successfully: ", mailResponse);
+
         const saveOTP = new OTP({ email, otp });
         const saveResult = await saveOTP.save();
         
@@ -60,13 +57,11 @@ async function sendEmailOTPRegister(email: string) {
             err.statusCode = 401;
             throw err;
         } else {
-            console.log("Successfully Save otp please verify..")
             return true;
            
         }
     }
     catch (error) {
-        console.log("Error occured while sending email: ", error);
         throw error;
     }
 }
@@ -82,7 +77,7 @@ const resendRegistrationOTP: RequestHandler = async (req, res, next) => {
         let decodedToken : {email : String}
          decodedToken = <any>jwt.verify(req.params.token, secretKey);
         const email = decodedToken.email.toString();
-        console.log("Email in resend Email : ", email);
+        
         const checkUserExits = await User.findOne({ email });
         if (!checkUserExits) {
             const err = new ProjectError("User not exist..");
@@ -151,9 +146,7 @@ async function sendDeactivateEmailOTP(email: string) {
         })
 
         const result = await OTP.findOne({ otp: otp });
-        console.log("Result is generate OTP function");
-        console.log("OTP: ", otp);
-        console.log("Result : ", result);
+
         // when result find then change the otp always unique otp store in database
         while (result) {
             otp = otpGenerator.generate(6, {

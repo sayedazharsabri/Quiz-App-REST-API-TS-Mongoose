@@ -259,7 +259,7 @@ const generateEmail = async (name: string, temperoryKey: string, emailaddress: s
   }
 
   transporter.sendMail(message).then(() => {
-    console.log("Email Sent ");
+
   }).catch(error => async () =>{
     let user = await User.findOne({ email: emailaddress }); //If there is some issue in generating email set the temperory key string in collection to empty
     user && (user.temperoryKey = '');
@@ -560,7 +560,7 @@ const verifyRegistrationOTP: RequestHandler = async (req, res, next) => {
     decodedToken = <any>jwt.verify(req.params.token, secretKey);
     // convert Object String to string
     const email = decodedToken.email.toString();
-    console.log("Email in Verify Registration OTP Email : ", email);
+
     // take otp from body
     const otp = req.body.otp;
     // console.log("Email from params : ", email);
@@ -582,7 +582,6 @@ const verifyRegistrationOTP: RequestHandler = async (req, res, next) => {
 
     // find last send otp for this email 
     const matchOTP = await OTP.find({ email }).sort({ createdAt: -1 }).limit(1);
-    console.log("Match OTP : ", matchOTP);
     // if otp not present for this email
     if (matchOTP.length === 0) {
       // OTP not found for the email
