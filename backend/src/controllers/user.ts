@@ -4,9 +4,9 @@ import bcrypt from "bcryptjs";
 import ProjectError from "../helper/error";
 import User from "../models/user";
 import { ReturnResponse } from "../utils/interfaces";
-import BlacklistedToken from "../models/blacklistedToken";
+
 import sendEmail from "../utils/email";
-import jwt, { decode } from "jsonwebtoken";
+
 
 import OTP from "../models/otp"
 import { sendDeactivateEmailOTP } from "./otp";
@@ -266,4 +266,4 @@ const isActiveUser = async (userId: String) => {
   return !user.isDeactivated;
 };
 
-export { deactivateUser, getUser, isActiveUser, updateUser, changePassword, verifyDeactivateAccountOTP };
+export { deactivateUser, getUser, isActiveUser, updateUser, changePassword, verifyDeactivateAccountOTP};

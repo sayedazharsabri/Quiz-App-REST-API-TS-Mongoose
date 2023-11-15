@@ -1,9 +1,9 @@
 {
 	"info": {
-		"_postman_id": "f96c2d4d-9d18-46ad-aa6e-8e0584ca8d38",
-		"name": "QuizClass Copy 4",
+		"_postman_id": "dff705df-0b73-482c-b5b9-dfe663565b1d",
+		"name": "QuizClass",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "23659079"
+		"_exporter_id": "29362692"
 	},
 	"item": [
 		{
@@ -13,7 +13,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"name\":\"Aarush\",\r\n    \"email\":\"aarush@gmail.com\",\r\n    \"password\": \"Password@12345\",\r\n    \"confirmPassword\":\"Password@12345\",\r\n    \r\n}",
+					"raw": "{\r\n    \"name\":\"Aarush\",\r\n    \"email\":\"aarush@gmail.com\",\r\n    \"password\": \"Password@12345\",\r\n    \"confirmPassword\":\"Password@12345\"\r\n    \r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -2278,8 +2278,8 @@
 							]
 						}
 					},
-					"_postman_previewlanguage": null,
-					"header": null,
+					"_postman_previewlanguage": "Text",
+					"header": [],
 					"cookie": [],
 					"body": "{\r\n    \"status\": \"success\",\r\n    \"message\": \"Registration Done !!\",\r\n    \"data\": {\r\n        \"userId\": \"654e67da0b09322db15994ca\",\r\n        \"email\": \"aarush@gmail.com\"\r\n    }\r\n}"
 				}
@@ -2322,8 +2322,8 @@
 							]
 						}
 					},
-					"_postman_previewlanguage": null,
-					"header": null,
+					"_postman_previewlanguage": "Text",
+					"header": [],
 					"cookie": [],
 					"body": "{\r\n    \"status\": \"success\",\r\n    \"message\": \"OTP send successfully. Please Verify Account\",\r\n    \"data\": {}\r\n}"
 				}
@@ -2396,8 +2396,8 @@
 							]
 						}
 					},
-					"_postman_previewlanguage": null,
-					"header": null,
+					"_postman_previewlanguage": "Text",
+					"header": [],
 					"cookie": [],
 					"body": "{\r\n    \"status\": \"success\",\r\n    \"message\": \"Deactivate Account Successfull !!\",\r\n    \"data\": {\r\n        \"userId\": \"654e67da0b09322db15994ca\",\r\n        \"email\": \"aarush@gmail.com\"\r\n    }\r\n}"
 				}
