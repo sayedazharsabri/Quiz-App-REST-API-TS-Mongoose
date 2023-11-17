@@ -1,5 +1,6 @@
 import express, { NextFunction, Request, Response } from "express";
 import mongoose from "mongoose";
+import cors from "cors"
 
 import authRoute from "./routes/auth";
 import examRoute from "./routes/exam";
@@ -12,6 +13,8 @@ import { ReturnResponse } from "./utils/interfaces";
 import clearBlacklistedTokenScheduler from "./utils/clearBlacklistedTokenScheduler";
 
 const app = express();
+
+app.use(cors({origin:`http://${process.env.CORS_ORIGIN_URL}`,credentials:true}))
 
 const connectionString = process.env.CONNECTION_STRING || "";
 

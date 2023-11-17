@@ -6,7 +6,8 @@
     "USER": "<USER_EMAIL>",
     "PASS": "<USER_PASSWORD>",
     "HOST": "<SERVICE_PROVIDER>",
-    "BASE_URL": "<SERVER_BASE_URL>"
+    "BASE_URL": "<SERVER_BASE_URL>",
+    "CORS_ORIGIN_URL":"<CLIENT_BASE_URL>"
   },
   "watch": ["src"],
   "ext": "ts,json",

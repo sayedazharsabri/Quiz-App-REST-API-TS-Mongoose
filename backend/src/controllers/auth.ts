@@ -123,6 +123,13 @@ const loginUser: RequestHandler = async (req, res, next) => {
         throw err;
       }
     }
+    
+    if(status && !user?.accountBlocked && user?.remainingTry < 1 ){
+      const err = new ProjectError('Your account is deactivated');
+        err.statusCode = 401;
+        throw err;
+    }
+
     if (status && !user?.accountBlocked) {
       const token = jwt.sign({ userId: user._id }, secretKey, {
         expiresIn: "10h",
