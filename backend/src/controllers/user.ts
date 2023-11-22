@@ -241,10 +241,6 @@ const verifyDeactivateAccountOTP: RequestHandler = async (req, res, next) => {
     user.isDeactivated = true;
     // Save result into database
     const result = await user.save();
-    if (!result) {
-      resp = { status: "error", message: "Error while Deactivate Account Save Data into DataBase", data: {} };
-      res.status(200).send({ message: "verify" });
-    }
     resp = { status: "success", message: "Deactivate Account Successfull !!", data: { userId: user._id,email:email } };
     res.status(200).send(resp);
 

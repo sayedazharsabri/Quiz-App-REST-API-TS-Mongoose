@@ -41,6 +41,7 @@ const registerUser: RequestHandler = async (req, res, next) => {
            // update data
            checkUserExits.name = name;
            checkUserExits.password = password;
+           await checkUserExits.save()
            resp = {
               status: "success",
               message: "OTP has sent on your email. Please Verify..",
@@ -194,7 +195,7 @@ const activateAccount: RequestHandler = async (req, res, next) => {
       user && (user.isTempKeyUsed = true)
       await user?.save();
       const resp = { status: "success", message: "Key Validated you have only attempt for login" };
-      res.status(302).send(resp);
+      res.status(200).send(resp);
     }
     else if (!user?.temperoryKey.length) {
       const err = new ProjectError("User is already Activated");
@@ -244,13 +245,10 @@ const generateEmail = async (name: string, temperoryKey: string, emailaddress: s
         ]
       },
       action: {
-        instructions: `If you believe that is by mistake here is your one time temporary key to activate your account after activating your account you can login once after this your account will be deactived for 24 hrs Note:<br><br>
-        If the button or link is not clickable kindly copy the link and paste it in the browser<br><br>
-        http://${SERVER_BASE_URL}/auth/activateaccount/${temperoryKey} <br><br>
+        instructions: `This is your one time temporary key to activate your account. After activating your account you will get one more chance to login. If you failed to login this time your account will be blocked for 24 hours.
         `,
         button: {
-          color: '#22BC66', // Optional action button color
-          text: 'Confirm your account',
+          text: 'Thank You',
           link: `http://${SERVER_BASE_URL}/auth/activateaccount/${temperoryKey}`
         }
       },
@@ -608,10 +606,6 @@ const verifyRegistrationOTP: RequestHandler = async (req, res, next) => {
     // update data verified true 
     user.isVerified = true;
     const result = await user.save();
-    if (!result) {
-      resp = { status: "error", message: "Error while Save Data into DataBase", data: { } };
-      res.status(200).send({ message: "verify" });
-    }
     resp = { status: "success", message: "Registration Done !!", data: { userId : user._id,email } };
     res.status(200).send(resp);
   } catch (error) {
