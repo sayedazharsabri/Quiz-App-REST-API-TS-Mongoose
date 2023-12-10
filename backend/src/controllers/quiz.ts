@@ -10,13 +10,14 @@ const createQuiz: RequestHandler = async (req, res, next) => {
     const createdBy = req.userId;
     const name = req.body.name;
     const category = req.body.category;
+    const difficultyLevel = req.body.difficultyLevel;
     const questionList = req.body.questionList;
     const answers = req.body.answers;
     const passingPercentage = req.body.passingPercentage;
     const attemptsAllowedPerUser = req.body.attemptsAllowedPerUser;
     const isPublicQuiz = req.body.isPublicQuiz;
     const allowedUser = req.body.allowedUser;
-    const quiz = new Quiz({ name, category, questionList, answers, passingPercentage, createdBy, attemptsAllowedPerUser, isPublicQuiz, allowedUser });
+    const quiz = new Quiz({ name, category, difficultyLevel, questionList, answers, passingPercentage, createdBy, attemptsAllowedPerUser, isPublicQuiz, allowedUser });
     const result = await quiz.save();
     const resp: ReturnResponse = {
       status: "success",

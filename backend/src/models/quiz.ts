@@ -13,6 +13,11 @@ const quizSchema = new schema(
       type: String,
       required: true
     },
+    difficultyLevel: {
+      type: String,
+      required: true,
+      enum: ["easy", "medium", "hard"],
+    },
     questionList: [
       {
         questionNumber: Number,
