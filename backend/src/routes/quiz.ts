@@ -64,7 +64,13 @@ router.post(
         return Promise.reject("Passing percentage can not be zero..");
       }
       return true;
-    })
+    }),
+    body("difficultyLevel").custom((difficultyLevel) => {
+      if (!difficultyLevel || !["easy", "medium", "hard"].includes(difficultyLevel)) {
+        return Promise.reject("Difficulty level must be easy, medium and hard");
+      }
+      return true;
+    }),
   ],
   validateRequest,
   createQuiz
@@ -109,7 +115,13 @@ router.put(
         return Promise.reject("Passing percentage can not be zero..");
       }
       return true;
-    })
+    }),
+    body("difficultyLevel").custom((difficultyLevel) => {
+      if (!difficultyLevel || !["easy", "medium", "hard"].includes(difficultyLevel)) {
+        return Promise.reject("Difficulty level must be easy, medium and hard");
+      }
+      return true;
+    }),
   ],
   validateRequest,
   updateQuiz
