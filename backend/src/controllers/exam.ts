@@ -90,12 +90,8 @@ const submitExam: RequestHandler = async (req, res, next) => {
     const userId = req.userId;
     const quizId = req.body.quizId;
     const attemptedQuestion = req.body.attemptedQuestion;
-
-    const quiz = await Quiz.findById(quizId, {
-      answers: 1,
-      passingPercentage: 1,
-      createdBy: 1,
-    });
+    
+    const quiz = await Quiz.findById(quizId, { questionList: 1 ,answers: 1, passingPercentage:1 });
     if (!quiz) {
       const err = new ProjectError("No quiz found!");
       err.statusCode = 404;
@@ -113,9 +109,20 @@ const submitExam: RequestHandler = async (req, res, next) => {
     const total = allQuestions.length;
 
     let score = 0;
+    let attemptedAnswerWithRightAnswer = [];
 
     for (let i = 0; i < total; i++) {
       let questionNumber = allQuestions[i];
+      const attemptedAnswer = attemptedQuestion[questionNumber];
+      const rightAnswer = answers[questionNumber];
+      if(!!attemptedAnswer){
+        attemptedAnswerWithRightAnswer.push({
+          questionNumber,
+          attemptedAnswer,
+          rightAnswer
+        })
+      }
+
       if (
         !!attemptedQuestion[questionNumber] &&
         answers[questionNumber] == attemptedQuestion[questionNumber]
@@ -141,12 +148,13 @@ const submitExam: RequestHandler = async (req, res, next) => {
       total,
       percentage,
       result,
+      attemtedAnswers: attemptedAnswerWithRightAnswer
     });
     const data = await report.save();
     const resp: ReturnResponse = {
       status: "success",
       message: "Quiz submitted",
-      data: { total, score, result, reportId: data._id },
+      data: { total, score,result, reportId: data._id, attemptedAnswerWithRightAnswer} 
     };
     res.status(200).send(resp);
   } catch (error) {
