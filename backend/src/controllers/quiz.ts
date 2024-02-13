@@ -283,6 +283,78 @@ const getAllQuiz: RequestHandler = async (req, res, next) => {
   }
 };
 
+const getAllQuizExam: RequestHandler = async (req, res, next) => {
+  try {
+    let quiz = await Quiz.find({ isPublished: true, category: "exam" },
+    {
+      name: 1,
+      category: 1,
+      questionList: 1,
+      createdBy: 1,
+      passingPercentage: 1,
+      isPublicQuiz: 1,
+      allowedUser: 1,
+    });
+
+    quiz = quiz.filter((item) => {
+      if (item.isPublicQuiz || item.allowedUser.includes(req.userId)) {
+        return item.createdBy.toString() !== req.userId;
+      }
+    });
+
+    if (!quiz) {
+      const err = new ProjectError("No exam quiz found!");
+      err.statusCode = 404;
+      throw err;
+    }
+
+    const resp: ReturnResponse = {
+      status: "success",
+      message: "All Exam Quizzes",
+      data: quiz,
+    };
+    res.status(200).send(resp);
+  } catch (error) {
+    next(error);
+  }
+};
+
+const getAllQuizTest: RequestHandler = async (req, res, next) => {
+  try {
+    let quiz = await Quiz.find({ isPublished: true, category: "test" },
+    {
+      name: 1,
+      category: 1,
+      questionList: 1,
+      createdBy: 1,
+      passingPercentage: 1,
+      isPublicQuiz: 1,
+      allowedUser: 1,
+    });
+
+    quiz = quiz.filter((item) => {
+      if (item.isPublicQuiz || item.allowedUser.includes(req.userId)) {
+        return item.createdBy.toString() !== req.userId;
+      }
+    });
+
+    if (!quiz) {
+      const err = new ProjectError("No test quiz found!");
+      err.statusCode = 404;
+      throw err;
+    }
+
+    const resp: ReturnResponse = {
+      status: "success",
+      message: "All Test Quizzes",
+      data: quiz,
+    };
+    res.status(200).send(resp);
+  } catch (error) {
+    next(error);
+  }
+};
+
 export {
   createQuiz,
   deleteQuiz,
@@ -291,5 +363,7 @@ export {
   isValidQuizName,
   publishQuiz,
   updateQuiz,
-  getAllQuiz
+  getAllQuiz,
+  getAllQuizExam,
+  getAllQuizTest
 };
